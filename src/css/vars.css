@@ -1,0 +1,11 @@
+:root {
+  --gray-dark: #313439;
+  --blue: #03a9f4;
+  --green: #1ce0b2;
+  --white: #fff;
+  --gray-light: #8e9dae;
+  --font-inter: "Inter", sans-serif;
+  --text-dark: #222b34;
+  --blue-dark: #3c4c5b;
+  --error: #e80004;
+}
