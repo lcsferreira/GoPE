@@ -34,7 +34,7 @@ if (empty($email)) {
       $_SESSION['loggedIn'] = true;
       $_SESSION['type'] = $row['type'];
 
-      header("Location: ../../pages/Dashboard/dashboard.php");
+      header("Location: ../../pages/Dashboard/countriesList.php");
       exit();
     } else {
       header("Location: ../../pages/Login/login.php?error=Incorrect email or password");
