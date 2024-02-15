@@ -19,11 +19,11 @@
   </div>
   <ul class="sidebar__links">
     <?php if ($_SESSION['type'] === 'Admin') : ?>
-    <li><a href="users.php">Users List</a></li>
-    <li><a href="countries.php">Countries List</a></li>
+    <li><a href="usersList.php">Users List</a></li>
+    <li><a href="countriesList.php">Countries List</a></li>
 
     <?php else : ?>
-    <li><a href="countries.php?id=<?php md5($_SESSION['email']) ?>">Countries list</a></li>
+    <li><a href="countries.php?id=<?php echo $_SESSION['id']; ?>">Countries list</a></li>
     <?php endif; ?>
   </ul>
 </div>
