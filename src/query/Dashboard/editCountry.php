@@ -34,7 +34,7 @@ if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region'])
       exit();
     }
   } else {
-    $sql = "UPDATE countries SET name = '$name', capital = '$capital', region = '$region', need_translation = '$need_translation', translated_step = NULL, card_translated_step = NULL WHERE id = '$id'";
+    $sql = "UPDATE countries SET name = '$name', capital = '$capital', region = '$region', need_translation = '$need_translation', translation_step = NULL, card_translated_step = NULL WHERE id = '$id'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
