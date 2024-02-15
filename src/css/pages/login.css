@@ -75,11 +75,6 @@ body {
   color: var(--gray-light);
 }
 
-.form-container form .form__input-container input:focus {
-  outline: none;
-  border: 1px solid var(--primary);
-}
-
 .form-container form .form__input-container .forgot-password-container {
   display: flex;
   width: 100%;
@@ -88,7 +83,7 @@ body {
 }
 
 .form-container form .form__input-container a {
-  background: var(--primary);
+  background: transparent;
   color: var(--white);
   font-weight: 400;
   font-size: small;

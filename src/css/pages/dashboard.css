@@ -13,6 +13,12 @@
   font-weight: 400;
   margin-bottom: 2rem;
 }
+.container__title span {
+  font-size: 0.75rem;
+  padding-left: 2rem;
+  font-weight: 400;
+  color: var(--gray-dark);
+}
 
 .dashboard-container {
   border: 1px solid var(--gray-lighter);
@@ -27,6 +33,11 @@
   background-color: var(--gray-lighter);
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
+}
+
+.dashboard-container__header h2 {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .dashboard-container__header .btn-add {
@@ -60,6 +71,55 @@
   vertical-align: middle;
 }
 
+.dashboard-container form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.dashboard-container form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-container form .form-group label {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-container form .form-group input {
+  height: 2.5rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.dashboard-container form .form-group input::placeholder {
+  color: var(--gray-light);
+}
+
+.dashboard-container form .btn-submit {
+  grid-column: 1 / -1;
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-container form .btn-submit:hover {
+  transform: scale(1.02);
+}
+
 .btn-play {
   background-color: transparent;
   color: var(--gray-dark);
@@ -72,7 +132,7 @@
 .btn-play:hover,
 .btn-edit:hover,
 .btn-delete:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .btn-edit {
@@ -91,4 +151,68 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+/* Toggle Switch */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-lighter);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--white);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--blue);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--blue);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
