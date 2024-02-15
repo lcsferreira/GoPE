@@ -2,11 +2,22 @@
 <html lang="en">
 
 <?php
+include "../../../config.php";
 session_start();
 if (!isset($_SESSION['loggedIn'])) {
   header("Location: ../../pages/Login/login.php");
   exit;
 }
+if (isset($_SESSION['message'])) {
+  echo "<script>alert('" . $_SESSION['message'] . "');</script>";
+  unset($_SESSION['message']); // Clear the session variable
+}
+$query = "SELECT * FROM countries";
+// echo $query;
+$result = mysqli_query($conn, $query);
+$countries = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
+mysqli_close($conn);
 ?>
 
 <head>
@@ -33,7 +44,8 @@ if (!isset($_SESSION['loggedIn'])) {
     <div class="dashboard-container">
       <div class="dashboard-container__header">
         <h2>Country Details</h2>
-        <button class="btn-add"><strong>Create</strong> Country</button>
+        <button class="btn-add" onclick="window.location.href = 'createCountry.php';"><strong>Create</strong>
+          Country</button>
       </div>
       <table class="dashboard-table">
         <thead>
@@ -47,16 +59,86 @@ if (!isset($_SESSION['loggedIn'])) {
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($countries as $country) : ?>
+          <!-- name	capital	region	need_translation	indicators_step	translation_step	card_english_step	card_translated_step -->
           <tr>
-            <td>Brasil</td>
-            <td><button class="btn-play"><i class="fa fa-play"></i></button></td>
-            <td><button class="btn-play"><i class="fa fa-play"></i></button></td>
-            <td><button class="btn-play"><i class="fa fa-play"></i></button></td>
-            <td><button class="btn-play"><i class="fa fa-play"></i></button></td>
+            <td><?php echo $country['name'] ?></td>
             <td>
-              <button class="btn-edit"><i class="fa fa-edit"></i></button>
-              <button class="btn-delete"><i class="fa fa-trash"></i></button>
+              <?php
+                if ($country['indicators_step'] == "not started") {
+                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                } elseif ($country['indicators_step'] == "waiting contact") {
+                  echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                } elseif ($country['indicators_step'] == "waiting admin") {
+                  echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                } elseif ($country['indicators_step'] == "completed") {
+                  echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                } else {
+                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                }
+                ?>
+            </td>
+            <td>
+              <?php
+                if ($country['card_english_step'] == "not started") {
+                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                } elseif ($country['card_english_step'] == "waiting contact") {
+                  echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                } elseif ($country['card_english_step'] == "waiting admin") {
+                  echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                } elseif ($country['card_english_step'] == "completed") {
+                  echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                } else {
+                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                }
+                ?>
+            </td>
+            <td>
+              <?php
+                if ($country['need_translation'] == 1) {
+                  if ($country['translation_step'] == "not started") {
+                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  } elseif ($country['translation_step'] == "waiting contact") {
+                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  } elseif ($country['translation_step'] == "waiting admin") {
+                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                  } elseif ($country['translation_step'] == "completed") {
+                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  } else {
+                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  }
+                } else {
+                  echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
+                }
+                ?>
+            </td>
+            <td>
+              <?php
+                if ($country['need_translation'] == 1) {
+                  if ($country['card_translated_step'] == "not started") {
+                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  } elseif ($country['card_translated_step'] == "waiting contact") {
+                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  } elseif ($country['card_translated_step'] == "waiting admin") {
+                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                  } elseif ($country['card_translated_step'] == "completed") {
+                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  } else {
+                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  }
+                } else {
+                  echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
+                }
+                ?>
+            </td>
+            <td>
+              <button class="btn-edit"
+                onclick="window.location.href = 'editCountry.php?id=<?php echo $country['id']; ?>'"><i
+                  class="fas fa-edit"></i></button>
+              <button class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+            </td>
           </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
