@@ -1,10 +1,11 @@
 <?php
 
 // Database configuration
-$host = "localhost";
-$username = "root";
-$password = "";
+$host = "mysql.pauloferreirajr.com";
+$username = "gope";
+$password = "gopapedrinho22";
 $database = "workgope";
+$port = "3306";
 
 // Create a connection
 $conn = mysqli_connect($host, $username, $password, $database);

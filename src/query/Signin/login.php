@@ -29,6 +29,7 @@ if (empty($email)) {
   if (mysqli_num_rows($result) === 1) {
     $row = mysqli_fetch_assoc($result);
     if ($row['email'] === $email && $row['password'] === $password) {
+      $_SESSION['id'] = $row['id'];
       $_SESSION['email'] = $row['email'];
       $_SESSION['name'] = $row['name'];
       $_SESSION['loggedIn'] = true;

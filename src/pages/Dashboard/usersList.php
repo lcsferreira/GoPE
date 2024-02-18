@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 include "../../../config.php";
 session_start();
@@ -19,6 +16,9 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
   <meta charset="UTF-8">

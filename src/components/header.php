@@ -19,27 +19,27 @@
   </div>
   <ul class="sidebar__links">
     <?php if ($_SESSION['type'] === 'Admin') : ?>
-    <li><a href="usersList.php">Users List</a></li>
-    <li><a href="countriesList.php">Countries List</a></li>
+      <li><a href="usersList.php">Users List</a></li>
+      <li><a href="countriesList.php">Countries List</a></li>
 
     <?php else : ?>
-    <li><a href="countries.php?id=<?php echo $_SESSION['id']; ?>">Countries list</a></li>
+      <li><a href="countries.php?id=<?php echo $_SESSION['id']; ?>">Countries list</a></li>
     <?php endif; ?>
   </ul>
 </div>
 
 <!-- JavaScript to handle sidebar toggle -->
 <script>
-const openSidebarButton = document.getElementById('openSidebar');
-const sidebar = document.getElementById('sidebar');
+  const openSidebarButton = document.getElementById('openSidebar');
+  const sidebar = document.getElementById('sidebar');
 
-openSidebarButton.addEventListener('click', () => {
-  sidebar.classList.add('open');
-});
+  openSidebarButton.addEventListener('click', () => {
+    sidebar.classList.add('open');
+  });
 
-const closeSidebarButton = document.getElementById('closeSidebar');
+  const closeSidebarButton = document.getElementById('closeSidebar');
 
-closeSidebarButton.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-});
+  closeSidebarButton.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+  });
 </script>

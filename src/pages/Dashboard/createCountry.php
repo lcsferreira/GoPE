@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 include "../../../config.php";
 session_start();
@@ -9,6 +6,9 @@ if (!isset($_SESSION['loggedIn'])) {
   exit;
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
   <meta charset="UTF-8">

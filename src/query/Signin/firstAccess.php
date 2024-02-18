@@ -2,16 +2,14 @@
 include '../../../config.php';
 
 // Get the token from the request
-$emailCrypted = $_POST['tk'];
-
-// Decrypt the token
-// $email = md5($emailCrypted);
-$email = $emailCrypted;
+$id = $_POST['tk'];
 
 // Update the user with the posted password
 $password = $_POST['password'];
 
-$query = "UPDATE users SET password = '$password' WHERE email = '$email'";
+// $password = md5($password);
+
+$query = "UPDATE users SET password = '$password' WHERE id = '$id'";
 
 $result = mysqli_query($conn, $query);
 
@@ -26,6 +24,3 @@ if (mysqli_affected_rows($conn) > 0) {
   // echo "Password not updated";
   header("Location: ../../pages/Login/firstAccess.php?error=update");
 }
-
-// Redirect to the login page
-// header("Location: ../../pages/Login/login.php");

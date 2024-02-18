@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 include "../../../config.php";
 session_start();
@@ -18,6 +15,10 @@ mysqli_close($conn);
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +27,8 @@ mysqli_close($conn);
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
-    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
-    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -57,8 +56,7 @@ mysqli_close($conn);
           <label for="need_translation">Need Translation</label>
           <!-- Rounded switch -->
           <label class="switch">
-            <input type="checkbox" name="need_translation" id="need_translation"
-              <?php if ($country['need_translation'] == 1) echo "checked"; ?>>
+            <input type="checkbox" name="need_translation" id="need_translation" <?php if ($country['need_translation'] == 1) echo "checked"; ?>>
             <span class="slider round"></span>
           </label>
           <!-- Hidden input field to store checkbox value -->
@@ -72,27 +70,27 @@ mysqli_close($conn);
     </div>
   </div>
   <script>
-  document.getElementById("countryForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission
+    document.getElementById("countryForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
 
-    // Get input values
-    var name = document.getElementById("name").value;
-    var capital = document.getElementById("capital").value;
-    var region = document.getElementById("region").value;
-    var needTranslation = document.getElementById("need_translation").checked;
+      // Get input values
+      var name = document.getElementById("name").value;
+      var capital = document.getElementById("capital").value;
+      var region = document.getElementById("region").value;
+      var needTranslation = document.getElementById("need_translation").checked;
 
-    // Set the value of the hidden input field based on checkbox state
-    document.getElementById("need_translation_value").value = needTranslation;
+      // Set the value of the hidden input field based on checkbox state
+      document.getElementById("need_translation_value").value = needTranslation;
 
-    // Log the values (you can modify this part as per your requirement)
-    console.log("Name: " + name);
-    console.log("Capital: " + capital);
-    console.log("Region: " + region);
-    console.log("Need Translation: " + needTranslation);
+      // Log the values (you can modify this part as per your requirement)
+      console.log("Name: " + name);
+      console.log("Capital: " + capital);
+      console.log("Region: " + region);
+      console.log("Need Translation: " + needTranslation);
 
-    // Submit the form
-    this.submit();
-  });
+      // Submit the form
+      this.submit();
+    });
   </script>
 
 

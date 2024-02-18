@@ -29,10 +29,8 @@ mysqli_close($conn);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
-    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
-    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -68,11 +66,11 @@ mysqli_close($conn);
         </thead>
         <tbody>
           <?php foreach ($countries as $country) : ?>
-          <!-- name	capital	region	need_translation	indicators_step	translation_step	card_english_step	card_translated_step -->
-          <tr>
-            <td><?php echo $country['name'] ?></td>
-            <td>
-              <?php
+            <!-- name	capital	region	need_translation	indicators_step	translation_step	card_english_step	card_translated_step -->
+            <tr>
+              <td><?php echo $country['name'] ?></td>
+              <td>
+                <?php
                 if ($country['indicators_step'] == "not started") {
                   echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 } elseif ($country['indicators_step'] == "waiting contact") {
@@ -85,9 +83,9 @@ mysqli_close($conn);
                   echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
                 ?>
-            </td>
-            <td>
-              <?php
+              </td>
+              <td>
+                <?php
                 if ($country['card_english_step'] == "not started") {
                   echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 } elseif ($country['card_english_step'] == "waiting contact") {
@@ -100,9 +98,9 @@ mysqli_close($conn);
                   echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
                 ?>
-            </td>
-            <td>
-              <?php
+              </td>
+              <td>
+                <?php
                 if ($country['need_translation'] == 1) {
                   if ($country['translation_step'] == "not started") {
                     echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
@@ -119,9 +117,9 @@ mysqli_close($conn);
                   echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
-            </td>
-            <td>
-              <?php
+              </td>
+              <td>
+                <?php
                 if ($country['need_translation'] == 1) {
                   if ($country['card_translated_step'] == "not started") {
                     echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
@@ -138,58 +136,55 @@ mysqli_close($conn);
                   echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
-            </td>
-            <td>
-              <button class="btn-edit"
-                onclick="window.location.href = 'editCountry.php?id=<?php echo $country['id']; ?>'"><i
-                  class="fas fa-edit"></i></button>
-              <button class="btn-delete" id="btn-delete-<?php echo $country['id']; ?>"><i
-                  class="fas fa-trash-alt"></i></button>
-            </td>
-          </tr>
+              </td>
+              <td>
+                <button class="btn-edit" onclick="window.location.href = 'editCountry.php?id=<?php echo $country['id']; ?>'"><i class="fas fa-edit"></i></button>
+                <button class="btn-delete" id="btn-delete-<?php echo $country['id']; ?>"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
     </div>
   </div>
   <script>
-  const modal = document.querySelector('.modal');
-  const modalConfirm = document.querySelector('#modal-confirm');
-  const modalClose = document.querySelector('#modal-close');
-  const btnDelete = document.querySelectorAll('.btn-delete');
+    const modal = document.querySelector('.modal');
+    const modalConfirm = document.querySelector('#modal-confirm');
+    const modalClose = document.querySelector('#modal-close');
+    const btnDelete = document.querySelectorAll('.btn-delete');
 
-  btnDelete.forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      modalConfirm.setAttribute('id', btn.getAttribute('id').split('-')[2]);
+    btnDelete.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalConfirm.setAttribute('id', btn.getAttribute('id').split('-')[2]);
+      });
     });
-  });
 
-  function deleteCountry(id) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '../../query/Dashboard/deleteCountry.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(`id=${id}`);
+    function deleteCountry(id) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '../../query/Dashboard/deleteCountry.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send(`id=${id}`);
 
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        window.location.href = 'countriesList.php';
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          window.location.href = 'countriesList.php';
+        }
+      }
+
+      xhr.onerror = function() {
+        console.log('Error');
       }
     }
 
-    xhr.onerror = function() {
-      console.log('Error');
-    }
-  }
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
 
-  modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  modalConfirm.addEventListener('click', () => {
-    const id = modalConfirm.getAttribute('id');
-    deleteCountry(id);
-  });
+    modalConfirm.addEventListener('click', () => {
+      const id = modalConfirm.getAttribute('id');
+      deleteCountry(id);
+    });
   </script>
 </body>
 
