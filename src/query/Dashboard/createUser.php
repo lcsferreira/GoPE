@@ -21,12 +21,18 @@ $result = mysqli_query($conn, $query);
 // Retrieve the user id
 $userId = mysqli_insert_id($conn);
 
+// if countries lenght is 0, close the database connection and return
+if (count($countries) === 0) {
+  mysqli_close($conn);
+  return;
+}
+
 // Insert the user's country relations into the database
 foreach ($countries as $country) {
   $countryId = $country->countryId;
   $mainUser = $country->mainUser;
   $mainUser = $mainUser === 'true' ? 1 : 0;
-  $query = "INSERT INTO user_country_relations (user_id, country_id, main_user) VALUES ('$userId', '$countryId', '$mainUser')";
+  $query = "INSERT INTO user_country_relations (id_user, id_country, is_main) VALUES ('$userId', '$countryId', '$mainUser')";
   $result = mysqli_query($conn, $query);
 }
 

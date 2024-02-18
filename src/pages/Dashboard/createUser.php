@@ -18,7 +18,7 @@ mysqli_close($conn);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countries List - GoPE!</title>
+  <title>User Creation - GoPE!</title>
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
@@ -35,7 +35,7 @@ mysqli_close($conn);
       <div class="dashboard-container__header">
         <h2>User <strong>Information</strong></h2>
       </div>
-      <form action="../../query/Dashboard/createUser.php" method="post" id="userForm">
+      <form action="" method="post" id="userForm">
         <div class="form-group">
           <label for="name">Name *</label>
           <input type="text" name="name" id="name" required>
@@ -63,8 +63,8 @@ mysqli_close($conn);
           <button id="add-country" type="button">Add Country <span><i class="fas fa-plus"></i></span></button>
 
           <div class="country-relation" id="country-relation-1">
-            <select name="country" required id="country-1">
-              <option value="" selected>Select a country</option>
+            <select name="country" id="country-1">
+              <option value="-1" selected>Select a country</option>
               <?php
               foreach ($countries as $country) {
                 echo "<option value='" . $country['id'] . "'>" . $country['name'] . "</option>";
@@ -112,7 +112,8 @@ mysqli_close($conn);
       countrySelect.name = 'country';
 
       countrySelect.id = `country-${countryRelationList.length + 1}`;
-      countrySelect.required = true;
+      countrySelect.required = false;
+      countrySelect.innerHTML = '<option value="-1" selected>Select a country</option>';
 
       const countries = <?php echo json_encode($countries); ?>;
       countries.forEach(country => {
@@ -177,14 +178,48 @@ mysqli_close($conn);
     deleteButtons.forEach(button => {
       button.addEventListener('click', () => {
         const id = button.id.split('-')[2];
-        console.log(id);
+        // console.log(id);
         deleteCountryRelation(id);
       });
     });
 
+    function validateForm() {
+      const form = document.getElementById('userForm');
+      const formData = new FormData(form);
+      // get all the required fields
+
+      const requiredFields = document.querySelectorAll('[required]');
+      // console.log(requiredFields);
+      for (input of requiredFields) {
+        if (input.value === "") {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function createUser(payload) {
+      fetch('../../query/Dashboard/createUser.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            // Code to execute if the response status is 200
+            // window.location.href = '../../pages/Dashboard/usersList.php'
+            console.log('User created');
+          } else {
+            console.log('Error:', response);
+          }
+        })
+    }
+
     const submitButton = document.querySelector('.btn-submit');
     submitButton.addEventListener('click', () => {
-      event.preventDefault();
+      // event.preventDefault();
       const countryRelations = document.querySelectorAll('.country-relation');
       countryRelations.forEach((relation, index) => {
         const mainUser = relation.querySelector(`#main-user-${index + 1}`);
@@ -195,10 +230,6 @@ mysqli_close($conn);
       // console log all the values
       const form = document.getElementById('userForm');
       const formData = new FormData(form);
-
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
 
       // countries = { countryId : id, mainUser: mainUserValue}
 
@@ -211,7 +242,8 @@ mysqli_close($conn);
         };
       });
 
-      console.log(countries);
+      // if an country have id -1, remove it from the array
+      const filteredCountries = countries.filter(country => country.countryId !== '-1');
 
       formattedPayload = {
         name: formData.get('name'),
@@ -219,30 +251,17 @@ mysqli_close($conn);
         secondaryEmail: formData.get('secondary-email'),
         institution: formData.get('institution'),
         type: formData.get('type'),
-        countries: countries,
+        countries: filteredCountries,
       };
 
-      console.log(formattedPayload);
+      if (validateForm()) {
+        createUser(formattedPayload);
+        // console.log(formattedPayload);
+      } else {
+        console.log('Please fill all the fields');
+      }
 
-      fetch('../../query/Dashboard/createUser.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedPayload),
-        })
-        .then((response) =>
-          console.log(response))
-        .then((data) => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    });
-  </script>
-
-
+    })
   </script>
 </body>
 
