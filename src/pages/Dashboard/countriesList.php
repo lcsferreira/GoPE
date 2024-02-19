@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 include "../../../config.php";
 session_start();
@@ -19,6 +16,9 @@ $countries = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
   <meta charset="UTF-8">
@@ -50,7 +50,7 @@ mysqli_close($conn);
     <div class="dashboard-container">
       <div class="dashboard-container__header">
         <h2>Country Details</h2>
-        <button class="btn-add" onclick="window.location.href = 'createCountry.php';"><strong>Create</strong>
+        <button disabled class="btn-add" onclick="window.location.href = 'createCountry.php';"><strong>Create</strong>
           Country</button>
       </div>
       <table class="dashboard-table">
@@ -72,30 +72,30 @@ mysqli_close($conn);
               <td>
                 <?php
                 if ($country['indicators_step'] == "not started") {
-                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 } elseif ($country['indicators_step'] == "waiting contact") {
-                  echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                 } elseif ($country['indicators_step'] == "waiting admin") {
-                  echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                  echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
                 } elseif ($country['indicators_step'] == "completed") {
-                  echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                 } else {
-                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
                 ?>
               </td>
               <td>
                 <?php
                 if ($country['card_english_step'] == "not started") {
-                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 } elseif ($country['card_english_step'] == "waiting contact") {
-                  echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                 } elseif ($country['card_english_step'] == "waiting admin") {
-                  echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                  echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
                 } elseif ($country['card_english_step'] == "completed") {
-                  echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                 } else {
-                  echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
                 ?>
               </td>
@@ -103,18 +103,18 @@ mysqli_close($conn);
                 <?php
                 if ($country['need_translation'] == 1) {
                   if ($country['translation_step'] == "not started") {
-                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   } elseif ($country['translation_step'] == "waiting contact") {
-                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                   } elseif ($country['translation_step'] == "waiting admin") {
-                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
                   } elseif ($country['translation_step'] == "completed") {
-                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                   } else {
-                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
                 } else {
-                  echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
+                  echo '<button disabled class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
               </td>
@@ -122,18 +122,18 @@ mysqli_close($conn);
                 <?php
                 if ($country['need_translation'] == 1) {
                   if ($country['card_translated_step'] == "not started") {
-                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   } elseif ($country['card_translated_step'] == "waiting contact") {
-                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                   } elseif ($country['card_translated_step'] == "waiting admin") {
-                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
                   } elseif ($country['card_translated_step'] == "completed") {
-                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                   } else {
-                    echo '<button class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
                 } else {
-                  echo '<button class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
+                  echo '<button disabled class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
               </td>

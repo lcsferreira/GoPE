@@ -19,9 +19,9 @@
   </div>
   <ul class="sidebar__links">
     <?php if ($_SESSION['type'] === 'Admin') : ?>
-      <li><a href="usersList.php">Users List</a></li>
-      <li><a href="countriesList.php">Countries List</a></li>
-
+      <li><a href="../../../src/pages/Dashboard/usersList.php"> Users List</a></li>
+      <li><a href="../../../src/pages/Dashboard/countriesList.php">Countries List</a></li>
+      <li><a href="../../../src/pages/Guide/manualGuide.php">Guide</a></li>
     <?php else : ?>
       <li><a href="countries.php?id=<?php echo $_SESSION['id']; ?>">Countries list</a></li>
     <?php endif; ?>
