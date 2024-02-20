@@ -59,9 +59,11 @@ if ($_SESSION['type'] == "admin") {
     </div>
     <div class="dashboard-container">
       <div class="dashboard-container__header">
-        <h2>Country Details</h2>
+        <h2>Country <strong>Details</strong></h2>
+        <?php if ($_SESSION['type'] === 'admin') : ?>
         <button class="btn-add" onclick="window.location.href = 'createCountry.php';"><strong>Create</strong>
           Country</button>
+        <?php endif; ?>
       </div>
       <table class="dashboard-table">
         <thead>
