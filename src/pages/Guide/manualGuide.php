@@ -6,6 +6,8 @@ if (!isset($_SESSION['loggedIn'])) {
   exit;
 }
 
+$videosUrl = [];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +22,10 @@ if (!isset($_SESSION['loggedIn'])) {
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -45,7 +49,7 @@ if (!isset($_SESSION['loggedIn'])) {
           <button class="btn-primary">
             View
           </button>
-          <a href="../../assets/GoPE!_User_Manual.pdf" download>
+          <a href="../../assets/GoPE!_User_Manual_English.pdf" download>
             <button class="btn-primary">
               Download <span> <i class="fas fa-download"></i></span>
             </button>
@@ -68,7 +72,7 @@ if (!isset($_SESSION['loggedIn'])) {
             View
           </button>
           <a href="../../
-          assets/GoPE!_User_Manual.pdf" download>
+          assets/GoPE!_User_Manual_Spanish.pdf" download>
             <button class="btn-primary">
               Download <span> <i class="fas fa-download"></i></span>
             </button>
@@ -86,15 +90,14 @@ if (!isset($_SESSION['loggedIn'])) {
           <a href="#0" class="next control"><i class="fas fa-chevron-right"></i></a>
           <a href="#0" class="prev control"><i class="fas fa-chevron-left"></i></a>
           <ul>
+            <?php foreach ($videosUrl as $videoUrl) : ?>
             <li class="dashboard_container__videos-carousel__video">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="560" height="315" src="<?php echo $videoUrl; ?>" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
             </li>
-            <li class="dashboard_container__videos-carousel__video">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </li>
-            <li class="dashboard_container__videos-carousel__video">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </li>
+            <?php endforeach; ?>
           </ul>
         </div>
       </div>
@@ -102,57 +105,57 @@ if (!isset($_SESSION['loggedIn'])) {
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    $(function() {
+  $(function() {
 
-      var slideCount = $(".slider-video ul li").length;
-      var slideWidth = $(".slider-video ul li").width();
-      var slideHeight = $(".slider-video ul li").height();
-      var slideUlWidth = slideCount * slideWidth;
+    var slideCount = $(".slider-video ul li").length;
+    var slideWidth = $(".slider-video ul li").width();
+    var slideHeight = $(".slider-video ul li").height();
+    var slideUlWidth = slideCount * slideWidth;
 
-      $(".slider-video").css({
-        "max-width": slideWidth,
-        "height": slideHeight
+    $(".slider-video").css({
+      "max-width": slideWidth,
+      "height": slideHeight
+    });
+    // $(".slider-video ul").css({
+    //   "width": slideUlWidth,
+    //   "margin-left": -slideWidth
+    // });
+    $(".slider-video ul li:last-child").prependTo($(".slider-video ul"));
+
+    function moveLeft() {
+      $(".slider-video ul").stop().animate({
+        left: +slideWidth
+      }, 700, function() {
+        $(".slider-video ul li:last-child").prependTo($(".slider-video ul"));
+        $(".slider-video ul").css("left", "");
       });
-      $(".slider-video ul").css({
-        "width": slideUlWidth,
-        "margin-left": -slideWidth
+    }
+
+    function moveRight() {
+      $(".slider-video ul").stop().animate({
+        left: -slideWidth
+      }, 700, function() {
+        $(".slider-video ul li:first-child").appendTo($(".slider-video ul"));
+        $(".slider-video ul").css("left", "");
       });
-      $(".slider-video ul li:last-child").prependTo($(".slider-video ul"));
-
-      function moveLeft() {
-        $(".slider-video ul").stop().animate({
-          left: +slideWidth
-        }, 700, function() {
-          $(".slider-video ul li:last-child").prependTo($(".slider-video ul"));
-          $(".slider-video ul").css("left", "");
-        });
-      }
-
-      function moveRight() {
-        $(".slider-video ul").stop().animate({
-          left: -slideWidth
-        }, 700, function() {
-          $(".slider-video ul li:first-child").appendTo($(".slider-video ul"));
-          $(".slider-video ul").css("left", "");
-        });
-      }
+    }
 
 
-      $(".next").on("click", function() {
-        moveRight();
-      });
-
-      $(".prev").on("click", function() {
-        moveLeft();
-      });
-
-
+    $(".next").on("click", function() {
+      moveRight();
     });
 
-    const btnNext = document.querySelector('.btn-next');
-    btnNext.addEventListener('click', () => {
-      window.location.href = 'workflowInstructions.php';
+    $(".prev").on("click", function() {
+      moveLeft();
     });
+
+
+  });
+
+  const btnNext = document.querySelector('.btn-next');
+  btnNext.addEventListener('click', () => {
+    window.location.href = 'workflowInstructions.php';
+  });
   </script>
 </body>
 

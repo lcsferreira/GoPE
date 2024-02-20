@@ -9,23 +9,31 @@ $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 
 if (mysqli_num_rows($result) > 0) {
-  // Email exists, generate a unique token for password reset
-  // $token = bin2hex(random_bytes(32));
+  $subject = "Reset Password - GoPE!";
+  $headers  = 'MIME-Version: 1.0' . "\r\n";
+  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+  $headers .= 'From: Workflow GoPE <info@globalphysicaleducationobservatory.com>' . "\r\n";
+  $headers .= 'Reply-To: info@globalphysicaleducationobservatory.com' . "\r\n";
+  $headers .= "X-Priority: 1\r\n";
+  $headers .= 'X-Mailer: PHP/' . phpversion();
 
-  // // Save the token in the database for the user
-  // $query = "UPDATE users SET reset_token = '$token' WHERE email = '$email'";
-  // mysqli_query($connection, $query);
+  $message = "
+  <br>
+  Did you forgot your password?
+  <br><br>
+  Please click in the <strong>link below</strong> to reset your password.
+  <br><br>
+  <a href='http://google.com'>English</a>
+  <a href='http://google.com'>Spanish</a>
+  <br><br>
+  <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Login/resetPassword.php?id=$id'>Reset Password</a>
+  <br><br>
+    If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
+  ";
 
-  // // Send the password reset email
-  // $resetLink = "https://example.com/reset-password.php?tk=$token";
-  // $to = $email;
-  // $subject = "Password Reset";
-  // $message = "Click the link below to reset your password:\n\n$resetLink";
-  // $headers = "From: noreply@example.com\r\n";
-  // mail($to, $subject, $message, $headers);
-  // echo "Password reset email sent";
+  mail($to, $subject, $message, $headers);
 
-  header("Location: ../../pages/Login/forgotPasswordSuccess.php");
+  header("Location: ../../pages/Login/login.php");
 } else {
   // Email does not exist
   // echo "Email does not exist";

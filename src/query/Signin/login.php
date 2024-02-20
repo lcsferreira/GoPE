@@ -14,6 +14,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 $email = validate($_POST['email']);
 $password = validate($_POST['password']);
+$password = md5($password);
 
 if (empty($email)) {
   header("Location: ../../pages/Login/login.php?error=Email is required");
@@ -35,7 +36,12 @@ if (empty($email)) {
       $_SESSION['loggedIn'] = true;
       $_SESSION['type'] = $row['type'];
 
-      header("Location: ../../pages/Dashboard/countriesList.php");
+      if ($row['type'] === 'admin') {
+        header("Location: ../../pages/Dashboard/countriesList.php");
+      } else {
+        header("Location: ../../pages/Dashboard/countriesList.php?id=" . $row['id']);
+      }
+
       exit();
     } else {
       header("Location: ../../pages/Login/login.php?error=Incorrect email or password");

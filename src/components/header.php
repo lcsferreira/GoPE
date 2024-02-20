@@ -18,7 +18,7 @@
     <p class="type"><?php echo $_SESSION['type'] ?></p>
   </div>
   <ul class="sidebar__links">
-    <?php if ($_SESSION['type'] === 'Admin') : ?>
+    <?php if ($_SESSION['type'] === 'admin') : ?>
       <li><a href="../../../src/pages/Dashboard/usersList.php"> Users List</a></li>
       <li><a href="../../../src/pages/Dashboard/countriesList.php">Countries List</a></li>
       <li><a href="../../../src/pages/Guide/manualGuide.php">Guide</a></li>
