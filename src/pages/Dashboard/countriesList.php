@@ -83,18 +83,30 @@ if ($_SESSION['type'] == "admin") {
             <td><?php echo $country['name'] ?></td>
             <td>
               <?php
-                if ($country['indicators_step'] == "not started") {
+                if ($country['indicators_step'] === "not started") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button class="btn-play" onclick="window.location.href = \'../Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button class="btn-play" onclick="window.location.href = \'../../query/Indicators/createIndicators.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
-                } elseif ($country['indicators_step'] == "waiting contact") {
-                  echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                } elseif ($country['indicators_step'] === "waiting contact") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  } else {
+                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                  }
                 } elseif ($country['indicators_step'] == "waiting admin") {
-                  echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
-                } elseif ($country['indicators_step'] == "completed") {
-                  echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  }
+                } elseif ($country['indicators_step'] === "completed") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  }
                 } else {
                   echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
