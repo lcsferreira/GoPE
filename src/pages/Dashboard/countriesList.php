@@ -84,7 +84,11 @@ if ($_SESSION['type'] == "admin") {
             <td>
               <?php
                 if ($country['indicators_step'] == "not started") {
-                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-play" onclick="window.location.href = \'../Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  }
                 } elseif ($country['indicators_step'] == "waiting contact") {
                   echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                 } elseif ($country['indicators_step'] == "waiting admin") {
