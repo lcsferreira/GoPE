@@ -40,11 +40,15 @@ if (!isset($_SESSION['loggedIn'])) {
         <h1><strong>First Set of Country Cards</strong></h1>
         <h2><?php echo $year = date('Y'); ?></h2>
         <p>
-          Dear Country Contact, in the First set of Country Cards, GoPE!’s core indicators will be updated to the most
-          recent and available information.
+          Dear Country Contact, in the <strong>First</strong> set of <strong>Country Cards, GoPE!’s</strong> core
+          indicators will be updated to the <strong>most
+            recent</strong> and <strong>available information</strong>.
           <br />
-          We value very much your participation and great contributions to GoPE!. We kindly ask you to review the data
-          collected for your country’s Country Card.
+          <br />
+
+          We value very much your <strong>participation</strong> and <strong>great contributions</strong> to
+          <strong>GoPE!</strong>. We kindly ask you to <strong>review</strong> the <strong>data</strong>
+          collected for <strong>your country’s Country Card</strong>.
         </p>
         <h3>
           You will have to
@@ -87,7 +91,12 @@ if (!isset($_SESSION['loggedIn'])) {
   <script>
     const btnNext = document.querySelector('.btn-next');
     btnNext.addEventListener('click', () => {
-      window.location.href = 'workflowInstructions.php';
+      window.location.href = '../Dashboard/countriesList.php<?php if ($_SESSION['type'] === 'admin') {
+                                                              echo "'";
+                                                            } else {
+                                                              echo "?id=" . $_SESSION['id'] . "'";
+                                                            }
+                                                            ?>;
     });
     const btnBack = document.querySelector('.btn-back');
     btnBack.addEventListener('click', () => {

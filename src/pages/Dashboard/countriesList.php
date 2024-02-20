@@ -9,12 +9,20 @@ if (!isset($_SESSION['loggedIn'])) {
 //   echo "<script>alert('" . $_SESSION['message'] . "');</script>";
 //   unset($_SESSION['message']); // Clear the session variable
 // }
-$query = "SELECT * FROM countries";
-// echo $query;
-$result = mysqli_query($conn, $query);
-$countries = mysqli_fetch_all($result, MYSQLI_ASSOC);
-mysqli_free_result($result);
-mysqli_close($conn);
+if ($_SESSION['type'] == "admin") {
+  $query = "SELECT * FROM countries";
+  // echo $query;
+  $result = mysqli_query($conn, $query);
+  $countries = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  mysqli_free_result($result);
+  mysqli_close($conn);
+} else {
+  $query = "SELECT countries.* FROM countries INNER JOIN user_country_relations ON countries.id = user_country_relations.id_country WHERE user_country_relations.id_user = " . $_SESSION['id'];
+  $result = mysqli_query($conn, $query);
+  $countries = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  mysqli_free_result($result);
+  mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
