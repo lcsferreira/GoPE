@@ -1,6 +1,10 @@
 <?php
 include '../../../config.php';
 $id = $_GET['id'];
+
+if (isset($_GET['Success'])) {
+  header("refresh:5;url=../../pages/Login/login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +51,7 @@ $id = $_GET['id'];
           Must have at <strong>least 8
             characters</strong>, <strong>one number</strong> and <strong>one uppercase letter</strong>.
         </p>
-        <input type="hidden" name="tk" value="<?php echo $_GET['tk'] ?>">
+        <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
         <div class="form__input-container">
           <label for="password">Password</label>
           <input type="password" name="password" id="password">

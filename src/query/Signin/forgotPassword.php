@@ -7,8 +7,10 @@ $email = $_POST['email'];
 $query = "SELECT * FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
+$id = $row['id'];
 
 if (mysqli_num_rows($result) > 0) {
+  $to = $email;
   $subject = "Reset Password - GoPE!";
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -22,9 +24,6 @@ if (mysqli_num_rows($result) > 0) {
   Did you forgot your password?
   <br><br>
   Please click in the <strong>link below</strong> to reset your password.
-  <br><br>
-  <a href='http://google.com'>English</a>
-  <a href='http://google.com'>Spanish</a>
   <br><br>
   <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Login/resetPassword.php?id=$id'>Reset Password</a>
   <br><br>

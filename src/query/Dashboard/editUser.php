@@ -69,7 +69,7 @@ if ($active !== $oldActive && $active == 1) {
   <br><br>
   Please click on the link below to log in to the GoPE workflow. This is a link that will allow you to create the password.
   <br><br>
-    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/login/firstAccess.php?tk=$id'>First-time registration</a>
+    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Login/firstAccess.php?tk=$id'>First-time registration</a>
   <br><br>
     If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
   ";
