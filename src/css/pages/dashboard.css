@@ -173,7 +173,42 @@
   transition: all 0.3s ease;
 }
 
+.btn-clock {
+  background-color: transparent;
+  color: var(--yellow-dark);
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-exclamation {
+  background-color: transparent;
+  color: var(--red);
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-check {
+  background-color: transparent;
+  color: var(--green-dark);
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-play:disabled {
+  color: var(--gray-light);
+  cursor: not-allowed;
+}
+
 .btn-play:hover,
+.btn-clock:hover,
+.btn-exclamation:hover,
+.btn-check:hover,
 .btn-edit:hover,
 .btn-delete:hover {
   transform: scale(1.2);
