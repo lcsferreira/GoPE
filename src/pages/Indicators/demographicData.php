@@ -18,10 +18,13 @@ if (!isset($_SESSION['loggedIn'])) {
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
+  <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -32,12 +35,15 @@ if (!isset($_SESSION['loggedIn'])) {
       <h1>Country <strong>Progress</strong></h1>
       <button class="btn-next">Next</button>
     </div>
-    <div class="dashboard-container">
-      <div class="dashboard-container__header">
-        <h2><strong>Indicators</strong></h2>
-      </div>
-      <div class="dashboard-container__description">
-        <p>demographic data</p>
+    <div class="indicators-container">
+      <?php include '../../components/sideNavBar.php'; ?>
+      <div class="dashboard-container">
+        <div class="dashboard-container__header">
+          <h2><strong>Indicators</strong></h2>
+        </div>
+        <div class="dashboard-container__description">
+          <p>demographic data</p>
+        </div>
       </div>
     </div>
   </div>
