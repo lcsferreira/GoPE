@@ -1,9 +1,7 @@
 .container {
-  padding: 2rem;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
   background-color: var(--white);
   color: var(--gray-dark);
 }
@@ -13,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  padding: 0 2rem;
 }
 
 .container__title-header h1 {
@@ -62,6 +61,7 @@
 .dashboard-container {
   border: 1px solid var(--gray-lighter);
   border-radius: 1rem;
+  margin-right: 2rem;
 }
 
 .dashboard-container__header {
@@ -171,4 +171,11 @@
 .container__cards-progress .card-progress h3 {
   font-size: 1rem;
   font-weight: 200;
+}
+
+.indicators-container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 2rem;
+  margin-top: 2rem;
 }
