@@ -21,10 +21,8 @@ if (!isset($_SESSION['loggedIn'])) {
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
-    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
-    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -37,12 +35,24 @@ if (!isset($_SESSION['loggedIn'])) {
     </div>
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
-      <div class="dashboard-container">
-        <div class="dashboard-container__header">
-          <h2><strong>Indicators</strong></h2>
+      <div class="indicator-input-container">
+        <div class="indicator-input-container__header">
+          <h2><strong>ES</strong></h2>
         </div>
-        <div class="dashboard-container__description">
-          <p>demographic data</p>
+        <div class="indicator-input-container-values">
+          <div>
+            <label for="duration-compulsory-pe">Duration of the compulsory school years of primary education <span><i class="fas fa-info-circle"></i></span></label>
+            <div id="duration-compulsory-pe">
+              <label for="document">Document title</label>
+              <input type="text" name="document" id="document">
+              <label for="year-publication">Year of publication</label>
+              <input type="text" name="year-publication" id="year-publication">
+              <label for="eletronic-source">Eletronic Source</label>
+              <input type="text" name="eletronic-source" id="eletronic-source">
+              <label for="voluntary-comments">Voluntary comments</label>
+              <textarea name="voluntary-comments" id="voluntary-comments" cols="30" rows="10"></textarea>
+            </div>
+          </div>
         </div>
       </div>
     </div>
