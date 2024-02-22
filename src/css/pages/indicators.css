@@ -62,7 +62,7 @@
 .indicator-input-container {
   border: 1px solid var(--gray-lighter);
   border-radius: 1rem;
-  margin-right: 2rem;
+  margin: 0 2rem;
 }
 
 .dashboard-container__header,
@@ -79,6 +79,8 @@
 .indicator-input-container-values {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding: 2rem;
+  gap: 2rem;
 }
 
 .dashboard-container__header h2 {
@@ -185,4 +187,64 @@
   grid-template-columns: 1fr 5fr;
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.input-indicator-group,
+.input-document-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.indicator-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.indicator-input label {
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.indicator-input input {
+  height: 2.5rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.indicator-input input::placeholder {
+  color: var(--gray-light);
+}
+
+.indicator-input textarea {
+  padding: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.indicator-input-container-values-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.indicator-input-container-values-group > label {
+  color: var(--text-dark);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.indicator-input-container-values-group label span {
+  margin-left: 0.5rem;
 }
