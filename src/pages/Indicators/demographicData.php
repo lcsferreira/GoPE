@@ -20,7 +20,17 @@ if (!isset($_SESSION['loggedIn'])) {
 //   array_push($durationDocumentsPEContact, $row);
 // }
 
+$sql = "SELECT * FROM demographic_data_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$adminValues = mysqli_fetch_assoc($result);
 
+$sql = "SELECT * FROM demographic_data_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$contactValues = mysqli_fetch_assoc($result);
+
+$sql = "SELECT * FROM demographic_data_comments WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$commentValues = mysqli_fetch_assoc($result);
 
 $sql = "SELECT * FROM demographic_data_agreement WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
@@ -65,24 +75,46 @@ $agreementValues = mysqli_fetch_assoc($result);
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 1;
-			  $inputName = "world_region";
-			  $inputTitle = "World region";
-			  $inputType = "text";
-			  include '../../components/valueGroup.php';
-			  ?>
               <?php
-			  $inputName = "world_region";
-			  include '../../components/commentGroup.php';
-			  ?>
+              $indicatorRole = "admin";
+              $indicatorOrder = 1;
+              $inputs = [
+                (object) [
+                  "name" => "world_region",
+                  "title" => "World region",
+                  "type" => "text",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="1-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 1;
+              $inputs = [
+                (object) [
+                  "name" => "world_region",
+                  "title" => "World region",
+                  "type" => "text",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "world_region";
+              $indicatorOrder = 1;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
             </div>
             <?php
-			$agreementOrder = 1;
-			$inputName = "world_region";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
+            $agreementOrder = 1;
+            $indicatorName = "world_region";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
           </div>
         </div>
         <div class="indicator-input-container">
@@ -91,384 +123,210 @@ $agreementValues = mysqli_fetch_assoc($result);
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 2;
-			  $inputName = "income_classification";
-			  $inputTitle = "Income classification";
-			  $inputType = "text";
-			  include '../../components/valueGroup.php';
-			  ?>
               <?php
-			  $inputName = "income_classification";
-			  include '../../components/commentGroup.php';
-			  ?>
+              $indicatorRole = "admin";
+              $indicatorOrder = 2;
+              $inputs = [
+                (object) [
+                  "name" => "income_classification",
+                  "title" => "Income classification ",
+                  "type" => "text",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="2-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 2;
+              $inputs = [
+                (object) [
+                  "name" => "income_classification",
+                  "title" => "Income classification",
+                  "type" => "text",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "income_classification";
+              $indicatorOrder = 2;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
             </div>
             <?php
-			$agreementOrder = 2;
-			$inputName = "income_classification";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>03</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 3;
-			  $inputName = "total_population";
-			  $inputTitle = "Total population";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "total_population";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 3;
-			$inputName = "total_population";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>04</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 4;
-			  $inputName = "literacy_youth_total";
-			  $inputTitle = "Literacy youth total 15-24 years (%)";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "literacy_youth_total";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 4;
-			$inputName = "literacy_youth_total";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>05</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 5;
-			  $inputName = "gov_expenditure";
-			  $inputTitle = "Government expenditure on education (%)";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "gov_expenditure";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 5;
-			$inputName = "gov_expenditure";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>06</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 6;
-			  $inputName = "entrance_age_pe";
-			  $inputTitle = "Official entrance age to primary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "entrance_age_pe";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 6;
-			$inputName = "entrance_age_pe";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>07</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 7;
-			  $inputName = "entrance_age_se";
-			  $inputTitle = "Official entrance age to secondary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "entrance_age_se";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 7;
-			$inputName = "entrance_age_se";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>08</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 8;
-			  $inputName = "duration_pe";
-			  $inputTitle = "Duration of primary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "duration_pe";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 8;
-			$inputName = "duration_pe";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>09</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 9;
-			  $inputName = "duration_se";
-			  $inputTitle = "Duration of secondary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "duration_se";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 9;
-			$inputName = "duration_se";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>10</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 10;
-			  $inputName = "duration_ce";
-			  $inputTitle = "Duration of compulsory education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "duration_ce";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 10;
-			$inputName = "duration_ce";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>11</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 11;
-			  $inputName = "school_age_pe";
-			  $inputTitle = "School-age population at primary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "school_age_pe";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 11;
-			$inputName = "school_age_pe";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
-          </div>
-        </div>
-
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>12</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php 
-			  $inputOrder = 12;
-			  $inputName = "school_age_se";
-			  $inputTitle = "School-age population at secondary education";
-			  $inputType = "number";
-			  include '../../components/valueGroup.php';
-			  ?>
-              <?php
-			  $inputName = "school_age_se";
-			  include '../../components/commentGroup.php';
-			  ?>
-            </div>
-            <?php
-			$agreementOrder = 12;
-			$inputName = "school_age_se";
-			$tableName = "demographic_data_agreement";
-			include '../../components/agreementGroup.php';
-			?>
+            $agreementOrder = 2;
+            $indicatorName = "income_classification";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
           </div>
         </div>
       </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>
-      $(document).ready(function() {
-        $(".btn-back").click(function() {
-          window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
-        });
-        $(".btn-next").click(function() {
-          window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
-        });
-
-        //verifyAgreementInput();
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $(".btn-back").click(function() {
+        window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
       });
+      $(".btn-next").click(function() {
+        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+      });
+      verifyAgreementInput()
+    });
 
-      function verifyAgreementInput() {
-        let contactInputs = []
-        let agreementGroups = []
-        for (let i = 1; i <= 3; i++) {
-          // get all the divs with id that contains i and -contact
-          contactInputs.push($(`div[id*="${i}-contact"]`))
-          agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+    function verifyAgreementInput() {
+      let contactInputs = []
+      let contactLabels = []
+      let agreementGroups = []
+      for (let i = 1; i <= 3; i++) {
+        // get all the divs with id that contains i and -contact
+        contactLabels.push($(`p[id*="${i}-contact-label"]`))
+        contactInputs.push($(`div[id*="${i}-contact"]`))
+        agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+      }
+
+      agreementGroups.forEach((agreementGroup, index) => {
+        // on load verify the value of the radio input inside of the agreementGroup
+        verifyRadioValue(agreementGroup, contactInputs[index], contactLabels[index])
+      })
+    }
+
+    function verifyRadioValue(agreementGroup, contactInput, contactLabel) {
+      //get all the radio inputs inside of the agreementGroup
+      let radioInputs = agreementGroup.find("input[type='radio']")
+      radioInputs.each(function() {
+        //on change verify the value of the radio input inside of the agreementGroup
+        $(this).change(function() {
+          if ($(this).val() == 1) {
+            contactLabel.hide()
+            contactInput.hide()
+          } else {
+            contactLabel.show()
+            contactInput.show()
+          }
+        })
+
+        //on load verify the value of the radio input inside of the agreementGroup
+        if ($(this).is(":checked")) {
+          if ($(this).val() == 1) {
+            contactLabel.hide()
+            contactInput.hide()
+          } else {
+            contactLabel.show()
+            contactInput.show()
+          }
         }
+      })
+    }
 
-        agreementGroups.forEach((agreementGroup, index) => {
-          // on load verify the value of the radio input inside of the agreementGroup
-          verifyRadioValue(agreementGroup, contactInputs[index])
-        })
+    function saveAgreementValue(indicatorName, tableName, value) {
+      let idCountry = <?php echo $_GET['id'] ?>;
+      const payload = {
+        tableName: tableName,
+        indicatorName: indicatorName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function verifyRadioValue(agreementGroup, contactInput) {
-        //get all the radio inputs inside of the agreementGroup
-        let radioInputs = agreementGroup.find("input[type='radio']")
-        radioInputs.each(function() {
-          //on change verify the value of the radio input inside of the agreementGroup
-          $(this).change(function() {
-            if ($(this).val() == 1) {
-              contactInput.hide()
-            } else {
-              contactInput.show()
-            }
-          })
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateAgreementValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
 
-          //on load verify the value of the radio input inside of the agreementGroup
-          if ($(this).is(":checked")) {
-            if ($(this).val() == 1) {
-              contactInput.hide()
-            } else {
-              contactInput.show()
-            }
-          }
-        })
+    function saveAdminValue(inputName, tableName) {
+      let value = $(`#${inputName}-admin`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function saveAgreementValue(agreementOrder, inputName, tableName, value) {
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/saveAgreementValue.php",
-          data: {
-            agreementOrder: agreementOrder,
-            inputName: inputName,
-            tableName: tableName,
-            value: value,
-            idCountry: <?php echo $_GET['id']; ?>
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
+
+    function saveContactValue(inputName, tableName) {
+      let value = $(`#${inputName}-contact`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function saveDocumentValue(inputName, tableName) {
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
 
-        let value = $(`#${inputName}`).val()
-        let id = inputName.split("-")[0];
-        let inputNameValue = inputName.split("-")[1];
+    function saveComment(inputName, tableName) {
+      //get the value from textarea
+      let value = $(`#${inputName}-comments`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
 
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/saveDocumentValue.php",
-          data: {
-            inputName: inputNameValue,
-            tableName: tableName,
-            value: value,
-            idCountry: <?php echo $_GET['id']; ?>,
-            idDocument: id
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
-      </script>
+
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
+
+    function hideComment(divName) {
+      if ($(`#${divName}`).is(":hidden")) {
+        $(`#${divName}`).show()
+      } else {
+        $(`#${divName}`).hide()
+      }
+    }
+    </script>
 </body>
 
 </html>
