@@ -6,6 +6,17 @@
   margin: 0 auto;
 }
 
+.agreement-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+}
+
 .radio-option {
   display: flex;
   justify-content: center;
@@ -85,6 +96,10 @@
   opacity: 1;
 }
 
+.radio-option input:checked ~ .checkmark::after {
+  opacity: 0;
+}
+
 .radio-option .checkmark::after {
   content: "";
   position: absolute;
@@ -98,8 +113,4 @@
 
 .radio-option:has(> input:checked) {
   border-color: #03a9f4;
-}
-
-.radio-option input:checked ~ .checkmark::after {
-  opacity: 0;
 }
