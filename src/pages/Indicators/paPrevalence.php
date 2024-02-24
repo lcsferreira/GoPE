@@ -37,12 +37,87 @@ if (!isset($_SESSION['loggedIn'])) {
     </div>
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
-      <div class="dashboard-container">
-        <div class="dashboard-container__header">
-          <h2><strong>Indicators</strong></h2>
+      <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>01</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php 
+			  $inputOrder = 1;
+			  $inputName = "pa_prevalence_boys";
+			  $inputTitle = "Physical activity prevalence in boys aged 11-17 years (%)";
+			  $inputType = "number";
+			  include '../../components/valueGroup.php';
+			  ?>
+              <?php
+			  $inputName = "pa_prevalence_boys";
+			  include '../../components/commentGroup.php';
+			  ?>
+            </div>
+            <?php
+			$agreementOrder = 1;
+			$inputName = "pa_prevalence_boys";
+			$tableName = "demographic_data_agreement";
+			include '../../components/agreementGroup.php';
+			?>
+          </div>
         </div>
-        <div class="dashboard-container__description">
-          <p>pa prevalence</p>
+
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>02</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php 
+			  $inputOrder = 2;
+			  $inputName = "pa_prevalence_girls";
+			  $inputTitle = "Physical activity prevalence in girls aged 11-17 years (%)";
+			  $inputType = "number";
+			  include '../../components/valueGroup.php';
+			  ?>
+              <?php
+			  $inputName = "pa_prevalence_girls";
+			  include '../../components/commentGroup.php';
+			  ?>
+            </div>
+            <?php
+			$agreementOrder = 2;
+			$inputName = "pa_prevalence_girls";
+			$tableName = "demographic_data_agreement";
+			include '../../components/agreementGroup.php';
+			?>
+          </div>
+        </div>
+
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>03</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php 
+			  $inputOrder = 3;
+			  $inputName = "pa_prevalence_children_adolescents";
+			  $inputTitle = "Physical activity prevalence in children and adolescents (total) aged 11-17
+			  years (%)";
+			  $inputType = "number";
+			  include '../../components/valueGroup.php';
+			  ?>
+              <?php
+			  $inputName = "pa_prevalence_children_ado";
+			  include '../../components/commentGroup.php';
+			  ?>
+            </div>
+            <?php
+			$agreementOrder = 3;
+			$inputName = "pa_prevalence_children_ado";
+			$tableName = "demographic_data_agreement";
+			include '../../components/agreementGroup.php';
+			?>
+          </div>
         </div>
       </div>
     </div>

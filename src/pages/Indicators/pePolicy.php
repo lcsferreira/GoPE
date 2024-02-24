@@ -37,13 +37,8 @@ if (!isset($_SESSION['loggedIn'])) {
     </div>
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
-      <div class="dashboard-container">
-        <div class="dashboard-container__header">
-          <h2><strong>Indicators</strong></h2>
-        </div>
-        <div class="dashboard-container__description">
-          <p>pe policy</p>
-        </div>
+      <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+
       </div>
     </div>
   </div>
