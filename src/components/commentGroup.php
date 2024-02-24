@@ -5,5 +5,4 @@
     comments here:</label>
   <textarea name="comments-<?php echo $inputName; ?>" id="comments-<?php echo $inputName; ?>" cols="20"
     rows="5"></textarea>
-
 </div>
