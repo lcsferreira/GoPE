@@ -183,9 +183,6 @@
 }
 
 .indicators-container {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  gap: 2rem;
   margin-top: 2rem;
 }
 
