@@ -1,0 +1,45 @@
+.switch-field {
+  display: flex;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 0.0625rem;
+  width: 0.0625rem;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: transparent;
+  font-weight: 700;
+  color: var(--gray-light);
+  font-size: 0.875rem;
+  line-height: 1;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: 0.15rem solid var(--gray-light);
+  transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: var(--gray-light);
+  box-shadow: none;
+  color: var(--white);
+}
+
+.switch-field label:first-of-type {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 0.25rem 0.25rem 0;
+  margin-left: -0.15rem;
+}
