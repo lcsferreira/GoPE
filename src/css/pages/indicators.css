@@ -197,6 +197,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .indicator-input label {
@@ -233,7 +234,10 @@
 .indicator-input-container-values-group {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+}
+
+.indicator-input-container-values-group #studies:has(div) {
+  margin-bottom: 2rem;
 }
 
 .indicator-input-container-values-group > label {
@@ -270,7 +274,7 @@
 }
 
 .thumbnail-pdf {
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -303,8 +307,20 @@
   transition: all 0.3s ease;
 }
 
-.btn-add:hover {
+.btn-add:hover,
+.btn-delete:hover {
   transform: scale(1.02);
+}
+
+.btn-delete {
+  background-color: var(--gray-dark);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 /* table css */
