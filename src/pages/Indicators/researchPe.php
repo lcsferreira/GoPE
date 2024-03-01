@@ -29,6 +29,10 @@ $sql = "SELECT * FROM research_pe_admin WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
 $adminValues = mysqli_fetch_assoc($result);
 
+$sql = "SELECT * FROM research_pe_intervation_studies WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +47,7 @@ $adminValues = mysqli_fetch_assoc($result);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
@@ -56,7 +61,7 @@ $adminValues = mysqli_fetch_assoc($result);
   <div class="container">
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Country <strong>Progress</strong></h1>
+      <h1>Country <strong>Indicators</strong></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -87,7 +92,7 @@ $adminValues = mysqli_fetch_assoc($result);
               <a href="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf" download class="btn-primary">
                 <strong>Download</strong> table
               </a>
-              <button class="btn-add">
+              <button class="btn-add" id="addStudy">
                 <strong>Add</strong> intervation study
               </button>
             </div>
@@ -97,10 +102,21 @@ $adminValues = mysqli_fetch_assoc($result);
 
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
+              <div id="studies">
+                <?php
+                  if($intervationStudies != null){
+                    foreach ($intervationStudies as $intervationStudy) {
+                      $inc = $intervationStudy["inc"];
+                      
+                      include '../../components/intervationStudies.php';
+                    }
+                  }
+                ?>
+              </div>
               <?php
               $indicatorName = "research_pe";
               $indicatorOrder = 1;
-              $tableName = "research_pe";
+              $tableName = "research_pe_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
@@ -139,6 +155,9 @@ $adminValues = mysqli_fetch_assoc($result);
       });
     });
 
+    $("#addStudy").click(function() {
+      addStudy();
+    });
   });
 
   function uploadTable() {
@@ -164,6 +183,178 @@ $adminValues = mysqli_fetch_assoc($result);
         }
       }
     });
+  }
+
+  function showAddStudy() {
+    //add an input group to the page
+    const studies = document.getElementById("studies");
+    const inc = studies.childElementCount + 1;
+    const study = `
+    <div class="agreement-group" id="${inc}" style="margin: 0 !important">
+      <div class="indicator-input" style="margin: 0 !important">
+        <label for="full_reference-${inc}">
+          Full reference
+        </label>
+        <input type="text" name="full_reference-${inc}" id="full_reference-${inc}" onblur="saveIntervationStudiesValues(${inc})"">
+      </div>
+      <div class="indicator-input" style="margin: 0 !important">
+        <label for="${inc}">
+        PE and school-based PA domains
+        <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
+        </label>
+        <div class="agreement-group" id="${inc}" style="margin: 0 !important">
+          <label for="pe-${inc}" class="radio-option-no-description" style="width: auto !important;">
+            <div class="option-text">
+              <h3>Physical Education</h3>
+            </div>
+            <input type="checkbox" name="radio-group-intervation-studies" id="pe-${inc}" value="pe" onclick="saveIntervationStudiesValues(${inc})"/>
+            <span class="checkmark"></span>
+          </label>
+          <label for="atp-${inc}" class="radio-option-no-description" style="width: auto !important;">
+            <div class="option-text">
+              <h3>Ative transport</h3>
+            </div>
+            <input type="checkbox" name="radio-group-intervation-studies" id="atp-${inc}" value="atp" onclick="saveIntervationStudiesValues(${inc})"/>
+            <span class="checkmark"></span>
+          </label>
+          <label for="ac-${inc}" class="radio-option-no-description" style="width: auto !important;">
+            <div class="option-text">
+              <h3>Active classes/breaks</h3>
+            </div>
+            <input type="checkbox" name="radio-group-intervation-studies" id="ac-${inc}" value="ac" onclick="saveIntervationStudiesValues(${inc})"/>
+            <span class="checkmark"></span>
+          </label>
+          <label for="ar-${inc}" class="radio-option-no-description" style="width: auto !important;">
+            <div class="option-text">
+              <h3>Active recess</h3>
+            </div>
+            <input type="checkbox" name="radio-group-intervation-studies" id="ar-${inc}" value="ar" onclick="saveIntervationStudiesValues(${inc})"/>
+            <span class="checkmark"></span>
+          </label>
+          <label for="e_pa-${inc}" class="radio-option-no-description" style="width: auto !important;">
+            <div class="option-text">
+              <h3>Extracurricular physical activity</h3>
+            </div>
+            <input type="checkbox" name="radio-group-intervation-studies" id="e_pa-${inc}" value="e_pa" onclick="saveIntervationStudiesValues(${inc})"/>
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <button class="btn-delete" onclick="deleteStudy(${inc})"><strong>Delete</strong> Study</button>
+    </div>
+    `;
+    studies.innerHTML += study;
+  }
+
+  function addStudy() {
+    const studies = document.getElementById("studies");
+    const inc = studies.childElementCount + 1;
+
+    $.ajax({
+      url: "../../query/Indicators/addStudy.php?id=<?php echo $_GET["id"]; ?>",
+      type: "POST",
+      data: {
+        inc: inc
+      },
+      success: function(data) {
+        if (data == "Success") {
+          showAddStudy();
+        } else {
+          console.log(data);
+        }
+      }
+    });
+
+  }
+
+  function removeStudy(inc) {
+    const study = document.getElementById(inc);
+    study.remove();
+  }
+
+  function deleteStudy(inc) {
+    $.ajax({
+      url: "../../query/Indicators/deleteStudy.php?id=<?php echo $_GET["id"]; ?>",
+      type: "POST",
+      data: {
+        inc: inc
+      },
+      success: function(data) {
+        if (data == "Success") {
+          removeStudy(inc);
+        } else {
+          console.log(data);
+        }
+      }
+    });
+  }
+
+  function saveIntervationStudiesValues(inc) {
+    const grupoStudy = document.getElementById(inc);
+    const fullReference = grupoStudy.querySelector(`#full_reference-${inc}`);
+    const pe = grupoStudy.querySelector(`#pe-${inc}`);
+    const atp = grupoStudy.querySelector(`#atp-${inc}`);
+    const ac = grupoStudy.querySelector(`#ac-${inc}`);
+    const ar = grupoStudy.querySelector(`#ar-${inc}`);
+    const e_pa = grupoStudy.querySelector(`#e_pa-${inc}`);
+
+    const values = {
+      fullReference: fullReference.value,
+      pe: pe.checked,
+      atp: atp.checked,
+      ac: ac.checked,
+      ar: ar.checked,
+      e_pa: e_pa.checked
+    };
+
+    $.ajax({
+      url: "../../query/Indicators/saveIntervationStudiesValues.php?id=<?php echo $_GET["id"]; ?>",
+      type: "POST",
+      data: {
+        inc: inc,
+        values: values
+      },
+      success: function(data) {
+        if (data == "Success") {
+          console.log("Success");
+        } else {
+          console.log(data);
+        }
+      }
+    });
+
+  }
+
+  function saveComment(inputName, tableName) {
+    //get the value from textarea
+    let value = $(`#${inputName}-comments`).val()
+    let idCountry = <?php echo $_GET['id'] ?>;
+
+    const payload = {
+      tableName: tableName,
+      inputName: inputName,
+      value: value,
+      idCountry: idCountry
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "../../query/Indicators/updateIndicatorValue.php",
+      data: {
+        payload: payload
+      },
+      success: function(response) {
+        console.log(response)
+      }
+    });
+  }
+
+  function hideComment(divName) {
+    if ($(`#${divName}`).is(":hidden")) {
+      $(`#${divName}`).show()
+    } else {
+      $(`#${divName}`).hide()
+    }
   }
   </script>
 </body>
