@@ -171,9 +171,12 @@
       ?>
     <?php
     foreach($monitoringSystemsDocumentsAdmin as $document){
-      $docInc = $document["inc"];
-      $docRole = $type;
-      include("documentMonitoring.php");
+      if($document["inc"] == $inc){
+        $docInc = $document["doc_inc"];
+        $inc = $document["inc"];
+        $docRole = $type;
+        include("documentMonitoring.php");
+      }
     }
     ?>
     <?php
@@ -181,9 +184,12 @@
       ?>
     <?php
     foreach($monitoringSystemsDocumentsContact as $document){
-      $docInc = $document["inc"];
-      $docRole = $type;
-      include("documentMonitoring.php");
+      if($document["inc"] == $inc){
+        $docInc = $document["doc_inc"];
+        $inc = $document["inc"];
+        $docRole = $type;
+        include("documentMonitoring.php");
+      }
     }
     ?>
     <?php

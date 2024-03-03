@@ -3,13 +3,14 @@ include '../../../config.php';
 
 $id = $_GET['id'];
 $inc = $_POST['inc'];
+$docInc = $_POST['docInc'];
 $type = $_POST['type'];
 //call procedure InsertMonitoringSystem
 if($type =="admin"){
-  $sql = "CALL InsertMonitoringSystemDocumentAdmin($id, $inc)";
+  $sql = "CALL InsertMonitoringSystemDocumentAdmin($id, $inc, $docInc)";
   $result = mysqli_query($conn, $sql);
 }else{
-  $sql = "CALL InsertMonitoringSystemDocumentContact($id, $inc)";
+  $sql = "CALL InsertMonitoringSystemDocumentContact($id, $inc, $docInc)";
   $result = mysqli_query($conn, $sql);
 }
 

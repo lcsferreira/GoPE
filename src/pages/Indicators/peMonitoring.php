@@ -174,7 +174,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       let contactInputs = []
       let contactLabels = []
       let agreementGroups = []
-      for (let i = 1; i <= 12; i++) {
+      for (let i = 1; i <= 1; i++) {
         // get all the divs with id that contains i and -contact
         contactLabels.push($(`p[id*="${i}-contact-label"]`))
         contactInputs.push($(`div[id*="${i}-contact"]`))
@@ -336,7 +336,9 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     function addMonitoringSystem(type) {
       const monitoringSystems = $(`.monitoring-systems-${type}`)
-      const inc = monitoringSystems.children().length + 1
+      const lastMonitoringSystem = monitoringSystems.children().last().attr('id')
+
+      const inc = lastMonitoringSystem == undefined ? 1 : parseInt(lastMonitoringSystem.split("-")[2]) + 1
 
       $.ajax({
         type: "POST",
@@ -358,8 +360,9 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     function showAddMonitoringSystem(type) {
       let monitoringSystems = $(".monitoring-systems-" + type)
+      const lastMonitoringSystem = monitoringSystems.children().last().attr('id')
 
-      const inc = monitoringSystems.children().length + 1
+      const inc = lastMonitoringSystem == undefined ? 1 : parseInt(lastMonitoringSystem.split("-")[2]) + 1
       const monitoringSystem = `
       <div class="agreement-group" id="monitoring-system-${inc}-${type}">
         <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Monitoring system ${inc} <span><button class="btn-delete" onclick="deleteMonitoringSystem(${inc}, '${type}')"><i
@@ -487,17 +490,17 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             onblur="saveMonitoringSystemValues(${inc}, '${type}')">
         </div>
 
-        <button id="addDocument-${inc}-${type}" class="btn-primary"><strong>Add</strong> Document to Monitoring
-          System</button>
+        <div id="monitoring-system-documents-${inc}-${type}">
+        </div>
+        <button id="addDocument-${inc}-${type}" class="btn-primary" style="width: 100% !important"
+        onclick="addDocumentToMonitoringSystem(${inc}, '${type}')"><strong>Add</strong> Document to
+        Monitoring
+        System</button>
       </div>
       `
       $(".monitoring-systems-" + type).append(monitoringSystem)
 
       $(`#other_purposes-${inc}-${type}`).hide()
-
-      $(`#addDocument-${inc}-${type}`).click(function() {
-        addDocumentToMonitoringSystem(inc, type)
-      })
 
     }
 
@@ -516,21 +519,21 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
           ${docInc}
           <span><button class="btn-delete"
-              onclick="deleteDocumentFromMonitoringSystem(${docInc}, '${type}')"><i
+              onclick="deleteDocumentFromMonitoringSystem(${docInc}, '${type}', ${inc})"><i
                 class="fas fa-trash-alt"></i></button></span>
         </h3>
         <div class="indicator-input">
           <label for="document-title-${docInc}-${type}">Document title</label>
           <input type="text" name="document-title-${docInc}-${type}"
             id="document-title-${docInc}-${type}"
-            onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}')">
+            onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}', '${inc}')">
         </div>
 
         <div class="indicator-input">
           <label for="document-eletronic_source-${docInc}-${type}">Eletronic source</label>
           <input type="text" name="document-eletronic_source-${docInc}-${type}"
             id="document-eletronic_source-${docInc}-${type}"
-            onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}')">
+            onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}', '${inc}')">
         </div>
       </div>
       `
@@ -552,7 +555,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         url: "../../query/Indicators/addDocumentToMonitoringSystem.php?id=<?php echo $_GET['id'] ?>",
         data: {
           idCountry: idCountry,
-          inc: docInc,
+          inc: inc,
+          docInc: docInc,
           type: type
         },
         success: function(response) {
@@ -565,25 +569,28 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
     }
 
-    function deleteDocumentFromMonitoringSystem(inc, type) {
+    function deleteDocumentFromMonitoringSystem(docInc, type, inc) {
       $.ajax({
         url: "../../query/Indicators/deleteDocumentFromMonitoringSystem.php?id=<?php echo $_GET['id']; ?>",
         type: "POST",
         data: {
+          docInc: docInc,
           inc: inc,
           type: type
         },
         success: function(data) {
           if (data == "Success") {
-            removeDocumentFromMonitoringSystem(inc, type);
+            removeDocumentFromMonitoringSystem(docInc, type);
           } else {
             console.log(data);
           }
         }
       });
 
-      function removeDocumentFromMonitoringSystem(inc, type) {
-        $(`#document-${inc}-${type}`).remove();
+      function removeDocumentFromMonitoringSystem(docInc, type) {
+        const monitoringSystem = $(`#monitoring-system-documents-${inc}-${type}`)
+
+        monitoringSystem.find(`#document-${docInc}-${type}`).remove()
       }
     }
 
@@ -597,19 +604,24 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       addMonitoringSystem(type)
     });
 
-    function saveDocumentValue(inputName, tableName) {
-      let value = $(`#${inputName}`).val()
-      const inc = inputName.split("-")[2]
+    function saveDocumentValue(inputName, tableName, inc) {
+      const docInc = inputName.split("-")[2]
       const type = inputName.split("-")[3]
       const input = inputName.split("-")[1]
+      const monitoringSystem = $(`#monitoring-system-documents-${inc}-${type}`)
+      //get the value of the input of the monitoringSystem
+      const value = monitoringSystem.find(`#${inputName}`).val()
 
       const payload = {
         tableName: tableName,
         inputName: input,
         value: value,
         inc: inc,
+        docInc: docInc,
         type: type
       }
+
+      // console.log(payload)
 
       $.ajax({
         type: "POST",
