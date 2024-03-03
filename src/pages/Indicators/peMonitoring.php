@@ -30,6 +30,14 @@ $sql = "SELECT * FROM pe_monitoring_monitoring_systems_contact WHERE id_country 
 $result = mysqli_query($conn, $sql);
 $monitoringSystemsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$sql = "SELECT * FROM pe_monitoring_monitoring_systems_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$monitoringSystemsDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_monitoring_monitoring_systems_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -487,10 +495,96 @@ $monitoringSystemsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       $(`#other_purposes-${inc}-${type}`).hide()
 
-      // $(`#addDocument-${inc}`).click(function() {
-      //   addDocumentToMonitoringSystem(inc)
-      // })
+      $(`#addDocument-${inc}-${type}`).click(function() {
+        addDocumentToMonitoringSystem(inc, type)
+      })
 
+    }
+
+    function showAddDocumentToMonitoringSystem(inc, type) {
+      const documents = $(`#monitoring-system-documents-${inc}-${type}`)
+      //get the last inc of the documents and add 1
+      const lastDoc = documents.children().last().attr('id')
+      let docInc = 1
+      if (lastDoc != undefined) {
+        docInc = parseInt(lastDoc.split("-")[1]) + 1
+      }
+      const tableName = `pe_monitoring_monitoring_systems_documents_${type}`
+
+      const document = `
+      <div id="document-${docInc}-${type}">
+        <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
+          ${docInc}
+          <span><button class="btn-delete"
+              onclick="deleteDocumentFromMonitoringSystem(${docInc}, '${type}')"><i
+                class="fas fa-trash-alt"></i></button></span>
+        </h3>
+        <div class="indicator-input">
+          <label for="document-title-${docInc}-${type}">Document title</label>
+          <input type="text" name="document-title-${docInc}-${type}"
+            id="document-title-${docInc}-${type}"
+            onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}')">
+        </div>
+
+        <div class="indicator-input">
+          <label for="document-eletronic_source-${docInc}-${type}">Eletronic source</label>
+          <input type="text" name="document-eletronic_source-${docInc}-${type}"
+            id="document-eletronic_source-${docInc}-${type}"
+            onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}')">
+        </div>
+      </div>
+      `
+
+      documents.append(document)
+    }
+
+    function addDocumentToMonitoringSystem(inc, type) {
+      const documents = $(`#monitoring-system-documents-${inc}-${type}`)
+      const lastDoc = documents.children().last().attr('id')
+      let docInc = 1
+      if (lastDoc != undefined) {
+        docInc = parseInt(lastDoc.split("-")[1]) + 1
+      }
+      const idCountry = <?php echo $_GET['id'] ?>;
+
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/addDocumentToMonitoringSystem.php?id=<?php echo $_GET['id'] ?>",
+        data: {
+          idCountry: idCountry,
+          inc: docInc,
+          type: type
+        },
+        success: function(response) {
+          if (response == "Success") {
+            showAddDocumentToMonitoringSystem(inc, type)
+          } else {
+            console.log(response)
+          }
+        }
+      });
+    }
+
+    function deleteDocumentFromMonitoringSystem(inc, type) {
+      $.ajax({
+        url: "../../query/Indicators/deleteDocumentFromMonitoringSystem.php?id=<?php echo $_GET['id']; ?>",
+        type: "POST",
+        data: {
+          inc: inc,
+          type: type
+        },
+        success: function(data) {
+          if (data == "Success") {
+            removeDocumentFromMonitoringSystem(inc, type);
+          } else {
+            console.log(data);
+          }
+        }
+      });
+
+      function removeDocumentFromMonitoringSystem(inc, type) {
+        $(`#document-${inc}-${type}`).remove();
+      }
     }
 
     $("#addMonitoringSystemAdmin").click(function() {
@@ -502,6 +596,32 @@ $monitoringSystemsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       const type = "contact"
       addMonitoringSystem(type)
     });
+
+    function saveDocumentValue(inputName, tableName) {
+      let value = $(`#${inputName}`).val()
+      const inc = inputName.split("-")[2]
+      const type = inputName.split("-")[3]
+      const input = inputName.split("-")[1]
+
+      const payload = {
+        tableName: tableName,
+        inputName: input,
+        value: value,
+        inc: inc,
+        type: type
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateDocumentValue.php?id=<?php echo $_GET['id']; ?>",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
 
     function saveMonitoringSystemValues(inc, type) {
       const idCountry = <?php echo $_GET['id'] ?>;

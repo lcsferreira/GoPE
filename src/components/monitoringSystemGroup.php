@@ -165,7 +165,34 @@
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')">
   </div>
 
-  <button id="addDocument-<?php echo $inc ?>-<?php echo $type; ?>" class="btn-primary"><strong>Add</strong> Document to
+  <div id="monitoring-system-documents-<?php echo $inc ?>-<?php echo $type; ?>">
+    <?php
+    if($monitoringSystemsDocumentsAdmin != null && $type == "admin"):
+      ?>
+    <?php
+    foreach($monitoringSystemsDocumentsAdmin as $document){
+      $docInc = $document["inc"];
+      $docRole = $type;
+      include("documentMonitoring.php");
+    }
+    ?>
+    <?php
+    elseif($monitoringSystemsDocumentsContact != null && $type == "contact"):
+      ?>
+    <?php
+    foreach($monitoringSystemsDocumentsContact as $document){
+      $docInc = $document["inc"];
+      $docRole = $type;
+      include("documentMonitoring.php");
+    }
+    ?>
+    <?php
+    endif;
+    ?>
+  </div>
+
+  <button id="addDocument-<?php echo $inc ?>-<?php echo $type; ?>" class="btn-primary" style="width: 100% !important"
+    onclick="addDocumentToMonitoringSystem(<?php echo $inc ?>, '<?php echo $type; ?>')"><strong>Add</strong> Document to
     Monitoring
     System</button>
 </div>
