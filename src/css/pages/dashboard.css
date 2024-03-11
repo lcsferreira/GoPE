@@ -200,7 +200,10 @@
   transition: all 0.3s ease;
 }
 
-.btn-play:disabled {
+.btn-play:disabled,
+.btn-clock:disabled,
+.btn-exclamation:disabled,
+.btn-check:disabled {
   color: var(--gray-light);
   cursor: not-allowed;
 }
