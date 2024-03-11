@@ -18,9 +18,9 @@ $result = mysqli_query($conn, $query);
 if (mysqli_affected_rows($conn) > 0) {
   // Password updated
   // echo "Password updated";
-  header("Location: ../../pages/Login/resetPassword.php?id=5&Success");
+  header("Location: ../../pages/Login/resetPassword.php?id=$id&Success");
 } else {
   // Password not updated
   // echo "Password not updated";
-  header("Location: ../../pages/Login/resetPassword.php?id=5&error=update");
+  header("Location: ../../pages/Login/resetPassword.php?id=$id&error=update");
 }
