@@ -73,7 +73,9 @@ if ($_SESSION['type'] == "admin") {
             <th>Country Card English Review</th>
             <th>Translation</th>
             <th>Country Card Translated Review</th>
+            <?php if ($_SESSION['type'] === 'admin') : ?>
             <th>Actions</th>
+            <?php endif; ?>
           </tr>
         </thead>
         <tbody>
@@ -85,15 +87,15 @@ if ($_SESSION['type'] == "admin") {
               <?php
                 if ($country['indicators_step'] === "not started") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button class="btn-play" onclick="window.location.href = \'../../query/Indicators/createIndicators.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button disabled class="btn-play" onclick="window.location.href = \'../../query/Indicators/createIndicators.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
                 } elseif ($country['indicators_step'] === "waiting contact") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                   } else {
-                    echo '<button class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
                   }
                 } elseif ($country['indicators_step'] == "waiting admin") {
                   if ($_SESSION['type'] === 'admin') {
@@ -103,7 +105,7 @@ if ($_SESSION['type'] == "admin") {
                   }
                 } elseif ($country['indicators_step'] === "completed") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                   }
@@ -165,6 +167,7 @@ if ($_SESSION['type'] == "admin") {
                 }
                 ?>
             </td>
+            <?php if ($_SESSION['type'] === 'admin') : ?>
             <td>
               <button class="btn-edit"
                 onclick="window.location.href = 'editCountry.php?id=<?php echo $country['id']; ?>'"><i
@@ -172,6 +175,7 @@ if ($_SESSION['type'] == "admin") {
               <button class="btn-delete" id="btn-delete-<?php echo $country['id']; ?>"><i
                   class="fas fa-trash-alt"></i></button>
             </td>
+            <?php endif; ?>
           </tr>
           <?php endforeach; ?>
         </tbody>

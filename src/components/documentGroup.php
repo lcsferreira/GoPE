@@ -1,44 +1,50 @@
-<?php
-if($id !== 0){
-  $id = $id;
-}else{
-	  $id = "1";
-}
-?>
-<div id="<?php echo $id ?>-<?php echo $userType ?>" class="input-document-indicator">
-  <?php
-  if ($userType == 'contact') :
-  ?>
-  <p class="contact-label">Provide new information here:</p>
-  <?php
-  endif;
-  ?>
+<div id="document-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">
+  <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
+    <?php echo $docInc ?>
+    <span><button class="btn-delete"
+        onclick="deleteDocumentFromIndicator(<?php echo $docInc ?>, '<?php echo $tableName; ?>', '<?php echo $docRole; ?>', '<?php echo $indicatorName; ?>')"><i
+          class="fas fa-trash-alt"></i></button></span>
+  </h3>
   <div class="indicator-input">
-    <label for="<?php echo $id ?>-document-<?php echo $userType ?>">Document
+    <label for="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Document
       title</label>
-    <input type="text" name="<?php echo $id ?>-title-<?php echo $userType ?>"
-      id="<?php echo $id ?>-title-<?php echo $userType ?>" value="<?php echo $documentTilte ?>"
-      onblur="saveDocumentValue('<?php echo $id; ?>-title-<?php echo $userType ?>', '<?php echo $tableName; ?>')">
+    <input type="text"
+      name="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      value="<?php echo $document["title"] ?>"
+      onblur="saveDocumentValue('document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')">
   </div>
+
   <div class="indicator-input">
-    <label for="<?php echo $id ?>-year_publication-<?php echo $userType ?>">Year of
-      publication</label>
-    <input type="text" name="<?php echo $id ?>-year_publication-<?php echo $userType ?>"
-      id="<?php echo $id ?>-year-publication-<?php echo $userType ?>" value="<?php echo $yearPublication ?>"
-      onblur="saveDocumentValue('<?php echo $id; ?>-year_publication-<?php echo $userType ?>', '<?php echo $tableName; ?>')">
+    <label
+      for="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Year
+      of publication</label>
+    <input type="number"
+      name="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      value="<?php echo $document["year_publication"] ?>"
+      onblur="saveDocumentValue('document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')">
   </div>
+
   <div class="indicator-input">
-    <label for="<?php echo $id ?>-eletronic-source-<?php echo $userType ?>">Eletronic
-      Source</label>
-    <input type="text" name="<?php echo $id ?>-eletronic-source-<?php echo $userType ?>"
-      id="<?php echo $id ?>-eletronic-source-<?php echo $userType ?>" value="<?php echo $eletronicSource ?>"
-      onblur="saveDocumentValue('<?php echo $id; ?>-eletronic-source-<?php echo $userType ?>', '<?php echo $tableName; ?>')">
+    <label
+      for="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Eletronic
+      source</label>
+    <input type="text"
+      name="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      value="<?php echo $document["eletronic_source"] ?>"
+      onblur="saveDocumentValue('document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')">
   </div>
+
   <div class="indicator-input">
-    <label for="<?php echo $id ?>-voluntary-comments-<?php echo $userType ?>">Voluntary
+    <label
+      for="document-voluntary_comments-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Voluntary
       comments</label>
-    <textarea name="<?php echo $id ?>-voluntary-comments-<?php echo $userType ?>"
-      id="<?php echo $id ?>-voluntary-comments-<?php echo $userType ?>" cols="20" rows="5"
-      onblur="saveDocumentValue('<?php echo $id; ?>-voluntary-comments-<?php echo $userType ?>', '<?php echo $tableName; ?>')"><?php echo $voluntaryComment ?></textarea>
+    <textarea
+      name="document-voluntary_comments-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-voluntary_comments-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      onblur="saveDocumentValue('document-voluntary_comments-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')"><?php echo $document["voluntary_comments"] ?></textarea>
   </div>
+
 </div>
