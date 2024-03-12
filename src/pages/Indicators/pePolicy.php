@@ -39,6 +39,38 @@ $sql = "SELECT * FROM pe_policy_exist_se_curriculum_documents_contact WHERE id_c
 $result = mysqli_query($conn, $sql);
 $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$sql = "SELECT * FROM pe_policy_exist_pe_mandatory_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMandatoryPeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_pe_mandatory_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMandatoryPeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_se_mandatory_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMandatorySeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_se_mandatory_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMandatorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_pe_min_time_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMinTimePeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_pe_min_time_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMinTimePeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_se_min_time_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMinTimeSeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM pe_policy_exist_se_min_time_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 
 ?>
 <!DOCTYPE html>
@@ -133,59 +165,61 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_pe"
                 data-table-name="pe_policy_exist_pe_curriculum_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
-              <p class="contact-label" id="1-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 1;
-              $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
-              $inputs = [
-                (object) [
-                  "name" => "yes-all",
-                  "title" => "Yes, for all school years",
-                  "value" => "1",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "yeas-some",
-                  "title" => "Yes, for some of the school years",
-                  "value" => "2",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "only-subnational-level",
-                  "title" => "Only at subnational level",
-                  "value" => "3",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "no",
-                  "title" => "No",
-                  "value" => "4",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ]
-              ];
-              include '../../components/indicatorChoiceGroup.php';
-              ?>
-              <div id="documents-exist_pe_curriculum_pe-contact">
+              <div id="1-contact-label">
+                <p class="contact-label">Provide new information here:</p>
                 <?php
-                if($curriculumPeDocumentsContact != null) {
-                  $docRole = "contact";
-                  $tableName = "pe_policy_exist_pe_curriculum_documents_contact";
-                  $indicatorName = "exist_pe_curriculum_pe";
-                  foreach($curriculumPeDocumentsContact as $document) {
-                    $docInc = $document['inc'];
-                    include '../../components/documentGroup.php';
-                  }
-                }
+                $indicatorRole = "contact";
+                $indicatorOrder = 1;
+                $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
+                $inputs = [
+                  (object) [
+                    "name" => "yes-all",
+                    "title" => "Yes, for all school years",
+                    "value" => "1",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "yeas-some",
+                    "title" => "Yes, for some of the school years",
+                    "value" => "2",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "only-subnational-level",
+                    "title" => "Only at subnational level",
+                    "value" => "3",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "no",
+                    "title" => "No",
+                    "value" => "4",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div id="documents-exist_pe_curriculum_pe-contact">
+                  <?php
+                  if($curriculumPeDocumentsContact != null) {
+                    $docRole = "contact";
+                    $tableName = "pe_policy_exist_pe_curriculum_documents_contact";
+                    $indicatorName = "exist_pe_curriculum_pe";
+                    foreach($curriculumPeDocumentsContact as $document) {
+                      $docInc = $document['inc'];
+                      include '../../components/documentGroup.php';
+                    }
+                  }
+                  ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_pe"
+                  data-table-name="pe_policy_exist_pe_curriculum_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
               </div>
-              <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_pe"
-                data-table-name="pe_policy_exist_pe_curriculum_documents_contact" data-role="contact"
-                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
               <?php
               $indicatorName = "exist_pe_curriculum_pe";
               $indicatorOrder = 1;
@@ -261,8 +295,9 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_se"
                 data-table-name="pe_policy_exist_se_curriculum_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
-              <p class="contact-label" id="2-contact-label">Provide new information here:</p>
-              <?php
+              <div id="2-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
               $indicatorRole = "contact";
               $indicatorOrder = 2;
               $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
@@ -298,6 +333,23 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+                <div id="documents-exist_pe_curriculum_se-contact">
+                  <?php
+                if($curriculumSeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "pe_policy_exist_se_curriculum_documents_contact";
+                  $indicatorName = "exist_pe_curriculum_se";
+                  foreach($curriculumSeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_se"
+                  data-table-name="pe_policy_exist_se_curriculum_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
               <?php
               $indicatorName = "exist_pe_curriculum_se";
               $indicatorOrder = 2;
@@ -324,7 +376,7 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $indicatorRole = "admin";
               $indicatorOrder = 3;
               $indicatorName = "exist_policy_mandatory_pe";
-              $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of secondary education";
+              $indicatorTitle = "Existence of a national policy requiring Physical Education to be a mandatory subject for the compulsory school years of primary education";
               $inputs = [
                 (object) [
                   "name" => "yes-all",
@@ -357,43 +409,77 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
-              <p class="contact-label" id="3-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 3;
-              $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
-              $inputs = [
-                (object) [
-                  "name" => "yes-all",
-                  "title" => "Yes, for all school years",
-                  "value" => "1",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "yeas-some",
-                  "title" => "Yes, for some of the school years",
-                  "value" => "2",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "only-subnational-level",
-                  "title" => "Only at subnational level",
-                  "value" => "3",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "no",
-                  "title" => "No",
-                  "value" => "4",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ]
-              ];
-              include '../../components/indicatorChoiceGroup.php';
-              ?>
+              <div id="documents-exist_policy_mandatory_pe-admin">
+                <?php
+                if($policyMandatoryPeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "pe_policy_exist_pe_mandatory_documents_admin";
+                  $indicatorName = "exist_policy_mandatory_pe";
+                  foreach($policyMandatoryPeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_mandatory_pe"
+                data-table-name="pe_policy_exist_pe_mandatory_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="3-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
+                $indicatorRole = "contact";
+                $indicatorOrder = 3;
+                $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
+                $inputs = [
+                  (object) [
+                    "name" => "yes-all",
+                    "title" => "Yes, for all school years",
+                    "value" => "1",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "yeas-some",
+                    "title" => "Yes, for some of the school years",
+                    "value" => "2",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "only-subnational-level",
+                    "title" => "Only at subnational level",
+                    "value" => "3",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "no",
+                    "title" => "No",
+                    "value" => "4",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorChoiceGroup.php';
+                ?>
+                <div id="documents-exist_pe_mandatory_pe-contact">
+                  <?php
+                if($policyMandatoryPeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "pe_policy_exist_pe_mandatory_documents_contact";
+                  $indicatorName = "exist_pe_mandatory_pe";
+                  foreach($policyMandatoryPeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_pe"
+                  data-table-name="pe_policy_exist_pe_mandatory_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
               <?php
               $indicatorName = "exist_policy_mandatory_pe";
               $indicatorOrder = 3;
@@ -453,43 +539,77 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
-              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 4;
-              $indicatorTitle = "Existence of a national policy requiring Physical Education to be a mandatory subject for the compulsory school years of secondary education";
-              $inputs = [
-                (object) [
-                  "name" => "yes-all",
-                  "title" => "Yes, for all school years",
-                  "value" => "1",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "yeas-some",
-                  "title" => "Yes, for some of the school years",
-                  "value" => "2",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "only-subnational-level",
-                  "title" => "Only at subnational level",
-                  "value" => "3",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "no",
-                  "title" => "No",
-                  "value" => "4",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ]
-              ];
-              include '../../components/indicatorChoiceGroup.php';
-              ?>
+              <div id="documents-exist_pe_mandatory_se-admin">
+                <?php
+                if($policyMandatorySeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "pe_policy_exist_se_mandatory_documents_admin";
+                  $indicatorName = "exist_pe_mandatory_se";
+                  foreach($policyMandatorySeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_se"
+                data-table-name="pe_policy_exist_se_mandatory_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="4-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
+                $indicatorRole = "contact";
+                $indicatorOrder = 4;
+                $indicatorTitle = "Existence of a national policy requiring Physical Education to be a mandatory subject for the compulsory school years of secondary education";
+                $inputs = [
+                  (object) [
+                    "name" => "yes-all",
+                    "title" => "Yes, for all school years",
+                    "value" => "1",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "yeas-some",
+                    "title" => "Yes, for some of the school years",
+                    "value" => "2",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "only-subnational-level",
+                    "title" => "Only at subnational level",
+                    "value" => "3",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "no",
+                    "title" => "No",
+                    "value" => "4",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorChoiceGroup.php';
+                ?>
+                <div id="documents-exist_pe_mandatory_se-contact">
+                  <?php
+                if($policyMandatorySeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "pe_policy_exist_se_mandatory_documents_contact";
+                  $indicatorName = "exist_pe_mandatory_se";
+                  foreach($policyMandatorySeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_se"
+                  data-table-name="pe_policy_exist_se_mandatory_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
               <?php
               $indicatorName = "exist_policy_mandatory_se";
               $indicatorOrder = 4;
@@ -549,43 +669,77 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
-              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 5;
-              $indicatorTitle = "Existence of a national policy requiring minimum Physical Education time for the compulsory school years of primary education";
-              $inputs = [
-                (object) [
-                  "name" => "yes-all",
-                  "title" => "Yes, for all school years",
-                  "value" => "1",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "yeas-some",
-                  "title" => "Yes, for some of the school years",
-                  "value" => "2",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "only-subnational-level",
-                  "title" => "Only at subnational level",
-                  "value" => "3",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "no",
-                  "title" => "No",
-                  "value" => "4",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ]
-              ];
-              include '../../components/indicatorChoiceGroup.php';
-              ?>
+              <div id="documents-exist_policy_min_time_pe-admin">
+                <?php
+                if($policyMinTimePeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "pe_policy_exist_pe_min_time_documents_admin";
+                  $indicatorName = "exist_policy_min_time_pe";
+                  foreach($policyMinTimePeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_pe"
+                data-table-name="pe_policy_exist_pe_min_time_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="5-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
+                  $indicatorRole = "contact";
+                  $indicatorOrder = 5;
+                  $indicatorTitle = "Existence of a national policy requiring minimum Physical Education time for the compulsory school years of primary education";
+                  $inputs = [
+                    (object) [
+                      "name" => "yes-all",
+                      "title" => "Yes, for all school years",
+                      "value" => "1",
+                      "type" => "radio",
+                      "tableName" => "pe_policy_admin"
+                    ],
+                    (object) [
+                      "name" => "yeas-some",
+                      "title" => "Yes, for some of the school years",
+                      "value" => "2",
+                      "type" => "radio",
+                      "tableName" => "pe_policy_admin"
+                    ],
+                    (object) [
+                      "name" => "only-subnational-level",
+                      "title" => "Only at subnational level",
+                      "value" => "3",
+                      "type" => "radio",
+                      "tableName" => "pe_policy_admin"
+                    ],
+                    (object) [
+                      "name" => "no",
+                      "title" => "No",
+                      "value" => "4",
+                      "type" => "radio",
+                      "tableName" => "pe_policy_admin"
+                    ]
+                  ];
+                  include '../../components/indicatorChoiceGroup.php';
+                ?>
+                <div id="documents-exist_policy_min_time_pe-contact">
+                  <?php
+                if($policyMinTimePeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "pe_policy_exist_pe_min_time_documents_contact";
+                  $indicatorName = "exist_policy_min_time_pe";
+                  foreach($policyMinTimePeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_pe"
+                  data-table-name="pe_policy_exist_pe_min_time_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
               <?php
               $indicatorName = "exist_policy_min_time_pe";
               $indicatorOrder = 5;
@@ -645,43 +799,77 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
-              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 6;
-              $indicatorTitle = "Existence of a national policy requiring minimum Physical Education time for the compulsory school years of secondary education";
-              $inputs = [
-                (object) [
-                  "name" => "yes-all",
-                  "title" => "Yes, for all school years",
-                  "value" => "1",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "yeas-some",
-                  "title" => "Yes, for some of the school years",
-                  "value" => "2",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "only-subnational-level",
-                  "title" => "Only at subnational level",
-                  "value" => "3",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ],
-                (object) [
-                  "name" => "no",
-                  "title" => "No",
-                  "value" => "4",
-                  "type" => "radio",
-                  "tableName" => "pe_policy_admin"
-                ]
-              ];
-              include '../../components/indicatorChoiceGroup.php';
-              ?>
+              <div id="documents-exist_policy_min_time_se-admin">
+                <?php
+                if($policyMinTimeSeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "pe_policy_exist_se_min_time_documents_admin";
+                  $indicatorName = "exist_policy_min_time_se";
+                  foreach($policyMinTimeSeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_se"
+                data-table-name="pe_policy_exist_se_min_time_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="6-contact-label">
+                <p class="contact-label" id="6-contact-label">Provide new information here:</p>
+                <?php
+                $indicatorRole = "contact";
+                $indicatorOrder = 6;
+                $indicatorTitle = "Existence of a national policy requiring minimum Physical Education time for the compulsory school years of secondary education";
+                $inputs = [
+                  (object) [
+                    "name" => "yes-all",
+                    "title" => "Yes, for all school years",
+                    "value" => "1",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "yeas-some",
+                    "title" => "Yes, for some of the school years",
+                    "value" => "2",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "only-subnational-level",
+                    "title" => "Only at subnational level",
+                    "value" => "3",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ],
+                  (object) [
+                    "name" => "no",
+                    "title" => "No",
+                    "value" => "4",
+                    "type" => "radio",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorChoiceGroup.php';
+                ?>
+                <div id="documents-exist_pe_min_time_se-contact">
+                  <?php
+                if($policyMinTimeSeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "pe_policy_exist_se_min_time_documents_contact";
+                  $indicatorName = "exist_policy_min_time_se";
+                  foreach($policyMinTimeSeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_se"
+                  data-table-name="pe_policy_exist_se_min_time_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
               <?php
               $indicatorName = "exist_policy_min_time_se";
               $indicatorOrder = 6;
@@ -765,8 +953,7 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         <div class="indicator-input">
           <label
-            for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Eletronic
-            source</label>
+            for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
           <input type="text"
             name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
             id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
@@ -799,14 +986,6 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   }
 
   //for all add-document buttons
-
-  // $("#add-document").click(function() {
-  //   let indicatorName = $(this).data("indicator-name")
-  //   let tableName = $(this).data("table-name")
-  //   let role = $(this).data("role")
-  //   addDocumentToTable(indicatorName, tableName, role)
-  // })
-
   const addDocumentButtons = document.querySelectorAll("#add-document")
   addDocumentButtons.forEach(button => {
     button.addEventListener("click", function() {
@@ -888,6 +1067,8 @@ $curriculumSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   function verifyRadioValue(agreementGroup, contactInput, contactLabel) {
     //get all the radio inputs inside of the agreementGroup
     let radioInputs = agreementGroup.find("input[type='radio']")
+    //get all the add-document buttons with data-role="contact"
+
     //if none of the radio inputs are checked hide the contactLabel and contactInput
     if (!radioInputs.is(":checked")) {
       contactLabel.hide()
