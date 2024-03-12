@@ -6,6 +6,40 @@ if (!isset($_SESSION['loggedIn'])) {
   exit;
 }
 
+$indicators = array("demographic_data", "pa_pravelance", "pe_policy", "pe_monitoring");
+$countryId = $_GET['id'];
+// $valueTypes = array("comments", "values_admin", "values_contact", "agreement");
+
+$progressIndicators = array(0, 0, 0, 0);
+$totalIndicators = array(14, 3, 1, 6);
+
+$index = 0;
+foreach ($indicators as $step) {
+  //select row from demographic_values_contacct table
+  $sql = "SELECT * FROM " . $step . "_agreement WHERE id = ".$countryId;
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  //for each row except id, check if the value is not null or zero
+  foreach($row as $key => $value){
+    if($key != "id_country" && $value == 2){
+      $progressIndicators[$index] ++;
+    }
+  }
+  $index ++;
+}
+
+foreach ($progressIndicators as $key => $progress) {
+  $progress = ($progress / $totalIndicators[$key]) * 100;
+
+  if ($progress == 100 || $progress > 100) {
+    $progress[$key] = 100;
+  }
+
+  //format to 1 numbers after comma
+  $progress[$key] = number_format($progress[$key], 1);
+  $progressIndicators[$key] = $progress;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,31 +93,31 @@ if (!isset($_SESSION['loggedIn'])) {
       <div class="container__cards-progress">
         <div class="card-progress">
           <div class="progress">
-            50%
+            <?php echo $progressIndicators[0] ?>%
           </div>
           <h3>Demographic data</h3>
         </div>
         <div class="card-progress">
           <div class="progress">
-            50%
+            <?php echo $progressIndicators[1] ?>%
           </div>
           <h3>Physical activity prevalence</h3>
         </div>
         <div class="card-progress">
           <div class="progress">
-            50%
+            <?php echo $progressIndicators[2] ?>%
           </div>
           <h3>Physical Education policy</h3>
         </div>
         <div class="card-progress">
           <div class="progress">
-            50%
+            <?php echo $progressIndicators[3] ?>%
           </div>
           <h3>Physical Education policy</h3>
         </div>
         <div class="card-progress">
           <div class="progress">
-            50%
+            <?php echo $progressIndicators[4] ?>%
           </div>
           <h3>Research in PE and school-based PA</h3>
         </div>

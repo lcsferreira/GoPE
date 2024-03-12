@@ -5,6 +5,69 @@ if (!isset($_SESSION['loggedIn'])) {
   header("Location: ../../pages/Login/login.php");
   exit;
 }
+$enableSubmit = false;
+$userType = $_SESSION['type'];
+$userId = $_SESSION['userId'];
+$countryId = $_SESSION['countryId'];
+
+// get country name
+$sql = "SELECT name FROM countries WHERE id = $countryId";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $countryName = $row['name'];
+}
+
+if($userType === 'contact') {
+  // verify if is main contact
+  $sql = "SELECT * FROM users WHERE id = $userId";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if($row['is_main'] == '1') {
+      $enableSubmit = true;
+    }else {
+      $enableSubmit = false;
+    }
+  }
+}
+// check if indicators_step is waiting admin
+$sql = "SELECT indicators_step FROM countries WHERE id = $countryId";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $indicatorsStep = $row['indicators_step'];
+  if($row['indicators_step'] === 'waiting_admin') {
+    $enableSubmit = false;
+  }else{
+    $enableSubmit = true;
+  }
+}
+
+// check if all agreements are checked
+
+function verifyAllAgreementsChecked($conn,$countryId)
+{
+  $indicators = array("demographic_data", "pa_pravelance", "pe_policy", "pe_monitoring", "research_pe");
+
+  foreach ($indicators as $indicator){
+    $sql = "SELECT * FROM " . $indicator . "_agreement WHERE id = $countryId";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if($row['agreement'] === 0 || $row['agreement'] === null){
+      return false;
+    }
+  }
+}
+
+if(verifyAllAgreementsChecked($conn,$countryId)){
+  $enableSubmit = true;
+  $hasAllAgreementsChecked = true;
+}else{
+  $enableSubmit = false;
+  $hasAllAgreementsChecked = false;
+}
 
 ?>
 <!DOCTYPE html>
@@ -42,14 +105,50 @@ if (!isset($_SESSION['loggedIn'])) {
           <h2><strong>Indicators</strong></h2>
         </div>
         <div class="dashboard-container__description">
-          <p>conclusion</p>
+          <?php if($userType === 'contact'): ?>
+          <p>If you are <strong>ready</strong> to provide <strong>your review</strong> of the indicators, click the
+            <strong>submit</strong> button.
+          </p>
+          <?php if(!$hasAllAgreementsChecked): ?>
+          <p><strong>Attention:</strong> You <strong>must</strong> agree with all the indicators to submit.</p>
+          <?php endif; ?>
+
+          <div class="dashboard-container__description__submit">
+            <button class="btn-submit
+              <?php
+              if(!$enableSubmit){
+                echo ' disabled';
+              }
+              ?>
+              ">Submit</button>
+          </div>
+          <?php else: ?>
+          <?php if($indicatorsStep === 'waiting contact'): ?>
+          <p>The contact has <strong>not yet reviewed</strong> the indicators!</p>
+          <?php else: ?>
+          <?php if($hasEdited): ?>
+          <p><strong>Send</strong> for <?php echo $countryName; ?> contact's<strong>review.</strong></p>
+          <?php else: ?>
+          <p>You <strong>didn't</strong> made any <strong>adjustment</strong> for the contact to review.</p>
+          <?php endif; ?>
+          <?php endif; ?>
+          <div class="dashboard-container__description__submit">
+            <button class="btn-submit
+                <?php
+                if(!$enableSubmit || $indicatorsStep === 'waiting_contact'){
+                  echo ' disabled';
+                }
+                ?>
+                ">Submit</button>
+          </div>
+          <?php endif; ?>
+
         </div>
       </div>
     </div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>

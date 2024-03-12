@@ -131,6 +131,12 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   <script>
   $(document).ready(function(e) {
+    $(".btn-back").click(function() {
+      window.location.href = "../Indicators/peMonitoring.php<?php echo "?id=" . $_GET['id'] ?>";
+    });
+    $(".btn-next").click(function() {
+      window.location.href = "../Indicators/conclusion.php<?php echo "?id=" . $_GET['id'] ?>";
+    });
     $(".thumbnail-pdf img").each(function() {
       var pdf = $(this).data("pdf-thumbnail-file");
       var img = $(this);
