@@ -71,7 +71,7 @@ if ($active !== $oldActive && $active == 1) {
   <br><br>
     <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Login/firstAccess.php?tk=$id'>First-time registration</a>
   <br><br>
-    If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
+    If you have any questions, please contact us at <a href='mailto: prjccristao@gmail.com'>prjccristao@gmail.com</a> or <a href='mailto: jmartins@fmh.ulisboa.pt'>jmartins@fmh.ulisboa.pt</a>
   ";
 
   mail($to, $subject, $message, $headers);
