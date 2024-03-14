@@ -388,3 +388,41 @@ input[type="submit"] {
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }
+
+.instructions {
+  padding: 2rem 5rem 1rem 5rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.instructions ul {
+  list-style: circle;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.instructions ul li {
+  display: flex;
+  gap: 1rem;
+  color: var(--gray-light);
+  font-weight: 200;
+  align-items: center;
+}
+
+.compulsory-warning-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+  align-items: center;
+}
+.compulsory-warning-values {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
