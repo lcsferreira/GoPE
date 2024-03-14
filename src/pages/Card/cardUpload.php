@@ -1,0 +1,234 @@
+<?php
+include "../../../config.php";
+session_start();
+if (!isset($_SESSION['loggedIn'])) {
+  header("Location: ../../pages/Login/login.php");
+  exit;
+}
+
+function getThumbnail($path, $country) {
+  if (is_dir($path)) {
+      $files = scandir($path);
+      
+      foreach ($files as $file) {
+          if ($file != "." && $file != ".." && strpos($file, $country) === 0 && pathinfo($file, PATHINFO_EXTENSION) === "png") {
+              return $file; // Retorna o primeiro arquivo encontrado
+          }
+      }
+  }
+  
+  return null; // Retorna null se nenhum arquivo for encontrado
+}
+
+$country_id = $_GET['id'];
+$sql = "SELECT card_english_step FROM countries WHERE id = $country_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+if($row['card_english_step'] == "not started"){
+  $sql = "INSERT INTO cards_en (id_country) VALUES ($country_id)";
+  mysqli_query($conn, $sql);
+  $sql = "UPDATE countries SET card_english_step = 'waiting admin' WHERE id = $country_id";
+  mysqli_query($conn, $sql);
+}
+
+$sql = "SELECT * FROM cards_en WHERE id_country = $country_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+// $commentValues = $row['comment'];
+$commentValues = array();
+$commentValues['comment'] = $row['comment'];
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coutry Card English Review - GoPE!</title>
+  <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/vars.css">
+  <link rel="stylesheet" href="../../css/components/header.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/pages/indicators.css">
+  <link rel="stylesheet" href="../../css/components/commentGroup.css">
+  <link rel="stylesheet" href="../../css/components/agreementGroup.css">
+  <link rel="stylesheet" href="../../css/pages/cardUpload.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+</head>
+
+<body>
+  <?php include '../../components/header.php'; ?>
+  <div class="container">
+    <div class="container__title-header">
+      <button class="btn-back">Back</button>
+      <h1><strong>Review</strong> the Country <strong>Card</strong></h1>
+      <div></div>
+    </div>
+    <div class="dashboard-container">
+      <div class="dashboard-container__header">
+        <h2><strong>English version</strong></h2>
+      </div>
+
+      <div style="display: flex">
+        <div class="card-container">
+          <img src="<?php echo getThumbnail("../../../uploads/card_en", $country_id); ?>" alt="Country Card">
+          <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
+            <input type="file" name="cardUpload" id="cardUpload">
+            <button class="btn-primary" id="uploadBtn">Upload card</button>
+            <a href="<?php echo "../../../uploads/cards_en/$country_id.pdf; "?>" class="btn-primary">Download Card</a>
+          </div>
+        </div>
+        <div class="card-options">
+          <p>
+            To ensure efficient review and identification of adjustments, please use a different color (e.g., red,
+            yellow highlight) when requesting changes for the Country Card.
+          </p>
+          <?php
+            $indicatorName = "comment";
+            $indicatorOrder = 1;
+            $tableName = "cards_en";
+            include '../../components/commentGroup.php';
+          ?>
+          <?php if($_SESSION['type'] == "admin"):?>
+          <a href="<?php echo "../../../uploads/files/$country_id.pdf; "?>" class="btn-primary"
+            style="width: 95%;">Download
+            file</a>
+          <?php else: ?>
+          <input type="file" name="fileUpload" id="fileUpload">
+          <button class="btn-primary" id="uploadFileBtn">Upload file</button>
+          <?php endif; ?>
+          <?php if($_SESSION['type'] == "admin"):?>
+          <label for="send-contact-review" class="radio-option-no-description" style="width: 97%;">
+            <div class="option-text">
+              <h3>Send for Country Contact's review</h3>
+            </div>
+            <input type="checkbox" name="send-contact-review" id="send-contact-review" value="send-for-review" />
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn-primary" style="width: 100%;" onclick="sendContactReview()">Submit</button>
+          <?php else: ?>
+          <label for="send-adjustment" class="radio-option-no-description" style="width: 97%;">
+            <div class="option-text">
+              <h3>Request further adjustments</h3>
+            </div>
+            <input type="radio" name="send-admin" id="send-adjustment" value="adjust" />
+            <span class="checkmark"></span>
+          </label>
+          <label for="send-approve" class="radio-option-no-description" style="width: 97%;">
+            <div class="option-text">
+              <h3>Approve the Country Card</h3>
+            </div>
+            <input type="radio" name="send-admin" id="send-approve" value="approve" />
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn-primary" style="width: 100%;" onclick="sendResponse()">Submit</button>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $(".btn-back").click(function() {
+      window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+    });
+  });
+
+  $("#uploadBtn").click(function() {
+
+    let formData = new FormData();
+    let file = $("#cardUpload")[0].files[0];
+    formData.append('cardUpload', file);
+    formData.append('idCountry', <?php echo $_GET['id'] ?>);
+
+    // console.log(formData);
+    $.ajax({
+      url: '../../query/Cards/uploadCard.php',
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        console.log(response);
+      }
+    });
+  });
+
+
+  function saveComment(inputName, tableName) {
+    //get the value from textarea
+    let value = $(`#${inputName}-comments`).val()
+    let idCountry = <?php echo $_GET['id'] ?>;
+
+    const payload = {
+      tableName: tableName,
+      inputName: inputName,
+      value: value,
+      idCountry: idCountry
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "../../query/Indicators/updateIndicatorValue.php",
+      data: {
+        payload: payload
+      },
+      success: function(response) {
+        console.log(response)
+      }
+    });
+  }
+
+  function hideComment(divName) {
+    if ($(`#${divName}`).is(":hidden")) {
+      $(`#${divName}`).show()
+    } else {
+      $(`#${divName}`).hide()
+    }
+  }
+
+  function sendContactReview() {
+    let idCountry = <?php echo $_GET['id'] ?>;
+    let sendForReview = $("#send-contact-review").is(":checked");
+
+    $.ajax({
+      type: "POST",
+      url: "../../query/Cards/sendForReview.php",
+      data: {
+        idCountry: idCountry,
+        sendForReview: sendForReview
+      },
+      success: function(response) {
+        console.log(response)
+      }
+    });
+  }
+
+  function sendRepsonse() {
+    let idCountry = <?php echo $_GET['id'] ?>;
+    let sendResponse = $("input[name='send-admin']:checked").val();
+
+    $.ajax({
+      type: "POST",
+      url: "../../query/Cards/sendResponse.php",
+      data: {
+        idCountry: idCountry,
+        sendResponse: sendResponse
+      },
+      success: function(response) {
+        console.log(response)
+      }
+    });
+  }
+  </script>
+</body>
+
+</html>
