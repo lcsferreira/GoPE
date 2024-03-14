@@ -1,4 +1,5 @@
-<div class="indicator-input" id="<?php echo $indicatorOrder ?>-<?php echo $indicatorRole ?>">
+<div <?php if(isset($hidden) && $hidden==true){echo "style='display: none;' ";}?> class="indicator-input"
+  id="<?php echo $indicatorOrder ?>-<?php echo $indicatorRole ?>">
   <?php 
 		foreach ($inputs as $input){
 			if( $indicatorRole == 'admin' ){
@@ -15,5 +16,4 @@
 				include '../../components/inputIndicatorContact.php';
 			}
 		}
-	?>
-</div>
+	?> </div>
