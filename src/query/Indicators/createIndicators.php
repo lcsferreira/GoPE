@@ -3,8 +3,9 @@ include '../../../config.php';
 
 $id = $_GET['id'];
 
-$indicators = ["demographic_data"];
-$value_types = ["admin", "contact", "comments_admin", "comments_contact", "agreement"];
+//auitomaticos
+$indicators = ["demographic_data", "pa_prevalence", "pe_monitoring", "pe_policy"];
+$value_types = ["admin", "contact", "comments", "agreement"];
 
 foreach ($indicators as $indicator) {
   foreach ($value_types as $value_type) {
@@ -12,6 +13,14 @@ foreach ($indicators as $indicator) {
     $result = mysqli_query($conn, $sql);
   }
 }
+
+//especificos
+$sql = "INSERT INTO research_pe_admin (id_country) VALUES ($id)";
+$result = mysqli_query($conn, $sql);
+$sql = "INSERT INTO research_pe_comments (id_country) VALUES ($id)";
+$result = mysqli_query($conn, $sql);
+
+//documentos, monitoring systems e intervation studies se criam sozinhos, não precisando inserir as tabelas
 
 if ($result) {
   $sql = "UPDATE countries SET indicators_step = 'waiting admin' WHERE id = " . $id;
