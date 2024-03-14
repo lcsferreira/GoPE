@@ -35,7 +35,25 @@ $commentValues = mysqli_fetch_assoc($result);
 $sql = "SELECT * FROM demographic_data_agreement WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
 $agreementValues = mysqli_fetch_assoc($result);
+
+$sql = "SELECT * FROM duration_compulsory_pe_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$compulsoryPeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM duration_compulsory_pe_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$compulsoryPeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM duration_compulsory_se_documents_admin WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$compulsorySeDocumentsAdmin = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+$sql = "SELECT * FROM duration_compulsory_se_documents_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,8 +70,10 @@ $agreementValues = mysqli_fetch_assoc($result);
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -69,13 +89,179 @@ $agreementValues = mysqli_fetch_assoc($result);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>01</strong></h2>
+            <h2><strong>ES</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
               $indicatorOrder = 1;
+              $inputs = [
+                (object) [
+                  "name" => "duration_compulsory_pe",
+                  "title" => "Duration of the compulsory school years of primary education",
+                  "type" => "text",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <div id="documents-duration_compulsory_pe-admin">
+                <?php
+                if($compulsoryPeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "duration_compulsory_pe_documents_admin";
+                  $indicatorName = "duration_compulsory_pe";
+                  foreach($compulsoryPeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_pe"
+                data-table-name="duration_compulsory_pe_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="1-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
+                $indicatorRole = "contact";
+                $indicatorOrder = 1;
+                $inputs = [
+                  (object) [
+                    "name" => "duration_compulsory_pe",
+                    "title" => "Duration of the compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "demographic_data_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                <div id="documents-duration_compulsory_pe-contact">
+                  <?php
+                if($compulsoryPeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "duration_compulsory_pe_documents_contact";
+                  $indicatorName = "duration_compulsory_pe";
+                  foreach($compulsoryPeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_pe"
+                  data-table-name="duration_compulsory_pe_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
+              <?php
+              $indicatorName = "duration_compulsory_pe";
+              $indicatorOrder = 1;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 1;
+            $indicatorName = "duration_compulsory_pe";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>ES</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 2;
+              $inputs = [
+                (object) [
+                  "name" => "duration_compulsory_se",
+                  "title" => "Duration of the compulsory school years of secondary education",
+                  "type" => "text",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <div id="documents-duration_compulsory_se-admin">
+                <?php
+                if($compulsorySeDocumentsAdmin != null) {
+                  $docRole = "admin";
+                  $tableName = "duration_compulsory_se_documents_admin";
+                  $indicatorName = "duration_compulsory_se";
+                  foreach($compulsorySeDocumentsAdmin as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+              </div>
+              <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_se"
+                data-table-name="duration_compulsory_se_documents_admin" data-role="admin"
+                style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <div id="2-contact-label">
+                <p class="contact-label">Provide new information here:</p>
+                <?php
+                $indicatorRole = "contact";
+                $indicatorOrder = 2;
+                $inputs = [
+                  (object) [
+                    "name" => "duration_compulsory_se",
+                    "title" => "Duration of the compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "demographic_data_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                <div id="documents-duration_compulsory_se-contact">
+                  <?php
+                if($compulsorySeDocumentsContact != null) {
+                  $docRole = "contact";
+                  $tableName = "duration_compulsory_se_documents_contact";
+                  $indicatorName = "duration_compulsory_se";
+                  foreach($compulsorySeDocumentsContact as $document) {
+                    $docInc = $document['inc'];
+                    include '../../components/documentGroup.php';
+                  }
+                }
+                ?>
+                </div>
+                <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_se"
+                  data-table-name="duration_compulsory_se_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              </div>
+              <?php
+              $indicatorName = "duration_compulsory_se";
+              $indicatorOrder = 2;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 2;
+            $indicatorName = "duration_compulsory_se";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>01</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 3;
               $inputs = [
                 (object) [
                   "name" => "world_region",
@@ -86,10 +272,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="1-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="3-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 1;
+              $indicatorOrder = 3;
               $inputs = [
                 (object) [
                   "name" => "world_region",
@@ -102,13 +288,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "world_region";
-              $indicatorOrder = 1;
+              $indicatorOrder = 3;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 1;
+            $agreementOrder = 3;
             $indicatorName = "world_region";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -124,7 +310,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 2;
+              $indicatorOrder = 4;
               $inputs = [
                 (object) [
                   "name" => "income_classification",
@@ -135,10 +321,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="2-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 2;
+              $indicatorOrder = 4;
               $inputs = [
                 (object) [
                   "name" => "income_classification",
@@ -151,13 +337,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "income_classification";
-              $indicatorOrder = 2;
+              $indicatorOrder = 4;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 2;
+            $agreementOrder = 4;
             $indicatorName = "income_classification";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -173,7 +359,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 3;
+              $indicatorOrder = 5;
               $inputs = [
                 (object) [
                   "name" => "total_population",
@@ -184,10 +370,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="3-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 3;
+              $indicatorOrder = 5;
               $inputs = [
                 (object) [
                   "name" => "total_population",
@@ -200,13 +386,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "total_population";
-              $indicatorOrder = 3;
+              $indicatorOrder = 5;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 3;
+            $agreementOrder = 5;
             $indicatorName = "total_population";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -222,7 +408,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 4;
+              $indicatorOrder = 6;
               $inputs = [
                 (object) [
                   "name" => "literacy_youth_total",
@@ -233,10 +419,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 4;
+              $indicatorOrder = 6;
               $inputs = [
                 (object) [
                   "name" => "literacy_youth_total",
@@ -249,13 +435,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "literacy_youth_total";
-              $indicatorOrder = 4;
+              $indicatorOrder = 6;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 4;
+            $agreementOrder = 6;
             $indicatorName = "literacy_youth_total";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -271,7 +457,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 5;
+              $indicatorOrder = 7;
               $inputs = [
                 (object) [
                   "name" => "gov_expenditure_education",
@@ -282,10 +468,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 5;
+              $indicatorOrder = 7;
               $inputs = [
                 (object) [
                   "name" => "gov_expenditure_education",
@@ -298,13 +484,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "gov_expenditure_education";
-              $indicatorOrder = 5;
+              $indicatorOrder = 7;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 5;
+            $agreementOrder = 7;
             $indicatorName = "gov_expenditure_education";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -320,7 +506,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 6;
+              $indicatorOrder = 8;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
@@ -331,10 +517,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 6;
+              $indicatorOrder = 8;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
@@ -347,13 +533,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "entrance_age_pe";
-              $indicatorOrder = 6;
+              $indicatorOrder = 8;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 6;
+            $agreementOrder = 8;
             $indicatorName = "entrance_age_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -369,7 +555,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 7;
+              $indicatorOrder = 9;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
@@ -380,10 +566,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="9-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 7;
+              $indicatorOrder = 9;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
@@ -396,13 +582,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "entrance_age_se";
-              $indicatorOrder = 7;
+              $indicatorOrder = 9;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 7;
+            $agreementOrder = 9;
             $indicatorName = "entrance_age_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -418,7 +604,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 8;
+              $indicatorOrder = 10;
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
@@ -429,10 +615,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="10-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 8;
+              $indicatorOrder = 10;
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
@@ -445,13 +631,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "duration_pe";
-              $indicatorOrder = 8;
+              $indicatorOrder = 10;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 8;
+            $agreementOrder = 10;
             $indicatorName = "duration_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -467,7 +653,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 9;
+              $indicatorOrder = 11;
               $inputs = [
                 (object) [
                   "name" => "duration_se",
@@ -478,10 +664,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="9-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="11-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 9;
+              $indicatorOrder = 11;
               $inputs = [
                 (object) [
                   "name" => "duration_se",
@@ -494,13 +680,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "duration_se";
-              $indicatorOrder = 9;
+              $indicatorOrder = 11;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 9;
+            $agreementOrder = 11;
             $indicatorName = "duration_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -516,7 +702,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 10;
+              $indicatorOrder = 12;
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
@@ -527,10 +713,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="10-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="12-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 10;
+              $indicatorOrder = 12;
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
@@ -543,13 +729,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "duration_ce";
-              $indicatorOrder = 10;
+              $indicatorOrder = 12;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 10;
+            $agreementOrder = 12;
             $indicatorName = "duration_ce";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -565,7 +751,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 11;
+              $indicatorOrder = 13;
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
@@ -576,10 +762,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="11-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="13-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 11;
+              $indicatorOrder = 13;
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
@@ -592,13 +778,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "school_age_pe";
-              $indicatorOrder = 11;
+              $indicatorOrder = 13;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 11;
+            $agreementOrder = 13;
             $indicatorName = "school_age_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -614,7 +800,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 12;
+              $indicatorOrder = 14;
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
@@ -625,10 +811,10 @@ $agreementValues = mysqli_fetch_assoc($result);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="12-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="14-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 12;
+              $indicatorOrder = 14;
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
@@ -641,13 +827,13 @@ $agreementValues = mysqli_fetch_assoc($result);
               ?>
               <?php
               $indicatorName = "school_age_se";
-              $indicatorOrder = 12;
+              $indicatorOrder = 14;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 12;
+            $agreementOrder = 14;
             $indicatorName = "school_age_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -659,120 +845,284 @@ $agreementValues = mysqli_fetch_assoc($result);
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-      $(document).ready(function() {
-        $(".btn-back").click(function() {
-          window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
-        });
-        $(".btn-next").click(function() {
-          window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
-        });
-        verifyAgreementInput()
+    $(document).ready(function() {
+      $(".btn-back").click(function() {
+        window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
+      });
+      $(".btn-next").click(function() {
+        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+      });
+      verifyAgreementInput()
+    });
+
+    function addDocumentToTable(indicatorName, tableName, role) {
+      const documents = $(`#documents-${indicatorName}-${role}`)
+      const lastDoc = documents.children().last().attr('id')
+      const docInc = lastDoc ? parseInt(lastDoc.split("-")[2]) + 1 : 1
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        indicatorName: indicatorName,
+        docInc: docInc
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/addDocumentToTable.php?id=" + idCountry,
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          if (response == "Success") {
+            showDocument(indicatorName, tableName, role)
+          } else {
+            console.log(response)
+          }
+        }
+      });
+    }
+
+    function showDocument(indicatorName, tableName, role) {
+      const documents = $(`#documents-${indicatorName}-${role}`)
+      const lastDoc = documents.children().last().attr('id')
+      const docInc = lastDoc ? parseInt(lastDoc.split("-")[2]) + 1 : 1
+      const docRole = role
+
+      const document = `
+      <div id="document-${indicatorName}-${docInc}-${docRole}">
+        <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
+          ${docInc}
+          <span><button class="btn-delete"
+              onclick="deleteDocumentFromIndicator(${docInc}, '${tableName}', '${docRole}', '${indicatorName}')"><i
+                class="fas fa-trash-alt"></i></button></span>
+        </h3>
+        <div class="indicator-input">
+          <label for="document-title-${indicatorName}-${docInc}-${docRole}">Document
+            title</label>
+          <input type="text"
+            name="document-title-${indicatorName}-${docInc}-${docRole}"
+            id="document-title-${indicatorName}-${docInc}-${docRole}"
+            onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+        </div>
+
+        <div class="indicator-input">
+          <label
+            for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
+          <input type="text"
+            name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+            id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+            onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+        </div>
+
+        <div class="indicator-input">
+          <label
+            for="document-eletronic_source-${indicatorName}-${docInc}-${docRole}">Eletronic
+            source</label>
+          <input type="text"
+            name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+            id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+            onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+        </div>
+
+        <div class="indicator-input">
+          <label
+            for="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}">Voluntary
+            comments</label>
+          <textarea
+            name="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+            id="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+            onblur="saveDocumentValue('document-voluntary_comments-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
+        </div>
+      </div>
+    `
+
+      documents.append(document)
+    }
+
+    //for all add-document buttons
+    const addDocumentButtons = document.querySelectorAll("#add-document")
+    addDocumentButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        let indicatorName = this.dataset.indicatorName
+        let tableName = this.dataset.tableName
+        let role = this.dataset.role
+        addDocumentToTable(indicatorName, tableName, role)
+      })
+    })
+
+    function saveDocumentValue(inputName, tableName, docInc) {
+      let value = $(`#${inputName}`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
+      const input = inputName.split("-")[1]
+
+      const payload = {
+        tableName: tableName,
+        inputName: input,
+        value: value,
+        idCountry: idCountry,
+        docInc: docInc
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateDocumentValueOfTable.php?id=" + idCountry,
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
+
+    function deleteDocumentFromIndicator(docInc, tableName, docRole, indicatorName) {
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        docInc: docInc,
+        idCountry: idCountry
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/deleteDocumentFromTable.php?id=" + idCountry,
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          removeDocumentFromIndicator(tableName, docInc, docRole, indicatorName)
+        }
       });
 
-      function verifyAgreementInput() {
-        let contactInputs = []
-        let contactLabels = []
-        let agreementGroups = []
-        for (let i = 1; i <= 12; i++) {
-          // get all the divs with id that contains i and -contact
-          contactLabels.push($(`p[id*="${i}-contact-label"]`))
-          contactInputs.push($(`div[id*="${i}-contact"]`))
-          agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
-        }
+      function removeDocumentFromIndicator(tableName, docInc, docRole, indicatorName) {
+        // id="document-${indicatorName}-${docInc}-${docRole}"
+        $(`#document-${indicatorName}-${docInc}-${docRole}`).remove()
+      }
+    }
 
-        agreementGroups.forEach((agreementGroup, index) => {
-          // on load verify the value of the radio input inside of the agreementGroup
-          verifyRadioValue(agreementGroup, contactInputs[index], contactLabels[index])
+    function verifyAgreementInput() {
+      let contactInputs = []
+      let contactLabels = []
+      let agreementGroups = []
+      for (let i = 1; i <= 12; i++) {
+        // get all the divs with id that contains i and -contact
+        contactLabels.push($(`p[id*="${i}-contact-label"]`))
+        contactInputs.push($(`div[id*="${i}-contact"]`))
+        agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+      }
+
+      agreementGroups.forEach((agreementGroup, index) => {
+        // on load verify the value of the radio input inside of the agreementGroup
+        verifyRadioValue(agreementGroup, contactInputs[index], contactLabels[index])
+      })
+    }
+
+    function verifyRadioValue(agreementGroup, contactInput, contactLabel) {
+      //get all the radio inputs inside of the agreementGroup
+      let radioInputs = agreementGroup.find("input[type='radio']")
+      //if none of the radio inputs are checked hide the contactLabel and contactInput
+      if (!radioInputs.is(":checked")) {
+        contactLabel.hide()
+        contactInput.hide()
+      } else if (radioInputs.is(":checked") && radioInputs.filter(":checked").val() == 1) {
+        contactLabel.hide()
+        contactInput.hide()
+      } else {
+        contactLabel.show()
+        contactInput.show()
+      }
+
+      radioInputs.each(function() {
+        //on change verify the value of the radio input inside of the agreementGroup
+        $(this).change(function() {
+          //if the value of the radio input is 1 hide the contactLabel and contactInput
+          if ($(this).val() == 1) {
+            contactLabel.hide()
+            contactInput.hide()
+          } else {
+            contactLabel.show()
+            contactInput.show()
+          }
         })
+      })
+    }
+
+    function saveAgreementValue(indicatorName, tableName, value) {
+      let idCountry = <?php echo $_GET['id'] ?>;
+      const payload = {
+        tableName: tableName,
+        indicatorName: indicatorName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function verifyRadioValue(agreementGroup, contactInput, contactLabel) {
-        //get all the radio inputs inside of the agreementGroup
-        let radioInputs = agreementGroup.find("input[type='radio']")
-        //if none of the radio inputs are checked hide the contactLabel and contactInput
-        if (!radioInputs.is(":checked")) {
-          contactLabel.hide()
-          contactInput.hide()
-        } else if (radioInputs.is(":checked") && radioInputs.filter(":checked").val() == 1) {
-          contactLabel.hide()
-          contactInput.hide()
-        } else {
-          contactLabel.show()
-          contactInput.show()
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateAgreementValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
         }
+      });
+    }
 
-        radioInputs.each(function() {
-          //on change verify the value of the radio input inside of the agreementGroup
-          $(this).change(function() {
-            //if the value of the radio input is 1 hide the contactLabel and contactInput
-            if ($(this).val() == 1) {
-              contactLabel.hide()
-              contactInput.hide()
-            } else {
-              contactLabel.show()
-              contactInput.show()
-            }
-          })
-        })
+    function saveAdminValue(inputName, tableName) {
+      let value = $(`#${inputName}-admin`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function saveAgreementValue(indicatorName, tableName, value) {
-        let idCountry = <?php echo $_GET['id'] ?>;
-        const payload = {
-          tableName: tableName,
-          indicatorName: indicatorName,
-          value: value,
-          idCountry: idCountry
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
         }
+      });
+    }
 
-        console.log(payload)
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/updateAgreementValue.php",
-          data: {
-            payload: payload
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
+    function saveCompulsoryDuration(payload) {
+      let idCountry = <?php echo $_GET['id'] ?>;
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateCompulsoryDuration.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
+
+    function saveContactValue(inputName, tableName) {
+      let value = $(`#${inputName}-contact`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
+
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function saveAdminValue(inputName, tableName) {
-        let value = $(`#${inputName}-admin`).val()
-        let idCountry = <?php echo $_GET['id'] ?>;
-
-        const payload = {
-          tableName: tableName,
-          inputName: inputName,
-          value: value,
-          idCountry: idCountry
-        }
-
-        console.log(payload)
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/updateIndicatorValue.php",
-          data: {
-            payload: payload
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
-      }
-
-      function saveContactValue(inputName, tableName) {
-        let value = $(`#${inputName}-contact`).val()
-        let idCountry = <?php echo $_GET['id'] ?>;
-
-        const payload = {
-          tableName: tableName,
-          inputName: inputName,
-          value: value,
-          idCountry: idCountry
-        }
-
+      if (inputName == "duration_compulsory_pe" || inputName == "duration_compulsory_se") {
+        saveCompulsoryDuration(payload)
+      } else {
         console.log(payload)
         $.ajax({
           type: "POST",
@@ -785,39 +1135,40 @@ $agreementValues = mysqli_fetch_assoc($result);
           }
         });
       }
+    }
 
-      function saveComment(inputName, tableName) {
-        //get the value from textarea
-        let value = $(`#${inputName}-comments`).val()
-        let idCountry = <?php echo $_GET['id'] ?>;
+    function saveComment(inputName, tableName) {
+      //get the value from textarea
+      let value = $(`#${inputName}-comments`).val()
+      let idCountry = <?php echo $_GET['id'] ?>;
 
-        const payload = {
-          tableName: tableName,
-          inputName: inputName,
-          value: value,
-          idCountry: idCountry
-        }
-
-        console.log(payload)
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/updateIndicatorValue.php",
-          data: {
-            payload: payload
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
+      const payload = {
+        tableName: tableName,
+        inputName: inputName,
+        value: value,
+        idCountry: idCountry
       }
 
-      function hideComment(divName) {
-        if ($(`#${divName}`).is(":hidden")) {
-          $(`#${divName}`).show()
-        } else {
-          $(`#${divName}`).hide()
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
         }
+      });
+    }
+
+    function hideComment(divName) {
+      if ($(`#${divName}`).is(":hidden")) {
+        $(`#${divName}`).show()
+      } else {
+        $(`#${divName}`).hide()
       }
+    }
     </script>
 </body>
 

@@ -71,6 +71,9 @@ $sql = "SELECT * FROM pe_policy_exist_se_min_time_documents_contact WHERE id_cou
 $result = mysqli_query($conn, $sql);
 $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$sql = "SELECT es_changed_pe, es_changed_se, duration_compulsory_pe, duration_compulsory_se FROM demographic_data_contact WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$compulsoryDuration = mysqli_fetch_assoc($result);
 
 ?>
 <!DOCTYPE html>
@@ -106,6 +109,34 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+
+        <div class="indicator-input-container"
+          <?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "style='border-color: var(--red)!important'"; } else{{echo "style='border-color: var(--green-dark)!important'"; }}?>>
+          <div class="indicator-input-container__header"
+            style="<?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "background-color: var(--red)!important;"; } else{{echo "background-color: var(--green-dark)!important;"; }}?> color:var(--white)!important">
+            <h2><strong>Compulsory school years</strong></h2>
+          </div>
+          <div class="compulsory-warning-container">
+            <div class="compulsory-warning-values">
+              <div>
+                <h3>Primary education</h3>
+                <p>Duration: <?php echo $compulsoryDuration['duration_compulsory_pe'] ?> years</p>
+              </div>
+              <div>
+                <h3>Secondary education</h3>
+                <p>Duration: <?php echo $compulsoryDuration['duration_compulsory_se'] ?> years</p>
+              </div>
+            </div>
+            <div
+              style="<?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "color: var(--red)!important"; } else{{echo "color: var(--green-dark)!important"; }}?>; width: 50%; font-weight: 700">
+              When validating the indicator ‘Existence of a national official Physical Education curriculum for the
+              compulsory years of primary education’, attend to the fact that the reported sources may be incorrect for
+              the compulsory school years that you have identified.
+            </div>
+          </div>
+        </div>
+
+
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
             <h2><strong>01</strong></h2>
@@ -149,6 +180,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_pe_curriculum_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_curriculum_pe-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 1;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_curriculum_pe",
+                    "title" => "Name of the region / state / canton / district / province with a subnational officially prescribed Physical Education curriculum for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_pe_curriculum_pe-admin">
                 <?php
                 if($curriculumPeDocumentsAdmin != null) {
@@ -177,32 +226,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     "title" => "Yes, for all school years",
                     "value" => "1",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "yeas-some",
                     "title" => "Yes, for some of the school years",
                     "value" => "2",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "only-subnational-level",
                     "title" => "Only at subnational level",
                     "value" => "3",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "no",
                     "title" => "No",
                     "value" => "4",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ]
                 ];
                 include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div <?php if($contactValues['exist_pe_curriculum_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_curriculum_pe-contact">
+                  <?php 
+                  $indicatorRole = "contact";
+                  $indicatorOrder = 1;
+                  $inputs = [
+                    (object) [
+                      "name" => "name_region_subnational_curriculum_pe",
+                      "title" => "Name of the region / state / canton / district / province with a subnational officially prescribed Physical Education curriculum for the
+                      compulsory school years of primary education",
+                      "type" => "text",
+                      "tableName" => "pe_policy_contact"
+                    ]
+                  ];
+                  include '../../components/indicatorInputGroup.php';
+                  ?>
+                </div>
                 <div id="documents-exist_pe_curriculum_pe-contact">
                   <?php
                   if($curriculumPeDocumentsContact != null) {
@@ -279,6 +346,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_pe_curriculum_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_curriculum_se-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 2;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_curriculum_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational officially prescribed Physical Education curriculum for the
+                    compulsory school years of secondary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_pe_curriculum_se-admin">
                 <?php
                 if($curriculumSeDocumentsAdmin != null) {
@@ -307,32 +392,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   "title" => "Yes, for all school years",
                   "value" => "1",
                   "type" => "radio",
-                  "tableName" => "pe_policy_admin"
+                  "tableName" => "pe_policy_contact"
                 ],
                 (object) [
                   "name" => "yeas-some",
                   "title" => "Yes, for some of the school years",
                   "value" => "2",
                   "type" => "radio",
-                  "tableName" => "pe_policy_admin"
+                  "tableName" => "pe_policy_contact"
                 ],
                 (object) [
                   "name" => "only-subnational-level",
                   "title" => "Only at subnational level",
                   "value" => "3",
                   "type" => "radio",
-                  "tableName" => "pe_policy_admin"
+                  "tableName" => "pe_policy_contact"
                 ],
                 (object) [
                   "name" => "no",
                   "title" => "No",
                   "value" => "4",
                   "type" => "radio",
-                  "tableName" => "pe_policy_admin"
+                  "tableName" => "pe_policy_contact"
                 ]
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+                <div <?php if($contactValues['exist_pe_curriculum_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_curriculum_se-contact">
+                  <?php 
+                $indicatorRole = "contact";
+                $indicatorOrder = 2;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_curriculum_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational officially prescribed Physical Education curriculum for the
+                    compulsory school years of secondary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                </div>
                 <div id="documents-exist_pe_curriculum_se-contact">
                   <?php
                 if($curriculumSeDocumentsContact != null) {
@@ -409,6 +512,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_policy_mandatory_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_mandatory_pe-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 3;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_mandatory_pe",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring Physical Education to be mandatory for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_policy_mandatory_pe-admin">
                 <?php
                 if($policyMandatoryPeDocumentsAdmin != null) {
@@ -437,32 +558,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     "title" => "Yes, for all school years",
                     "value" => "1",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "yeas-some",
                     "title" => "Yes, for some of the school years",
                     "value" => "2",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "only-subnational-level",
                     "title" => "Only at subnational level",
                     "value" => "3",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "no",
                     "title" => "No",
                     "value" => "4",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ]
                 ];
                 include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div <?php if($contactValues['exist_policy_mandatory_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_mandatory_pe-contact">
+                  <?php 
+                $indicatorRole = "contact";
+                $indicatorOrder = 3;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_mandatory_pe",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring Physical Education to be mandatory for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                </div>
                 <div id="documents-exist_pe_mandatory_pe-contact">
                   <?php
                 if($policyMandatoryPeDocumentsContact != null) {
@@ -539,6 +678,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_policy_mandatory_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_mandatory_se-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 4;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_mandatory_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring Physical Education to be mandatory for the
+                    compulsory school years of secondary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_pe_mandatory_se-admin">
                 <?php
                 if($policyMandatorySeDocumentsAdmin != null) {
@@ -567,32 +724,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     "title" => "Yes, for all school years",
                     "value" => "1",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "yeas-some",
                     "title" => "Yes, for some of the school years",
                     "value" => "2",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "only-subnational-level",
                     "title" => "Only at subnational level",
                     "value" => "3",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "no",
                     "title" => "No",
                     "value" => "4",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ]
                 ];
                 include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div <?php if($contactValues['exist_policy_mandatory_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_mandatory_se-contact">
+                  <?php 
+                $indicatorRole = "contact";
+                $indicatorOrder = 4;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_mandatory_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring Physical Education to be mandatory for the
+                    compulsory school years of secondary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                </div>
                 <div id="documents-exist_pe_mandatory_se-contact">
                   <?php
                 if($policyMandatorySeDocumentsContact != null) {
@@ -669,6 +844,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_policy_min_time_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_min_time_pe-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 5;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_min_time_pe",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_policy_min_time_pe-admin">
                 <?php
                 if($policyMinTimePeDocumentsAdmin != null) {
@@ -697,32 +890,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                       "title" => "Yes, for all school years",
                       "value" => "1",
                       "type" => "radio",
-                      "tableName" => "pe_policy_admin"
+                      "tableName" => "pe_policy_contact"
                     ],
                     (object) [
                       "name" => "yeas-some",
                       "title" => "Yes, for some of the school years",
                       "value" => "2",
                       "type" => "radio",
-                      "tableName" => "pe_policy_admin"
+                      "tableName" => "pe_policy_contact"
                     ],
                     (object) [
                       "name" => "only-subnational-level",
                       "title" => "Only at subnational level",
                       "value" => "3",
                       "type" => "radio",
-                      "tableName" => "pe_policy_admin"
+                      "tableName" => "pe_policy_contact"
                     ],
                     (object) [
                       "name" => "no",
                       "title" => "No",
                       "value" => "4",
                       "type" => "radio",
-                      "tableName" => "pe_policy_admin"
+                      "tableName" => "pe_policy_contact"
                     ]
                   ];
                   include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div <?php if($contactValues['exist_policy_min_time_pe'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_min_time_pe-contact">
+                  <?php 
+                $indicatorRole = "contact";
+                $indicatorOrder = 5;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_min_time_pe",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                </div>
                 <div id="documents-exist_policy_min_time_pe-contact">
                   <?php
                 if($policyMinTimePeDocumentsContact != null) {
@@ -799,6 +1010,24 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorChoiceGroup.php';
               ?>
+              <div <?php if($adminValues['exist_policy_min_time_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_min_time_se-admin">
+                <?php 
+                $indicatorRole = "admin";
+                $indicatorOrder = 6;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_min_time_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_admin"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+              </div>
               <div id="documents-exist_policy_min_time_se-admin">
                 <?php
                 if($policyMinTimeSeDocumentsAdmin != null) {
@@ -827,32 +1056,50 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     "title" => "Yes, for all school years",
                     "value" => "1",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "yeas-some",
                     "title" => "Yes, for some of the school years",
                     "value" => "2",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "only-subnational-level",
                     "title" => "Only at subnational level",
                     "value" => "3",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ],
                   (object) [
                     "name" => "no",
                     "title" => "No",
                     "value" => "4",
                     "type" => "radio",
-                    "tableName" => "pe_policy_admin"
+                    "tableName" => "pe_policy_contact"
                   ]
                 ];
                 include '../../components/indicatorChoiceGroup.php';
                 ?>
+                <div <?php if($contactValues['exist_policy_min_time_se'] != 3){
+                  echo "hidden";
+                }?> name="name_region_subnational_min_time_se-contact">
+                  <?php 
+                $indicatorRole = "contact";
+                $indicatorOrder = 6;
+                $inputs = [
+                  (object) [
+                    "name" => "name_region_subnational_min_time_se",
+                    "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
+                    compulsory school years of primary education",
+                    "type" => "text",
+                    "tableName" => "pe_policy_contact"
+                  ]
+                ];
+                include '../../components/indicatorInputGroup.php';
+                ?>
+                </div>
                 <div id="documents-exist_pe_min_time_se-contact">
                   <?php
                 if($policyMinTimeSeDocumentsContact != null) {
@@ -1105,6 +1352,33 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       idCountry: idCountry
     }
 
+
+    if (value == '3') {
+      let role = tableName.split("_")[2]
+      let inputNameSearch = indicatorName.split("_")
+      // console.log(inputNameSearch)
+      if (inputNameSearch[2] == "min") {
+        inputNameSearch = "name_region_subnational_" + inputNameSearch[2] + "_" + inputNameSearch[3] + "_" +
+          inputNameSearch[4] + "-" + role;
+      } else {
+        inputNameSearch = "name_region_subnational_" + inputNameSearch[2] + "_" + inputNameSearch[3] + "-" + role;
+      }
+      // console.log(inputNameSearch)
+      $(`div[name="${inputNameSearch}"]`).show()
+    } else {
+      let role = tableName.split("_")[2]
+      let inputNameSearch = indicatorName.split("_")
+      if (inputNameSearch[2] == "min") {
+        inputNameSearch = "name_region_subnational_" + inputNameSearch[2] + "_" + inputNameSearch[3] + "_" +
+          inputNameSearch[4] + "-" + role;
+      } else {
+        inputNameSearch = "name_region_subnational_" + inputNameSearch[2] + "_" + inputNameSearch[3] + "-" + role;
+      }
+      // console.log(inputNameSearch)
+      $(`div[name="${inputNameSearch}"]`).hide()
+
+    }
+
     console.log(payload)
     $.ajax({
       type: "POST",
@@ -1128,6 +1402,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       value: value,
       idCountry: idCountry
     }
+
+
 
     console.log(payload)
     $.ajax({

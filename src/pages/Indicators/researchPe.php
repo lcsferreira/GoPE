@@ -72,6 +72,44 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <h2><strong>Physical Education and school-based physical activity research</strong></h2>
           </div>
 
+
+          <div class="instructions">
+            <p>
+              Please consult the table below, which includes the Physical Education and school-based physical activity
+              intervention studies conducted in your country.
+              <br>
+              These studies were identified via an umbrella review of systematic reviews. You can add another study that
+              is not presented on the list. In doing so, identify the school domains of that article and provide its
+              full reference.
+              <br>
+              Do consider the following inclusion criteria:
+            <ul>
+              <li>Primarily school-based interventions aimed at increasing physical activity in children and
+                adolescents.</li>
+              <li>Studies with children (5-10 years of age) and/or adolescents (11-17 years of age) attending school.
+                For different age limits, the mean age provided needs to fall within these gaps.</li>
+              <li>Context of interventions based on the school setting (primary focus).</li>
+            </ul>
+            When multiple studies were published based on the same sample/population/intervention, due to the purposes
+            of our study and GoPE! project, we aim to include and count all studies.
+            <br>
+            Do also consider the following exclusion criteria:
+            <ul>
+              <li>Studies of interventions that did not primarily aim to increase physical activity in school-attending
+                children and adolescents.</li>
+              <li>Studies with children aged less than 5 years, with adults and seniors, with unschooled children and
+                adolescents 5-17yrs.</li>
+              <li>Interventions studies not mainly focused on physical activity promotion.</li>
+              <li>Studies with all intervention components conducted entirely outside of the school, or not implemented
+                primarily in the school context.</li>
+            </ul>
+            The final list of approved studies will calculate four indicators: number of articles, contribution to
+            research, research quintiles and the proportion of articles per school domain (PE, active transport active
+            classes/breaks, active recess, extra-curriculum physical activity).
+            </p>
+            <p>NOTE: A table can be shown with the inclusion and exclusion criteria.</p>
+          </div>
+
           <!-- show a pdf with the table of intervation studies -->
           <div class="thumbnail-pdf" id="preview">
             <?php if ($adminValues['has_table'] == 0) : ?>

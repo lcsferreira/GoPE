@@ -11,7 +11,11 @@ $idCountry = $payload['idCountry'];
 $sql = "UPDATE $tableName SET $inputName = '$value' WHERE id_country = $idCountry";
 $result = $conn->query($sql);
 
+
 if ($result) {
+  // if(isset($_SESSION['hasEdited']) && $_SESSION['hasEdited'] === false) {
+  //   $_SESSION['hasEdited'] = true;
+  // }
   echo "success";
 } else {
   echo "error";
