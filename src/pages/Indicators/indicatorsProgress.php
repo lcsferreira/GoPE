@@ -5,18 +5,22 @@ if (!isset($_SESSION['loggedIn'])) {
   header("Location: ../../pages/Login/login.php");
   exit;
 }
+//check if hasEdited is setted, and if is false keep it false
+if (!isset($_SESSION['hasEdited']) || $_SESSION['hasEdited'] === false) {
+  $_SESSION['hasEdited'] = false;
+}
 
-$indicators = array("demographic_data", "pa_pravelance", "pe_policy", "pe_monitoring");
+$indicators = array("demographic_data", "pa_prevalence", "pe_policy", "pe_monitoring");
 $countryId = $_GET['id'];
 // $valueTypes = array("comments", "values_admin", "values_contact", "agreement");
 
 $progressIndicators = array(0, 0, 0, 0);
-$totalIndicators = array(14, 3, 1, 6);
+$totalIndicators = array(14, 3, 6, 1);
 
 $index = 0;
 foreach ($indicators as $step) {
   //select row from demographic_values_contacct table
-  $sql = "SELECT * FROM " . $step . "_agreement WHERE id = ".$countryId;
+  $sql = "SELECT * FROM " . $step . "_agreement WHERE id_country = ".$countryId;
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
   //for each row except id, check if the value is not null or zero
@@ -32,11 +36,11 @@ foreach ($progressIndicators as $key => $progress) {
   $progress = ($progress / $totalIndicators[$key]) * 100;
 
   if ($progress == 100 || $progress > 100) {
-    $progress[$key] = 100;
+    $progress = 100;
   }
 
   //format to 1 numbers after comma
-  $progress[$key] = number_format($progress[$key], 1);
+  $progress = number_format($progress, 1);
   $progressIndicators[$key] = $progress;
 }
 
@@ -117,7 +121,7 @@ foreach ($progressIndicators as $key => $progress) {
         </div>
         <div class="card-progress">
           <div class="progress">
-            <?php echo $progressIndicators[4] ?>%
+            100.0%
           </div>
           <h3>Research in PE and school-based PA</h3>
         </div>
