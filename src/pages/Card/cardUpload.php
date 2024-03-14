@@ -8,13 +8,13 @@ if (!isset($_SESSION['loggedIn'])) {
 
 function getThumbnail($path, $country) {
   if (is_dir($path)) {
-      $files = scandir($path);
-      
-      foreach ($files as $file) {
-          if ($file != "." && $file != ".." && strpos($file, $country) === 0 && pathinfo($file, PATHINFO_EXTENSION) === "png") {
-              return $file; // Retorna o primeiro arquivo encontrado
-          }
+    $files = scandir($path);
+    
+    foreach ($files as $file) {
+      if ($file != "." && $file != ".." && strpos($file, $country) === 0 && pathinfo($file, PATHINFO_EXTENSION) === "png") {
+          return $file; // Retorna o primeiro arquivo encontrado
       }
+  }
   }
   
   return null; // Retorna null se nenhum arquivo for encontrado
@@ -77,7 +77,8 @@ $commentValues['comment'] = $row['comment'];
 
       <div style="display: flex">
         <div class="card-container">
-          <img src="<?php echo getThumbnail("../../../uploads/card_en", $country_id); ?>" alt="Country Card">
+          <img src="<?php echo "../../uploads/cards_en/".getThumbnail("../../uploads/cards_en/", $country_id); ?>"
+            alt="Country card">
           <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
             <input type="file" name="cardUpload" id="cardUpload">
             <button class="btn-primary" id="uploadBtn">Upload card</button>
