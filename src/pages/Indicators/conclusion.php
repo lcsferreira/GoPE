@@ -7,8 +7,9 @@ if (!isset($_SESSION['loggedIn'])) {
 }
 $enableSubmit = false;
 $userType = $_SESSION['type'];
-$userId = $_SESSION['userId'];
-$countryId = $_SESSION['countryId'];
+$userId = $_SESSION['id'];
+$countryId = $_GET['id'];
+// $hasEdited = $_SESSION['hasEdited'];
 
 // get country name
 $sql = "SELECT name FROM countries WHERE id = $countryId";
@@ -51,22 +52,26 @@ function verifyAllAgreementsChecked($conn,$countryId)
   $indicators = array("demographic_data", "pa_pravelance", "pe_policy", "pe_monitoring", "research_pe");
 
   foreach ($indicators as $indicator){
-    $sql = "SELECT * FROM " . $indicator . "_agreement WHERE id = $countryId";
+    $sql = "SELECT * FROM " . $indicator . "_agreement WHERE id_country = $countryId";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 
-    if($row['agreement'] === 0 || $row['agreement'] === null){
-      return false;
+    foreach($row as $key => $value){
+      if($key != "id_country" && $value == 0){
+        return false;
+      }
     }
   }
 }
 
-if(verifyAllAgreementsChecked($conn,$countryId)){
-  $enableSubmit = true;
-  $hasAllAgreementsChecked = true;
-}else{
-  $enableSubmit = false;
-  $hasAllAgreementsChecked = false;
+if($userType === "contact"){
+  if(verifyAllAgreementsChecked($conn,$countryId)){
+    $enableSubmit = true;
+    $hasAllAgreementsChecked = true;
+  }else{
+    $enableSubmit = false;
+    $hasAllAgreementsChecked = false;
+  }
 }
 
 ?>
@@ -93,61 +98,124 @@ if(verifyAllAgreementsChecked($conn,$countryId)){
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php
+    $icon = "fas fa-exclamation-circle";
+    $message = "Do you want to send the information? This action will disable the possibility of modifying the data.";
+    $buttonConfirmText = "Confirm";
+    $buttonCloseText = "Cancel";
+    include '../../components/modalCard.php';
+    ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Progress</strong></h1>
-      <button class="btn-next">Next</button>
+      <div></div>
     </div>
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
-      <div class="dashboard-container">
-        <div class="dashboard-container__header">
-          <h2><strong>Indicators</strong></h2>
-        </div>
-        <div class="dashboard-container__description">
-          <?php if($userType === 'contact'): ?>
-          <p>If you are <strong>ready</strong> to provide <strong>your review</strong> of the indicators, click the
-            <strong>submit</strong> button.
-          </p>
-          <?php if(!$hasAllAgreementsChecked): ?>
-          <p><strong>Attention:</strong> You <strong>must</strong> agree with all the indicators to submit.</p>
-          <?php endif; ?>
-
-          <div class="dashboard-container__description__submit">
-            <button class="btn-submit
-              <?php
-              if(!$enableSubmit){
-                echo ' disabled';
-              }
-              ?>
-              ">Submit</button>
+      <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+        <div class="dashboard-container">
+          <div class="dashboard-container__header">
+            <h2><strong>Indicators</strong></h2>
           </div>
-          <?php else: ?>
-          <?php if($indicatorsStep === 'waiting contact'): ?>
-          <p>The contact has <strong>not yet reviewed</strong> the indicators!</p>
-          <?php else: ?>
-          <?php if($hasEdited): ?>
-          <p><strong>Send</strong> for <?php echo $countryName; ?> contact's<strong>review.</strong></p>
-          <?php else: ?>
-          <p>You <strong>didn't</strong> made any <strong>adjustment</strong> for the contact to review.</p>
-          <?php endif; ?>
-          <?php endif; ?>
-          <div class="dashboard-container__description__submit">
-            <button class="btn-submit
-                <?php
-                if(!$enableSubmit || $indicatorsStep === 'waiting_contact'){
+          <div class="dashboard-container__description">
+            <?php if($userType === 'contact'): ?>
+            <p>If you are <strong>ready</strong> to provide <strong>your review</strong> of the indicators, click the
+              <strong>submit</strong> button.
+            </p>
+            <?php if(!$hasAllAgreementsChecked): ?>
+            <p><strong>Attention:</strong> You <strong>must</strong> agree with all the indicators to submit.</p>
+            <?php endif; ?>
+
+            <div class="dashboard-container__description__submit">
+              <button class="btn-submit" <?php
+                if(!$enableSubmit){
                   echo ' disabled';
                 }
-                ?>
-                ">Submit</button>
-          </div>
-          <?php endif; ?>
+                ?> onclick="openConfirmationModal()">Submit</button>
+            </div>
+            <?php else: ?>
+            <?php if($indicatorsStep === 'waiting contact'): ?>
+            <p>The contact has <strong>not yet reviewed</strong> the indicators!</p>
+            <?php else: ?>
+            <!-- <?php if(!$hasEdited): ?> -->
+            <p style="color: var(--text-dark)"><strong>Send</strong> for <?php echo $countryName; ?> contact's<strong>
+                review.</strong></p>
+            <!-- <?php else: ?>
+            <p>You <strong>didn't</strong> made any <strong>adjustment</strong> for the contact to review.</p>
+            <?php endif; ?> -->
+            <?php endif; ?>
+            <div class="dashboard-container__description__submit">
+              <button class="btn-primary" <?php
+                  if(!$enableSubmit || $indicatorsStep === 'waiting_contact'){
+                    echo ' disabled';
+                  }
+                  ?> onclick="sendToContactReview()">Submit</button>
+            </div>
+            <?php endif; ?>
 
+          </div>
         </div>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+    $(document).ready(function() {
+      $(".btn-back").click(function() {
+        window.location.href = "../Indicators/researchPe.php<?php echo "?id=" . $_GET['id'] ?>";
+      });
+    });
+
+    const modal = document.querySelector('.modal');
+    const modalConfirm = document.querySelector('#modal-confirm');
+    const modalClose = document.querySelector('#modal-close');
+
+    function openConfirmationModal() {
+      modal.style.display = 'block';
+    }
+
+    modalConfirm.addEventListener('click', () => {
+      modal.style.display = 'none';
+      sendToAdminReview();
+      // window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    function sendToAdminReview() {
+      $.ajax({
+        url: '../../query/Indicators/sendToAdminReview.php',
+        type: 'POST',
+        data: {
+          idCountry: <?php echo $_GET['id'] ?>
+        },
+        success: function(response) {
+          if (response === 'success') {
+            window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+          } else {
+            alert('Error');
+          }
+        }
+      });
+    }
+
+    function sendToContactReview() {
+      $.ajax({
+        url: '../../query/Indicators/sendToContactReview.php',
+        type: 'POST',
+        data: {
+          idCountry: <?php echo $_GET['id'] ?>
+        },
+        success: function(response) {
+          if (response === 'success') {
+            window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+          } else {
+            alert('Error');
+          }
+        }
+      });
+    }
     </script>
 </body>
 
