@@ -76,7 +76,8 @@ if (!isset($_SESSION['loggedIn'])) {
   <script>
   $(document).ready(function() {
     $(".btn-back").click(function() {
-      window.location.href = "countriesList.php?id=<?php echo $_SESSION['id'] ?>";
+      window.location.href =
+        "../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>";
     });
     $(".btn-next").click(function() {
       window.location.href = "cardUpload.php?id=<?php echo $_GET['id'] ?>";
