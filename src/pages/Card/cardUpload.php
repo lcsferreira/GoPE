@@ -200,20 +200,23 @@ $commentValues['comment'] = $row['comment'];
     let idCountry = <?php echo $_GET['id'] ?>;
     let sendForReview = $("#send-contact-review").is(":checked");
 
-    $.ajax({
-      type: "POST",
-      url: "../../query/Cards/sendForReview.php",
-      data: {
-        idCountry: idCountry,
-        sendForReview: sendForReview
-      },
-      success: function(response) {
-        console.log(response)
-      }
-    });
+    if (sendForReview) {
+      $.ajax({
+        type: "POST",
+        url: "../../query/Cards/sendForReview.php",
+        data: {
+          idCountry: idCountry,
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    } else {
+      window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+    }
   }
 
-  function sendRepsonse() {
+  function sendResponse() {
     let idCountry = <?php echo $_GET['id'] ?>;
     let sendResponse = $("input[name='send-admin']:checked").val();
 
