@@ -268,8 +268,8 @@
 }
 
 .btn-primary:disabled {
-  background-color: var(--gray-light);
-  color: var(--gray-dark);
+  background-color: #d3d3d3;
+  color: #a9a9a9;
   cursor: not-allowed;
 }
 

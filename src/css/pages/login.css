@@ -113,7 +113,8 @@ body {
 }
 
 .form-container form .btn-login:disabled {
-  background: var(--gray-light);
+  background-color: #d3d3d3;
+  color: #a9a9a9;
   cursor: not-allowed;
 }
 
