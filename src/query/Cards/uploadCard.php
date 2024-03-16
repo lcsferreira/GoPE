@@ -37,8 +37,8 @@ if (!empty($cardUpload)) {
     if(move_uploaded_file($tmp2,$pdf))
     {
       //sql update cards_en table of has_card to 1
-      // $sql = "UPDATE cards_en SET has_card = 1 WHERE id = $idCountry";
-      // mysqli_query($connection, $sql);
+      $sql = "UPDATE cards_en SET has_card = 1 WHERE id_country = $idCountry";
+      mysqli_query($conn, $sql);
 
       //generate thumbnail
       $pdfFilePath = $pdf;
@@ -46,16 +46,16 @@ if (!empty($cardUpload)) {
       // echo $thumbnailFile;
       // echo $path;
       $oldThumnail = getThumbnail($path, $idCountry);
-      echo $oldThumnail;
-      // unlink($path.$oldThumnail);
+      unlink($path.$oldThumnail);
       $imagick = new Imagick($pdfFilePath);
       $imagick->setResolution(300, 300);
       $imagick->setImageFormat('png'); 
       // $imagick->setResolution(3000, 2000); // Resolução em DPI (dots per inch)
       // $imagick->thumbnailImage(500, 500, true); // Redimensionar para Full HD
+      date_default_timezone_set('UTC');
       $imagick->writeImage($thumbnailFile."-". date("Y-m-d-H-i-s") . '.png');
 
-      echo $idCountry;
+      echo "success";
     }
   } else 
   {
