@@ -87,7 +87,7 @@ if ($_SESSION['type'] == "admin") {
               <?php
                 if ($country['indicators_step'] === "not started") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button disabled class="btn-play" onclick="window.location.href = \'../../query/Indicators/createIndicators.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                    echo '<button class="btn-play" onclick="window.location.href = \'../../query/Indicators/createIndicators.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }

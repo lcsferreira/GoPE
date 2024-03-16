@@ -24,6 +24,7 @@ $country_id = $_GET['id'];
 $sql = "SELECT card_english_step FROM countries WHERE id = $country_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
+$stepStatus = $row['card_english_step'];
 
 if($row['card_english_step'] == "not started"){
   $sql = "INSERT INTO cards_en (id_country) VALUES ($country_id)";
@@ -39,6 +40,23 @@ $row = mysqli_fetch_assoc($result);
 // $commentValues = $row['comment'];
 $commentValues = array();
 $commentValues['comment'] = $row['comment'];
+
+function getLastUpdatedDate($country_id){
+  $date = getThumbnail("../../uploads/cards_en/", $country_id);
+  // $imagick->writeImage($thumbnailFile."-". date("Y-m-d-H-i-s") . '.png');
+  date_default_timezone_set('UTC');
+
+  //separte the date from the file name
+  $date = explode("-", $date);
+
+  $formattedDate = $date[1] . "/" . $date[2] . "/" . $date[3] . " " . $date[4] . ":" . $date[5] . ":" . $date[6];
+
+  $formattedDate = explode(".", $formattedDate);
+  $formattedDate = $formattedDate[0];
+
+  $formattedDate = date("F j, Y, g:i a", strtotime($formattedDate));
+  return "Last updated: " . $formattedDate . " (UTC)";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +83,13 @@ $commentValues['comment'] = $row['comment'];
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php
+      $icon = "fas fa-exclamation-circle";
+      $message = "Do you want to approve this step? This action will disable the possibility of modifying the data.";
+      $buttonConfirmText = "Confirm";
+      $buttonCloseText = "Cancel";
+      include '../../components/modalCard.php';
+    ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1><strong>Review</strong> the Country <strong>Card</strong></h1>
@@ -77,13 +102,24 @@ $commentValues['comment'] = $row['comment'];
 
       <div style="display: flex">
         <div class="card-container">
-          <img src="<?php echo "../../uploads/cards_en/".getThumbnail("../../uploads/cards_en/", $country_id); ?>"
-            alt="Country card">
-          <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
+          <h3>
+            <?php 
+              echo getLastUpdatedDate($country_id);
+            ?>
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;">
+            <img src="<?php echo "../../uploads/cards_en/".getThumbnail("../../uploads/cards_en/", $country_id); ?>"
+              alt="Country card">
+            <a href="<?php echo "../../uploads/cards_en/$country_id.pdf "?>"
+              class="btn-primary  <?php if(!$row['has_card']){echo " disabled-link ";} ?>" download>Download Card <i
+                class="fas fa-download"></i></a>
+          </div>
+          <?php if($_SESSION['type'] == "admin"):?>
+          <div class="upload-container">
             <input type="file" name="cardUpload" id="cardUpload">
             <button class="btn-primary" id="uploadBtn">Upload card</button>
-            <a href="<?php echo "../../../uploads/cards_en/$country_id.pdf; "?>" class="btn-primary">Download Card</a>
           </div>
+          <?php endif; ?>
         </div>
         <div class="card-options">
           <p>
@@ -97,9 +133,10 @@ $commentValues['comment'] = $row['comment'];
             include '../../components/commentGroup.php';
           ?>
           <?php if($_SESSION['type'] == "admin"):?>
-          <a href="<?php echo "../../../uploads/files/$country_id.pdf; "?>" class="btn-primary"
+          <a href="<?php echo "../../uploads/files/$country_id.pdf; "?>"
+            class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>"
             style="width: 95%;">Download
-            file</a>
+            file <i class="fas fa-download"></i></a>
           <?php else: ?>
           <input type="file" name="fileUpload" id="fileUpload">
           <button class="btn-primary" id="uploadFileBtn">Upload file</button>
@@ -112,7 +149,8 @@ $commentValues['comment'] = $row['comment'];
             <input type="checkbox" name="send-contact-review" id="send-contact-review" value="send-for-review" />
             <span class="checkmark"></span>
           </label>
-          <button class="btn-primary" style="width: 100%;" onclick="sendContactReview()">Submit</button>
+          <button class="btn-primary" style="width: 100%;" onclick="sendContactReview()"
+            <?php if($stepStatus == "waiting contact"){echo " disabled ";} ?>>Submit</button>
           <?php else: ?>
           <label for="send-adjustment" class="radio-option-no-description" style="width: 97%;">
             <div class="option-text">
@@ -150,7 +188,11 @@ $commentValues['comment'] = $row['comment'];
     formData.append('cardUpload', file);
     formData.append('idCountry', <?php echo $_GET['id'] ?>);
 
-    // console.log(formData);
+    let loading = `
+      <span class="loader"></span>
+    `;
+    $(".card-container").html(loading);
+
     $.ajax({
       url: '../../query/Cards/uploadCard.php',
       type: 'post',
@@ -158,7 +200,7 @@ $commentValues['comment'] = $row['comment'];
       contentType: false,
       processData: false,
       success: function(response) {
-        console.log(response);
+        location.reload();
       }
     });
   });
@@ -209,6 +251,7 @@ $commentValues['comment'] = $row['comment'];
         },
         success: function(response) {
           console.log(response)
+          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
         }
       });
     } else {
@@ -216,10 +259,18 @@ $commentValues['comment'] = $row['comment'];
     }
   }
 
-  function sendResponse() {
+  const modal = document.querySelector('.modal');
+  const modalConfirm = document.querySelector('#modal-confirm');
+  const modalClose = document.querySelector('#modal-close');
+
+  function openConfirmationModal() {
+    modal.style.display = 'block';
+  }
+
+  modalConfirm.addEventListener('click', () => {
+    modal.style.display = 'none';
     let idCountry = <?php echo $_GET['id'] ?>;
     let sendResponse = $("input[name='send-admin']:checked").val();
-
     $.ajax({
       type: "POST",
       url: "../../query/Cards/sendResponse.php",
@@ -231,6 +282,31 @@ $commentValues['comment'] = $row['comment'];
         console.log(response)
       }
     });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  function sendResponse() {
+    let idCountry = <?php echo $_GET['id'] ?>;
+    let sendResponse = $("input[name='send-admin']:checked").val();
+
+    if (sendResponse == "approve") {
+      openConfirmationModal();
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "../../query/Cards/sendResponse.php",
+        data: {
+          idCountry: idCountry,
+          sendResponse: sendResponse
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
+    }
   }
   </script>
 </body>

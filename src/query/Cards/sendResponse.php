@@ -13,20 +13,7 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $countryName = $row['name'];
 
-// $sql = "UPDATE countries SET card_english_step = 'waiting contact' WHERE id = $idCountry";
-// $conn->query($sql);
-
-//get the contacts related to the country
-// $sql = "SELECT email FROM user_country_relation INNER JOIN users ON user_country_relation.id_user = users.id WHERE id_country = $countryId AND active = 1";
-// $result = $conn->query($sql);
-// $emails = array();
-// if ($result->num_rows > 0) {
-//   while ($row = $result->fetch_assoc()) {
-//     array_push($emails, $row['email']);
-//   }
-// }
-
-$adminEmails = ["lucas.simooes.ferreira@gmail.com"];
+$adminEmails = ["lucas.simoes.ferreira@gmail.com"];
 date_default_timezone_set('Europe/Lisbon');
 
 foreach ($adminEmails as $email) {

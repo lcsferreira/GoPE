@@ -16,7 +16,7 @@ $sql = "UPDATE countries SET card_english_step = 'waiting contact' WHERE id = $i
 $conn->query($sql);
 
 //get the contacts related to the country
-$sql = "SELECT email FROM user_country_relation INNER JOIN users ON user_country_relation.id_user = users.id WHERE id_country = $countryId AND active = 1";
+$sql = "SELECT email FROM user_country_relations INNER JOIN users ON user_country_relations.id_user = users.id WHERE id_country = $idCountry AND active = 1";
 $result = $conn->query($sql);
 $emails = array();
 if ($result->num_rows > 0) {
@@ -51,3 +51,5 @@ foreach ($emails as $email) {
 
   mail($to, $subject, $message, $headers);
 }
+
+echo "success";
