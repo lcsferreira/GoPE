@@ -483,6 +483,11 @@ if (!isset($_SESSION['loggedIn'])) {
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+  const btnBack = document.querySelector('.btn-back');
+  btnBack.addEventListener('click', () => {
+    window.location.href =
+      '../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>';
+  });
   const modal = document.querySelector('.modal');
   const modalConfirm = document.querySelector('#modal-confirm');
   const modalClose = document.querySelector('#modal-close');
