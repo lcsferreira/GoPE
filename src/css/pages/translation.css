@@ -1,0 +1,41 @@
+textarea {
+  padding: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 1rem;
+  width: -webkit-fill-available;
+}
+
+select {
+  width: 30%;
+  height: 2.5rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+select::placeholder {
+  color: var(--gray-light);
+}
+
+select:focus {
+  box-shadow: 0 0 1px var(--blue);
+}
+
+select:disabled {
+  background-color: #d3d3d3;
+  color: #a9a9a9;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem 0 2rem;
+}
