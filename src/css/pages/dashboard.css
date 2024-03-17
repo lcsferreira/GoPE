@@ -91,6 +91,10 @@
   vertical-align: middle;
   border-bottom: 1px solid var(--gray-lighter);
 }
+/* if there is no more element below td, dont have border-bottom */
+.dashboard-container tr:last-child td {
+  border-bottom: none;
+}
 
 .dashboard-container form {
   display: flex;
