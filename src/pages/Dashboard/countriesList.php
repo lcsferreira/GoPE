@@ -93,11 +93,11 @@ if ($_SESSION['type'] == "admin") {
                   }
                 } elseif ($country['indicators_step'] === "waiting contact") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
                   } else {
-                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
+                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                   }
-                } elseif ($country['indicators_step'] == "waiting admin") {
+                } elseif ($country['indicators_step'] == "waiting admin" ) {
                   if ($_SESSION['type'] === 'admin') {
                     echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                   } else {
@@ -105,7 +105,7 @@ if ($_SESSION['type'] == "admin") {
                   }
                 } elseif ($country['indicators_step'] === "completed") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    echo '<button class="btn-check" onclick="window.location.href = \'../../pages/Indicators/indicatorsProgress.php?id=' . $country['id'] . '\'"><i class="fas fa-check-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
                   }
@@ -116,14 +116,30 @@ if ($_SESSION['type'] == "admin") {
             </td>
             <td>
               <?php
-                if ($country['card_english_step'] == "not started") {
-                  echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
-                } elseif ($country['card_english_step'] == "waiting contact") {
-                  echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
-                } elseif ($country['card_english_step'] == "waiting admin") {
-                  echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
-                } elseif ($country['card_english_step'] == "completed") {
-                  echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                if ($country['card_english_step'] == "not started" && $country['indicators_step'] == "completed") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-play" onclick="window.location.href = \'../../pages/Card/cardUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                  }
+                } elseif ($country['card_english_step'] == "waiting contact" && $country['indicators_step'] == "completed") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Card/cardUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
+                  } else {
+                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/reviewInstructions.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                  }
+                } elseif ($country['card_english_step'] == "waiting admin" && $country['indicators_step'] == "completed") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardUpload.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                  }
+                } elseif ($country['card_english_step'] == "completed" && $country['indicators_step'] == "completed") {
+                  if ($_SESSION['type'] === 'admin') {
+                    echo '<button class="btn-check" onclick="window.location.href = \'../../pages/Card/cardUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-check-circle"></i></button>';
+                  } else {
+                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  }
                 } else {
                   echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                 }
@@ -132,18 +148,34 @@ if ($_SESSION['type'] == "admin") {
             <td>
               <?php
                 if ($country['need_translation'] == 1) {
-                  if ($country['translation_step'] == "not started") {
-                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
-                  } elseif ($country['translation_step'] == "waiting contact") {
-                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
-                  } elseif ($country['translation_step'] == "waiting admin") {
-                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
-                  } elseif ($country['translation_step'] == "completed") {
-                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
-                  } else {
+                  if($country['translation_step'] == "not started" && $country['card_english_step'] == "completed"){
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-play" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    }
+                  } elseif ($country['card_english_step'] == "waiting contact" && $country['card_english_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
+                    } else {
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/reviewInstructions.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                    }
+                  } elseif ($country['card_english_step'] == "waiting admin" && $country['card_english_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/translation.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    }
+                  } elseif ($country['card_english_step'] == "completed" && $country['card_english_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-check" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-check-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    }
+                  } else{
                     echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
-                } else {
+                }else {
                   echo '<button disabled class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
@@ -151,18 +183,34 @@ if ($_SESSION['type'] == "admin") {
             <td>
               <?php
                 if ($country['need_translation'] == 1) {
-                  if ($country['card_translated_step'] == "not started") {
-                    echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
-                  } elseif ($country['card_translated_step'] == "waiting contact") {
-                    echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
-                  } elseif ($country['card_translated_step'] == "waiting admin") {
-                    echo '<button disabled class="btn-exclamation"><i class="fas fa-exclamation-circle"></i></button>';
-                  } elseif ($country['card_translated_step'] == "completed") {
-                    echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                  if($country['card_translated_step'] == "not started" && $country['translation_step'] == "completed"){
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-play" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
+                    }
+                  } elseif ($country['card_translated_step'] == "waiting contact" && $country['translation_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
+                    } else {
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/reviewInstructions.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                    }
+                  } elseif ($country['card_translated_step'] == "waiting admin" && $country['translation_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
+                    }
+                  } elseif ($country['card_translated_step'] == "completed" && $country['translation_step'] == "completed") {
+                    if ($_SESSION['type'] === 'admin') {
+                      echo '<button class="btn-check" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-check-circle"></i></button>';
+                    } else {
+                      echo '<button disabled class="btn-check"><i class="fas fa-check-circle"></i></button>';
+                    }
                   } else {
                     echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                   }
-                } else {
+                }else {
                   echo '<button disabled class="btn-play" disabled><i class="fas fa-minus-circle"></i></button>';
                 }
                 ?>
