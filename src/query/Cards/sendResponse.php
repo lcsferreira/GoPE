@@ -39,6 +39,8 @@ foreach ($adminEmails as $email) {
     <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>Workflow</a>
     <br><br>
     ";
+    mail($to, $subject, $message, $headers);
+    echo "success";
   }else{
     $subject = "Country Card English step - APPROVED - GoPE!";
     $message = "
@@ -52,7 +54,8 @@ foreach ($adminEmails as $email) {
     <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>Workflow</a>
     <br><br>
     ";
+    mail($to, $subject, $message, $headers);
+    header('Location: ../../pages/Card/cardSuccess.php?cardStep=en');
   }
 
-  mail($to, $subject, $message, $headers);
 }
