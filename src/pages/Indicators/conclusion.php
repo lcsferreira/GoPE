@@ -9,7 +9,6 @@ $enableSubmit = false;
 $userType = $_SESSION['type'];
 $userId = $_SESSION['id'];
 $countryId = $_GET['id'];
-// $hasEdited = $_SESSION['hasEdited'];
 
 // get country name
 $sql = "SELECT name FROM countries WHERE id = $countryId";
@@ -21,13 +20,14 @@ if ($result->num_rows > 0) {
 
 if($userType === 'contact') {
   // verify if is main contact
-  $sql = "SELECT * FROM users WHERE id = $userId";
+  $sql = "SELECT is_main FROM user_country_relations WHERE id_user = $userId AND id_country = $countryId";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    if($row['is_main'] == '1') {
+    if($row['is_main'] == '1'){
       $enableSubmit = true;
-    }else {
+    }
+    else{
       $enableSubmit = false;
     }
   }
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
 
 function verifyAllAgreementsChecked($conn,$countryId)
 {
-  $indicators = array("demographic_data", "pa_pravelance", "pe_policy", "pe_monitoring", "research_pe");
+  $indicators = array("demographic_data", "pa_prevalence", "pe_policy", "pe_monitoring");
 
   foreach ($indicators as $indicator){
     $sql = "SELECT * FROM " . $indicator . "_agreement WHERE id_country = $countryId";
@@ -62,6 +62,8 @@ function verifyAllAgreementsChecked($conn,$countryId)
       }
     }
   }
+
+  return true;
 }
 
 if($userType === "contact"){
@@ -88,6 +90,7 @@ if($userType === "contact"){
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
@@ -127,7 +130,7 @@ if($userType === "contact"){
             <?php endif; ?>
 
             <div class="dashboard-container__description__submit">
-              <button class="btn-submit" <?php
+              <button class="btn-primary" <?php
                 if(!$enableSubmit){
                   echo ' disabled';
                 }
@@ -137,16 +140,19 @@ if($userType === "contact"){
             <?php if($indicatorsStep === 'waiting contact'): ?>
             <p>The contact has <strong>not yet reviewed</strong> the indicators!</p>
             <?php else: ?>
-            <!-- <?php if(!$hasEdited): ?> -->
             <p style="color: var(--text-dark)"><strong>Send</strong> for <?php echo $countryName; ?> contact's<strong>
-                review.</strong></p>
-            <!-- <?php else: ?>
-            <p>You <strong>didn't</strong> made any <strong>adjustment</strong> for the contact to review.</p>
-            <?php endif; ?> -->
+                review</strong> or you can <strong>approve it</strong></p>
+            <label for="approve" class="radio-option-no-description" style="width: 60%;">
+              <div class="option-text">
+                <h3>Approve indicators</h3>
+              </div>
+              <input type="checkbox" name="approve" id="approve" value="approve" />
+              <span class="checkmark"></span>
+            </label>
             <?php endif; ?>
             <div class="dashboard-container__description__submit">
               <button class="btn-primary" <?php
-                  if(!$enableSubmit || $indicatorsStep === 'waiting_contact'){
+                  if(!$enableSubmit || $indicatorsStep !== 'waiting admin'){
                     echo ' disabled';
                   }
                   ?> onclick="sendToContactReview()">Submit</button>
@@ -201,20 +207,39 @@ if($userType === "contact"){
     }
 
     function sendToContactReview() {
-      $.ajax({
-        url: '../../query/Indicators/sendToContactReview.php',
-        type: 'POST',
-        data: {
-          idCountry: <?php echo $_GET['id'] ?>
-        },
-        success: function(response) {
-          if (response === 'success') {
-            window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
-          } else {
-            alert('Error');
+      //get the value of the checkbox approve
+      var approve = document.getElementById('approve').checked;
+      if (approve) {
+        $.ajax({
+          url: '../../query/Indicators/approveIndicators.php',
+          type: 'POST',
+          data: {
+            idCountry: <?php echo $_GET['id'] ?>
+          },
+          success: function(response) {
+            if (response === 'success') {
+              window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+            } else {
+              alert('Error');
+            }
           }
-        }
-      });
+        });
+      } else {
+        $.ajax({
+          url: '../../query/Indicators/sendToContactReview.php',
+          type: 'POST',
+          data: {
+            idCountry: <?php echo $_GET['id'] ?>
+          },
+          success: function(response) {
+            if (response === 'success') {
+              window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+            } else {
+              alert('Error');
+            }
+          }
+        });
+      }
     }
     </script>
 </body>

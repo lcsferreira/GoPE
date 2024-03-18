@@ -47,7 +47,7 @@ foreach ($adminEmails as $email) {
     <br>
       Dear Admin,
     <br><br>
-    ".$countryName." Contact has approved the card step for the Country Cards".$year." Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>here</a>.
+    ".$countryName." Contact has approved the card step for the Country Cards ".$year." Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>here</a>.
     <br><br>
     Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
     <br><br>
@@ -55,6 +55,10 @@ foreach ($adminEmails as $email) {
     <br><br>
     ";
     mail($to, $subject, $message, $headers);
+    //adicionar update card_english_step = completed
+    $sql = "UPDATE countries SET card_english_step = 'completed' WHERE id = $idCountry";
+    $result = $conn->query($sql);
+    
     header('Location: ../../pages/Card/cardSuccess.php?cardStep=en');
   }
 

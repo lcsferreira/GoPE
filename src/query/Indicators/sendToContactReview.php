@@ -10,6 +10,9 @@ if ($result) {
   //send email to main contact
   $sql = "SELECT email FROM user_country_relation INNER JOIN users ON user_country_relation.id_user = users.id WHERE id_country = $countryId AND active = 1";
   $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $emails = array();
+  array_push($emails, $row['email']);
 
   $sql = "SELECT name FROM countries WHERE id = $countryId";
   $result = $conn->query($sql);
@@ -17,9 +20,6 @@ if ($result) {
   $country_name = $row['name'];
   
   if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $emails = array();
-    array_push($emails, $row['email']);
 
     foreach ($emails as $email) {
       $to = $email;

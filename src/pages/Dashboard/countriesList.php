@@ -150,23 +150,23 @@ if ($_SESSION['type'] == "admin") {
                 if ($country['need_translation'] == 1) {
                   if($country['translation_step'] == "not started" && $country['card_english_step'] == "completed"){
                     if ($_SESSION['type'] === 'admin') {
-                      echo '<button class="btn-play" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
+                      echo '<button class="btn-play" onclick="window.location.href = \'../../query/Translation/createTranslation.php?id=' . $country['id'] . '\'"><i class="fas fa-play-circle"></i></button>';
                     } else {
                       echo '<button disabled class="btn-play"><i class="fas fa-play-circle"></i></button>';
                     }
-                  } elseif ($country['card_english_step'] == "waiting contact" && $country['card_english_step'] == "completed") {
+                  } elseif ($country['translation_step'] == "waiting contact" && $country['card_english_step'] == "completed") {
                     if ($_SESSION['type'] === 'admin') {
                       echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
                     } else {
-                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/reviewInstructions.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                     }
-                  } elseif ($country['card_english_step'] == "waiting admin" && $country['card_english_step'] == "completed") {
+                  } elseif ($country['translation_step'] == "waiting admin" && $country['card_english_step'] == "completed") {
                     if ($_SESSION['type'] === 'admin') {
                       echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/translation.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                     } else {
                       echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                     }
-                  } elseif ($country['card_english_step'] == "completed" && $country['card_english_step'] == "completed") {
+                  } elseif ($country['translation_step'] == "completed" && $country['card_english_step'] == "completed") {
                     if ($_SESSION['type'] === 'admin') {
                       echo '<button class="btn-check" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-check-circle"></i></button>';
                     } else {

@@ -32,7 +32,9 @@ if ($result) {
     
       $message = "
       <br>
-        Dear Admin,".$country_name." Contact,
+        Dear Admin, 
+        <br>
+      ".$country_name." Contact,
       <br><br>
         ".$country_name." Contact has sended new information about indicators step for the Country Cards $year Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?$countryId'>here</a>.
       <br><br>

@@ -104,21 +104,15 @@ function getLastUpdatedDate($country_id){
         <div class="card-container">
           <h3>
             <?php 
-              if($row['has_card'] == 0){
-                echo "No card uploaded";
-              }else{
-                echo getLastUpdatedDate($country_id);
-              }
+              echo getLastUpdatedDate($country_id);
             ?>
           </h3>
           <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;">
-            <?php if($row['has_card'] == 1): ?>
             <img src="<?php echo "../../uploads/cards_en/".getThumbnail("../../uploads/cards_en/", $country_id); ?>"
               alt="Country card">
             <a href="<?php echo "../../uploads/cards_en/$country_id.pdf "?>"
               class="btn-primary  <?php if(!$row['has_card']){echo " disabled-link ";} ?>" download>Download Card <i
                 class="fas fa-download"></i></a>
-            <?php endif; ?>
           </div>
           <?php if($_SESSION['type'] == "admin"):?>
           <div class="upload-container">
@@ -200,7 +194,7 @@ function getLastUpdatedDate($country_id){
     $(".card-container").html(loading);
 
     $.ajax({
-      url: '../../query/Cards/uploadCard.php',
+      url: '../../query/Cards/uploadTranslatedCard.php',
       type: 'post',
       data: formData,
       contentType: false,
