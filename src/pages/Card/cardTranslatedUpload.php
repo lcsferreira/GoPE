@@ -21,19 +21,19 @@ function getThumbnail($path, $country) {
 }
 
 $country_id = $_GET['id'];
-$sql = "SELECT card_english_step FROM countries WHERE id = $country_id";
+$sql = "SELECT card_translated_step FROM countries WHERE id = $country_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
-$stepStatus = $row['card_english_step'];
+$stepStatus = $row['card_translated_step'];
 
-if($row['card_english_step'] == "not started"){
-  $sql = "INSERT INTO cards_en (id_country) VALUES ($country_id)";
+if($row['card_translated_step'] == "not started"){
+  $sql = "INSERT INTO cards_tr (id_country) VALUES ($country_id)";
   mysqli_query($conn, $sql);
-  $sql = "UPDATE countries SET card_english_step = 'waiting admin' WHERE id = $country_id";
+  $sql = "UPDATE countries SET card_translated_step = 'waiting admin' WHERE id = $country_id";
   mysqli_query($conn, $sql);
 }
 
-$sql = "SELECT * FROM cards_en WHERE id_country = $country_id";
+$sql = "SELECT * FROM cards_tr WHERE id_country = $country_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -42,7 +42,7 @@ $commentValues = array();
 $commentValues['comment'] = $row['comment'];
 
 function getLastUpdatedDate($country_id){
-  $date = getThumbnail("../../uploads/cards_en/", $country_id);
+  $date = getThumbnail("../../uploads/cards_tr/", $country_id);
   // $imagick->writeImage($thumbnailFile."-". date("Y-m-d-H-i-s") . '.png');
   date_default_timezone_set('UTC');
 
@@ -65,7 +65,7 @@ function getLastUpdatedDate($country_id){
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coutry Card English Review - GoPE!</title>
+  <title>Coutry Card Translated Review - GoPE!</title>
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
@@ -97,22 +97,28 @@ function getLastUpdatedDate($country_id){
     </div>
     <div class="dashboard-container">
       <div class="dashboard-container__header">
-        <h2><strong>English version</strong></h2>
+        <h2><strong>Translated version</strong></h2>
       </div>
 
       <div style="display: flex">
         <div class="card-container">
           <h3>
             <?php 
-              echo getLastUpdatedDate($country_id);
+              if($row['has_card'] == 0){
+                echo "No card uploaded";
+              }else{
+                echo getLastUpdatedDate($country_id);
+              }
             ?>
           </h3>
           <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;">
-            <img src="<?php echo "../../uploads/cards_en/".getThumbnail("../../uploads/cards_en/", $country_id); ?>"
+            <?php if($row['has_card'] == 1): ?>
+            <img src="<?php echo "../../uploads/cards_tr/".getThumbnail("../../uploads/cards_tr/", $country_id); ?>"
               alt="Country card">
-            <a href="<?php echo "../../uploads/cards_en/$country_id.pdf "?>"
+            <a href="<?php echo "../../uploads/cards_tr/$country_id.pdf "?>"
               class="btn-primary  <?php if(!$row['has_card']){echo " disabled-link ";} ?>" download>Download Card <i
                 class="fas fa-download"></i></a>
+            <?php endif; ?>
           </div>
           <?php if($_SESSION['type'] == "admin"):?>
           <div class="upload-container">
@@ -129,15 +135,23 @@ function getLastUpdatedDate($country_id){
           <?php
             $indicatorName = "comment";
             $indicatorOrder = 1;
-            $tableName = "cards_en";
+            $tableName = "cards_tr";
             include '../../components/commentGroup.php';
           ?>
           <?php if($_SESSION['type'] == "admin"):?>
-          <a href="<?php echo "../../uploads/files/$country_id.pdf; "?>"
-            class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>"
-            style="width: 95%;">Download
+          <a href="<?php echo "../../uploads/files/".$country_id."_translated.pdf"?>"
+            class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>" style="width: 95%;"
+            download>Download
             file <i class="fas fa-download"></i></a>
           <?php else: ?>
+          <div id="file-container" style="width: 100%;">
+            <?php if($row['has_contact_file'] == 1): ?>
+            <a href="<?php echo "../../uploads/files/".$country_id."_translated.pdf"?>"
+              class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>"
+              style="display: block; width: 95%;" download>Download
+              file <i class="fas fa-download"></i></a>
+            <?php endif; ?>
+          </div>
           <input type="file" name="fileUpload" id="fileUpload">
           <button class="btn-primary" id="uploadFileBtn">Upload file</button>
           <?php endif; ?>
@@ -177,7 +191,7 @@ function getLastUpdatedDate($country_id){
   <script>
   $(document).ready(function() {
     $(".btn-back").click(function() {
-      window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+      window.location.href = "reviewInstructionsTranslated.php?id=<?php echo $_GET['id'] ?>";
     });
   });
 
@@ -194,7 +208,31 @@ function getLastUpdatedDate($country_id){
     $(".card-container").html(loading);
 
     $.ajax({
-      url: '../../query/Cards/uploadTranslatedCard.php',
+      url: '../../query/Cards/uploadCardTranslated.php',
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        location.reload();
+      }
+    });
+  });
+
+  $("#uploadFileBtn").click(function() {
+
+    let formData = new FormData();
+    let file = $("#fileUpload")[0].files[0];
+    formData.append('fileUpload', file);
+    formData.append('idCountry', <?php echo $_GET['id'] ?>);
+
+    let loading = `
+      <span class="loader"></span>
+    `;
+    $("#file-container").append(loading);
+
+    $.ajax({
+      url: '../../query/Cards/uploadFileTranslated.php',
       type: 'post',
       data: formData,
       contentType: false,
@@ -245,17 +283,17 @@ function getLastUpdatedDate($country_id){
     if (sendForReview) {
       $.ajax({
         type: "POST",
-        url: "../../query/Cards/sendForReview.php",
+        url: "../../query/Cards/sendTranslatedForReview.php",
         data: {
           idCountry: idCountry,
         },
         success: function(response) {
           console.log(response)
-          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+          window.location.href = "reviewInstructionsTranslated.php?id=<?php echo $_GET['id'] ?>";
         }
       });
     } else {
-      window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+      window.location.href = "reviewInstructionsTranslated.php?id=<?php echo $_GET['id'] ?>";
     }
   }
 
@@ -273,7 +311,7 @@ function getLastUpdatedDate($country_id){
     let sendResponse = $("input[name='send-admin']:checked").val();
     $.ajax({
       type: "POST",
-      url: "../../query/Cards/sendResponse.php",
+      url: "../../query/Cards/sendResponseTranslated.php",
       data: {
         idCountry: idCountry,
         sendResponse: sendResponse
@@ -297,13 +335,14 @@ function getLastUpdatedDate($country_id){
     } else {
       $.ajax({
         type: "POST",
-        url: "../../query/Cards/sendResponse.php",
+        url: "../../query/Cards/sendResponseTranslated.php",
         data: {
           idCountry: idCountry,
           sendResponse: sendResponse
         },
         success: function(response) {
-          console.log(response)
+          window.location.href =
+            "../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>";
         }
       });
     }

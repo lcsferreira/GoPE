@@ -162,7 +162,7 @@ if ($_SESSION['type'] == "admin") {
                     }
                   } elseif ($country['translation_step'] == "waiting admin" && $country['card_english_step'] == "completed") {
                     if ($_SESSION['type'] === 'admin') {
-                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/translation.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Translation/translation.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                     } else {
                       echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                     }
@@ -193,11 +193,11 @@ if ($_SESSION['type'] == "admin") {
                     if ($_SESSION['type'] === 'admin') {
                       echo '<button class="btn-clock" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-clock"></i></button>';
                     } else {
-                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/reviewInstructions.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/reviewInstructionsTranslated.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                     }
                   } elseif ($country['card_translated_step'] == "waiting admin" && $country['translation_step'] == "completed") {
                     if ($_SESSION['type'] === 'admin') {
-                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                      echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardTranslatedUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                     } else {
                       echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                     }

@@ -27,7 +27,10 @@ foreach ($adminEmails as $email) {
   $headers .= "X-Priority: 1\r\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
   if($response == "adjust"){
-    $subject = "Country Card English step - ADJUSTMENT REQUIRED - GoPE!";
+    $sql = "UPDATE countries SET card_translated_step = 'waiting admin' WHERE id = $idCountry";
+    $result = $conn->query($sql);
+    
+    $subject = "Country Card Translated step - ADJUSTMENT REQUIRED - GoPE!";
     $message = "
     <br>
       Dear Admin,
@@ -36,30 +39,30 @@ foreach ($adminEmails as $email) {
     <br><br>
     Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
     <br><br>
-    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>Workflow</a>
+    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructionsTranslated.php?id=".$idCountry."'>Workflow</a>
     <br><br>
     ";
     mail($to, $subject, $message, $headers);
     echo "success";
   }else{
-    $subject = "Country Card English step - APPROVED - GoPE!";
+    $subject = "Country Card Translated step - APPROVED - GoPE!";
     $message = "
     <br>
       Dear Admin,
     <br><br>
-    ".$countryName." Contact has approved the english card step for the Country Cards ".$year." Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>here</a>.
+    ".$countryName." Contact has approved the translated card step for the Country Cards ".$year." Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructionsTranslated.php?id=".$idCountry."'>here</a>.
     <br><br>
     Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
     <br><br>
-    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>Workflow</a>
+    <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructionsTranslated.php?id=".$idCountry."'>Workflow</a>
     <br><br>
     ";
     mail($to, $subject, $message, $headers);
-    //adicionar update card_english_step = completed
-    $sql = "UPDATE countries SET card_english_step = 'completed' WHERE id = $idCountry";
+    //adicionar update card_translated_step = completed
+    $sql = "UPDATE countries SET card_translated_step = 'completed' WHERE id = $idCountry";
     $result = $conn->query($sql);
     
-    header('Location: ../../pages/Card/cardSuccess.php?cardStep=en');
+    header('Location: ../../pages/Card/CardSuccess.php?cardStep=tr');
   }
 
 }

@@ -139,11 +139,19 @@ function getLastUpdatedDate($country_id){
             include '../../components/commentGroup.php';
           ?>
           <?php if($_SESSION['type'] == "admin"):?>
-          <a href="<?php echo "../../uploads/files/$country_id.pdf; "?>"
-            class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>"
-            style="width: 95%;">Download
+          <a href="<?php echo "../../uploads/files/".$country_id.".pdf"?>"
+            class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>" style="width: 95%;"
+            download>Download
             file <i class="fas fa-download"></i></a>
           <?php else: ?>
+          <div id="file-container" style="width: 100%;">
+            <?php if($row['has_contact_file'] == 1): ?>
+            <a href="<?php echo "../../uploads/files/".$country_id.".pdf"?>"
+              class="btn-primary  <?php if(!$row['has_contact_file']){echo " disabled-link ";} ?>"
+              style="display: block; width: 95%;" download>Download
+              file <i class="fas fa-download"></i></a>
+            <?php endif; ?>
+          </div>
           <input type="file" name="fileUpload" id="fileUpload">
           <button class="btn-primary" id="uploadFileBtn">Upload file</button>
           <?php endif; ?>
@@ -201,6 +209,30 @@ function getLastUpdatedDate($country_id){
 
     $.ajax({
       url: '../../query/Cards/uploadCard.php',
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        location.reload();
+      }
+    });
+  });
+
+  $("#uploadFileBtn").click(function() {
+
+    let formData = new FormData();
+    let file = $("#fileUpload")[0].files[0];
+    formData.append('fileUpload', file);
+    formData.append('idCountry', <?php echo $_GET['id'] ?>);
+
+    let loading = `
+      <span class="loader"></span>
+    `;
+    $("#file-container").append(loading);
+
+    $.ajax({
+      url: '../../query/Cards/uploadFile.php',
       type: 'post',
       data: formData,
       contentType: false,
