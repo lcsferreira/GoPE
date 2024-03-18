@@ -25,7 +25,7 @@ foreach ($indicators as $step) {
   $row = mysqli_fetch_assoc($result);
   //for each row except id, check if the value is not null or zero
   foreach($row as $key => $value){
-    if($key != "id_country" && $value == 2){
+    if($key != "id_country" && $value == 1){
       $progressIndicators[$index] ++;
     }
   }
@@ -95,31 +95,35 @@ foreach ($progressIndicators as $key => $progress) {
         </ul>
       </div>
       <div class="container__cards-progress">
-        <div class="card-progress">
+        <div class="card-progress" onclick="window.location.href='demographicData.php?id=<?php echo $_GET['id'] ?>'"
+          style="background: linear-gradient(360deg, rgba(76,95,126,1) 0%, rgba(141,184,233,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[0] ?>%
           </div>
           <h3>Demographic data</h3>
         </div>
-        <div class="card-progress">
+        <div class="card-progress" onclick="window.location.href='paPrevalence.php?id=<?php echo $_GET['id'] ?>'"
+          style="background: linear-gradient(360deg, rgba(31,99,157,1) 34%, rgba(40,156,255,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[1] ?>%
           </div>
           <h3>Physical activity prevalence</h3>
         </div>
-        <div class="card-progress">
+        <div class="card-progress" onclick="window.location.href='pePolicy.php?id=<?php echo $_GET['id'] ?>'">
           <div class="progress">
             <?php echo $progressIndicators[2] ?>%
           </div>
           <h3>Physical Education policy</h3>
         </div>
-        <div class="card-progress">
+        <div class="card-progress" onclick="window.location.href='peMonitoring.php?id=<?php echo $_GET['id'] ?>'"
+          style="background: linear-gradient(360deg, rgba(17,38,71,1) 0%, rgba(90,120,152,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[3] ?>%
           </div>
-          <h3>Physical Education policy</h3>
+          <h3>Physical Education monitoring</h3>
         </div>
-        <div class="card-progress">
+        <div class="card-progress" onclick="window.location.href='researchPe.php?id=<?php echo $_GET['id'] ?>'"
+          style="background: linear-gradient(360deg, rgba(18,25,36,1) 0%, rgba(70,102,137,1) 100%);">
           <div class="progress">
             100.0%
           </div>

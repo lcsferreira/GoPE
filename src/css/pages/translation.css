@@ -9,6 +9,12 @@ textarea {
   width: -webkit-fill-available;
 }
 
+textarea:disabled {
+  background-color: #ebebeb;
+  color: #8b8b8b;
+  cursor: not-allowed;
+}
+
 select {
   width: 30%;
   height: 2.5rem;

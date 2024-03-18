@@ -27,6 +27,9 @@ foreach ($adminEmails as $email) {
   $headers .= "X-Priority: 1\r\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
   if($response == "adjust"){
+    $sql = "UPDATE countries SET card_english_step = 'waiting admin' WHERE id = $idCountry";
+    $result = $conn->query($sql);
+    
     $subject = "Country Card English step - ADJUSTMENT REQUIRED - GoPE!";
     $message = "
     <br>
@@ -59,7 +62,7 @@ foreach ($adminEmails as $email) {
     $sql = "UPDATE countries SET card_english_step = 'completed' WHERE id = $idCountry";
     $result = $conn->query($sql);
     
-    header('Location: ../../pages/Card/cardSuccess.php?cardStep=en');
+    echo "approved";
   }
 
 }

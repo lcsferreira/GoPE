@@ -182,6 +182,11 @@
   font-weight: 200;
 }
 
+.container__cards-progress .card-progress:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
 .indicators-container {
   margin-top: 2rem;
 }
@@ -217,6 +222,12 @@
   font-size: 1rem;
 }
 
+input:disabled {
+  background-color: #f2f2f2;
+  color: #a9a9a9;
+  cursor: not-allowed;
+}
+
 .indicator-input input::placeholder {
   color: var(--gray-light);
 }
@@ -229,6 +240,12 @@
   background: var(--white);
   color: var(--text-dark);
   font-size: 1rem;
+}
+
+.indicator-input textarea:disabled {
+  background-color: #f2f2f2;
+  color: #a9a9a9;
+  cursor: not-allowed;
 }
 
 .indicator-input-container-values-group {
@@ -321,6 +338,12 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+}
+
+.btn-delete:disabled {
+  background-color: #d3d3d3;
+  color: #a9a9a9;
+  cursor: not-allowed;
 }
 
 /* table css */

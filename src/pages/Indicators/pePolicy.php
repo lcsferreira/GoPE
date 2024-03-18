@@ -212,9 +212,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_pe"
                 data-table-name="pe_policy_exist_pe_curriculum_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="1-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -284,9 +286,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                   }
                   ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_pe"
                   data-table-name="pe_policy_exist_pe_curriculum_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_pe_curriculum_pe";
@@ -378,9 +382,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_se"
                 data-table-name="pe_policy_exist_se_curriculum_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="2-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -450,9 +456,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_curriculum_se"
                   data-table-name="pe_policy_exist_se_curriculum_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_pe_curriculum_se";
@@ -544,9 +552,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_mandatory_pe"
                 data-table-name="pe_policy_exist_pe_mandatory_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="3-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -616,9 +626,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_pe"
                   data-table-name="pe_policy_exist_pe_mandatory_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_policy_mandatory_pe";
@@ -710,9 +722,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_se"
                 data-table-name="pe_policy_exist_se_mandatory_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="4-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -782,9 +796,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_pe_mandatory_se"
                   data-table-name="pe_policy_exist_se_mandatory_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_policy_mandatory_se";
@@ -876,9 +892,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_pe"
                 data-table-name="pe_policy_exist_pe_min_time_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="5-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -948,9 +966,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_pe"
                   data-table-name="pe_policy_exist_pe_min_time_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_policy_min_time_pe";
@@ -1042,9 +1062,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_se"
                 data-table-name="pe_policy_exist_se_min_time_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="6-contact-label">
                 <p class="contact-label" id="6-contact-label">Provide new information here:</p>
                 <?php
@@ -1114,9 +1136,11 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_se"
                   data-table-name="pe_policy_exist_se_min_time_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_policy_min_time_se";

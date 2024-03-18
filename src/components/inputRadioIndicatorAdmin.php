@@ -7,6 +7,7 @@
     <?php if ($adminValues[$indicatorName] == $inputValue && $adminValues[$indicatorName] !== null) {
                                                                                                                                                                                                                 echo "checked";
                                                                                                                                                                                                               } ?>
-    onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '<?php echo $inputValue; ?>')" />
+    onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '<?php echo $inputValue; ?>')"
+    <?php if($_SESSION['type'] != "admin"){echo " disabled";} ?> />
   <span class="checkmark"></span>
 </label>

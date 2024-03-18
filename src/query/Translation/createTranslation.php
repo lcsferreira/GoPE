@@ -41,7 +41,7 @@ if($rs){
       <br><br>
       Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
       <br><br>
-      <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Translation/translation.php?id=".$idCountry."'>Workflow</a>
+      <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Translation/translation.php?id=".$country_id."'>Workflow</a>
       <br><br>
       If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
       ";

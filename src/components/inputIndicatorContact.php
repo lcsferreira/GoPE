@@ -2,4 +2,5 @@
   <?php echo $inputTitle ?></label>
 <input type="<?php echo $inputType ?>" name="<?php echo $inputName ?>-contact" id="<?php echo $inputName ?>-contact"
   onblur="saveContactValue('<?php echo $inputName ?>', '<?php echo $tableName ?>')"
-  value="<?php if($contactValues[$inputName]){ echo $contactValues[$inputName];}else{echo "";} ?>">
+  value="<?php if($contactValues[$inputName]){ echo $contactValues[$inputName];}else{echo "";} ?>"
+  <?php if($_SESSION['type'] == 'admin'){echo " disabled";} ?>>

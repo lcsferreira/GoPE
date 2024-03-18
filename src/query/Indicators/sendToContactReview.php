@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 
 if ($result) {
   //send email to main contact
-  $sql = "SELECT email FROM user_country_relation INNER JOIN users ON user_country_relation.id_user = users.id WHERE id_country = $countryId AND active = 1";
+  $sql = "SELECT email FROM user_country_relations INNER JOIN users ON user_country_relations.id_user = users.id WHERE id_country = $countryId AND active = 1";
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();
   $emails = array();
@@ -42,7 +42,7 @@ if ($result) {
       <br><br>
         Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
       <br><br>
-        <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?$countryId'>Workflow</a>
+        <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?id=$countryId'>Workflow</a>
       <br><br>
         If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
       ";

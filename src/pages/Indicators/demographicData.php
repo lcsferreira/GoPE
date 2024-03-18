@@ -119,9 +119,11 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_pe"
                 data-table-name="duration_compulsory_pe_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="1-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -150,9 +152,11 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_pe"
                   data-table-name="duration_compulsory_pe_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "duration_compulsory_pe";
@@ -202,9 +206,11 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
                 ?>
               </div>
+              <?php if($_SESSION['type'] == 'admin'): ?>
               <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_se"
                 data-table-name="duration_compulsory_se_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+              <?php endif; ?>
               <div id="2-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
@@ -233,9 +239,11 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 }
                 ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="add-document" class="btn-primary" data-indicator-name="duration_compulsory_se"
                   data-table-name="duration_compulsory_se_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "duration_compulsory_se";

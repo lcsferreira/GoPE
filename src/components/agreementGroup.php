@@ -12,7 +12,8 @@
       value="1" <?php if ($agreementValues[$indicatorName] == 1 && $agreementValues[$indicatorName] !== null) {
                                                                                                   echo "checked";
                                                                                                 } ?>
-      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '1')" />
+      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '1')"
+      <?php if($_SESSION['type'] == 'admin'){echo " disabled";} ?> />
     <span class="checkmark"></span>
   </label>
 
@@ -31,7 +32,8 @@
       id="correct-provide-<?php echo $agreementOrder; ?>" value="2" <?php if ($agreementValues[$indicatorName] == 2 && $agreementValues[$indicatorName] !== null) {
                                                                                                           echo "checked";
                                                                                                         } ?>
-      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '2')" />
+      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '2')"
+      <?php if($_SESSION['type'] == 'admin'){echo " disabled";} ?> />
     <span class="checkmark"></span>
   </label>
 
@@ -50,7 +52,8 @@
       id="out-of-date-<?php echo $agreementOrder; ?>" value="3" <?php if ($agreementValues[$indicatorName] == 3 && $agreementValues[$indicatorName] != null) {
                                                                                                       echo "checked";
                                                                                                     } ?>
-      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '3')" />
+      onclick="saveAgreementValue('<?php echo $indicatorName; ?>', '<?php echo $tableName; ?>', '3')"
+      <?php if($_SESSION['type'] == 'admin'){echo " disabled";} ?> />
     <span class="checkmark"></span>
   </label>
 </div>

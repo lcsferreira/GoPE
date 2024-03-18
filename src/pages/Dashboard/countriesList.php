@@ -130,7 +130,7 @@ if ($_SESSION['type'] == "admin") {
                   }
                 } elseif ($country['card_english_step'] == "waiting admin" && $country['indicators_step'] == "completed") {
                   if ($_SESSION['type'] === 'admin') {
-                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardUpload.php.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
+                    echo '<button class="btn-exclamation" onclick="window.location.href = \'../../pages/Card/cardUpload.php?id=' . $country['id'] . '\'"><i class="fas fa-exclamation-circle"></i></button>';
                   } else {
                     echo '<button disabled class="btn-clock"><i class="fas fa-clock"></i></button>';
                   }

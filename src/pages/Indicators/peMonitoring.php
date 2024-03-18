@@ -105,10 +105,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   }
                   ?>
                 </div>
+                <?php if($_SESSION['type'] == 'admin'): ?>
                 <button id="addMonitoringSystemAdmin" class="btn-add"
                   style="width: 100%; margin-bottom: 2rem"><strong>Add</strong> monitoring
                   system
                 </button>
+                <?php endif; ?>
               </div>
 
               <p class="contact-label" id="1-contact-label">Provide new information here:</p>
@@ -136,10 +138,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   }
                   ?>
                 </div>
+                <?php if($_SESSION['type'] == 'contact'): ?>
                 <button id="addMonitoringSystemContact" class="btn-add"
                   style="width: 100%; margin-bottom: 2rem"><strong>Add</strong> monitoring
                   system
                 </button>
+                <?php endif; ?>
               </div>
               <?php
               $indicatorName = "exist_system_evaluate_pe_policy_implementation";

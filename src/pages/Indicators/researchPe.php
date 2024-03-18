@@ -121,11 +121,13 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </form>
             <?php else : ?>
             <img data-pdf-thumbnail-file="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf">
+            <?php if($_SESSION['type'] == 'admin'): ?>
             <form action="../../query/Indicators/tableUpload.php?id=<?php echo $_GET["id"]; ?>" method="post"
               enctype="multipart/form-data">
               <input type="file" name="fileToUpload" id="fileToUpload">
               <input type="submit" value="Confirm" name="submit">
             </form>
+            <?php endif; ?>
             <div class="control-panel">
               <a href="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf" download class="btn-primary">
                 <strong>Download</strong> table

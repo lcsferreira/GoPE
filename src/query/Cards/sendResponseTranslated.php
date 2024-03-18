@@ -62,7 +62,7 @@ foreach ($adminEmails as $email) {
     $sql = "UPDATE countries SET card_translated_step = 'completed' WHERE id = $idCountry";
     $result = $conn->query($sql);
     
-    header('Location: ../../pages/Card/CardSuccess.php?cardStep=tr');
+    echo "approved";
   }
 
 }

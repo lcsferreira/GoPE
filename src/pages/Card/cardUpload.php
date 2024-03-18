@@ -317,7 +317,11 @@ function getLastUpdatedDate($country_id){
         sendResponse: sendResponse
       },
       success: function(response) {
-        console.log(response)
+        if (response == "approved") {
+          window.location.href = "CardSuccess.php?cardStep=en";
+        } else {
+          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+        }
       }
     });
   });
@@ -341,7 +345,7 @@ function getLastUpdatedDate($country_id){
           sendResponse: sendResponse
         },
         success: function(response) {
-          console.log(response)
+          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
         }
       });
     }
