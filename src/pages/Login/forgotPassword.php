@@ -74,7 +74,7 @@ if (isset($_GET['Success'])) {
     if (email === '') {
       emailError.textContent = 'Email is required';
       submitButton.disabled = true;
-    } else if (!email.includes('@') || !email.includes('.com')) {
+    } else if (!email.includes('@')) {
       emailError.textContent = 'Invalid email format';
       submitButton.disabled = true;
     } else {
