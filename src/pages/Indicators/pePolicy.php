@@ -110,6 +110,7 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
       <?php include '../../components/sideNavBar.php'; ?>
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php if($_SESSION['type'] != "admin"): ?>
+        <?php if($compulsoryDuration['duration_compulsory_pe'] != null || $compulsoryDuration['duration_compulsory_se'] != null): ?>
         <div class="indicator-input-container"
           <?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "style='border-color: var(--red)!important'"; } else{{echo "style='border-color: var(--green-dark)!important'"; }}?>>
           <div class="indicator-input-container__header"
@@ -135,6 +136,7 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
             </div>
           </div>
         </div>
+        <?php endif; ?>
         <?php endif; ?>
 
 
