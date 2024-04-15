@@ -7,7 +7,9 @@ $sql = "UPDATE countries SET indicators_step = 'waiting admin' WHERE id = $count
 $result = $conn->query($sql);
 
 if ($result) {
-  $emails = ["lucas.simoes.ferreira@gmail.com"]; //change to admin email
+  // $emails = ["lucas.simoes.ferreira@gmail.com"]; //change to admin email
+  $emails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
+
 
   $sql = "SELECT name FROM countries WHERE id = $countryId";
   $result = $conn->query($sql);
@@ -25,7 +27,7 @@ if ($result) {
       $subject = "Indicators step - CONTACT REQUEST REVIEW - GoPE!";
       $headers  = 'MIME-Version: 1.0' . "\r\n";
       $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-      $headers .= 'From: Workflow GoPE <info@globalphysicaleducationobservatory.com>' . "\r\n";
+      $headers .= 'From: prferreiraj@loudoun.dreamhost.com' . "\r\n";
       $headers .= 'Reply-To: info@globalphysicaleducationobservatory.com' . "\r\n";
       $headers .= "X-Priority: 1\r\n";
       $headers .= 'X-Mailer: PHP/' . phpversion();

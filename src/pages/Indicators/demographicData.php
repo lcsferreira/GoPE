@@ -89,7 +89,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>ES</strong></h2>
+            <h2><strong>Educational System (ES)</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -176,7 +176,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>ES</strong></h2>
+            <h2><strong>Educational System (ES)</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -518,7 +518,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
-                  "title" => "Official entrance age to primary education",
+                  "title" => "Official entrance age to primary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -532,7 +532,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
-                  "title" => "Official entrance age to primary education",
+                  "title" => "Official entrance age to primary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -567,7 +567,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
-                  "title" => "Official entrance age to secondary education",
+                  "title" => "Official entrance age to secondary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -581,7 +581,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
-                  "title" => "Official entrance age to secondary education",
+                  "title" => "Official entrance age to secondary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -616,7 +616,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
-                  "title" => "Duration of primary education",
+                  "title" => "Duration of primary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -630,7 +630,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
-                  "title" => "Duration of primary education",
+                  "title" => "Duration of primary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -665,7 +665,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_se",
-                  "title" => "Duration of secondary education",
+                  "title" => "Duration of secondary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -679,7 +679,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_se",
-                  "title" => "Duration of secondary education",
+                  "title" => "Duration of secondary education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -714,7 +714,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
-                  "title" => "Duration of compulsory education",
+                  "title" => "Duration of compulsory education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -728,7 +728,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
-                  "title" => "Duration of compulsory education",
+                  "title" => "Duration of compulsory education (years)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -763,7 +763,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
-                  "title" => "School-age population at primary education",
+                  "title" => "School-age population at primary education (n)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -777,7 +777,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
-                  "title" => "School-age population at primary education",
+                  "title" => "School-age population at primary education (n)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -812,7 +812,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
-                  "title" => "School-age population at secondary education",
+                  "title" => "School-age population at secondary education (n)",
                   "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -826,7 +826,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
-                  "title" => "School-age population at secondary education",
+                  "title" => "School-age population at secondary education (n)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]

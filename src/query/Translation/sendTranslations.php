@@ -24,7 +24,9 @@ if($rs > 0){
   $row = mysqli_fetch_assoc($result);
   $country_name = $row['name'];
 
-  $admin_emails = ["lucas.simoes.ferreira@gmail.com"];
+  // $admin_emails = ["lucas.simoes.ferreira@gmail.com"];
+  $adminEmails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
+
   foreach ($admin_emails as $email) {
     //get time
     date_default_timezone_set('Europe/Lisbon');
@@ -35,7 +37,7 @@ if($rs > 0){
         
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    $headers .= 'From: Workflow GoPE <info@globalphysicaleducationobservatory.com>'. "\r\n";
+    $headers .= 'From: prferreiraj@loudoun.dreamhost.com'. "\r\n";
     $headers .= 'Reply-To: info@globalphysicaleducationobservatory.com'. "\r\n";
     $headers .= "X-Priority: 1\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();

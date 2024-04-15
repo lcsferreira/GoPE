@@ -107,7 +107,7 @@ foreach ($progressIndicators as $key => $progress) {
           <div class="progress">
             <?php echo $progressIndicators[1] ?>%
           </div>
-          <h3>Physical activity prevalence</h3>
+          <h3>Physical activity participation</h3>
         </div>
         <div class="card-progress" onclick="window.location.href='pePolicy.php?id=<?php echo $_GET['id'] ?>'">
           <div class="progress">

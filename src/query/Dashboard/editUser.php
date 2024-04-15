@@ -53,7 +53,7 @@ if ($active !== $oldActive && $active == 1) {
   $subject = "Action Required -  GoPE! Country Contact registration instructions - new GoPE! data review and Country Card approval system";
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-  $headers .= 'From: Workflow GoPE <info@globalphysicaleducationobservatory.com>' . "\r\n";
+  $headers .= 'From: prferreiraj@loudoun.dreamhost.com' . "\r\n";
   $headers .= 'Reply-To: info@globalphysicaleducationobservatory.com' . "\r\n";
   $headers .= "X-Priority: 1\r\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
@@ -71,7 +71,7 @@ if ($active !== $oldActive && $active == 1) {
   <br><br>
     <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Login/firstAccess.php?tk=$id'>First-time registration</a>
   <br><br>
-    If you have any questions, please contact us at <a href='mailto: prjccristao@gmail.com'>prjccristao@gmail.com</a> or <a href='mailto: jmartins@fmh.ulisboa.pt'>jmartins@fmh.ulisboa.pt</a>
+    If you have any questions, please contact us at <a href='mailto: prjccristao@gmail.com'>prjccristao@gmail.com</a> or <a href='mailto: gopecoordination@gmail.com'>gopecoordination@gmail.com</a>
   ";
 
   mail($to, $subject, $message, $headers);

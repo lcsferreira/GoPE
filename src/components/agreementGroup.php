@@ -4,7 +4,7 @@
       <h3>Correct</h3>
       <p>
         The information provided is <strong>correct</strong> and
-        <strong>up to date</strong> and should be included on the new 2024
+        <strong>up to date</strong> and should be included on the new 2025
         Country Card.
       </p>
     </div>
@@ -22,10 +22,10 @@
       <h3>Correct, but provide new information</h3>
       <p>
         The information provided is <strong>correct</strong> and
-        <strong>up to date</strong> and should be included on the new 2024
+        <strong>up to date</strong> and should be included on the new 2025
         Country Card. Furthermore, I
         <strong>wish to provide</strong> additional information that
-        should also be included in the new Country Card 2024.
+        should also be included in the new Country Card 2025.
       </p>
     </div>
     <input type="radio" name="radio-group-<?php echo $agreementOrder; ?>"
@@ -43,9 +43,9 @@
       <p>
         The information provided is <strong>out of date</strong> and
         should <strong>not be included</strong> in the new Country Card
-        2024. Therefore, I <strong>wish to provide</strong> the
+        2025. Therefore, I <strong>wish to provide</strong> the
         <strong>updated information</strong> that should be included in
-        the new Country Card 2024.
+        the new Country Card 2025.
       </p>
     </div>
     <input type="radio" name="radio-group-<?php echo $agreementOrder; ?>"

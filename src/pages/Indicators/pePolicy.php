@@ -83,7 +83,7 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Physical education policy - GoPE!</title>
+  <title>Physical Education policy - GoPE!</title>
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
@@ -1043,7 +1043,7 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                   (object) [
                     "name" => "name_region_subnational_min_time_se",
                     "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
-                    compulsory school years of primary education",
+                    compulsory school years of secondary education",
                     "type" => "text",
                     "tableName" => "pe_policy_admin"
                   ]
@@ -1117,7 +1117,7 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                   (object) [
                     "name" => "name_region_subnational_min_time_se",
                     "title" => "Name of the region / state / canton / district / province with a subnational policy requiring minimum Physical Education time for the
-                    compulsory school years of primary education",
+                    compulsory school years of secondary education",
                     "type" => "text",
                     "tableName" => "pe_policy_contact"
                   ]

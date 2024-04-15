@@ -31,7 +31,7 @@ $agreementValues = mysqli_fetch_assoc($result);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Physical activity prevalence - GoPE!</title>
+  <title>Physical activity participation - GoPE!</title>
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
@@ -118,7 +118,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               $inputs = [
                 (object) [
                   "name" => "girls_age_percent",
-                  "title" => "Physical activity prevalence in boys aged 11-17 years (%)",
+                  "title" => "Physical activity prevalence in girls aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_admin"
                 ]
@@ -167,7 +167,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               $inputs = [
                 (object) [
                   "name" => "children_age_percent",
-                  "title" => "Physical activity prevalence in children and adolescents (total) aged 11-17 years (%)",
+                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_admin"
                 ]
@@ -181,7 +181,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               $inputs = [
                 (object) [
                   "name" => "children_age_percent",
-                  "title" => "Physical activity prevalence in children and adolescents (total) aged 11-17 years (%)",
+                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_contact"
                 ]

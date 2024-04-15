@@ -78,6 +78,10 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <div class="indicator-input-container__header">
             <h2><strong>01</strong></h2>
           </div>
+          <div style="padding: 2rem 2rem 0 2rem;">
+            <h3 style="color: var(--red)">Due to the specificity of this indicator, its related information must be
+              provided by the GoPE! Country Contact</h3>
+          </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
               <?php
@@ -371,7 +375,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div class="agreement-group" id="monitoring-system-${inc}-${type}">
         <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Monitoring system ${inc} <span><button class="btn-delete" onclick="deleteMonitoringSystem(${inc}, '${type}')"><i
           class="fas fa-trash-alt"></i></button></span></h3>
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="reach-group-${inc}-${type}">
             Reach
           </label>
@@ -395,7 +399,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
         </div>
 
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="monitoring-purpose-${inc}-${type}">
             Monitoring purpose
             <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
@@ -411,7 +415,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </label>
             <label for="pe_general_school-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>Specifically for physical education General for school</h3>
+                <h3>Mandatory Physical Education Delivery</h3>
               </div>
               <input type="checkbox" name="radio-group-monitoring-purpose" id="pe_general_school-${inc}-${type}"
                 value="pe_general_school" onclick="saveMonitoringSystemValues(${inc}, '${type}')"/>
@@ -436,7 +440,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
         </div>
 
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="${inc}-${type}">
             Education level to which is applied
           </label>
@@ -471,14 +475,14 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
         </div>
 
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="years_applied-${inc}-${type}">
             School years to which is applied
           </label>
           <input type="text" name="years_applied" id="years_applied-${inc}-${type}">
         </div>
 
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="year_publication-${inc}-${type}">
             Year of publication
           </label>
@@ -486,11 +490,19 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             onblur="saveMonitoringSystemValues(${inc}, '${type}')">
         </div>
 
-        <div class=" indicator-input" style="margin: 0 !important">
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="years_application-${inc}-${type}">
             Years of application
           </label>
           <input type="text" name="years_application" id="years_application-${inc}-${type}"
+            onblur="saveMonitoringSystemValues(${inc}, '${type}')">
+        </div>
+
+        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
+          <label for="voluntary_comments-${inc}-${type}">
+            Voluntary comments
+          </label>
+          <input type="text" name="voluntary_comments" id="voluntary_comments-${inc}-${type}"
             onblur="saveMonitoringSystemValues(${inc}, '${type}')">
         </div>
 
@@ -672,6 +684,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       const yearsApplied = $(`#years_applied-${inc}-${type}`).val()
       const yearPublication = $(`#year_publication-${inc}-${type}`).val()
       const yearsApplication = $(`#years_application-${inc}-${type}`).val()
+      const voluntaryComments = $(`#voluntary_comments-${inc}-${type}`).val()
 
       const payload = {
         idCountry: idCountry,
@@ -686,8 +699,11 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         educationLevel: educationLevel,
         yearsApplied: yearsApplied,
         yearPublication: yearPublication,
-        yearsApplication: yearsApplication
+        yearsApplication: yearsApplication,
+        voluntaryComments: voluntaryComments
       }
+
+      console.log(payload)
 
       $.ajax({
         type: "POST",
