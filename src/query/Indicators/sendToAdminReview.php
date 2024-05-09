@@ -20,7 +20,7 @@ if ($result) {
     foreach ($emails as $email) {
       $to = $email;
       //get the actual year
-      $year = date("Y");
+      $year = date("Y") + 1;
       date_default_timezone_set('Europe/Lisbon');
       $date = date('m/d/Y h:i:s a', time());
       
@@ -38,11 +38,11 @@ if ($result) {
         <br>
       ".$country_name." Contact,
       <br><br>
-        ".$country_name." Contact has sended new information about indicators step for the Country Cards $year Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?$countryId'>here</a>.
+        ".$country_name." Contact has sended new information about indicators step for the Country Cards $year Workflow on ".$date.". You may view their responses <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?id=$countryId'>here</a>.
       <br><br>
         Please click in the <b>link below</b> to enter the $year GoPE! Country Cards Workflow.
       <br><br>
-        <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?$countryId'>Workflow</a>
+        <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?id=$countryId'>Workflow</a>
       <br><br>
       ";
     

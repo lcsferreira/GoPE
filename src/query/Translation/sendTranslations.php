@@ -31,7 +31,7 @@ if($rs > 0){
     //get time
     date_default_timezone_set('Europe/Lisbon');
     $date = date('m/d/Y h:i:s a', time());
-    $year = date("Y");
+    $year = date("Y") + 1;
     //send email to admin
     $assunto = "Translation Step - COMPLETED - GoPE!";
         

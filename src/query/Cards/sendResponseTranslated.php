@@ -21,7 +21,7 @@ date_default_timezone_set('Europe/Lisbon');
 foreach ($adminEmails as $email) {
   $to = $email;
   $date = date("Y-m-d H:i:s");
-  $year = date("Y");
+  $year = date("Y") + 1;
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
   $headers .= 'From: prferreiraj@loudoun.dreamhost.com' . "\r\n";

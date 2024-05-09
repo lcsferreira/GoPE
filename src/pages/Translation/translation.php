@@ -383,8 +383,7 @@ if ($result->num_rows > 0) {
           <button class="btn-back" type="button"
             onclick="document.location = `../countriesList/countriesListAdmin.php`">Back</button>
           <?php if($_SESSION['type'] != 'admin'): ?>
-          <button class="btn-primary" type="button" name="confirmval" onclick="openConfirmationModal()">Send to
-            GoPE!</button>
+          <button class="btn-primary" type="button" name="confirmval" onclick="openConfirmationModal()">Submit</button>
           <?php endif; ?>
         </div>
       </form>

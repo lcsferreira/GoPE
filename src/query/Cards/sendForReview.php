@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
 
 foreach ($emails as $email) {
   $to = $email;
-  $year = date("Y");
+  $year = date("Y") + 1;
   $subject = "Country Card English step - REVIEW REQUIRED - GoPE!";
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -40,7 +40,8 @@ foreach ($emails as $email) {
   <br>
     Dear ".$countryName." Contact,
   <br><br>
-  For the First set of Country Cards ".$year.", <b>we have updated the GoPE! Country Card in English.</b> Please log into the workflow in order to review it, make any adjustments, and approve it.
+  For the First set of Country Cards ".$year.", <b>we have updated the GoPE! Country Card to the english
+  version.</b> Please log into the workflow in order to review it, make any adjustments, and approve it.
   <br><br>
   Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
   <br><br>

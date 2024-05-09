@@ -24,7 +24,7 @@ if ($result) {
     foreach ($emails as $email) {
       $to = $email;
       //get the actual year
-      $year = date("Y");
+      $year = date("Y") + 1;
       
       $subject = "Indicators step - REVIEW REQUIRED - GoPE!";
       $headers  = 'MIME-Version: 1.0' . "\r\n";

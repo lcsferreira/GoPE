@@ -31,7 +31,7 @@ if (!isset($_SESSION['loggedIn'])) {
   <div class="container">
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1><strong>Review</strong> the Country <strong>Card</strong></h1>
+      <h1>Country Card <strong>English</strong> Review</h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="dashboard-container">
@@ -39,16 +39,20 @@ if (!isset($_SESSION['loggedIn'])) {
         <h2>Review <strong>Introduction</strong></h2>
       </div>
       <div class="instructions-container">
-        <h1><strong>First Set of Country Cards</strong></h1>
-        <h2><?php echo $year = date('Y'); ?></h2>
+        <h1><strong>First Set of GoPE! Country Cards</strong></h1>
+        <h2><?php echo $year = date('Y') + 1 ?></h2>
         <p>
-          Dear Country Contact, the <strong>English version</strong> of the <strong>Country Cards, GoPE!’s</strong> will
-          be <strong>displayed
-            recent</strong> in this step.
+          Dear Country Contact, the GoPE! team is designing the <strong>English version</strong> of your
+          country’s <strong>Country Card. </strong> When it is available,
         </p>
         <h3>
-          You can
+          You can:
         </h3>
+        <!-- <ul>
+          <li>Approve it or request additional changes</li>
+          <li>Upload a file to offer more information</li>
+          <li>Leave a comment sharing your opinion</li>
+        </ul> -->
         <div class="cards-container">
           <div class="card">
             <h4>01</h4>

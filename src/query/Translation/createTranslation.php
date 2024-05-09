@@ -24,7 +24,7 @@ if($rs){
 
     foreach ($emails as $email) {
       $to = $email;
-      $year = date("Y");
+      $year = date("Y") + 1;
       $subject = "Translation step - STARTED - GoPE!";
       $headers  = 'MIME-Version: 1.0' . "\r\n";
       $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -37,7 +37,7 @@ if($rs){
       <br>
         Dear ".$countryName." Contact,
       <br><br>
-      For the First set of Country Cards ".$year.", <b>we have started the translation of the GoPE! Country Card.</b> Please log into the workflow in order to fulfill the translation.
+      For the First set of Country Cards ".$year.", <b>we have started the translation of the GoPE! Country Card.</b> Please log into the workflow in order to complete the translation.
       <br><br>
       Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
       <br><br>
