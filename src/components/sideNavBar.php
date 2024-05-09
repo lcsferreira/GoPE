@@ -1,7 +1,8 @@
 <div class="side-nav">
   <ul class="side-nav__links">
     <li <?php if (basename($_SERVER['PHP_SELF']) == "demographicData.php") echo 'class="selected"' ?>><a
-        href="../../../src/pages/Indicators/demographicData.php?id=<?php echo $_GET["id"]; ?>">Demographic data</a></li>
+        href="../../../src/pages/Indicators/demographicData.php?id=<?php echo $_GET["id"]; ?>">Country and Demographic
+        data</a></li>
     <li <?php if (basename($_SERVER['PHP_SELF']) == "paPrevalence.php") echo 'class="selected"' ?>><a
         href="../../../src/pages/Indicators/paPrevalence.php?id=<?php echo $_GET["id"]; ?>">Physical activity
         particpation</a></li>

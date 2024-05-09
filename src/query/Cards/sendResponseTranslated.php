@@ -13,8 +13,8 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $countryName = $row['name'];
 
-// $adminEmails = ["lucas.simoes.ferreira@gmail.com"];
-$adminEmails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
+$adminEmails = ["lucas.simoes.ferreira@gmail.com"];
+// $adminEmails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
 
 date_default_timezone_set('Europe/Lisbon');
 

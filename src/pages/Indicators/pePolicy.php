@@ -71,10 +71,6 @@ $sql = "SELECT * FROM pe_policy_exist_se_min_time_documents_contact WHERE id_cou
 $result = mysqli_query($conn, $sql);
 $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$sql = "SELECT es_changed_pe, es_changed_se, duration_compulsory_pe, duration_compulsory_se FROM demographic_data_contact WHERE id_country = " . $_GET['id'];
-$result = mysqli_query($conn, $sql);
-$compulsoryDuration = mysqli_fetch_assoc($result);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,37 +105,6 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
-        <?php if($_SESSION['type'] != "admin"): ?>
-        <?php if($compulsoryDuration['duration_compulsory_pe'] != null || $compulsoryDuration['duration_compulsory_se'] != null): ?>
-        <div class="indicator-input-container"
-          <?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "style='border-color: var(--red)!important'"; } else{{echo "style='border-color: var(--green-dark)!important'"; }}?>>
-          <div class="indicator-input-container__header"
-            style="<?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "background-color: var(--red)!important;"; } else{{echo "background-color: var(--green-dark)!important;"; }}?> color:var(--white)!important">
-            <h2><strong>Compulsory school years</strong></h2>
-          </div>
-          <div class="compulsory-warning-container">
-            <div class="compulsory-warning-values">
-              <div>
-                <h3>Primary education</h3>
-                <p>Duration: <?php echo $compulsoryDuration['duration_compulsory_pe'] ?> years</p>
-              </div>
-              <div>
-                <h3>Secondary education</h3>
-                <p>Duration: <?php echo $compulsoryDuration['duration_compulsory_se'] ?> years</p>
-              </div>
-            </div>
-            <div
-              style="<?php if($compulsoryDuration['es_changed_pe'] == 1 || $compulsoryDuration['es_changed_se'] == 1){echo "color: var(--red)!important"; } else{{echo "color: var(--green-dark)!important"; }}?>; width: 50%; font-weight: 700">
-              When validating the indicator ‘Existence of a national official Physical Education curriculum for the
-              compulsory years of primary education’, attend to the fact that the reported sources may be incorrect for
-              the compulsory school years that you have identified.
-            </div>
-          </div>
-        </div>
-        <?php endif; ?>
-        <?php endif; ?>
-
-
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
             <h2><strong>01</strong></h2>
@@ -1070,7 +1035,8 @@ $compulsoryDuration = mysqli_fetch_assoc($result);
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
               <?php endif; ?>
               <div id="6-contact-label">
-                <p class="contact-label" id="6-contact-label">Provide new information here:</p>
+                <p class="contact-label" id="6-contact-label">Provide new information here:
+                </p>
                 <?php
                 $indicatorRole = "contact";
                 $indicatorOrder = 6;

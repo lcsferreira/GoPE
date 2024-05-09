@@ -118,13 +118,16 @@ if($userType === "contact"){
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <div class="dashboard-container">
           <div class="dashboard-container__header">
-            <h2><strong>Indicators</strong></h2>
+            <h2><strong>Conclusion</strong></h2>
           </div>
           <div class="dashboard-container__description">
             <?php if($userType === 'contact'): ?>
-            <p>If you are <strong>ready</strong> to provide <strong>your review</strong> of the indicators, click the
+            <p>If you are <strong>ready</strong> to provide <strong>your review</strong> of the indicators, please click
+              the
               <strong>submit</strong> button.
             </p>
+            <p>The <strong>GoPE! team</strong> will <strong>review the data</strong> and <strong>contact you</strong> as
+              soon as possible with <strong>further instructions</strong>.</p>
             <?php if(!$hasAllAgreementsChecked): ?>
             <p><strong>Attention:</strong> You <strong>must</strong> agree with all the indicators to submit.</p>
             <?php endif; ?>

@@ -21,9 +21,13 @@
 
 .indicator-comments label,
 .contact-label {
-  color: var(--gray-light);
+  color: var(--blue);
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: 700;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--gray-light);
 }
 
 .indicator-comments textarea {

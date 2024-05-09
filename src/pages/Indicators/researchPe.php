@@ -49,6 +49,8 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
+  <link rel="stylesheet" href="../../css/components/inputYesNo.css">
+
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
@@ -69,45 +71,21 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>Physical Education and school-based physical activity research</strong></h2>
+            <h2><strong>Physical Education and school-based physical activity interventions research</strong></h2>
           </div>
 
 
           <div class="instructions">
-            <p>
-              Please consult the table below, which includes the Physical Education and school-based physical activity
-              intervention studies conducted in your country.
+            <p style="text-align: justify;">
+              Please consult the table below, which includes the Physical Education and
+              school-based physical activity intervention studies conducted in your country,
+              identified through an umbrella systematic review.
               <br>
-              These studies were identified via an umbrella review of systematic reviews. You can add another study that
-              is not presented on the list. In doing so, identify the school domains of that article and provide its
-              full reference.
-              <br>
-              Do consider the following inclusion criteria:
-            <ul>
-              <li>Primarily school-based interventions aimed at increasing physical activity in children and
-                adolescents.</li>
-              <li>Studies with children (5-10 years of age) and/or adolescents (11-17 years of age) attending school.
-                For different age limits, the mean age provided needs to fall within these gaps.</li>
-              <li>Context of interventions based on the school setting (primary focus).</li>
-            </ul>
-            When multiple studies were published based on the same sample/population/intervention, due to the purposes
-            of our study and GoPE! project, we aim to include and count all studies.
-            <br>
-            Do also consider the following exclusion criteria:
-            <ul>
-              <li>Studies of interventions that did not primarily aim to increase physical activity in school-attending
-                children and adolescents.</li>
-              <li>Studies with children aged less than 5 years, with adults and seniors, with unschooled children and
-                adolescents 5-17yrs.</li>
-              <li>Interventions studies not mainly focused on physical activity promotion.</li>
-              <li>Studies with all intervention components conducted entirely outside of the school, or not implemented
-                primarily in the school context.</li>
-            </ul>
-            The final list of approved studies will calculate four indicators: number of articles, contribution to
-            research, research quintiles and the proportion of articles per school domain (PE, active transport active
-            classes/breaks, active recess, extra-curriculum physical activity).
+              You can add different
+              intervention studies that may exist and were not identified through the research
+              process. To add an intervention study, please consult the inclusion criteria on the
+              information box <i class="fas fa-info-circle"></i>.
             </p>
-            <p>NOTE: A table can be shown with the inclusion and exclusion criteria.</p>
           </div>
 
           <!-- show a pdf with the table of intervation studies -->
@@ -133,7 +111,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <strong>Download</strong> table
               </a>
               <button class="btn-add" id="addStudy">
-                <strong>Add</strong> intervation study
+                <strong>Add</strong> Intervention study
               </button>
             </div>
             <?php endif; ?>
@@ -237,12 +215,9 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const inc = studies.childElementCount + 1;
     const study = `
     <div class="agreement-group" id="${inc}" style="margin: 0 !important">
-      <div class="indicator-input" style="margin: 0 !important">
-        <label for="full_reference-${inc}">
-          Full reference
-        </label>
-        <input type="text" name="full_reference-${inc}" id="full_reference-${inc}" onblur="saveIntervationStudiesValues(${inc})"">
-      </div>
+      <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervation study
+        ${inc}
+      </h3>
       <div class="indicator-input" style="margin: 0 !important">
         <label for="${inc}">
         PE and school-based PA domains
@@ -258,7 +233,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </label>
           <label for="atp-${inc}" class="radio-option-no-description" style="width: auto !important;">
             <div class="option-text">
-              <h3>Ative transport</h3>
+              <h3>Active transport</h3>
             </div>
             <input type="checkbox" name="radio-group-intervation-studies" id="atp-${inc}" value="atp" onclick="saveIntervationStudiesValues(${inc})"/>
             <span class="checkmark"></span>
@@ -284,6 +259,113 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <input type="checkbox" name="radio-group-intervation-studies" id="e_pa-${inc}" value="e_pa" onclick="saveIntervationStudiesValues(${inc})"/>
             <span class="checkmark"></span>
           </label>
+          <label for="other-${inc}" class="radio-option-no-description" style="width: auto !important;">
+          <div class="option-text">
+            <h3>Other</h3>
+          </div>
+          <input type="checkbox" name="radio-group-intervation-studies" id="other-${inc}" value="other"
+            onclick="saveIntervationStudiesValues(${inc})" />
+          <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class=" indicator-input" hidden style="margin: 0 !important" id="other-domain-container-${inc}">
+        <label for="other-domain-${inc}">
+          Other domain
+        </label>
+        <textarea name="other-domain-${inc}" id="other-domain-${inc}" cols="30" rows="2"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="title-${inc}">
+          Title
+        </label>
+        <textarea name="title-${inc}" id="title-${inc}" cols="30" rows="2"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="year-${inc}">
+          Year
+        </label>
+        <input type="text" name="year-${inc}" id="year-${inc}"
+          onblur="saveIntervationStudiesValues(${inc})">
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="eletronic-source-${inc}">
+          Eletronic source
+        </label>
+        <textarea name="eletronic-source-${inc}" id="eletronic-source-${inc}" cols="30" rows="2"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="apa7th_reference-${inc}">
+          APA 7th reference
+        </label>
+        <textarea name="apa7th_reference-${inc}" id="apa7th_reference-${inc}" cols="30" rows="2"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="inclusion-criteria-${inc}">
+          Inclusion criteria
+        </label>
+        <textarea name="inclusion-criteria-${inc}" id="inclusion-criteria-${inc}" cols="30"
+          rows="4"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="exclusion-criteria-${inc}">
+          Exclusion criteria
+        </label>
+        <textarea name="exclusion-criteria-${inc}" id="exclusion-criteria-${inc}" cols="30"
+          rows="4"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="main-outcomes-${inc}">
+          Main outcomes
+        </label>
+        <textarea name="main-outcomes-${inc}" id="main-outcomes-${inc}" cols="30" rows="4"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="min-age-samples-${inc}">
+          Minimum age of the sample
+        </label>
+        <input type="text" name="min-age-samples-${inc}" id="min-age-samples-${inc}"
+          onblur="saveIntervationStudiesValues(${inc})">
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="avg-age-samples-${inc}">
+          Average age of the sample
+        </label>
+        <input type="text" name="avg-age-samples-${inc}" id="avg-age-samples-${inc}"
+          onblur="saveIntervationStudiesValues(${inc})">
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="max-age-samples-${inc}">
+          Maximum age of the sample
+        </label>
+        <input type="text" name="max-age-samples-${inc}" id="max-age-samples-${inc}"
+          onblur="saveIntervationStudiesValues(${inc})">
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="period-data-collection-${inc}">
+          Period of data collection
+        </label>
+        <input type="text" name="period-data-collection-${inc}" id="period-data-collection-${inc}"
+          onblur="saveIntervationStudiesValues(${inc})">
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="not_was_lockdown-${inc}">
+        Do you confirm that your country was not in a lockdown status due to the covid 19 pandemic when the data collection took place?
+        </label>
+        <div class="switch-field" id="not_was_lockdown-${inc}">
+          <input type="radio" id="not_was_lockdown-${inc}-yes" name="not_was_lockdown-${inc}"
+            value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="not_was_lockdown-${inc}-yes">Yes</label>
+          <input type="radio" id="not_was_lockdown-${inc}-no" name="not_was_lockdown-${inc}"
+            value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="not_was_lockdown-${inc}-no">No</label>
         </div>
       </div>
       <button class="btn-delete" onclick="deleteStudy(${inc})"><strong>Delete</strong> Study</button>
@@ -337,21 +419,64 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   function saveIntervationStudiesValues(inc) {
     const grupoStudy = document.getElementById(inc);
-    const fullReference = grupoStudy.querySelector(`#full_reference-${inc}`);
+    const title = grupoStudy.querySelector(`#title-${inc}`);
+    const year = grupoStudy.querySelector(`#year-${inc}`);
+    const eletronicSource = grupoStudy.querySelector(`#eletronic-source-${inc}`);
+    const apa7thReference = grupoStudy.querySelector(`#apa7th_reference-${inc}`);
+    const inclusionCriteria = grupoStudy.querySelector(`#inclusion-criteria-${inc}`);
+    const exclusionCriteria = grupoStudy.querySelector(`#exclusion-criteria-${inc}`);
+    const mainOutcomes = grupoStudy.querySelector(`#main-outcomes-${inc}`);
+    const minAgeSamples = grupoStudy.querySelector(`#min-age-samples-${inc}`);
+    const avgAgeSamples = grupoStudy.querySelector(`#avg-age-samples-${inc}`);
+    const maxAgeSamples = grupoStudy.querySelector(`#max-age-samples-${inc}`);
+    const periodDataCollection = grupoStudy.querySelector(`#period-data-collection-${inc}`);
+    const lockdownYes = grupoStudy.querySelector(`#not_was_lockdown-${inc}-yes`);
+    const lockdownNo = grupoStudy.querySelector(`#not_was_lockdown-${inc}-no`);
+    let lockdown = "0";
+    if (lockdownYes.checked) {
+      lockdown = true;
+    } else if (lockdownNo.checked) {
+      lockdown = false;
+    }
+
+
     const pe = grupoStudy.querySelector(`#pe-${inc}`);
     const atp = grupoStudy.querySelector(`#atp-${inc}`);
     const ac = grupoStudy.querySelector(`#ac-${inc}`);
     const ar = grupoStudy.querySelector(`#ar-${inc}`);
     const e_pa = grupoStudy.querySelector(`#e_pa-${inc}`);
+    const other = grupoStudy.querySelector(`#other-${inc}`);
+    if (other.checked) {
+      $(`#other-domain-container-${inc}`).show();
+    } else {
+      $(`#other-domain-container-${inc}`).hide();
+    }
+
+    const otherDomain = grupoStudy.querySelector(`#other-domain-${inc}`).value;
 
     const values = {
-      fullReference: fullReference.value,
       pe: pe.checked,
       atp: atp.checked,
       ac: ac.checked,
       ar: ar.checked,
-      e_pa: e_pa.checked
+      e_pa: e_pa.checked,
+      other: other.checked,
+      otherText: otherDomain,
+      title: title.value,
+      year: year.value,
+      eletronicSource: eletronicSource.value,
+      apa7thReference: apa7thReference.value,
+      inclusionCriteria: inclusionCriteria.value,
+      exclusionCriteria: exclusionCriteria.value,
+      mainOutcomes: mainOutcomes.value,
+      minAgeSamples: minAgeSamples.value,
+      avgAgeSamples: avgAgeSamples.value,
+      maxAgeSamples: maxAgeSamples.value,
+      periodDataCollection: periodDataCollection.value,
+      lockdown: lockdown
     };
+
+    console.log(values);
 
     $.ajax({
       url: "../../query/Indicators/saveIntervationStudiesValues.php?id=<?php echo $_GET["id"]; ?>",

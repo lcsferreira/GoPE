@@ -79,8 +79,10 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <h2><strong>01</strong></h2>
           </div>
           <div style="padding: 2rem 2rem 0 2rem;">
-            <h3 style="color: var(--red)">Due to the specificity of this indicator, its related information must be
-              provided by the GoPE! Country Contact</h3>
+            <h3 style="color: var(--red)">The information regarding the existence of this indicator must be provided by
+              the Country Contact. However, the GoPE! research working group could have collected data. In that case,
+              please validate the information or provide new data. To provide a monitoring system, please consult the
+              information box <i class="fas fa-info-circle"></i></h3>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -447,7 +449,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <div class="agreement-group" id="education_level-${inc}-${type}" style="margin: 0 !important">
             <label for="education_level-primary-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>Primary</h3>
+                <h3>Primary education</h3>
               </div>
               <input type="radio" name="radio-group-education-level-monitoring-system-${inc}-${type}"
                 id="education_level-primary-${inc}-${type}" value="1"
@@ -456,7 +458,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </label>
             <label for="education_level-secondary-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>Secondary</h3>
+                <h3>Secondary education</h3>
               </div>
               <input type="radio" name="radio-group-education-level-monitoring-system-${inc}-${type}"
                 id="education_level-secondary-${inc}-${type}" value="2"
@@ -465,7 +467,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </label>
             <label for="education_level-both-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>Primary and Secondary</h3>
+                <h3>Primary and Secondary education</h3>
               </div>
               <input type="radio" name="radio-group-education-level-monitoring-system-${inc}-${type}"
                 id="education_level-both-${inc}-${type}" value="3"
@@ -511,7 +513,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <button id="addDocument-${inc}-${type}" class="btn-primary" style="width: 100% !important"
         onclick="addDocumentToMonitoringSystem(${inc}, '${type}')"><strong>Add</strong> Document to
         Monitoring
-        System</button>
+        system</button>
       </div>
       `
       $(".monitoring-systems-" + type).append(monitoringSystem)

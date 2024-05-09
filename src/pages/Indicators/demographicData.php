@@ -61,7 +61,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Demographic data - GoPE!</title>
+  <title>Country and Demographic data - GoPE!</title>
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
@@ -89,7 +89,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>Educational System (ES)</strong></h2>
+            <h2><strong>01</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -99,7 +99,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_compulsory_pe",
-                  "title" => "Duration of the compulsory school years of primary education",
+                  "title" => "Duration of the compulsory school years of primary education (years)",
                   "type" => "text",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -132,7 +132,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 $inputs = [
                   (object) [
                     "name" => "duration_compulsory_pe",
-                    "title" => "Duration of the compulsory school years of primary education",
+                    "title" => "Duration of the compulsory school years of primary education (years)",
                     "type" => "text",
                     "tableName" => "demographic_data_contact"
                   ]
@@ -176,7 +176,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>Educational System (ES)</strong></h2>
+            <h2><strong>02</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -186,7 +186,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $inputs = [
                 (object) [
                   "name" => "duration_compulsory_se",
-                  "title" => "Duration of the compulsory school years of secondary education",
+                  "title" => "Duration of the compulsory school years of secondary education (years)",
                   "type" => "text",
                   "tableName" => "demographic_data_admin"
                 ]
@@ -219,7 +219,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 $inputs = [
                   (object) [
                     "name" => "duration_compulsory_se",
-                    "title" => "Duration of the compulsory school years of primary education",
+                    "title" => "Duration of the compulsory school years of primary education (years)",
                     "type" => "text",
                     "tableName" => "demographic_data_contact"
                   ]
@@ -263,7 +263,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>01</strong></h2>
+            <h2><strong>03</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -272,9 +272,9 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $indicatorOrder = 3;
               $inputs = [
                 (object) [
-                  "name" => "world_region",
-                  "title" => "World region",
-                  "type" => "text",
+                  "name" => "total_population",
+                  "title" => "Total population (n)",
+                  "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
               ];
@@ -286,106 +286,8 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $indicatorOrder = 3;
               $inputs = [
                 (object) [
-                  "name" => "world_region",
-                  "title" => "World region",
-                  "type" => "text",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "world_region";
-              $indicatorOrder = 3;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 3;
-            $indicatorName = "world_region";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>02</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 4;
-              $inputs = [
-                (object) [
-                  "name" => "income_classification",
-                  "title" => "Income classification ",
-                  "type" => "text",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 4;
-              $inputs = [
-                (object) [
-                  "name" => "income_classification",
-                  "title" => "Income classification",
-                  "type" => "text",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "income_classification";
-              $indicatorOrder = 4;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 4;
-            $indicatorName = "income_classification";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>03</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 5;
-              $inputs = [
-                (object) [
                   "name" => "total_population",
-                  "title" => "Total population",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 5;
-              $inputs = [
-                (object) [
-                  "name" => "total_population",
-                  "title" => "Total population",
+                  "title" => "Total population (n)",
                   "type" => "number",
                   "tableName" => "demographic_data_contact"
                 ]
@@ -394,13 +296,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "total_population";
-              $indicatorOrder = 5;
+              $indicatorOrder = 3;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 5;
+            $agreementOrder = 3;
             $indicatorName = "total_population";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -416,7 +318,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 6;
+              $indicatorOrder = 4;
               $inputs = [
                 (object) [
                   "name" => "literacy_youth_total",
@@ -427,10 +329,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 6;
+              $indicatorOrder = 4;
               $inputs = [
                 (object) [
                   "name" => "literacy_youth_total",
@@ -443,13 +345,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "literacy_youth_total";
-              $indicatorOrder = 6;
+              $indicatorOrder = 4;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 6;
+            $agreementOrder = 4;
             $indicatorName = "literacy_youth_total";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -465,7 +367,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 7;
+              $indicatorOrder = 5;
               $inputs = [
                 (object) [
                   "name" => "gov_expenditure_education",
@@ -476,10 +378,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 7;
+              $indicatorOrder = 5;
               $inputs = [
                 (object) [
                   "name" => "gov_expenditure_education",
@@ -492,13 +394,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "gov_expenditure_education";
-              $indicatorOrder = 7;
+              $indicatorOrder = 5;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 7;
+            $agreementOrder = 5;
             $indicatorName = "gov_expenditure_education";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -514,7 +416,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 8;
+              $indicatorOrder = 6;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
@@ -525,10 +427,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 8;
+              $indicatorOrder = 6;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_pe",
@@ -541,13 +443,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "entrance_age_pe";
-              $indicatorOrder = 8;
+              $indicatorOrder = 6;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 8;
+            $agreementOrder = 6;
             $indicatorName = "entrance_age_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -563,7 +465,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 9;
+              $indicatorOrder = 7;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
@@ -574,10 +476,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="9-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 9;
+              $indicatorOrder = 7;
               $inputs = [
                 (object) [
                   "name" => "entrance_age_se",
@@ -590,13 +492,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "entrance_age_se";
-              $indicatorOrder = 9;
+              $indicatorOrder = 7;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 9;
+            $agreementOrder = 7;
             $indicatorName = "entrance_age_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -612,7 +514,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 10;
+              $indicatorOrder = 8;
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
@@ -623,10 +525,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="10-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 10;
+              $indicatorOrder = 8;
               $inputs = [
                 (object) [
                   "name" => "duration_pe",
@@ -639,13 +541,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "duration_pe";
-              $indicatorOrder = 10;
+              $indicatorOrder = 8;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 10;
+            $agreementOrder = 8;
             $indicatorName = "duration_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -661,7 +563,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 11;
+              $indicatorOrder = 9;
               $inputs = [
                 (object) [
                   "name" => "duration_se",
@@ -672,10 +574,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="11-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="9-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 11;
+              $indicatorOrder = 9;
               $inputs = [
                 (object) [
                   "name" => "duration_se",
@@ -688,13 +590,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "duration_se";
-              $indicatorOrder = 11;
+              $indicatorOrder = 9;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 11;
+            $agreementOrder = 9;
             $indicatorName = "duration_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -710,7 +612,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 12;
+              $indicatorOrder = 10;
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
@@ -721,10 +623,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="12-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="10-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 12;
+              $indicatorOrder = 10;
               $inputs = [
                 (object) [
                   "name" => "duration_ce",
@@ -737,13 +639,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "duration_ce";
-              $indicatorOrder = 12;
+              $indicatorOrder = 10;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 12;
+            $agreementOrder = 10;
             $indicatorName = "duration_ce";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -759,7 +661,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 13;
+              $indicatorOrder = 11;
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
@@ -770,10 +672,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="13-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="11-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 13;
+              $indicatorOrder = 11;
               $inputs = [
                 (object) [
                   "name" => "school_age_pe",
@@ -786,13 +688,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "school_age_pe";
-              $indicatorOrder = 13;
+              $indicatorOrder = 11;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 13;
+            $agreementOrder = 11;
             $indicatorName = "school_age_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -808,7 +710,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 14;
+              $indicatorOrder = 12;
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
@@ -819,10 +721,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ];
               include '../../components/indicatorInputGroup.php';
               ?>
-              <p class="contact-label" id="14-contact-label">Provide new information here:</p>
+              <p class="contact-label" id="12-contact-label">Provide new information here:</p>
               <?php
               $indicatorRole = "contact";
-              $indicatorOrder = 14;
+              $indicatorOrder = 12;
               $inputs = [
                 (object) [
                   "name" => "school_age_se",
@@ -835,13 +737,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               ?>
               <?php
               $indicatorName = "school_age_se";
-              $indicatorOrder = 14;
+              $indicatorOrder = 12;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 14;
+            $agreementOrder = 12;
             $indicatorName = "school_age_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -1103,20 +1005,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
     }
 
-    function saveCompulsoryDuration(payload) {
-      let idCountry = <?php echo $_GET['id'] ?>;
-      $.ajax({
-        type: "POST",
-        url: "../../query/Indicators/updateCompulsoryDuration.php",
-        data: {
-          payload: payload
-        },
-        success: function(response) {
-          console.log(response)
-        }
-      });
-    }
-
     function saveContactValue(inputName, tableName) {
       let value = $(`#${inputName}-contact`).val()
       let idCountry = <?php echo $_GET['id'] ?>;
@@ -1128,21 +1016,18 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         idCountry: idCountry
       }
 
-      if (inputName == "duration_compulsory_pe" || inputName == "duration_compulsory_se") {
-        saveCompulsoryDuration(payload)
-      } else {
-        console.log(payload)
-        $.ajax({
-          type: "POST",
-          url: "../../query/Indicators/updateIndicatorValue.php",
-          data: {
-            payload: payload
-          },
-          success: function(response) {
-            console.log(response)
-          }
-        });
-      }
+
+      console.log(payload)
+      $.ajax({
+        type: "POST",
+        url: "../../query/Indicators/updateIndicatorValue.php",
+        data: {
+          payload: payload
+        },
+        success: function(response) {
+          console.log(response)
+        }
+      });
     }
 
     function saveComment(inputName, tableName) {

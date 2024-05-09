@@ -77,22 +77,24 @@ foreach ($progressIndicators as $key => $progress) {
         <h2><strong>Indicators</strong></h2>
       </div>
       <div class="dashboard-container__description">
-        <p>Welcome to our dashboard! Here, you can monitor the indicators' review progress. Keep in mind that achieving
-          100% completion requires a collaborative process</p>
-        <ul>
-          <li>
-            Enter new information and comments as needed
-          </li>
-          <li>
-            The GoPE! team will review the information you provide
-          </li>
-          <li>
-            We will send the data back to you for final confirmation
-          </li>
-          <li>
-            Only when you approve all information as correct, will the indicator reach 100% completion
-          </li>
-        </ul>
+        <p>Dear Country Contact, in the First set of Country Cards, GoPE!’s core indicators will be
+          updated to the most recent and available information. Here, you can monitor the
+          indicators' review progress. Keep in mind that achieving 100% completion requires a
+          collaborative process between the Country Contact and the GoPE! team.</p>
+        <p>You will have to review the Country Card’s indicators, review the English version of the
+          Country Contact, translate your country’s Country Card (if applicable) and review the
+          translated version of the Country Card (if applicable).</p>
+        <p style="color: var(--blue); font-weight:bold">
+          The GoPE! team will review the information you provide.
+          We will send the data back to you for final confirmation.
+        </p>
+        <p style="color: var(--blue);">
+          The system automatically stores data. You can log out and log back in as needed, and
+          your progress won’t be lost. No limit exists to how often you check the data before its
+          approval. However, once the data is approved by you (or by the main GoPE! Country
+          Contact when multiple Country Contacts exist), you won't be able to make any more
+          changes.
+        </p>
       </div>
       <div class="container__cards-progress">
         <div class="card-progress" onclick="window.location.href='demographicData.php?id=<?php echo $_GET['id'] ?>'"
@@ -100,7 +102,7 @@ foreach ($progressIndicators as $key => $progress) {
           <div class="progress">
             <?php echo $progressIndicators[0] ?>%
           </div>
-          <h3>Demographic data</h3>
+          <h3>Country and Demographic data</h3>
         </div>
         <div class="card-progress" onclick="window.location.href='paPrevalence.php?id=<?php echo $_GET['id'] ?>'"
           style="background: linear-gradient(360deg, rgba(31,99,157,1) 34%, rgba(40,156,255,1) 100%);">
@@ -127,7 +129,7 @@ foreach ($progressIndicators as $key => $progress) {
           <div class="progress">
             100.0%
           </div>
-          <h3>Research in PE and school-based PA</h3>
+          <h3>PE and school-based PA interventions research</h3>
         </div>
       </div>
     </div>

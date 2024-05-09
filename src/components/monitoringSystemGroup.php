@@ -103,7 +103,7 @@
       style="margin: 0 !important">
       <label for="education_level-primary-<?php echo $inc ?>-<?php echo $type; ?>" class="radio-option-no-description">
         <div class="option-text">
-          <h3>Primary</h3>
+          <h3>Primary education</h3>
         </div>
         <input type="radio" name="radio-group-education-level-monitoring-system-<?php echo $inc ?>-<?php echo $type; ?>"
           id="education_level-primary-<?php echo $inc ?>-<?php echo $type; ?>" value="1"
@@ -115,7 +115,7 @@
       <label for="education_level-secondary-<?php echo $inc ?>-<?php echo $type; ?>"
         class="radio-option-no-description">
         <div class="option-text">
-          <h3>Secondary</h3>
+          <h3>Secondary education</h3>
         </div>
         <input type="radio" name="radio-group-education-level-monitoring-system-<?php echo $inc ?>-<?php echo $type; ?>"
           id="education_level-secondary-<?php echo $inc ?>-<?php echo $type; ?>" value="2"
@@ -126,7 +126,7 @@
       </label>
       <label for="education_level-both-<?php echo $inc ?>-<?php echo $type; ?>" class="radio-option-no-description">
         <div class="option-text">
-          <h3>Primary and Secondary</h3>
+          <h3>Primary and Secondary education</h3>
         </div>
         <input type="radio" name="radio-group-education-level-monitoring-system-<?php echo $inc ?>-<?php echo $type; ?>"
           id="education_level-both-<?php echo $inc ?>-<?php echo $type; ?>" value="3"
@@ -214,6 +214,6 @@
   <button id="addDocument-<?php echo $inc ?>-<?php echo $type; ?>" class="btn-primary" style="width: 100% !important"
     onclick="addDocumentToMonitoringSystem(<?php echo $inc ?>, '<?php echo $type; ?>')"><strong>Add</strong> Document to
     Monitoring
-    System</button>
+    system</button>
   <?php endif; ?>
 </div>

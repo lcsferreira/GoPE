@@ -16,12 +16,12 @@
 .switch-field label {
   background-color: transparent;
   font-weight: 700;
-  color: var(--gray-light);
+  color: var(--blue) !important;
   font-size: 0.875rem;
   line-height: 1;
   text-align: center;
   padding: 0.5rem 1rem;
-  border: 0.15rem solid var(--gray-light);
+  border: 0.15rem solid var(--blue);
   transition: all 0.1s ease-in-out;
 }
 
@@ -30,9 +30,9 @@
 }
 
 .switch-field input:checked + label {
-  background-color: var(--gray-light);
+  background-color: var(--blue);
   box-shadow: none;
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .switch-field label:first-of-type {
@@ -42,4 +42,18 @@
 .switch-field label:last-of-type {
   border-radius: 0 0.25rem 0.25rem 0;
   margin-left: -0.15rem;
+}
+
+.switch-field input:checked:disabled + label {
+  background-color: var(--blue-dark);
+  color: var(--gray-lighter) !important;
+  border-color: var(--gray-light);
+  cursor: not-allowed;
+}
+
+.switch-field input:disabled + label {
+  background-color: var(--gray-lighter);
+  color: var(--gray-light) !important;
+  border-color: var(--gray-light);
+  cursor: not-allowed;
 }
