@@ -40,7 +40,7 @@ if (!isset($_SESSION['loggedIn'])) {
       </div>
       <div class="instructions-container">
         <h1><strong>First Set of Country Cards</strong></h1>
-        <h2><?php echo $year = date('Y'); ?></h2>
+        <h2><?php echo $year = date('Y') +1 ; ?></h2>
         <p>
           Dear Country Contact, in the <strong>First</strong> set of <strong>Country Cards, GoPE!’s</strong> core
           indicators will be updated to the <strong>most

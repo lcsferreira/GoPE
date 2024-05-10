@@ -56,7 +56,7 @@ foreach ($progressIndicators as $key => $progress) {
   <link rel="stylesheet" href="../../css/reset.css">
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
-  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/modalConsent.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
@@ -67,6 +67,7 @@ foreach ($progressIndicators as $key => $progress) {
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php include '../../components/modalConsent.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Progress</strong></h1>
@@ -97,34 +98,34 @@ foreach ($progressIndicators as $key => $progress) {
         </p>
       </div>
       <div class="container__cards-progress">
-        <div class="card-progress" onclick="window.location.href='demographicData.php?id=<?php echo $_GET['id'] ?>'"
+        <div class="card-progress" onclick="openConsent('demographicData')"
           style="background: linear-gradient(360deg, rgba(76,95,126,1) 0%, rgba(141,184,233,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[0] ?>%
           </div>
           <h3>Country and Demographic data</h3>
         </div>
-        <div class="card-progress" onclick="window.location.href='paPrevalence.php?id=<?php echo $_GET['id'] ?>'"
+        <div class="card-progress" onclick="openConsent('paPrevalence')"
           style="background: linear-gradient(360deg, rgba(31,99,157,1) 34%, rgba(40,156,255,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[1] ?>%
           </div>
           <h3>Physical activity participation</h3>
         </div>
-        <div class="card-progress" onclick="window.location.href='pePolicy.php?id=<?php echo $_GET['id'] ?>'">
+        <div class="card-progress" onclick="openConsent('pePolicy')">
           <div class="progress">
             <?php echo $progressIndicators[2] ?>%
           </div>
           <h3>Physical Education policy</h3>
         </div>
-        <div class="card-progress" onclick="window.location.href='peMonitoring.php?id=<?php echo $_GET['id'] ?>'"
+        <div class="card-progress" onclick="openConsent('peMonitoring')"
           style="background: linear-gradient(360deg, rgba(17,38,71,1) 0%, rgba(90,120,152,1) 100%);">
           <div class="progress">
             <?php echo $progressIndicators[3] ?>%
           </div>
           <h3>Physical Education monitoring</h3>
         </div>
-        <div class="card-progress" onclick="window.location.href='researchPe.php?id=<?php echo $_GET['id'] ?>'"
+        <div class="card-progress" onclick="openConsent('researchPe')"
           style="background: linear-gradient(360deg, rgba(18,25,36,1) 0%, rgba(70,102,137,1) 100%);">
           <div class="progress">
             100.0%
@@ -139,8 +140,68 @@ foreach ($progressIndicators as $key => $progress) {
   const buttonNext = document.querySelector('.btn-next');
   const buttonBack = document.querySelector('.btn-back');
 
+  const modalConsent = document.querySelector('#modalConsent');
+
+  function openModal() {
+    modalConsent.style.display = 'block';
+  }
+
+  function closeModal() {
+    modalConsent.style.display = 'none';
+  }
+
+  function confirmConsent(pageUrl) {
+    console.log(pageUrl);
+    if ($("#consent").is(":checked")) {
+      $("#modalConfirm").css("display", "none");
+      const payload = {
+        consent: '1',
+        id: <?php echo $_SESSION['id']; ?>
+      };
+
+      console.log(payload);
+
+      $.ajax({
+        url: "../../query/Dashboard/consent.php",
+        type: "POST",
+        data: {
+          consent: '1',
+          id: <?php echo $_SESSION['id']; ?>
+        },
+        success: function(data) {
+          if (data == "success") {
+            document.location = pageUrl + `.php?id=<?php echo $countryId; ?>`;
+          }
+        }
+      });
+    } else {
+      if ($("#error")) {
+        $("#error").remove();
+      }
+      $("#msg-consent").append(
+        "<p style='color: red;' id='error'>Please confirm that you agree to participate.</p>");
+    }
+  }
+
+
+
+  $('#cancel-confirm').click(function() {
+    $("#modalConsent").css("display", "none");
+  });
+
+  function openConsent(pageUrl) {
+    if (<?php echo $_SESSION['consent']; ?> == 0 && '<?php echo $_SESSION['type']; ?>' != 'admin') {
+      openModal();
+      $("#confirm").click(function() {
+        confirmConsent(pageUrl);
+      });
+    } else {
+      window.location.href = pageUrl + `.php?id=<?php echo $countryId; ?>`;
+    }
+  }
+
   buttonNext.addEventListener('click', () => {
-    window.location.href = 'demographicData.php?id=<?php echo $_GET['id'] ?>';
+    openConsent('demographicData');
   });
 
   buttonBack.addEventListener('click', () => {

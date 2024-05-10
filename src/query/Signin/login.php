@@ -35,6 +35,7 @@ if (empty($email)) {
       $_SESSION['name'] = $row['name'];
       $_SESSION['loggedIn'] = true;
       $_SESSION['type'] = $row['type'];
+      $_SESSION['consent'] = $row['consent'];
 
       if ($row['type'] === 'admin') {
         header("Location: ../../pages/Dashboard/countriesList.php");

@@ -159,7 +159,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>06</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Urban Population" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Literacy youth total (15-24 years)” into your
+              country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s6" maxlength="255"><?php if ($has_data) echo $data["s6"]?></textarea></div>
           </div>
@@ -167,7 +168,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>07</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Life expectancy" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Government expenditure on education” into your
+              country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s7" maxlength="255"><?php if ($has_data) echo $data["s7"]?></textarea></div>
           </div>
@@ -175,8 +177,7 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>08</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Gini index for income inequality" into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “primary education” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s8" maxlength="255"><?php if ($has_data) echo $data["s8"]?></textarea></div>
           </div>
@@ -184,8 +185,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>09</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Human Development Index" into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “secondary education” into your country’s language?
+            </div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s9" maxlength="255"><?php if ($has_data) echo $data["s9"]?></textarea></div>
           </div>
@@ -193,7 +194,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>10</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Literacy Rate" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Official entrance age to each school level (years)”
+              into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s10" maxlength="255"><?php if ($has_data) echo $data["s10"]?></textarea></div>
           </div>
@@ -201,8 +203,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>11</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Deaths from non—communicable diseases" into your
-              country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Duration by educational level (years)” into your
+              country’s
+              language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s11" maxlength="255"><?php if ($has_data) echo $data["s11"]?></textarea></div>
           </div>
@@ -210,8 +213,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>12</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate “Risk of premature non-communicable diseases
-              mortality” into your country’s
+            <div style="margin: 1rem 2rem;">How do you translate “Duration of compulsory education (years)” into your
+              country’s
               language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s12" maxlength="255"><?php if ($has_data) echo $data["s12"]?></textarea></div>
@@ -220,7 +223,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>13</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate “Human Capital Index” into your country’s language?
+            <div style="margin: 1rem 2rem;">How do you translate “School-age population by level of education” into your
+              country’s
+              language?
             </div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s13" maxlength="255"><?php if ($has_data) echo $data["s13"]?></textarea></div>
@@ -229,7 +234,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>14</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate “Democracy Index” into your country’s language?
+            <div style="margin: 1rem 2rem;">How do you translate “Word bank category (High income – Upper-middle income
+              –
+              Lower-middle income – Low income)” into your country’s language?
             </div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s14" maxlength="255"><?php if ($has_data) echo $data["s14"]?></textarea></div>
@@ -238,7 +245,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>15</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate “Tax Burden” into your country’s language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical activity participation” into your country’s
+              language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s15" maxlength="255"><?php if ($has_data) echo $data["s15"]?></textarea></div>
           </div>
@@ -246,9 +254,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>16</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "World Bank Income Category (High income - Upper
-              middle income — Lower middle
-              income - Low income)" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical activity prevalence estimates for
+              adolescents” into your
+              country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s16" maxlength="255"><?php if ($has_data) echo $data["s16"]?></textarea></div>
           </div>
@@ -256,8 +264,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>17</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Physical Activity Participation" into your
-              country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “National and official physical education curriculum”
+              into your
+              country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s17" maxlength="255"><?php if ($has_data) echo $data["s17"]?></textarea></div>
           </div>
@@ -265,9 +274,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>18</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Physical Activity Prevalence estimates for adults"
-              into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “National policy requiring mandatory physical
+              education” into your
+              country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s18" maxlength="255"><?php if ($has_data) echo $data["s18"]?></textarea></div>
           </div>
@@ -275,7 +284,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>19</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Adults" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “National policy requiring minimum physical education
+              time” into
+              your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s19" maxlength="255"><?php if ($has_data) echo $data["s19"]?></textarea></div>
           </div>
@@ -283,8 +294,7 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>20</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Gender Inequalities in Physical Activity
-              Prevalence" into your country's
+            <div style="margin: 1rem 2rem;">How do you translate “Yes, for all school years” into your country’s
               language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s20" maxlength="255"><?php if ($has_data) echo $data["s20"]?></textarea></div>
@@ -293,7 +303,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>21</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Women" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Yes, for some of the school years” into your country’s
+              language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s21" maxlength="255"><?php if ($has_data) echo $data["s21"]?></textarea></div>
           </div>
@@ -301,7 +312,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>22</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Men" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Only at the subnational level” into your country’s
+              language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s22" maxlength="255"><?php if ($has_data) echo $data["s22"]?></textarea></div>
           </div>
@@ -309,7 +321,7 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>23</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Worldwide" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “No” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s23" maxlength="255"><?php if ($has_data) echo $data["s23"]?></textarea></div>
           </div>
@@ -317,7 +329,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>24</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "World region" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical education monitoring” into your country’s
+              language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s24" maxlength="255"><?php if ($has_data) echo $data["s24"]?></textarea></div>
           </div>
@@ -325,10 +338,9 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>25</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "This country card is part of the 3rd Physical
-              Activity Almanac (free resource
-              on the GoPA! website) For description of indicators and data sources visit: " into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “National monitoring system to evaluate physical
+              education
+              policies implementation” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s25" maxlength="255"><?php if ($has_data) echo $data["s25"]?></textarea></div>
           </div>
@@ -336,8 +348,7 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>26</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Policy and Surveillance Status" into your
-              country’s language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Yes” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s26" maxlength="255"><?php if ($has_data) echo $data["s26"]?></textarea></div>
           </div>
@@ -345,8 +356,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>27</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "National physical activity policy/plan" into your
-              country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical education and school-based physical activity
+              interventions research” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s27" maxlength="255"><?php if ($has_data) echo $data["s27"]?></textarea></div>
           </div>
@@ -354,8 +365,8 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>28</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "National recommendations" into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Position in the ranking” into your country’s language?
+            </div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s28" maxlength="255"><?php if ($has_data) echo $data["s28"]?></textarea></div>
           </div>
@@ -363,9 +374,7 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>29</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "National survey(s) including physical activity
-              questions" into your country's
-              language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “High” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s29" maxlength="255"><?php if ($has_data) echo $data["s29"]?></textarea></div>
           </div>
@@ -373,9 +382,27 @@ if ($result->num_rows > 0) {
             <div class="indicator-input-container__header">
               <h2><strong>30</strong></h2>
             </div>
-            <div style="margin: 1rem 2rem;">How do you translate "Most recent" into your country's language?</div>
+            <div style="margin: 1rem 2rem;">How do you translate “Low” into your country’s language?</div>
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s30" maxlength="255"><?php if ($has_data) echo $data["s30"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>31</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “research articles quintiles (Q)” into your country’s
+              language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s31" maxlength="255"><?php if ($has_data) echo $data["s31"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>32</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Contribution to research worlwide” into your country’s
+              language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s32" maxlength="255"><?php if ($has_data) echo $data["s32"]?></textarea></div>
           </div>
         </div>
 
