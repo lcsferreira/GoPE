@@ -289,7 +289,7 @@ function getLastUpdatedDate($country_id){
         },
         success: function(response) {
           console.log(response)
-          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+          window.location.href = "../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>";
         }
       });
     } else {
@@ -320,7 +320,7 @@ function getLastUpdatedDate($country_id){
         if (response == "approved") {
           window.location.href = "CardSuccess.php?cardStep=en";
         } else {
-          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+          window.location.href = "../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>";
         }
       }
     });
@@ -345,7 +345,7 @@ function getLastUpdatedDate($country_id){
           sendResponse: sendResponse
         },
         success: function(response) {
-          window.location.href = "reviewInstructions.php?id=<?php echo $_GET['id'] ?>";
+          window.location.href = "../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>";
         }
       });
     }
