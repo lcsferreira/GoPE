@@ -407,8 +407,7 @@ if ($result->num_rows > 0) {
         </div>
 
         <div class="buttons">
-          <button class="btn-back" type="button"
-            onclick="document.location = `../countriesList/countriesListAdmin.php`">Back</button>
+          <button class="btn-back" type="button">Back</button>
           <?php if($_SESSION['type'] != 'admin'): ?>
           <button class="btn-primary" type="button" name="confirmval" onclick="openConfirmationModal()">Submit</button>
           <?php endif; ?>
@@ -419,8 +418,9 @@ if ($result->num_rows > 0) {
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-  const btnBack = document.querySelector('.btn-back');
-  btnBack.addEventListener('click', () => {
+  const btnBack = $('.btn-back');
+
+  btnBack.on('click', () => {
     window.location.href =
       '../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>';
   });
