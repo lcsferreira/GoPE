@@ -768,14 +768,18 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
 
       $(".btn-next").click(function() {
-        verifyAgreementInputWithNoDoc()
+        verifyAgreementInputWithNoDoc("paPrevalence")
       });
 
       //get all the side-nav__links > li > a tags and add the verifyAgreementInputWithNoDoc function to the click event
       $(".side-nav__links > li > a").click(function() {
-        //remove href from the a tag
-        $(this).removeAttr("href")
-        verifyAgreementInputWithNoDoc()
+        event.preventDefault()
+        //get the href value
+        let pageUrl = $(this).attr("href")
+        //get the value between the last / and the .php
+        pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
+        //disable href
+        verifyAgreementInputWithNoDoc(pageUrl)
       });
 
       verifyAgreementInput()
@@ -825,7 +829,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
     //function to verify if the agreement input is 2 or 3, if it is, and no document is related, then show the modalInfo
-    function verifyAgreementInputWithNoDoc() {
+    function verifyAgreementInputWithNoDoc(pageUrl) {
       let agreementGroups = []
       let allFilled = true
 
@@ -848,17 +852,17 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             allFilled = false
             if (indicatorName == "duration_compulsory_pe") {
               message =
-                `If you you <strong>wish to provide new information</strong> for the indicator <strong>'Duration of the compulsory school years of primary education'</strong>, please <strong>add a document.</strong>`
+                `Please <strong>add at least one document</strong> to the indicator <strong>'Duration of the compulsory school years of primary education'</strong>.`
             } else {
               message =
-                `If you you <strong>wish to provide new information</strong> for the indicator <strong>'Duration of the compulsory school years of secondary education'</strong>, please <strong>add a document.</strong>`
+                `Please <strong>add at least one document</strong> to the indicator <strong>'Duration of the compulsory school years of secondary education'</strong>.`
             }
           }
         }
       })
 
       if (allFilled) {
-        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+        window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
       } else {
         openModal(message)
       }
