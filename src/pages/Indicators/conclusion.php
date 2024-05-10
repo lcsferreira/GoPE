@@ -201,7 +201,7 @@ if($userType === "contact"){
         },
         success: function(response) {
           if (response === 'success') {
-            window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+            window.location.href = '../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>';
           } else {
             alert('Error');
           }
@@ -221,7 +221,7 @@ if($userType === "contact"){
           },
           success: function(response) {
             if (response === 'success') {
-              window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+              window.location.href = '../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>';
             } else {
               alert('Error');
             }
@@ -236,7 +236,7 @@ if($userType === "contact"){
           },
           success: function(response) {
             if (response === 'success') {
-              window.location.href = 'indicatorsProgress.php?id=<?php echo $_GET['id'] ?>';
+              window.location.href = '../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>';
             } else {
               alert('Error');
             }
