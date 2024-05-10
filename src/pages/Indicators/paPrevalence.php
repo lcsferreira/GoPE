@@ -68,8 +68,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 1;
               $inputs = [
                 (object) [
-                  "name" => "boys_age_percent",
-                  "title" => "Physical activity prevalence in boys aged 11-17 years (%)",
+                  "name" => "children_age_percent",
+                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_admin"
                 ]
@@ -82,8 +82,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 1;
               $inputs = [
                 (object) [
-                  "name" => "boys_age_percent",
-                  "title" => "Physical activity prevalence in boys aged 11-17 years (%)",
+                  "name" => "children_age_percent",
+                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_contact"
                 ]
@@ -91,7 +91,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               include '../../components/indicatorInputGroup.php';
               ?>
               <?php
-              $indicatorName = "boys_age_percent";
+              $indicatorName = "children_age_percent";
               $indicatorOrder = 1;
               $tableName = "pa_prevalence_comments";
               include '../../components/commentGroup.php';
@@ -99,7 +99,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             </div>
             <?php
             $agreementOrder = 1;
-            $indicatorName = "boys_age_percent";
+            $indicatorName = "children_age_percent";
             $tableName = "pa_prevalence_agreement";
             include '../../components/agreementGroup.php';
             ?>
@@ -117,8 +117,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 2;
               $inputs = [
                 (object) [
-                  "name" => "girls_age_percent",
-                  "title" => "Physical activity prevalence in girls aged 11-17 years (%)",
+                  "name" => "boys_age_percent",
+                  "title" => "Physical activity prevalence in boys aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_admin"
                 ]
@@ -131,8 +131,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 2;
               $inputs = [
                 (object) [
-                  "name" => "girls_age_percent",
-                  "title" => "Physical activity prevalence in girls aged 11-17 years (%)",
+                  "name" => "boys_age_percent",
+                  "title" => "Physical activity prevalence in boys aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_contact"
                 ]
@@ -140,7 +140,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               include '../../components/indicatorInputGroup.php';
               ?>
               <?php
-              $indicatorName = "girls_age_percent";
+              $indicatorName = "boys_age_percent";
               $indicatorOrder = 2;
               $tableName = "pa_prevalence_comments";
               include '../../components/commentGroup.php';
@@ -148,7 +148,7 @@ $agreementValues = mysqli_fetch_assoc($result);
             </div>
             <?php
             $agreementOrder = 2;
-            $indicatorName = "girls_age_percent";
+            $indicatorName = "boys_age_percent";
             $tableName = "pa_prevalence_agreement";
             include '../../components/agreementGroup.php';
             ?>
@@ -157,7 +157,7 @@ $agreementValues = mysqli_fetch_assoc($result);
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>03</strong></h2>
+            <h2><strong>03</strong></h3>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -166,8 +166,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 3;
               $inputs = [
                 (object) [
-                  "name" => "children_age_percent",
-                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
+                  "name" => "girls_age_percent",
+                  "title" => "Physical activity prevalence in girls aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_admin"
                 ]
@@ -180,8 +180,8 @@ $agreementValues = mysqli_fetch_assoc($result);
               $indicatorOrder = 3;
               $inputs = [
                 (object) [
-                  "name" => "children_age_percent",
-                  "title" => "Physical activity prevalence in adolescents (total) aged 11-17 years (%)",
+                  "name" => "girls_age_percent",
+                  "title" => "Physical activity prevalence in girls aged 11-17 years (%)",
                   "type" => "number",
                   "tableName" => "pa_prevalence_contact"
                 ]
@@ -189,7 +189,7 @@ $agreementValues = mysqli_fetch_assoc($result);
               include '../../components/indicatorInputGroup.php';
               ?>
               <?php
-              $indicatorName = "children_age_percent";
+              $indicatorName = "girls_age_percent";
               $indicatorOrder = 3;
               $tableName = "pa_prevalence_comments";
               include '../../components/commentGroup.php';
@@ -197,13 +197,14 @@ $agreementValues = mysqli_fetch_assoc($result);
             </div>
             <?php
             $agreementOrder = 3;
-            $indicatorName = "children_age_percent";
+            $indicatorName = "girls_age_percent";
             $tableName = "pa_prevalence_agreement";
             include '../../components/agreementGroup.php';
             ?>
           </div>
         </div>
         <!-- -------------------- -->
+
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

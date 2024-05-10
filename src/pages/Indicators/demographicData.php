@@ -87,6 +87,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+        <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
             <h2><strong>01</strong></h2>
@@ -98,9 +99,401 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               $indicatorOrder = 1;
               $inputs = [
                 (object) [
+                  "name" => "total_population",
+                  "title" => "Total population (n)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="1-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 1;
+              $inputs = [
+                (object) [
+                  "name" => "total_population",
+                  "title" => "Total population (n)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "total_population";
+              $indicatorOrder = 1;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 1;
+            $indicatorName = "total_population";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>02</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 2;
+              $inputs = [
+                (object) [
+                  "name" => "literacy_youth_total",
+                  "title" => "Literacy youth total 15-24 years (%)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="2-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 2;
+              $inputs = [
+                (object) [
+                  "name" => "literacy_youth_total",
+                  "title" => "Literacy youth total 15-24 years (%)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "literacy_youth_total";
+              $indicatorOrder = 2;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 2;
+            $indicatorName = "literacy_youth_total";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>03</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 3;
+              $inputs = [
+                (object) [
+                  "name" => "gov_expenditure_education",
+                  "title" => "Government expenditure on education (%)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="3-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 3;
+              $inputs = [
+                (object) [
+                  "name" => "gov_expenditure_education",
+                  "title" => "Government expenditure on education (%)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "gov_expenditure_education";
+              $indicatorOrder = 3;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 3;
+            $indicatorName = "gov_expenditure_education";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>04</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 4;
+              $inputs = [
+                (object) [
+                  "name" => "entrance_age_pe",
+                  "title" => "Official entrance age to primary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 4;
+              $inputs = [
+                (object) [
+                  "name" => "entrance_age_pe",
+                  "title" => "Official entrance age to primary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "entrance_age_pe";
+              $indicatorOrder = 4;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 4;
+            $indicatorName = "entrance_age_pe";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>05</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 5;
+              $inputs = [
+                (object) [
+                  "name" => "entrance_age_se",
+                  "title" => "Official entrance age to secondary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 5;
+              $inputs = [
+                (object) [
+                  "name" => "entrance_age_se",
+                  "title" => "Official entrance age to secondary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "entrance_age_se";
+              $indicatorOrder = 5;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 5;
+            $indicatorName = "entrance_age_se";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>06</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 6;
+              $inputs = [
+                (object) [
+                  "name" => "duration_pe",
+                  "title" => "Duration of primary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 6;
+              $inputs = [
+                (object) [
+                  "name" => "duration_pe",
+                  "title" => "Duration of primary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "duration_pe";
+              $indicatorOrder = 6;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 6;
+            $indicatorName = "duration_pe";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>07</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 7;
+              $inputs = [
+                (object) [
+                  "name" => "duration_se",
+                  "title" => "Duration of secondary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 7;
+              $inputs = [
+                (object) [
+                  "name" => "duration_se",
+                  "title" => "Duration of secondary education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "duration_se";
+              $indicatorOrder = 7;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 7;
+            $indicatorName = "duration_se";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>08</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 8;
+              $inputs = [
+                (object) [
+                  "name" => "duration_ce",
+                  "title" => "Duration of compulsory education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_admin"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
+              <?php
+              $indicatorRole = "contact";
+              $indicatorOrder = 8;
+              $inputs = [
+                (object) [
+                  "name" => "duration_ce",
+                  "title" => "Duration of compulsory education (years)",
+                  "type" => "number",
+                  "tableName" => "demographic_data_contact"
+                ]
+              ];
+              include '../../components/indicatorInputGroup.php';
+              ?>
+              <?php
+              $indicatorName = "duration_ce";
+              $indicatorOrder = 8;
+              $tableName = "demographic_data_comments";
+              include '../../components/commentGroup.php';
+              ?>
+            </div>
+            <?php
+            $agreementOrder = 8;
+            $indicatorName = "duration_ce";
+            $tableName = "demographic_data_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <div class="indicator-input-container">
+          <div class="indicator-input-container__header">
+            <h2><strong>09</strong></h2>
+          </div>
+          <div class="indicator-input-container-values">
+            <div class="indicator-input-container-values-group">
+              <?php
+              $indicatorRole = "admin";
+              $indicatorOrder = 9;
+              $inputs = [
+                (object) [
                   "name" => "duration_compulsory_pe",
                   "title" => "Duration of the compulsory school years of primary education (years)",
-                  "type" => "text",
+                  "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
               ];
@@ -124,16 +517,16 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 data-table-name="duration_compulsory_pe_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
               <?php endif; ?>
-              <div id="1-contact-label">
+              <div id="9-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
                 $indicatorRole = "contact";
-                $indicatorOrder = 1;
+                $indicatorOrder = 9;
                 $inputs = [
                   (object) [
                     "name" => "duration_compulsory_pe",
                     "title" => "Duration of the compulsory school years of primary education (years)",
-                    "type" => "text",
+                    "type" => "number",
                     "tableName" => "demographic_data_contact"
                   ]
                 ];
@@ -160,13 +553,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </div>
               <?php
               $indicatorName = "duration_compulsory_pe";
-              $indicatorOrder = 1;
+              $indicatorOrder = 9;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
               ?>
             </div>
             <?php
-            $agreementOrder = 1;
+            $agreementOrder = 9;
             $indicatorName = "duration_compulsory_pe";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
@@ -176,18 +569,18 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
-            <h2><strong>02</strong></h2>
+            <h2><strong>10</strong></h2>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
               <?php
               $indicatorRole = "admin";
-              $indicatorOrder = 2;
+              $indicatorOrder = 10;
               $inputs = [
                 (object) [
                   "name" => "duration_compulsory_se",
                   "title" => "Duration of the compulsory school years of secondary education (years)",
-                  "type" => "text",
+                  "type" => "number",
                   "tableName" => "demographic_data_admin"
                 ]
               ];
@@ -211,16 +604,16 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 data-table-name="duration_compulsory_se_documents_admin" data-role="admin"
                 style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
               <?php endif; ?>
-              <div id="2-contact-label">
+              <div id="10-contact-label">
                 <p class="contact-label">Provide new information here:</p>
                 <?php
                 $indicatorRole = "contact";
-                $indicatorOrder = 2;
+                $indicatorOrder = 10;
                 $inputs = [
                   (object) [
                     "name" => "duration_compulsory_se",
                     "title" => "Duration of the compulsory school years of primary education (years)",
-                    "type" => "text",
+                    "type" => "number",
                     "tableName" => "demographic_data_contact"
                   ]
                 ];
@@ -247,398 +640,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </div>
               <?php
               $indicatorName = "duration_compulsory_se";
-              $indicatorOrder = 2;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 2;
-            $indicatorName = "duration_compulsory_se";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>03</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 3;
-              $inputs = [
-                (object) [
-                  "name" => "total_population",
-                  "title" => "Total population (n)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="3-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 3;
-              $inputs = [
-                (object) [
-                  "name" => "total_population",
-                  "title" => "Total population (n)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "total_population";
-              $indicatorOrder = 3;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 3;
-            $indicatorName = "total_population";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>04</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 4;
-              $inputs = [
-                (object) [
-                  "name" => "literacy_youth_total",
-                  "title" => "Literacy youth total 15-24 years (%)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="4-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 4;
-              $inputs = [
-                (object) [
-                  "name" => "literacy_youth_total",
-                  "title" => "Literacy youth total 15-24 years (%)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "literacy_youth_total";
-              $indicatorOrder = 4;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 4;
-            $indicatorName = "literacy_youth_total";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>05</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 5;
-              $inputs = [
-                (object) [
-                  "name" => "gov_expenditure_education",
-                  "title" => "Government expenditure on education (%)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="5-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 5;
-              $inputs = [
-                (object) [
-                  "name" => "gov_expenditure_education",
-                  "title" => "Government expenditure on education (%)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "gov_expenditure_education";
-              $indicatorOrder = 5;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 5;
-            $indicatorName = "gov_expenditure_education";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>06</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 6;
-              $inputs = [
-                (object) [
-                  "name" => "entrance_age_pe",
-                  "title" => "Official entrance age to primary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="6-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 6;
-              $inputs = [
-                (object) [
-                  "name" => "entrance_age_pe",
-                  "title" => "Official entrance age to primary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "entrance_age_pe";
-              $indicatorOrder = 6;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 6;
-            $indicatorName = "entrance_age_pe";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>07</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 7;
-              $inputs = [
-                (object) [
-                  "name" => "entrance_age_se",
-                  "title" => "Official entrance age to secondary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="7-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 7;
-              $inputs = [
-                (object) [
-                  "name" => "entrance_age_se",
-                  "title" => "Official entrance age to secondary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "entrance_age_se";
-              $indicatorOrder = 7;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 7;
-            $indicatorName = "entrance_age_se";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>08</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 8;
-              $inputs = [
-                (object) [
-                  "name" => "duration_pe",
-                  "title" => "Duration of primary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="8-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 8;
-              $inputs = [
-                (object) [
-                  "name" => "duration_pe",
-                  "title" => "Duration of primary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "duration_pe";
-              $indicatorOrder = 8;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 8;
-            $indicatorName = "duration_pe";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>09</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 9;
-              $inputs = [
-                (object) [
-                  "name" => "duration_se",
-                  "title" => "Duration of secondary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="9-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 9;
-              $inputs = [
-                (object) [
-                  "name" => "duration_se",
-                  "title" => "Duration of secondary education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "duration_se";
-              $indicatorOrder = 9;
-              $tableName = "demographic_data_comments";
-              include '../../components/commentGroup.php';
-              ?>
-            </div>
-            <?php
-            $agreementOrder = 9;
-            $indicatorName = "duration_se";
-            $tableName = "demographic_data_agreement";
-            include '../../components/agreementGroup.php';
-            ?>
-          </div>
-        </div>
-        <!-- -------------------- -->
-        <div class="indicator-input-container">
-          <div class="indicator-input-container__header">
-            <h2><strong>10</strong></h2>
-          </div>
-          <div class="indicator-input-container-values">
-            <div class="indicator-input-container-values-group">
-              <?php
-              $indicatorRole = "admin";
-              $indicatorOrder = 10;
-              $inputs = [
-                (object) [
-                  "name" => "duration_ce",
-                  "title" => "Duration of compulsory education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_admin"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <p class="contact-label" id="10-contact-label">Provide new information here:</p>
-              <?php
-              $indicatorRole = "contact";
-              $indicatorOrder = 10;
-              $inputs = [
-                (object) [
-                  "name" => "duration_ce",
-                  "title" => "Duration of compulsory education (years)",
-                  "type" => "number",
-                  "tableName" => "demographic_data_contact"
-                ]
-              ];
-              include '../../components/indicatorInputGroup.php';
-              ?>
-              <?php
-              $indicatorName = "duration_ce";
               $indicatorOrder = 10;
               $tableName = "demographic_data_comments";
               include '../../components/commentGroup.php';
@@ -646,7 +647,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
             <?php
             $agreementOrder = 10;
-            $indicatorName = "duration_ce";
+            $indicatorName = "duration_compulsory_se";
             $tableName = "demographic_data_agreement";
             include '../../components/agreementGroup.php';
             ?>
@@ -756,14 +757,54 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
+      // verifyIfDocumentIsFFilled("duration_compulsory_pe", "admin")
+
+
       $(".btn-back").click(function() {
         window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
       });
+
       $(".btn-next").click(function() {
-        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+        if (verifyAllDocuments('<?php echo $_SESSION['type'] ?>')) {
+          window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+        } else {
+          alert("Please fill all documents")
+        }
       });
       verifyAgreementInput()
     });
+
+    function verifyAllDocuments(role) {
+      const indicatorsNames = ["duration_compulsory_pe", "duration_compulsory_se"]
+      let allFilled = true
+      indicatorsNames.forEach(indicatorName => {
+        if (!verifyIfDocumentIsFFilled(indicatorName, role)) {
+          allFilled = false
+        }
+      })
+      return allFilled
+    }
+
+    function verifyIfDocumentIsFFilled(indicatorName, role) {
+      let allFilled = true
+      const documents = $(`#documents-${indicatorName}-${role}`)
+      console.log(documents)
+      documents.children().each(function() {
+        const doc = $(this)
+        const docInc = doc.attr('id').split("-")[2]
+        const title = doc.find(`#document-title-${indicatorName}-${docInc}-${role}`).val()
+        const yearPublication = doc.find(`#document-year_publication-${indicatorName}-${docInc}-${role}`).val()
+        const eletronicSource = doc.find(`#document-eletronic_source-${indicatorName}-${docInc}-${role}`).val()
+        const voluntaryComments = doc.find(`#document-voluntary_comments-${indicatorName}-${docInc}-${role}`).val()
+
+        if (title == "" || yearPublication == "" || eletronicSource == "") {
+          allFilled = false
+        }
+      })
+
+      console.log(allFilled)
+      return allFilled
+    }
 
     function addDocumentToTable(indicatorName, tableName, role) {
       const documents = $(`#documents-${indicatorName}-${role}`)
