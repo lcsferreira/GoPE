@@ -79,6 +79,11 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php 
+    $typeModal = "warning";
+    $icon = "fas fa-exclamation-triangle";
+    $buttonCloseText = "Close";
+    include '../../components/modalInfo.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Indicators</strong></h1>
@@ -612,7 +617,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 $inputs = [
                   (object) [
                     "name" => "duration_compulsory_se",
-                    "title" => "Duration of the compulsory school years of primary education (years)",
+                    "title" => "Duration of the compulsory school years of secondary education (years)",
                     "type" => "number",
                     "tableName" => "demographic_data_contact"
                   ]
@@ -758,21 +763,36 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <script>
     $(document).ready(function() {
       // verifyIfDocumentIsFFilled("duration_compulsory_pe", "admin")
-
-
       $(".btn-back").click(function() {
         window.location.href = "../Indicators/indicatorsProgress.php<?php echo "?id=" . $_GET['id'] ?>";
       });
 
       $(".btn-next").click(function() {
-        if (verifyAllDocuments('<?php echo $_SESSION['type'] ?>')) {
-          window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
-        } else {
-          alert("Please fill all documents")
-        }
+        verifyAgreementInputWithNoDoc()
       });
+
+      //get all the side-nav__links > li > a tags and add the verifyAgreementInputWithNoDoc function to the click event
+      $(".side-nav__links > li > a").click(function() {
+        //remove href from the a tag
+        $(this).removeAttr("href")
+        verifyAgreementInputWithNoDoc()
+      });
+
       verifyAgreementInput()
     });
+
+    function openModal(msg) {
+      $("#modal").css("display", "block")
+      $(".modal-body").html(msg)
+      $("#modal-close").click(function() {
+        closeModal()
+      })
+    }
+
+    function closeModal() {
+      $(".modal-body").html("")
+      $("#modal").css("display", "none")
+    }
 
     function verifyAllDocuments(role) {
       const indicatorsNames = ["duration_compulsory_pe", "duration_compulsory_se"]
@@ -788,7 +808,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     function verifyIfDocumentIsFFilled(indicatorName, role) {
       let allFilled = true
       const documents = $(`#documents-${indicatorName}-${role}`)
-      console.log(documents)
       documents.children().each(function() {
         const doc = $(this)
         const docInc = doc.attr('id').split("-")[2]
@@ -802,8 +821,47 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
       })
 
-      console.log(allFilled)
       return allFilled
+    }
+
+    //function to verify if the agreement input is 2 or 3, if it is, and no document is related, then show the modalInfo
+    function verifyAgreementInputWithNoDoc() {
+      let agreementGroups = []
+      let allFilled = true
+
+      for (let i = 9; i <= 10; i++) {
+        agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+      }
+
+      const indicatorsNames = ["duration_compulsory_pe", "duration_compulsory_se"]
+
+      let message = ""
+
+      agreementGroups.forEach(agreementGroup => {
+        let radioInputs = agreementGroup.find("input[type='radio']")
+        let agreementValue = radioInputs.filter(":checked").val()
+        let indicatorName = indicatorsNames[agreementGroups.indexOf(agreementGroup)]
+
+        if (agreementValue == 2 || agreementValue == 3) {
+          const documents = $(`#documents-${indicatorName}-${'<?php echo $_SESSION['type'] ?>'}`)
+          if (documents.children().length == 0) {
+            allFilled = false
+            if (indicatorName == "duration_compulsory_pe") {
+              message =
+                `If you you <strong>wish to provide new information</strong> for the indicator <strong>'Duration of the compulsory school years of primary education'</strong>, please <strong>add a document.</strong>`
+            } else {
+              message =
+                `If you you <strong>wish to provide new information</strong> for the indicator <strong>'Duration of the compulsory school years of secondary education'</strong>, please <strong>add a document.</strong>`
+            }
+          }
+        }
+      })
+
+      if (allFilled) {
+        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
+      } else {
+        openModal(message)
+      }
     }
 
     function addDocumentToTable(indicatorName, tableName, role) {
@@ -959,8 +1017,14 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       let agreementGroups = []
       for (let i = 1; i <= 12; i++) {
         // get all the divs with id that contains i and -contact
-        contactLabels.push($(`p[id*="${i}-contact-label"]`))
-        contactInputs.push($(`div[id*="${i}-contact"]`))
+        if (i == 9 || i == 10) {
+          contactLabels.push($(`div[id="${i}-contact-label"]`))
+          contactInputs.push($(`div[id="${i}-contact"]`))
+          agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+          continue
+        }
+        contactLabels.push($(`p[id="${i}-contact-label"]`))
+        contactInputs.push($(`div[id="${i}-contact"]`))
         agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
       }
 
@@ -1009,7 +1073,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         idCountry: idCountry
       }
 
-      console.log(payload)
       $.ajax({
         type: "POST",
         url: "../../query/Indicators/updateAgreementValue.php",
@@ -1033,7 +1096,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         idCountry: idCountry
       }
 
-      console.log(payload)
       $.ajax({
         type: "POST",
         url: "../../query/Indicators/updateIndicatorValue.php",
@@ -1057,8 +1119,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         idCountry: idCountry
       }
 
-
-      console.log(payload)
       $.ajax({
         type: "POST",
         url: "../../query/Indicators/updateIndicatorValue.php",
@@ -1083,7 +1143,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         idCountry: idCountry
       }
 
-      console.log(payload)
       $.ajax({
         type: "POST",
         url: "../../query/Indicators/updateIndicatorValue.php",

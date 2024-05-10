@@ -10,14 +10,41 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal.warning {
+  color: var(--red) !important;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal.warning .modal-footer .btn-close {
+  border: 2px solid var(--red);
+  width: 100%;
+  background: transparent;
+  color: var(--red);
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .modal-content {
   background-color: #fefefe;
-  margin: 25% auto;
+  position: relative;
+  margin: 0 auto;
+  top: 25%;
   padding: 20px;
   border: none;
   border-radius: 1rem;
-  width: 35%;
-  height: 45%;
+  max-width: 35%;
+  max-height: 45%;
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
