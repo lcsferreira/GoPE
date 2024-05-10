@@ -8,6 +8,8 @@
   <div class="indicator-input">
     <label for="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Document
       title</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text"
       name="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
@@ -20,6 +22,8 @@
     <label
       for="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Year
       of publication</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="number"
       name="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-year_publication-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
@@ -32,6 +36,8 @@
     <label
       for="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Eletronic
       source</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text"
       name="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
