@@ -97,6 +97,11 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php 
+    $typeModal = "warning";
+    $icon = "fas fa-exclamation-triangle";
+    $buttonCloseText = "Close";
+    include '../../components/modalInfo.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Progress</strong></h1>
@@ -1135,10 +1140,119 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
     });
     $(".btn-next").click(function() {
-      window.location.href = "../Indicators/peMonitoring.php<?php echo "?id=" . $_GET['id'] ?>";
+      verifyAgreementInputWithNoDoc("peMonitoring")
+    });
+
+    $(".side-nav__links > li > a").click(function() {
+      //remove href from the a tag
+      event.preventDefault()
+      //get the href value
+      let pageUrl = $(this).attr("href")
+      //get the value between the last / and the .php
+      pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
+      verifyAgreementInputWithNoDoc(pageUrl)
     });
     verifyAgreementInput()
   });
+
+  function openModal(msg) {
+    $("#modal").css("display", "block")
+    $(".modal-body").html(msg)
+    $("#modal-close").click(function() {
+      closeModal()
+    })
+  }
+
+  function closeModal() {
+    $(".modal-body").html("")
+    $("#modal").css("display", "none")
+  }
+
+  function verifyAllDocuments(role) {
+    const indicatorsNames = ["exist_pe_curriculum_pe", "exist_pe_curriculum_se", "exist_policy_mandatory_pe",
+      "exist_policy_mandatory_se", "exist_policy_min_time_pe", "exist_policy_min_time_se"
+    ]
+    let allFilled = true
+    indicatorsNames.forEach(indicatorName => {
+      if (!verifyIfDocumentIsFFilled(indicatorName, role)) {
+        allFilled = false
+      }
+    })
+    return allFilled
+  }
+
+  function verifyIfDocumentIsFFilled(indicatorName, role) {
+    let allFilled = true
+    const documents = $(`#documents-${indicatorName}-${role}`)
+    documents.children().each(function() {
+      const doc = $(this)
+      const docInc = doc.attr('id').split("-")[2]
+      const title = doc.find(`#document-title-${indicatorName}-${docInc}-${role}`).val()
+      const yearPublication = doc.find(`#document-year_publication-${indicatorName}-${docInc}-${role}`).val()
+      const eletronicSource = doc.find(`#document-eletronic_source-${indicatorName}-${docInc}-${role}`).val()
+      const voluntaryComments = doc.find(`#document-voluntary_comments-${indicatorName}-${docInc}-${role}`).val()
+
+      if (title == "" || yearPublication == "" || eletronicSource == "") {
+        allFilled = false
+      }
+    })
+
+    return allFilled
+  }
+
+  //function to verify if the agreement input is 2 or 3, if it is, and no document is related, then show the modalInfo
+  function verifyAgreementInputWithNoDoc(pageUrl) {
+    let agreementGroups = []
+    let allFilled = true
+
+    for (let i = 1; i <= 6; i++) {
+      agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+    }
+
+    const indicatorsNames = ["exist_pe_curriculum_pe", "exist_pe_curriculum_se", "exist_policy_mandatory_pe",
+      "exist_policy_mandatory_se", "exist_policy_min_time_pe", "exist_policy_min_time_se"
+    ]
+    let message = ""
+
+    agreementGroups.forEach(agreementGroup => {
+      let radioInputs = agreementGroup.find("input[type='radio']")
+      let agreementValue = radioInputs.filter(":checked").val()
+      let indicatorName = indicatorsNames[agreementGroups.indexOf(agreementGroup)]
+
+      if (agreementValue == 2 || agreementValue == 3) {
+        const documents = $(`#documents-${indicatorName}-${'<?php echo $_SESSION['type'] ?>'}`)
+        if (documents.children().length == 0) {
+          allFilled = false
+          if (indicatorName == "exist_pe_curriculum_pe") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national official Physical Education curriculum for the compulsory school years of primary education'</strong>"
+          } else if (indicatorName == "exist_pe_curriculum_se") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national official Physical Education curriculum for the compulsory school years of secondary education'</strong>"
+          } else if (indicatorName == "exist_policy_mandatory_pe") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national policy requiring Physical Education to be mandatory for the compulsory school years of primary education'</strong>"
+          } else if (indicatorName == "exist_policy_mandatory_se") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national policy requiring Physical Education to be mandatory for the compulsory school years of secondary education'</strong>"
+          } else if (indicatorName == "exist_policy_min_time_pe") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator<strong> 'Existence of a national policy requiring minimum Physical Education time for the compulsory school years of primary education'</strong>"
+          } else if (indicatorName == "exist_policy_min_time_se") {
+            message =
+              "Please <strong>add at least one document</strong> to the indicator<strong> 'Existence of a national policy requiring minimum Physical Education time for the compulsory school years of secondary education'</strong>"
+
+          }
+        }
+      }
+    })
+
+    if (allFilled) {
+      window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+    } else {
+      openModal(message)
+    }
+  }
 
   function addDocumentToTable(indicatorName, tableName, role) {
     const documents = $(`#documents-${indicatorName}-${role}`)
