@@ -6,7 +6,6 @@
       </div>
     </div>
     <div class="modal-body">
-
     </div>
     <div class="modal-footer">
       <button class="btn-close" id="modal-close"><?php echo $buttonCloseText; ?></button>

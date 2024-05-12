@@ -52,6 +52,8 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/inputYesNo.css">
   <link rel="stylesheet" href="../../css/components/videoContainer.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
+  <link rel="stylesheet" href="../../css/components/modalMethod.css">
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
@@ -61,6 +63,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php include '../../components/modalMetodology.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Indicators</strong></h1>
@@ -152,6 +155,10 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
+  const methods = [{
+    "name": "APA 7th reference",
+    "html": "<p>Example of a reference following APA 7th: </p><p><strong>Main structure: </strong>Auhtors’ last name, Authors’ first name initial letter. (Year of publication). Articles title. Journals’ title, volume(number), pages. DOI: </p><p><strong>Example: </strong>Martins, J., Onofre, M., & Hallal, P. C. (2023). Launch of the Global Observatory for Physical Education (GoPE!). Journal of Physical Activity and Health, 20(7), 573-574. DOI: 10.1123/jpah.2023-0099 </p>"
+  }]
   $(document).ready(function(e) {
     $(".btn-back").click(function() {
       window.location.href = "../Indicators/peMonitoring.php<?php echo "?id=" . $_GET['id'] ?>";
@@ -189,6 +196,16 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     $("#addStudy").click(function() {
       addStudy();
+    });
+
+    $("#apa7thMethod").click(function() {
+      $("#modalMethod").show();
+      const method = methods.find(method => method.name === "APA 7th reference");
+      $("#indicatorTitle").text(method.name);
+      $("#modalIndicatorMethod").html(method.html);
+      $("#modal-close-method").click(function() {
+        $("#modalMethod").hide();
+      });
     });
   });
 

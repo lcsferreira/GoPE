@@ -38,6 +38,7 @@
     <label for="monitoring-purpose-<?php echo $inc ?>-<?php echo $type; ?>">
       Monitoring purpose
       <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
+      <span><i class="fas fa-info-circle"></i></span>
     </label>
     <div class="agreement-group" id="monitoring-purpose-<?php echo $inc ?>-<?php echo $type; ?>"
       style="margin: 0 !important">

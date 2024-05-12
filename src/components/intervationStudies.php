@@ -5,7 +5,8 @@
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="<?php echo $inc ?>">
       PE and school-based PA domains
-      <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
+      <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected) </span><span><i
+          class="fas fa-info-circle"></i></span>
     </label>
     <div class="agreement-group" id="<?php echo $inc ?>" style="margin: 0 !important">
       <label for="pe-<?php echo $inc ?>" class="radio-option-no-description">
@@ -105,7 +106,7 @@
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="apa7th_reference-<?php echo $inc ?>">
-      APA 7th reference
+      APA 7th reference <span id="apa7thMethod" method="apa7th_reference"><i class="fas fa-info-circle"></i></span>
     </label>
     <textarea name="apa7th_reference-<?php echo $inc ?>" id="apa7th_reference-<?php echo $inc ?>" cols="30" rows="2"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["apa7th_reference"]){ echo $intervationStudy["apa7th_reference"];}else{echo "";} ?></textarea>

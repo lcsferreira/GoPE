@@ -85,6 +85,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/modalMethod.css">
+
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
@@ -99,6 +101,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php include '../../components/modalMetodology.php'; ?>
     <?php 
     $typeModal = "warning";
     $icon = "fas fa-exclamation-triangle";
@@ -1141,6 +1144,37 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+  const methods = [{
+      name: "name_region_subnational_curriculum_pe",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    },
+    {
+      name: "name_region_subnational_curriculum_se",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    },
+    {
+      name: "name_region_subnational_mandatory_pe",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    },
+    {
+      name: "name_region_subnational_mandatory_se",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    },
+    {
+      name: "name_region_subnational_min_time_pe",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    },
+    {
+      name: "name_region_subnational_min_time_se",
+      title: "Name of the region where the policy is implemented",
+      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
+    }
+  ];
   $(document).ready(function() {
     $(".btn-back").click(function() {
       window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
@@ -1161,8 +1195,36 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $(".hide-show-video").click(function() {
       hideVideo()
     });
+
+    let methodSpans = document.querySelectorAll("[method]");
+    methodSpans.forEach(methodSpan => {
+      methodSpan.addEventListener("click", function() {
+        openModalMethod(methodSpan.getAttribute("method"))
+      })
+    })
+
     verifyAgreementInput()
   });
+
+
+  function openModalMethod(method) {
+    const methodData = methods.find(
+      m => m.name == method)
+
+    $("#modalMethod").css("display", "block")
+
+    $("#indicatorTitle").html(methodData.title)
+    $("#modalIndicatorMethod").html(methodData.html)
+    $("#modal-close-method").click(function() {
+      closeModalMethod()
+    })
+  }
+
+  function closeModalMethod() {
+    $("#indicatorTitle").html("")
+    $("#modalIndicatorMethod").html("")
+    $("#modalMethod").css("display", "none")
+  }
 
   function openModal(msg) {
     $("#modal").css("display", "block")
