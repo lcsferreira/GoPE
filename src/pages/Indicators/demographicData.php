@@ -70,6 +70,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
+  <link rel="stylesheet" href="../../css/components/videoContainer.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
@@ -92,6 +93,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <div class="indicators-container">
       <?php include '../../components/sideNavBar.php'; ?>
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
+        <?php 
+        $videoTitle = "Methodological approach for collecting country and demographic data";
+        $videoUrl = "https://www.youtube.com/embed/1w7OgIMMRc4";
+        include '../../components/videoContainer.php'; ?>
         <!-- -------------------- -->
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
@@ -782,6 +787,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         verifyAgreementInputWithNoDoc(pageUrl)
       });
 
+      $(".hide-show-video").click(function() {
+        hideVideo()
+      });
+
       verifyAgreementInput()
     });
 
@@ -1164,6 +1173,20 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         $(`#${divName}`).show()
       } else {
         $(`#${divName}`).hide()
+      }
+    }
+
+    function hideVideo() {
+      if ($(".indicator-video-container__content").is(":hidden")) {
+        $(".indicator-video-container__content").show()
+        //rotate the icon
+        $(".indicator-video-container__icon").css("transform", "rotate(0deg)")
+        $(".indicator-video-container__header").css("border-radius", "0.75rem 0.75rem 0 0")
+      } else {
+        $(".indicator-video-container__content").hide()
+        //rotate the icon
+        $(".indicator-video-container__icon").css("transform", "rotate(180deg)")
+        $(".indicator-video-container__header").css("border-radius", "0.75rem")
       }
     }
     </script>

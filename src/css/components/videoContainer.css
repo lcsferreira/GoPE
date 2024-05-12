@@ -1,0 +1,31 @@
+.indicator-video-container {
+  border: 1px solid var(--gray-lighter);
+  border-radius: 1rem;
+  margin: 0 2rem;
+}
+
+.indicator-video-container__header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--gray-lighter);
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  color: var(--gray-dark);
+}
+
+.indicator-video-container__content {
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.hide-show-video {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: larger;
+  color: var(--gray-dark);
+}
