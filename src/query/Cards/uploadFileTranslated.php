@@ -21,7 +21,7 @@ function getThumbnail($path, $country) {
 $idCountry = $_POST['idCountry'];
 $fileUpload = $_FILES['fileUpload'];
 
-$valid_extensions = array('pdf'); // valid extensions// upload directory
+$valid_extensions = array('pdf', 'pwp', 'docx'); // valid extensions// upload directory
 $path = '../../uploads/files/';
 
 if (!empty($fileUpload)) {

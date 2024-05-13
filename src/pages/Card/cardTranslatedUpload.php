@@ -154,6 +154,7 @@ function getLastUpdatedDate($country_id){
           </div>
           <input type="file" name="fileUpload" id="fileUpload">
           <button class="btn-primary" id="uploadFileBtn">Upload file</button>
+          <p style="margin-top: 1rem;">(.pdf, .pwp, .docx)</p>
           <?php endif; ?>
           <?php if($_SESSION['type'] == "admin"):?>
           <label for="send-contact-review" class="radio-option-no-description" style="width: 97%;">
