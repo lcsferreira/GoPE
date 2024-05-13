@@ -143,6 +143,8 @@
     <label for="years_applied-<?php echo $inc ?>-<?php echo $type; ?>">
       School years to which is applied
     </label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text" name="years_applied" id="years_applied-<?php echo $inc ?>-<?php echo $type; ?>"
       value="<?php if($monitoringSystem["years_applied"]){ echo $monitoringSystem["years_applied"];}else{echo "";} ?>"
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"
@@ -163,6 +165,8 @@
     <label for="years_application-<?php echo $inc ?>-<?php echo $type; ?>">
       Years of application
     </label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text" name="years_application" id="years_application-<?php echo $inc ?>-<?php echo $type; ?>"
       value="<?php if($monitoringSystem["years_application"]){ echo $monitoringSystem["years_application"];}else{echo "";} ?>"
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"

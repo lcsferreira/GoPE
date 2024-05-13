@@ -66,6 +66,11 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php 
+    $typeModal = "warning";
+    $icon = "fas fa-exclamation-triangle";
+    $buttonCloseText = "Close";
+    include '../../components/modalInfo.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Country <strong>Indicators</strong></h1>
@@ -208,16 +213,76 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       let agreementValue = radioInputs.filter(":checked").val()
 
+      let contactValue = $("input[name='exist_system_evaluate_pe_policy_implementation-contact']:checked").val()
+
       if (agreementValue == 2 || agreementValue == 3) {
         let monitoringSystemsContact = $(".monitoring-systems-contact")
         if (monitoringSystemsContact.children().length == 0) {
-          console.log("No monitoring system for the contact")
+          //get the exist_system_evaluate_pe_policy_implementation-contact checked value
+          if (contactValue == "yes") {
+            openModal("You must provide at least one monitoring system")
+          } else {
+            window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+          }
         } else {
-          console.log(pageUrl)
+          if (contactValue == "yes") {
+            //verify if all the monitoring systems have “Reach”, “Monitoring purpose”, “Education level”, “School years”, “years of application” filled
+            let monitoringSystems = $(".monitoring-systems-contact")
+            let monitoringSystemsArray = Array.from(monitoringSystems.children())
+            let monitoringSystemsValues = []
+            monitoringSystemsArray.forEach((monitoringSystem, index) => {
+              let reach = $(monitoringSystem).find("input[name='radio-group-reach-monitoring-system-" + (index +
+                1) + "-contact']:checked").val()
+              let monitoringPurpose = $(monitoringSystem).find(
+                "input[name='radio-group-monitoring-purpose']:checked").val()
+              let educationLevel = $(monitoringSystem).find(
+                  "input[name='radio-group-education-level-monitoring-system-" + (index + 1) + "-contact']:checked")
+                .val()
+              let yearsApplied = $(monitoringSystem).find("input[name='years_applied']").val()
+              let yearPublication = $(monitoringSystem).find("input[name='year_publication']").val()
+              let yearsApplication = $(monitoringSystem).find("input[name='years_application']").val()
+
+              monitoringSystemsValues.push({
+                reach: reach,
+                monitoringPurpose: monitoringPurpose,
+                educationLevel: educationLevel,
+                yearsApplied: yearsApplied,
+                yearPublication: yearPublication,
+                yearsApplication: yearsApplication
+              })
+            })
+
+            let monitoringSystemValues = monitoringSystemsValues.filter((monitoringSystem) => {
+              return monitoringSystem.reach == undefined || monitoringSystem.monitoringPurpose == undefined ||
+                monitoringSystem.educationLevel == undefined || monitoringSystem.yearsApplied == "" ||
+                monitoringSystem.yearPublication == "" || monitoringSystem.yearsApplication == ""
+            })
+
+            if (monitoringSystemValues.length > 0) {
+              openModal("You must fill all the fields of the monitoring systems")
+            } else {
+              window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+            }
+          } else {
+            window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+          }
         }
       } else {
-        console.log(pageUrl)
+        window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
       }
+    }
+
+    function openModal(msg) {
+      $("#modal").css("display", "block")
+      $(".modal-body").html(msg)
+      $("#modal-close").click(function() {
+        closeModal()
+      })
+    }
+
+    function closeModal() {
+      $(".modal-body").html("")
+      $("#modal").css("display", "none")
     }
 
     function verifyAgreementInput() {
