@@ -11,7 +11,7 @@ $peGeneralSchool = $payload['peGeneralSchool'] == 'true' ? 1 : 0;
 $minTime = $payload['minTime'] == 'true' ? 1 : 0;
 $other = $payload['other'] == 'true' ? 1 : 0;
 
-$sql = "UPDATE pe_monitoring_monitoring_systems_".$payload["type"]." SET reach = ".$payload['reach'] .", curriculum_implementation = ".$curriculumImplementation.", pe_general_school = ".$peGeneralSchool.", min_time = ".$minTime.", other = ".$other.", other_purposes = '".$payload['otherPurposes']."', education_level = '".$payload['educationLevel']."', years_applied = '".$payload['yearsApplied']."', year_publication = '".$payload['yearPublication']."', years_application = '".$payload['yearsApplication']."', voluntary_comments = '".$payload['voluntaryComments']."' WHERE id_country = ".$id . " AND inc = " . $inc;
+$sql = "UPDATE pe_monitoring_monitoring_systems_".$payload["type"]." SET reach = '".$payload['reach'] ."', curriculum_implementation = ".$curriculumImplementation.", pe_general_school = ".$peGeneralSchool.", min_time = ".$minTime.", other = ".$other.", other_purposes = '".$payload['otherPurposes']."', education_level = '".$payload['educationLevel']."', years_applied = '".$payload['yearsApplied']."', year_publication = '".$payload['yearPublication']."', years_application = '".$payload['yearsApplication']."', voluntary_comments = '".$payload['voluntaryComments']."' WHERE id_country = ".$id . " AND inc = " . $inc;
 $result = mysqli_query($conn, $sql);
 
 if ($result) {

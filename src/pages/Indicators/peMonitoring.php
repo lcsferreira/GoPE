@@ -178,14 +178,47 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       $(".btn-back").click(function() {
         window.location.href = "../Indicators/pePolicy.php<?php echo "?id=" . $_GET['id'] ?>";
       });
-      $(".btn-next").click(function() {
-        window.location.href = "../Indicators/researchPe.php<?php echo "?id=" . $_GET['id'] ?>";
-      });
+      // $(".btn-next").click(function() {
+      //   window.location.href = "../Indicators/researchPe.php<?php echo "?id=" . $_GET['id'] ?>";
+      // });
       $(".hide-show-video").click(function() {
         hideVideo()
       });
+
+      $(".btn-next").click(function() {
+        verifyIfNoMonitoringSystem("researchPe")
+      });
+
+      //get all the side-nav__links > li > a tags and add the verifyAgreementInputWithNoDoc function to the click event
+      $(".side-nav__links > li > a").click(function() {
+        event.preventDefault()
+        //get the href value
+        let pageUrl = $(this).attr("href")
+        //get the value between the last / and the .php
+        pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
+        //disable href
+        verifyIfNoMonitoringSystem(pageUrl)
+      });
       verifyAgreementInput()
     });
+
+    function verifyIfNoMonitoringSystem(pageUrl) {
+      const agreementGroup = $("#agreement-group-1")
+      let radioInputs = agreementGroup.find("input[type='radio']")
+
+      let agreementValue = radioInputs.filter(":checked").val()
+
+      if (agreementValue == 2 || agreementValue == 3) {
+        let monitoringSystemsContact = $(".monitoring-systems-contact")
+        if (monitoringSystemsContact.children().length == 0) {
+          console.log("No monitoring system for the contact")
+        } else {
+          console.log(pageUrl)
+        }
+      } else {
+        console.log(pageUrl)
+      }
+    }
 
     function verifyAgreementInput() {
       let contactInputs = []
@@ -412,6 +445,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="monitoring-purpose-${inc}-${type}">
             Monitoring purpose
             <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
+            <span><i class="fas fa-info-circle"></i></span>
           </label>
           <div class="agreement-group" id="monitoring-purpose-${inc}-${type}" style="margin: 0 !important">
             <label for="curriculum_implementation-${inc}-${type}" class="radio-option-no-description">
@@ -666,7 +700,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       //if reach is undefined, set it to null
       if (reach == undefined) {
-        reach = null
+        reach = ""
       }
 
       const curriculumImplementation = $(`#curriculum_implementation-${inc}-${type}`).is(":checked")
@@ -687,7 +721,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       //if educationLevel is undefined, set it to null
       if (educationLevel == undefined) {
-        educationLevel = null
+        educationLevel = ""
       }
 
       const yearsApplied = $(`#years_applied-${inc}-${type}`).val()
