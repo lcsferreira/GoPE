@@ -45,7 +45,7 @@
 }
 
 .switch-field input:checked:disabled + label {
-  background-color: var(--blue-dark);
+  background-color: var(--blue-disabled);
   color: var(--gray-lighter) !important;
   border-color: var(--gray-light);
   cursor: not-allowed;
