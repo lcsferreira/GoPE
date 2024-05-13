@@ -92,7 +92,7 @@ function getLastUpdatedDate($country_id){
     ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1><strong>Review</strong> the Country <strong>Card</strong></h1>
+      <h1><strong>Review</strong> the <strong>Translated</strong> version of the Country <strong>Card</strong></h1>
       <div></div>
     </div>
     <div class="dashboard-container">
