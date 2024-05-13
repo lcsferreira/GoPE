@@ -43,7 +43,7 @@ if($rs){
       <br><br>
       <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Translation/translation.php?id=".$country_id."'>Workflow</a>
       <br><br>
-      If you have any questions, please contact us at <a href='mailto: main.admin@email.com'>main.admin@email.com</a>
+      If you have any questions, please contact us at <a href='mailto: gopecoordination@gmail.com'>gopecoordination@gmail.com</a> or <a href='mailto:prjccristao@gmail.com'>prjccristao@gmail.com</a>
       ";
     
       mail($to, $subject, $message, $headers);

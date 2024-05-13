@@ -12,10 +12,10 @@ $country_id = $_GET['id'];
 if (isset($_POST["language"])) {
   $selected_language = $_POST["language"];
 
-  // Cria a lista de colunas s1 a s57
+  // Cria a lista de colunas s1 a s44
   $columns = implode(', ', array_map(function ($i) {
       return "s" . ($i + 1);
-  }, range(0, 29)));
+  }, range(0, 43)));
 
   //if the country already has data, delete it
   $sql = "DELETE FROM translations WHERE id_country = ".$country_id;
@@ -28,12 +28,6 @@ if (isset($_POST["language"])) {
                   WHERE language = '$selected_language' limit 1";
 
   $result = $conn->query($copy_sql);
-
-  // if ($conn->query($copy_sql) === TRUE) {
-  //     echo "<p>Dados copiados com sucesso!</p>";
-  // } else {
-  //     echo "<p>Erro ao copiar dados</p>";
-  // }
 }
 // // Consulta para obter as opções do select
 $sql = "SELECT DISTINCT language FROM language_translations order by language";
@@ -74,6 +68,12 @@ if ($result->num_rows > 0) {
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php 
+      $typeModal = "warning";
+      $icon = "fas fa-exclamation-triangle";
+      $buttonCloseText = "Close";
+      include '../../components/modalInfo.php'; 
+    ?>
     <?php
       $icon = "fas fa-exclamation-circle";
       $message = "Do you want to approve this step? This action will disable the possibility of modifying the data.";
@@ -404,6 +404,113 @@ if ($result->num_rows > 0) {
             <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
                 rows="5" cols="60" name="s32" maxlength="255"><?php if ($has_data) echo $data["s32"]?></textarea></div>
           </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>33</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Number of articles” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s33" maxlength="255"><?php if ($has_data) echo $data["s33"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>34</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Articles by type” into your country’s language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s34" maxlength="255"><?php if ($has_data) echo $data["s34"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>35</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical Education” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s35" maxlength="255"><?php if ($has_data) echo $data["s35"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>36</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Active transport” into your country’s language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s36" maxlength="255"><?php if ($has_data) echo $data["s36"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>37</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Active classes/breaks” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s37" maxlength="255"><?php if ($has_data) echo $data["s37"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>38</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Active recess” into your country’s language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s38" maxlength="255"><?php if ($has_data) echo $data["s38"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>39</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Extra-curriculum physical activity” into your
+              country’s language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s39" maxlength="255"><?php if ($has_data) echo $data["s39"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>40</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate "This country card is part of the 1 st Physical
+              Education
+              Almanac (free resource on the GoPE! website). For description of indicators and data
+              sources visit:" into your country's language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s40" maxlength="255"><?php if ($has_data) echo $data["s40"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>41</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Physical Education Country Card” into your country’s
+              language?</div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s41" maxlength="255"><?php if ($has_data) echo $data["s41"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>42</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Contact information” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s42" maxlength="255"><?php if ($has_data) echo $data["s42"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>43</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Name” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s43" maxlength="255"><?php if ($has_data) echo $data["s43"]?></textarea></div>
+          </div>
+          <div class="indicator-input-container">
+            <div class="indicator-input-container__header">
+              <h2><strong>44</strong></h2>
+            </div>
+            <div style="margin: 1rem 2rem;">How do you translate “Institution” into your country’s language?
+            </div>
+            <div style="margin: 1rem 2rem;"><textarea <?php if ($_SESSION['type'] == 'admin') echo "disabled";?>
+                rows="5" cols="60" name="s44" maxlength="255"><?php if ($has_data) echo $data["s44"]?></textarea></div>
+          </div>
         </div>
 
         <div class="buttons">
@@ -424,12 +531,34 @@ if ($result->num_rows > 0) {
     window.location.href =
       '../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>';
   });
-  const modal = document.querySelector('.modal');
+  const modals = document.querySelectorAll('.modal');
+  const modalInfo = modals[0];
+  const modal = modals[1];
+
   const modalConfirm = document.querySelector('#modal-confirm');
-  const modalClose = document.querySelector('#modal-close');
+  const modalsClose = document.querySelectorAll('#modal-close');
+
+  const modalInfoClose = modalsClose[0];
+  const modalClose = modalsClose[1];
+
 
   function openConfirmationModal() {
-    modal.style.display = 'block';
+    //get all the inputs and verify if are filled
+    const inputs = document.querySelectorAll('textarea');
+    let filled = true;
+    inputs.forEach(input => {
+      if (input.value == '') {
+        filled = false;
+      }
+    });
+    if (!filled) {
+      const modalInfoBody = modalInfo.querySelector('.modal-body');
+      modalInfoBody.innerHTML = 'Please fill all the fields before submitting.';
+      modalInfo.style.display = 'block';
+      return;
+    } else {
+      modal.style.display = 'block';
+    }
   }
 
   modalConfirm.addEventListener('click', () => {
@@ -441,6 +570,10 @@ if ($result->num_rows > 0) {
     modal.style.display = 'none';
   });
 
+  modalInfoClose.addEventListener('click', () => {
+    modalInfo.style.display = 'none';
+  });
+
   function sendTranslations() {
     //get all the values fro the #form
     const form = document.querySelector('#form');
@@ -449,6 +582,7 @@ if ($result->num_rows > 0) {
     for (const [key, value] of formData.entries()) {
       data[key] = value;
     }
+    console.log(data);
 
     //send the data to the server
     $.ajax({
