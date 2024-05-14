@@ -17,6 +17,8 @@ foreach ($indicators as $indicator) {
 //especificos
 $sql = "INSERT INTO research_pe_admin (id_country) VALUES ($id)";
 $result = mysqli_query($conn, $sql);
+$sql = "INSERT INTO research_pe_agreement (id_country) VALUES ($id)";
+$result = mysqli_query($conn, $sql);
 $sql = "INSERT INTO research_pe_comments (id_country) VALUES ($id)";
 $result = mysqli_query($conn, $sql);
 

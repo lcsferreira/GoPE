@@ -29,6 +29,10 @@ $sql = "SELECT * FROM research_pe_admin WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
 $adminValues = mysqli_fetch_assoc($result);
 
+$sql = "SELECT * FROM research_pe_agreement WHERE id_country = " . $_GET['id'];
+$result = mysqli_query($conn, $sql);
+$agreementValues = mysqli_fetch_assoc($result);
+
 $sql = "SELECT * FROM research_pe_intervation_studies WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
 $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -145,6 +149,12 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
               include '../../components/commentGroup.php';
               ?>
             </div>
+            <?php
+            $agreementOrder = 1;
+            $indicatorName = "studies_table";
+            $tableName = "research_pe_agreement";
+            include '../../components/agreementGroup.php';
+            ?>
           </div>
         </div>
       </div>
@@ -208,6 +218,27 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
     });
   });
+
+  function saveAgreementValue(indicatorName, tableName, value) {
+    let idCountry = <?php echo $_GET['id'] ?>;
+    const payload = {
+      tableName: tableName,
+      indicatorName: indicatorName,
+      value: value,
+      idCountry: idCountry
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "../../query/Indicators/updateAgreementValue.php",
+      data: {
+        payload: payload
+      },
+      success: function(response) {
+        console.log(response)
+      }
+    });
+  }
 
   function uploadTable() {
     const pdfFile = document.getElementById("pdfFile");

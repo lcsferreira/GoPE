@@ -10,12 +10,12 @@ if (!isset($_SESSION['hasEdited']) || $_SESSION['hasEdited'] === false) {
   $_SESSION['hasEdited'] = false;
 }
 
-$indicators = array("demographic_data", "pa_prevalence", "pe_policy", "pe_monitoring");
+$indicators = array("demographic_data", "pa_prevalence", "pe_policy", "pe_monitoring", "research_pe");
 $countryId = $_GET['id'];
 // $valueTypes = array("comments", "values_admin", "values_contact", "agreement");
 
-$progressIndicators = array(0, 0, 0, 0);
-$totalIndicators = array(14, 3, 6, 1);
+$progressIndicators = array(0, 0, 0, 0, 0);
+$totalIndicators = array(12, 3, 6, 1, 1);
 
 $index = 0;
 foreach ($indicators as $step) {
@@ -128,7 +128,7 @@ foreach ($progressIndicators as $key => $progress) {
         <div class="card-progress" onclick="openConsent('researchPe')"
           style="background: linear-gradient(360deg, rgba(18,25,36,1) 0%, rgba(70,102,137,1) 100%);">
           <div class="progress">
-            100.0%
+            <?php echo $progressIndicators[4] ?>%
           </div>
           <h3>PE and school-based PA interventions research</h3>
         </div>
