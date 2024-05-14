@@ -117,7 +117,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
           $videoTitle = "Methodological approach for collecting Physical Education policy data";
-          $videoUrl = "https://www.youtube.com/embed/1w7OgIMMRc4";
+          $videoUrl = "https://drive.google.com/file/d/16CIawm6043Q6BwhY_fIyMzPm6cs29ySc/preview";
           include '../../components/videoContainer.php'; ?>
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">

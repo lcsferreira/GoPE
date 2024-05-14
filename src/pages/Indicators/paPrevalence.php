@@ -60,7 +60,7 @@ $agreementValues = mysqli_fetch_assoc($result);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
           $videoTitle = "Methodological approach for collecting physical activity participation data";
-          $videoUrl = "https://www.youtube.com/embed/1w7OgIMMRc4";
+          $videoUrl = "https://drive.google.com/file/d/1YTK7IsJXtEKFuWUO-MKCc8U6tgMyYXss/preview";
           include '../../components/videoContainer.php'; ?>
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">

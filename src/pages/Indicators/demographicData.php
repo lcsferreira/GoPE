@@ -95,7 +95,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
         $videoTitle = "Methodological approach for collecting country and demographic data";
-        $videoUrl = "https://www.youtube.com/embed/1w7OgIMMRc4";
+        $videoUrl = "https://drive.google.com/file/d/1IN3WSir94uzGzdt_2is7Wj1ajX70-rMP/preview";
         include '../../components/videoContainer.php'; ?>
         <!-- -------------------- -->
         <div class="indicator-input-container">

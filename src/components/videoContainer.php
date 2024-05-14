@@ -6,8 +6,6 @@
     </button>
   </div>
   <div class="indicator-video-container__content">
-    <iframe src="<?php echo $videoUrl; ?>" frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="500"
-      height="400"></iframe>
+    <iframe src="<?php echo $videoUrl ?>" width="640" height="480" allow="autoplay"></iframe>
   </div>
 </div>

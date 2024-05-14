@@ -6,7 +6,12 @@ if (!isset($_SESSION['loggedIn'])) {
   exit;
 }
 
-$videosUrl = [];
+$videosUrl = [
+  "https://drive.google.com/file/d/1IN3WSir94uzGzdt_2is7Wj1ajX70-rMP/preview",
+  "https://drive.google.com/file/d/1YTK7IsJXtEKFuWUO-MKCc8U6tgMyYXss/preview",
+  "https://drive.google.com/file/d/16CIawm6043Q6BwhY_fIyMzPm6cs29ySc/preview",
+  "https://drive.google.com/file/d/1NHY5mY9usAQExZg9MzgHikgb0LEhdnTf/preview"
+];
 
 ?>
 <!DOCTYPE html>
