@@ -405,11 +405,17 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
           onblur="saveIntervationStudiesValues(${inc})">
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
-        <label for="period-data-collection-${inc}">
-          Period of data collection
+        <label for="period_data_collect-${inc}">
+          Was the study conducted in 2020?
         </label>
-        <input type="text" name="period-data-collection-${inc}" id="period-data-collection-${inc}"
-          onblur="saveIntervationStudiesValues(${inc})">
+        <div class="switch-field" id="period_data_collect-${inc}">
+          <input type="radio" id="period_data_collect-${inc}-yes" name="period_data_collect-${inc}"
+            value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="period_data_collect-${inc}-yes">Yes</label>
+          <input type="radio" id="period_data_collect-${inc}-no" name="period_data_collect-${inc}"
+            value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="period_data_collect-${inc}-no">No</label>
+        </div>
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
         <label for="not_was_lockdown-${inc}">
@@ -485,14 +491,22 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const minAgeSamples = grupoStudy.querySelector(`#min-age-samples-${inc}`);
     const avgAgeSamples = grupoStudy.querySelector(`#avg-age-samples-${inc}`);
     const maxAgeSamples = grupoStudy.querySelector(`#max-age-samples-${inc}`);
-    const periodDataCollection = grupoStudy.querySelector(`#period-data-collection-${inc}`);
+    const periodDataCollectionYes = grupoStudy.querySelector(`#period_data_collect-${inc}-yes`);
+    const periodDataCollectionNo = grupoStudy.querySelector(`#period_data_collect-${inc}-no`);
     const lockdownYes = grupoStudy.querySelector(`#not_was_lockdown-${inc}-yes`);
     const lockdownNo = grupoStudy.querySelector(`#not_was_lockdown-${inc}-no`);
     let lockdown = "0";
+
     if (lockdownYes.checked) {
       lockdown = true;
     } else if (lockdownNo.checked) {
       lockdown = false;
+    }
+
+    if (periodDataCollectionYes.checked) {
+      periodDataCollection = true;
+    } else if (periodDataCollectionNo.checked) {
+      periodDataCollection = false;
     }
 
 
@@ -528,7 +542,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       minAgeSamples: minAgeSamples.value,
       avgAgeSamples: avgAgeSamples.value,
       maxAgeSamples: maxAgeSamples.value,
-      periodDataCollection: periodDataCollection.value,
+      periodDataCollection: periodDataCollection,
       lockdown: lockdown
     };
 

@@ -157,12 +157,24 @@
       value="<?php if($intervationStudy["max_age_sample"]){ echo $intervationStudy["max_age_sample"];}else{echo "";} ?>">
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
-    <label for="period-data-collection-<?php echo $inc ?>">
-      Period of data collection
+    <label for="period_data_collect-<?php echo $inc ?>">
+      Was the study conducted in 2020?
     </label>
-    <input type="text" name="period-data-collection-<?php echo $inc ?>" id="period-data-collection-<?php echo $inc ?>"
+    <!-- <input type="text" name="period-data-collection-<?php echo $inc ?>" id="period-data-collection-<?php echo $inc ?>"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["period_data_collect"]){ echo $intervationStudy["period_data_collect"];}else{echo "";} ?>">
+      value="<?php if($intervationStudy["period_data_collect"]){ echo $intervationStudy["period_data_collect"];}else{echo "";} ?>"> -->
+    <div class="switch-field" id="period_data_collect-<?php echo $inc ?>">
+      <input type="radio" id="period_data_collect-<?php echo $inc ?>-yes" name="period_data_collect-<?php echo $inc ?>"
+        value="yes" <?php if ($intervationStudy["period_data_collect"] == 1 && $intervationStudy["period_data_collect"] !== null) {
+        echo "checked";
+      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="period_data_collect-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="period_data_collect-<?php echo $inc ?>-no" name="period_data_collect-<?php echo $inc ?>"
+        value="no" <?php if ($intervationStudy["period_data_collect"] == 0 && $intervationStudy["period_data_collect"] !== null) {
+        echo "checked";
+      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="period_data_collect-<?php echo $inc ?>-no">No</label>
+    </div>
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="not_was_lockdown-<?php echo $inc ?>">
