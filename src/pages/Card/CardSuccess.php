@@ -23,7 +23,7 @@ $cardStep = $_GET['cardStep'];
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
     integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
-  <title>Forgot Password - GoPE!</title>
+  <title>Card Success - GoPE!</title>
 </head>
 
 <body>
@@ -52,12 +52,32 @@ $cardStep = $_GET['cardStep'];
     </div>
   </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+  $(document).ready(() => {
+    sendEmail();
+  });
+
   const btnAdvance = document.querySelector('.btn-advance');
   btnAdvance.addEventListener('click', () => {
     window.location.href =
       '../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>';
   });
+
+  //send email
+  const sendEmail = () => {
+    $.ajax({
+      type: "POST",
+      url: "../../query/Cards/sendSuccessEmail.php",
+      data: {
+        id: <?php echo $id; ?>,
+        cardStep: "<?php echo $cardStep; ?>"
+      },
+      success: function(response) {
+        console.log(response);
+      }
+    });
+  }
   </script>
 </body>
 

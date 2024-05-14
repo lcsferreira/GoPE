@@ -319,7 +319,7 @@ function getLastUpdatedDate($country_id){
       },
       success: function(response) {
         if (response == "approved") {
-          window.location.href = "CardSuccess.php?cardStep=en";
+          window.location.href = "CardSuccess.php?id=<?php echo $_GET['id'] ?>&cardStep=en";
         } else {
           window.location.href = "../Dashboard/countriesList.php?id=<?php echo $_GET['id'] ?>";
         }
