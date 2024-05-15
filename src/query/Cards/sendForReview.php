@@ -40,8 +40,7 @@ foreach ($emails as $email) {
   <br>
     Dear ".$countryName." Contact,
   <br><br>
-  For the First set of Country Cards ".$year.", <b>we have updated the GoPE! Country Card to the english
-  version.</b> Please log into the workflow in order to review it, make any adjustments, and approve it.
+  For the First set of Country Cards ".$year.", <b>we have updated the English version of the GoPE! Country Card</b> Please log into the workflow in order to review it, make any adjustments, and approve it.
   <br><br>
   Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
   <br><br>
