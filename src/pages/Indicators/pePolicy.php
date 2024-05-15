@@ -936,7 +936,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </div>
                 <div id="documents-exist_policy_min_time_pe-contact">
                   <?php
-                if($policyMinTimePeDocumentsContact != null) {
+                if($policyMinTimePeDocumentsContact) {
                   $docRole = "contact";
                   $tableName = "pe_policy_exist_pe_min_time_documents_contact";
                   $indicatorName = "exist_policy_min_time_pe";
@@ -1105,7 +1105,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 include '../../components/indicatorInputGroup.php';
                 ?>
                 </div>
-                <div id="documents-exist_pe_min_time_se-contact">
+                <div id="documents-exist_policy_min_time_se-contact">
                   <?php
                 if($policyMinTimeSeDocumentsContact != null) {
                   $docRole = "contact";
@@ -1119,6 +1119,9 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 ?>
                 </div>
                 <?php if($_SESSION['type'] == 'contact'): ?>
+                <!-- <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_pe"
+                  data-table-name="pe_policy_exist_pe_min_time_documents_contact" data-role="contact"
+                  style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button> -->
                 <button id="add-document" class="btn-primary" data-indicator-name="exist_policy_min_time_se"
                   data-table-name="pe_policy_exist_se_min_time_documents_contact" data-role="contact"
                   style="width: 100% !important; margin-bottom: 1rem;" onclick=""><strong>Add</strong> Document</button>
@@ -1325,6 +1328,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
   }
 
+
   function addDocumentToTable(indicatorName, tableName, role) {
     const documents = $(`#documents-${indicatorName}-${role}`)
     const lastDoc = documents.children().last().attr('id')
@@ -1478,9 +1482,9 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     let agreementGroups = []
     for (let i = 1; i <= 12; i++) {
       // get all the divs with id that contains i and -contact
-      contactLabels.push($(`p[id*="${i}-contact-label"]`))
-      contactInputs.push($(`div[id*="${i}-contact"]`))
-      agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
+      contactLabels.push($(`p[id="${i}-contact-label"]`))
+      contactInputs.push($(`div[id="${i}-contact"]`))
+      agreementGroups.push($(`div[id="agreement-group-${i}"]`))
     }
 
     agreementGroups.forEach((agreementGroup, index) => {
