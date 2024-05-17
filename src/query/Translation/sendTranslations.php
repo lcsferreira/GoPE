@@ -25,8 +25,8 @@ if($rs > 0){
   $row = mysqli_fetch_assoc($result);
   $country_name = $row['name'];
 
-  $admin_emails = ["lucas.simoes.ferreira@gmail.com"];
-  // $adminEmails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
+  // $admin_emails = ["lucas.simoes.ferreira@gmail.com"];
+  $adminEmails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
 
   foreach ($admin_emails as $email) {
     //get time

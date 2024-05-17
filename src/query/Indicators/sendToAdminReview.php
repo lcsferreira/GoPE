@@ -7,8 +7,8 @@ $sql = "UPDATE countries SET indicators_step = 'waiting admin' WHERE id = $count
 $result = $conn->query($sql);
 
 if ($result) {
-  $emails = ["lucas.simoes.ferreira@gmail.com"]; //change to admin email
-  // $emails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
+  // $emails = ["lucas.simoes.ferreira@gmail.com"]; //change to admin email
+  $emails = ["gopecoordination@gmail.com", "prjccristao@gmail.com"];
 
 
   $sql = "SELECT name FROM countries WHERE id = $countryId";
