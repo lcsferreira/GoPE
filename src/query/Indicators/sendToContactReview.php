@@ -38,7 +38,7 @@ if ($result) {
       <br>
         Dear ".$country_name." Contact,
       <br><br>
-        For the Third set of Country Cards ".$year.", we have updated the data for the GoPE! physical education indicators. Please log into the Workflow in order to review the indicators, make any adjustments and approve the new Country Card.
+        For the first set of Country Cards ".$year.", we have updated the data for the GoPE! physical education indicators. Please log into the Workflow in order to review the indicators, make any adjustments and approve the new Country Card.
       <br><br>
         Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
       <br><br>

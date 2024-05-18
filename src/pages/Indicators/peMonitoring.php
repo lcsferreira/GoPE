@@ -594,6 +594,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="year_publication-${inc}-${type}">
             Year of publication
           </label>
+          <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="number" name="year_publication" id="year_publication-${inc}-${type}"
             onblur="saveMonitoringSystemValues(${inc}, '${type}')">
         </div>
@@ -648,6 +650,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         </h3>
         <div class="indicator-input">
           <label for="document-title-${docInc}-${type}">Document title</label>
+          <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="text" name="document-title-${docInc}-${type}"
             id="document-title-${docInc}-${type}"
             onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}', '${inc}')">
@@ -655,6 +659,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         <div class="indicator-input">
           <label for="document-eletronic_source-${docInc}-${type}">Eletronic source</label>
+          <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="text" name="document-eletronic_source-${docInc}-${type}"
             id="document-eletronic_source-${docInc}-${type}"
             onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}', '${inc}')">

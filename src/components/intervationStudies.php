@@ -1,5 +1,5 @@
 <div class="agreement-group" id="<?php echo $inc ?>">
-  <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervation study
+  <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervention study
     <?php echo $inc ?>
   </h3>
   <div class=" indicator-input" style="margin: 0 !important">
@@ -101,6 +101,8 @@
     <label for="eletronic-source-<?php echo $inc ?>">
       Eletronic source
     </label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <textarea name="eletronic-source-<?php echo $inc ?>" id="eletronic-source-<?php echo $inc ?>" cols="30" rows="2"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["eletronic_source"]){ echo $intervationStudy["eletronic_source"];}else{echo "";} ?></textarea>
   </div>

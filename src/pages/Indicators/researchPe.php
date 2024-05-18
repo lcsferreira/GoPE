@@ -109,7 +109,9 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <input type="submit" value="Confirm" name="submit">
             </form>
             <?php else : ?>
-            <img data-pdf-thumbnail-file="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf">
+            <!-- <img data-pdf-thumbnail-file="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf"> -->
+            <embed src="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf" type="application/pdf" width="100%"
+              height="400px" />
             <?php if($_SESSION['type'] == 'admin'): ?>
             <form action="../../query/Indicators/tableUpload.php?id=<?php echo $_GET["id"]; ?>" method="post"
               enctype="multipart/form-data">
@@ -271,7 +273,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const inc = studies.childElementCount + 1;
     const study = `
     <div class="agreement-group" id="${inc}" style="margin: 0 !important">
-      <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervation study
+      <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervention study
         ${inc}
       </h3>
       <div class="indicator-input" style="margin: 0 !important">
@@ -350,6 +352,8 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <label for="eletronic-source-${inc}">
           Eletronic source
         </label>
+        <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
         <textarea name="eletronic-source-${inc}" id="eletronic-source-${inc}" cols="30" rows="2"
           onblur="saveIntervationStudiesValues(${inc})"></textarea>
       </div>

@@ -46,7 +46,7 @@ if (isset($_GET['Success'])) {
         <h1>First Access</h1>
       </div>
       <p class="form__description">
-        your <strong>password</strong> has been <strong>saved</strong>.
+        Your <strong>password</strong> has been <strong>saved</strong>.
         <br>
         We will <strong>redirect</strong> you to the <strong>log in </strong> area.
       </p>

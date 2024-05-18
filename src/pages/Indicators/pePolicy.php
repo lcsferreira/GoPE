@@ -109,7 +109,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     include '../../components/modalInfo.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Country <strong>Progress</strong></h1>
+      <h1>Country <strong>Indicators</strong></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -1374,6 +1374,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="indicator-input">
           <label for="document-title-${indicatorName}-${docInc}-${docRole}">Document
             title</label>
+            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="text"
             name="document-title-${indicatorName}-${docInc}-${docRole}"
             id="document-title-${indicatorName}-${docInc}-${docRole}"
@@ -1383,6 +1385,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="indicator-input">
           <label
             for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
+            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="text"
             name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
             id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
@@ -1393,6 +1397,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label
             for="document-eletronic_source-${indicatorName}-${docInc}-${docRole}">Eletronic
             source</label>
+            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
           <input type="text"
             name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
             id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"

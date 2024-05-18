@@ -7,6 +7,8 @@
   </h3>
   <div class="indicator-input">
     <label for="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Document title</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text" name="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>" value="<?php echo $document["title"] ?>"
       onblur="saveDocumentValue('document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $inc; ?>')"
@@ -15,6 +17,8 @@
 
   <div class="indicator-input">
     <label for="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Eletronic source</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
     <input type="text" name="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       value="<?php echo $document["eletronic_source"] ?>"
