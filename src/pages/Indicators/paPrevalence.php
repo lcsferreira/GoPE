@@ -41,6 +41,7 @@ $agreementValues = mysqli_fetch_assoc($result);
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="../../css/components/videoContainer.css">
+  <link rel="stylesheet" href="../../css/components/cardLocation.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
@@ -50,9 +51,13 @@ $agreementValues = mysqli_fetch_assoc($result);
 <body>
   <?php include '../../components/header.php'; ?>
   <div class="container">
+    <?php
+    $cardLocationPath = "../../assets/card_pa_participation.png";
+    include '../../components/cardLocation.php';
+    ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Country <strong>Indicators</strong></h1>
+      <h1>Physical Activity participation <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -225,8 +230,23 @@ $agreementValues = mysqli_fetch_assoc($result);
       $(".hide-show-video").click(function() {
         hideVideo()
       });
+      openCardLocationModal()
+
       verifyAgreementInput()
     });
+
+    function openCardLocationModal() {
+      $("#cardLocationModal").click(function() {
+        $("#cardLocation").css("display", "block")
+        $("#card-location-modal-close").click(function() {
+          closeCardLocationModal()
+        })
+      })
+    }
+
+    function closeCardLocationModal() {
+      $("#cardLocation").css("display", "none")
+    }
 
     function verifyAgreementInput() {
       let contactInputs = []

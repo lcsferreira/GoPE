@@ -57,6 +57,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="../../css/components/videoContainer.css">
+  <link rel="stylesheet" href="../../css/components/cardLocation.css">
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
@@ -71,9 +73,13 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $icon = "fas fa-exclamation-triangle";
     $buttonCloseText = "Close";
     include '../../components/modalInfo.php'; ?>
+    <?php
+    $cardLocationPath = "../../assets/card_pe_monitoring.png";
+    include '../../components/cardLocation.php';
+    ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Country <strong>Indicators</strong></h1>
+      <h1>Physical education monitoring <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -204,6 +210,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         //disable href
         verifyIfNoMonitoringSystem(pageUrl)
       });
+      openCardLocationModal()
+
       verifyAgreementInput()
     });
 
@@ -270,6 +278,19 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       } else {
         window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
       }
+    }
+
+    function openCardLocationModal() {
+      $("#cardLocationModal").click(function() {
+        $("#cardLocation").css("display", "block")
+        $("#card-location-modal-close").click(function() {
+          closeCardLocationModal()
+        })
+      })
+    }
+
+    function closeCardLocationModal() {
+      $("#cardLocation").css("display", "none")
     }
 
     function openModal(msg) {

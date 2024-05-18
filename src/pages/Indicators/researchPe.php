@@ -6,21 +6,6 @@ if (!isset($_SESSION['loggedIn'])) {
   exit;
 }
 
-function getThumbnail($path, $country)
-{
-  if (is_dir($path)) {
-    $files = scandir($path);
-
-    foreach ($files as $file) {
-      if ($file != "." && $file != ".." && strpos($file, $country) === 0 && pathinfo($file, PATHINFO_EXTENSION) === "png") {
-        return $file; // Retorna o primeiro arquivo encontrado
-      }
-    }
-  }
-
-  return null; // Retorna null se nenhum arquivo for encontrado
-}
-
 $sql = "SELECT * FROM research_pe_comments WHERE id_country = " . $_GET['id'];
 $result = mysqli_query($conn, $sql);
 $commentValues = mysqli_fetch_assoc($result);
@@ -57,6 +42,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/videoContainer.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
   <link rel="stylesheet" href="../../css/components/modalMethod.css">
+  <link rel="stylesheet" href="../../css/components/cardLocation.css">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
     integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
@@ -68,9 +54,13 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <?php include '../../components/header.php'; ?>
   <div class="container">
     <?php include '../../components/modalMetodology.php'; ?>
+    <?php
+    $cardLocationPath = "../../assets/card_pe_research.png";
+    include '../../components/cardLocation.php';
+    ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Country <strong>Indicators</strong></h1>
+      <h1>Research in PE and school-based PA <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -110,8 +100,8 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </form>
             <?php else : ?>
             <!-- <img data-pdf-thumbnail-file="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf"> -->
-            <embed src="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf" type="application/pdf" width="100%"
-              height="400px" />
+            <embed src="../../uploads/tables/<?php echo $adminValues['file_name']; ?>" type="application/pdf"
+              width="100%" height="400px" />
             <?php if($_SESSION['type'] == 'admin'): ?>
             <form action="../../query/Indicators/tableUpload.php?id=<?php echo $_GET["id"]; ?>" method="post"
               enctype="multipart/form-data">
@@ -178,29 +168,6 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $(".btn-next").click(function() {
       window.location.href = "../Indicators/conclusion.php<?php echo "?id=" . $_GET['id'] ?>";
     });
-    $(".thumbnail-pdf img").each(function() {
-      var pdf = $(this).data("pdf-thumbnail-file");
-      var img = $(this);
-      pdfjsLib.getDocument(pdf).promise.then(function(pdf) {
-        return pdf.getPage(1);
-      }).then(function(page) {
-        var scale = 1.5;
-        var viewport = page.getViewport({
-          scale: scale
-        });
-        var canvas = document.createElement("canvas");
-        var context = canvas.getContext("2d");
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        var renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-        page.render(renderContext).promise.then(function() {
-          img.attr("src", canvas.toDataURL());
-        });
-      });
-    });
 
     $(".hide-show-video").click(function() {
       hideVideo()
@@ -219,7 +186,22 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         $("#modalMethod").hide();
       });
     });
+    openCardLocationModal()
+
   });
+
+  function openCardLocationModal() {
+    $("#cardLocationModal").click(function() {
+      $("#cardLocation").css("display", "block")
+      $("#card-location-modal-close").click(function() {
+        closeCardLocationModal()
+      })
+    })
+  }
+
+  function closeCardLocationModal() {
+    $("#cardLocation").css("display", "none")
+  }
 
   function saveAgreementValue(indicatorName, tableName, value) {
     let idCountry = <?php echo $_GET['id'] ?>;

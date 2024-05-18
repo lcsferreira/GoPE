@@ -44,7 +44,7 @@ foreach ($emails as $email) {
   <br><br>
   Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
   <br><br>
-  <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/reviewInstructions.php?id=".$idCountry."'>Workflow</a>
+  <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Card/cardUpload.php?id=".$idCountry."'>Workflow</a>
   <br><br>
   If you have any questions, please contact us at <a href='mailto: gopecoordination@gmail.com'>gopecoordination@gmail.com</a> or <a href='mailto:prjccristao@gmail.com'>prjccristao@gmail.com</a>.
   ";

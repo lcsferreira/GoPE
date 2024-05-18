@@ -1,0 +1,66 @@
+.card-location-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 25%;
+  right: 25%;
+  width: 600px;
+  height: 600px;
+  overflow: auto;
+  background-color: white;
+  border: 1px solid #8e9dae;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 0px 100vw rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 0px 100vw rgba(0, 0, 0, 0.3);
+}
+
+.card-location-modal .card-location-modal-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--gray-lighter);
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  color: var(--gray-dark);
+}
+
+.card-location-modal .card-location-modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card-location-modal .card-location-modal-header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content-method {
+  background-color: #fefefe;
+  margin: 0 auto;
+  padding: 20px;
+  border: none;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.card-location-modal .card-location-modal-body {
+  color: #8e9dae;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 15px;
+}
+
+.card-location-modal .card-location-modal-body img {
+  border: 1px solid #8e9dae;
+  border-radius: 0.75rem;
+}
+
+.fa-info-circle:hover {
+  cursor: pointer;
+}
