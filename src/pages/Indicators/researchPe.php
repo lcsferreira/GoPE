@@ -35,12 +35,12 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/vars.css">
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
-  <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/components/inputYesNo.css">
   <link rel="stylesheet" href="../../css/components/videoContainer.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/components/modalMethod.css">
   <link rel="stylesheet" href="../../css/components/cardLocation.css">
 
@@ -55,8 +55,14 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <div class="container">
     <?php include '../../components/modalMetodology.php'; ?>
     <?php
-    $cardLocationPath = "../../assets/card_pe_research.png";
-    include '../../components/cardLocation.php';
+      $cardLocationPath = "../../assets/card_pe_research.png";
+      include '../../components/cardLocation.php';
+    ?>
+    <?php 
+      $typeModal = "warning";
+      $icon = "fas fa-exclamation-triangle";
+      $buttonCloseText = "Close";
+      include '../../components/modalInfo.php'; 
     ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
@@ -157,16 +163,22 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
-  const methods = [{
-    "name": "APA 7th reference",
-    "html": "<p>Example of a reference following APA 7th: </p><p><strong>Main structure: </strong>Auhtors’ last name, Authors’ first name initial letter. (Year of publication). Articles title. Journals’ title, volume(number), pages. DOI: </p><p><strong>Example: </strong>Martins, J., Onofre, M., & Hallal, P. C. (2023). Launch of the Global Observatory for Physical Education (GoPE!). Journal of Physical Activity and Health, 20(7), 573-574. DOI: 10.1123/jpah.2023-0099 </p>"
-  }]
   $(document).ready(function(e) {
     $(".btn-back").click(function() {
       window.location.href = "../Indicators/peMonitoring.php<?php echo "?id=" . $_GET['id'] ?>";
     });
     $(".btn-next").click(function() {
-      window.location.href = "../Indicators/conclusion.php<?php echo "?id=" . $_GET['id'] ?>";
+      verifyIntervetionCompleted("conclusion")
+    });
+
+    $(".side-nav__links > li > a").click(function() {
+      //remove href from the a tag
+      event.preventDefault()
+      //get the href value
+      let pageUrl = $(this).attr("href")
+      //get the value between the last / and the .php
+      pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
+      verifyIntervetionCompleted(pageUrl)
     });
 
     $(".hide-show-video").click(function() {
@@ -177,18 +189,66 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       addStudy();
     });
 
-    $("#apa7thMethod").click(function() {
-      $("#modalMethod").show();
-      const method = methods.find(method => method.name === "APA 7th reference");
-      $("#indicatorTitle").text(method.name);
-      $("#modalIndicatorMethod").html(method.html);
-      $("#modal-close-method").click(function() {
-        $("#modalMethod").hide();
-      });
-    });
     openCardLocationModal()
 
   });
+
+  function verifyIntervetionCompleted(pageUrl) {
+    let agreementGroups = []
+    let allFilled = true
+    let studiesContainer = []
+    const studies = $("#studies")
+
+    agreementGroups.push($(`div[id="agreement-group-1"]`))
+
+    agreementGroups.forEach(agreementGroup => {
+      let radioInputs = agreementGroup.find("input[type='radio']")
+
+      let agreementValue = radioInputs.filter(":checked").val()
+
+      if (agreementValue == 2 || agreementValue == 3) {
+        //check if all the studies are filled
+        studies.children().each(function(index, study) {
+          let title = $(study).find("textarea[name^='title']")
+          let year = $(study).find("input[name^='year']")
+          let authors = $(study).find("textarea[name^='authors']")
+          let eletronicSource = $(study).find("textarea[name^='eletronic-source']")
+          let isPopStudyComp = $(study).find("input[name^='is_pop_study_comp']:checked")
+          let isMainOutcome = $(study).find("input[name^='is_main_outcome']:checked")
+          let isStudyIntervention = $(study).find("input[name^='is_study_intervention']:checked")
+          let isPrimSchoolSet = $(study).find("input[name^='is_prim_school_set']:checked")
+          let isPublishedPeer = $(study).find("input[name^='is_published_peer']:checked")
+          let wasCollected = $(study).find("input[name^='was_collected']:checked")
+
+          if (title.val() == "" || year.val() == "" || authors.val() == "" || eletronicSource.val() == "" ||
+            isPopStudyComp.length == 0 || isMainOutcome.length == 0 || isStudyIntervention.length == 0 ||
+            isPrimSchoolSet.length == 0 || isPublishedPeer.length == 0 || wasCollected.length == 0) {
+            allFilled = false
+          }
+        })
+      }
+    })
+
+    if (!allFilled) {
+      openModal("Please fill all the studies before proceeding")
+    } else {
+      window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+    }
+
+  }
+
+  function openModal(msg) {
+    $("#modal").css("display", "block")
+    $(".modal-body").html(msg)
+    $("#modal-close").click(function() {
+      closeModal()
+    })
+  }
+
+  function closeModal() {
+    $(".modal-body").html("")
+    $("#modal").css("display", "none")
+  }
 
   function openCardLocationModal() {
     $("#cardLocationModal").click(function() {
@@ -258,64 +318,6 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Intervention study
         ${inc}
       </h3>
-      <div class="indicator-input" style="margin: 0 !important">
-        <label for="${inc}">
-        PE and school-based PA domains
-        <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
-        </label>
-        <div class="agreement-group" id="${inc}" style="margin: 0 !important">
-          <label for="pe-${inc}" class="radio-option-no-description" style="width: auto !important;">
-            <div class="option-text">
-              <h3>Physical Education</h3>
-            </div>
-            <input type="checkbox" name="radio-group-intervation-studies" id="pe-${inc}" value="pe" onclick="saveIntervationStudiesValues(${inc})"/>
-            <span class="checkmark"></span>
-          </label>
-          <label for="atp-${inc}" class="radio-option-no-description" style="width: auto !important;">
-            <div class="option-text">
-              <h3>Active transport</h3>
-            </div>
-            <input type="checkbox" name="radio-group-intervation-studies" id="atp-${inc}" value="atp" onclick="saveIntervationStudiesValues(${inc})"/>
-            <span class="checkmark"></span>
-          </label>
-          <label for="ac-${inc}" class="radio-option-no-description" style="width: auto !important;">
-            <div class="option-text">
-              <h3>Active classes/breaks</h3>
-            </div>
-            <input type="checkbox" name="radio-group-intervation-studies" id="ac-${inc}" value="ac" onclick="saveIntervationStudiesValues(${inc})"/>
-            <span class="checkmark"></span>
-          </label>
-          <label for="ar-${inc}" class="radio-option-no-description" style="width: auto !important;">
-            <div class="option-text">
-              <h3>Active recess</h3>
-            </div>
-            <input type="checkbox" name="radio-group-intervation-studies" id="ar-${inc}" value="ar" onclick="saveIntervationStudiesValues(${inc})"/>
-            <span class="checkmark"></span>
-          </label>
-          <label for="e_pa-${inc}" class="radio-option-no-description" style="width: auto !important;">
-            <div class="option-text">
-              <h3>Extracurricular physical activity</h3>
-            </div>
-            <input type="checkbox" name="radio-group-intervation-studies" id="e_pa-${inc}" value="e_pa" onclick="saveIntervationStudiesValues(${inc})"/>
-            <span class="checkmark"></span>
-          </label>
-          <label for="other-${inc}" class="radio-option-no-description" style="width: auto !important;">
-          <div class="option-text">
-            <h3>Other</h3>
-          </div>
-          <input type="checkbox" name="radio-group-intervation-studies" id="other-${inc}" value="other"
-            onclick="saveIntervationStudiesValues(${inc})" />
-          <span class="checkmark"></span>
-          </label>
-        </div>
-      </div>
-      <div class=" indicator-input" hidden style="margin: 0 !important" id="other-domain-container-${inc}">
-        <label for="other-domain-${inc}">
-          Other domain
-        </label>
-        <textarea name="other-domain-${inc}" id="other-domain-${inc}" cols="30" rows="2"
-          onblur="saveIntervationStudiesValues(${inc})"></textarea>
-      </div>
       <div class=" indicator-input" style="margin: 0 !important">
         <label for="title-${inc}">
           Title
@@ -331,89 +333,100 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
           onblur="saveIntervationStudiesValues(${inc})">
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
+        <label for="authors-${inc}">
+          Authors 
+        </label>
+        <textarea name="authors-${inc}" id="authors-${inc}" cols="30" rows="2"
+          onblur="saveIntervationStudiesValues(${inc})"></textarea>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
         <label for="eletronic-source-${inc}">
           Eletronic source
         </label>
         <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
+          information.</p>
         <textarea name="eletronic-source-${inc}" id="eletronic-source-${inc}" cols="30" rows="2"
           onblur="saveIntervationStudiesValues(${inc})"></textarea>
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
-        <label for="apa7th_reference-${inc}">
-          APA 7th reference
+        <label for="is_pop_study_comp-${inc}">
+          Is the population of the study composed of children aged 5 to 10 years old and/or adolescents aged 11 to 17 years
+          old attending school (for different age limits, the mean age needs to fall within these gaps)?
         </label>
-        <textarea name="apa7th_reference-${inc}" id="apa7th_reference-${inc}" cols="30" rows="2"
-          onblur="saveIntervationStudiesValues(${inc})"></textarea>
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="inclusion-criteria-${inc}">
-          Inclusion criteria
-        </label>
-        <textarea name="inclusion-criteria-${inc}" id="inclusion-criteria-${inc}" cols="30"
-          rows="4"
-          onblur="saveIntervationStudiesValues(${inc})"></textarea>
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="exclusion-criteria-${inc}">
-          Exclusion criteria
-        </label>
-        <textarea name="exclusion-criteria-${inc}" id="exclusion-criteria-${inc}" cols="30"
-          rows="4"
-          onblur="saveIntervationStudiesValues(${inc})"></textarea>
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="main-outcomes-${inc}">
-          Main outcomes
-        </label>
-        <textarea name="main-outcomes-${inc}" id="main-outcomes-${inc}" cols="30" rows="4"
-          onblur="saveIntervationStudiesValues(${inc})"></textarea>
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="min-age-samples-${inc}">
-          Minimum age of the sample
-        </label>
-        <input type="text" name="min-age-samples-${inc}" id="min-age-samples-${inc}"
-          onblur="saveIntervationStudiesValues(${inc})">
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="avg-age-samples-${inc}">
-          Average age of the sample
-        </label>
-        <input type="text" name="avg-age-samples-${inc}" id="avg-age-samples-${inc}"
-          onblur="saveIntervationStudiesValues(${inc})">
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="max-age-samples-${inc}">
-          Maximum age of the sample
-        </label>
-        <input type="text" name="max-age-samples-${inc}" id="max-age-samples-${inc}"
-          onblur="saveIntervationStudiesValues(${inc})">
-      </div>
-      <div class=" indicator-input" style="margin: 0 !important">
-        <label for="period_data_collect-${inc}">
-          Was the study conducted in 2020?
-        </label>
-        <div class="switch-field" id="period_data_collect-${inc}">
-          <input type="radio" id="period_data_collect-${inc}-yes" name="period_data_collect-${inc}"
+        <div class="switch-field" id="is_pop_study_comp-${inc}">
+          <input type="radio" id="is_pop_study_comp-${inc}-yes" name="is_pop_study_comp-${inc}"
             value="yes" onclick="saveIntervationStudiesValues(${inc})" />
-          <label for="period_data_collect-${inc}-yes">Yes</label>
-          <input type="radio" id="period_data_collect-${inc}-no" name="period_data_collect-${inc}"
+          <label for="is_pop_study_comp-${inc}-yes">Yes</label>
+          <input type="radio" id="is_pop_study_comp-${inc}-no" name="is_pop_study_comp-${inc}"
             value="no" onclick="saveIntervationStudiesValues(${inc})" />
-          <label for="period_data_collect-${inc}-no">No</label>
+          <label for="is_pop_study_comp-${inc}-no">No</label>
         </div>
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
-        <label for="not_was_lockdown-${inc}">
-        Do you confirm that your country was not in a lockdown status due to the covid 19 pandemic when the data collection took place?
+        <label for="is_main_outcome-${inc}">
+          Is physical activity (i.e., MVPA, VPA, meeting the PA recommendations) the main outcome of the study?
         </label>
-        <div class="switch-field" id="not_was_lockdown-${inc}">
-          <input type="radio" id="not_was_lockdown-${inc}-yes" name="not_was_lockdown-${inc}"
+        <div class="switch-field" id="is_main_outcome-${inc}">
+          <input type="radio" id="is_main_outcome-${inc}-yes" name="is_main_outcome-${inc}"
             value="yes" onclick="saveIntervationStudiesValues(${inc})" />
-          <label for="not_was_lockdown-${inc}-yes">Yes</label>
-          <input type="radio" id="not_was_lockdown-${inc}-no" name="not_was_lockdown-${inc}"
+          <label for="is_main_outcome-${inc}-yes">Yes</label>
+          <input type="radio" id="is_main_outcome-${inc}-no" name="is_main_outcome-${inc}"
             value="no" onclick="saveIntervationStudiesValues(${inc})" />
-          <label for="not_was_lockdown-${inc}-no">No</label>
+          <label for="is_main_outcome-${inc}-no">No</label>
+        </div> 
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="is_study_intervention-${inc}">
+          Is the study an intervention (a type of study in which an intervention is applied to a group of people in a
+          specific context to verify its impact on an outcome of interest)
+        </label>
+        <div class="switch-field" id="is_study_intervention-${inc}">
+          <input type="radio" id="is_study_intervention-${inc}-yes"
+            name="is_study_intervention-${inc}" value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_study_intervention-${inc}-yes">Yes</label>
+          <input type="radio" id="is_study_intervention-${inc}-no"
+            name="is_study_intervention-${inc}" value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_study_intervention-${inc}-no">No</label>
+        </div>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="is_prim_school_set-${inc}">
+          Is the study primarily conducted within the school setting?
+        </label>
+        <div class="switch-field" id="is_prim_school_set-${inc}">
+          <input type="radio" id="is_prim_school_set-${inc}-yes" name="is_prim_school_set-${inc}"
+            value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_prim_school_set-${inc}-yes">Yes</label>
+          <input type="radio" id="is_prim_school_set-${inc}-no" name="is_prim_school_set-${inc}"
+            value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_prim_school_set-${inc}-no">No</label>
+        </div>
+        
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="is_published_peer-${inc}">
+          Is the study published in a peer-reviewed journal?
+        </label>
+        <div class="switch-field" id="is_published_peer-${inc}">
+          <input type="radio" id="is_published_peer-${inc}-yes" name="is_published_peer-${inc}"
+            value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_published_peer-${inc}-yes">Yes</label>
+          <input type="radio" id="is_published_peer-${inc}-no" name="is_published_peer-${inc}"
+            value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="is_published_peer-${inc}-no">No</label>
+
+        </div>
+      </div>
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="was_collected-${inc}">
+          Was the data of the study collected until December 2019 or after January 2021?
+        </label>
+        <div class="switch-field" id="was_collected-${inc}">
+          <input type="radio" id="was_collected-${inc}-yes" name="was_collected-${inc}" value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="was_collected-${inc}-yes">Yes</label>
+          <input type="radio" id="was_collected-${inc}-no" name="was_collected-${inc}" value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="was_collected-${inc}-no">No</label>
+
         </div>
       </div>
       <button class="btn-delete" onclick="deleteStudy(${inc})"><strong>Delete</strong> Study</button>
@@ -470,66 +483,73 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const title = grupoStudy.querySelector(`#title-${inc}`);
     const year = grupoStudy.querySelector(`#year-${inc}`);
     const eletronicSource = grupoStudy.querySelector(`#eletronic-source-${inc}`);
-    const apa7thReference = grupoStudy.querySelector(`#apa7th_reference-${inc}`);
-    const inclusionCriteria = grupoStudy.querySelector(`#inclusion-criteria-${inc}`);
-    const exclusionCriteria = grupoStudy.querySelector(`#exclusion-criteria-${inc}`);
-    const mainOutcomes = grupoStudy.querySelector(`#main-outcomes-${inc}`);
-    const minAgeSamples = grupoStudy.querySelector(`#min-age-samples-${inc}`);
-    const avgAgeSamples = grupoStudy.querySelector(`#avg-age-samples-${inc}`);
-    const maxAgeSamples = grupoStudy.querySelector(`#max-age-samples-${inc}`);
-    const periodDataCollectionYes = grupoStudy.querySelector(`#period_data_collect-${inc}-yes`);
-    const periodDataCollectionNo = grupoStudy.querySelector(`#period_data_collect-${inc}-no`);
-    const lockdownYes = grupoStudy.querySelector(`#not_was_lockdown-${inc}-yes`);
-    const lockdownNo = grupoStudy.querySelector(`#not_was_lockdown-${inc}-no`);
-    let lockdown = "0";
+    const authors = grupoStudy.querySelector(`#authors-${inc}`);
+    const isPopStudyCompYes = grupoStudy.querySelector(`#is_pop_study_comp-${inc}-yes`);
+    const isPopStudyCompNo = grupoStudy.querySelector(`#is_pop_study_comp-${inc}-no`);
+    const isMainOutcomeYes = grupoStudy.querySelector(`#is_main_outcome-${inc}-yes`);
+    const isMainOutcomeNo = grupoStudy.querySelector(`#is_main_outcome-${inc}-no`);
+    const isStudyInterventionYes = grupoStudy.querySelector(`#is_study_intervention-${inc}-yes`);
+    const isStudyInterventionNo = grupoStudy.querySelector(`#is_study_intervention-${inc}-no`);
+    const isPrimSchoolSetYes = grupoStudy.querySelector(`#is_prim_school_set-${inc}-yes`);
+    const isPrimSchoolSetNo = grupoStudy.querySelector(`#is_prim_school_set-${inc}-no`);
+    const isPublishedPeerYes = grupoStudy.querySelector(`#is_published_peer-${inc}-yes`);
+    const isPublishedPeerNo = grupoStudy.querySelector(`#is_published_peer-${inc}-no`);
+    const wasCollectedYes = grupoStudy.querySelector(`#was_collected-${inc}-yes`);
+    const wasCollectedNo = grupoStudy.querySelector(`#was_collected-${inc}-no`);
 
-    if (lockdownYes.checked) {
-      lockdown = true;
-    } else if (lockdownNo.checked) {
-      lockdown = false;
+    let isPopStudyComp = false;
+    if (isPopStudyCompYes.checked) {
+      isPopStudyComp = true;
+    } else if (isPopStudyCompNo.checked) {
+      isPopStudyComp = false;
     }
 
-    if (periodDataCollectionYes.checked) {
-      periodDataCollection = true;
-    } else if (periodDataCollectionNo.checked) {
-      periodDataCollection = false;
+    let isMainOutcome = false;
+    if (isMainOutcomeYes.checked) {
+      isMainOutcome = true;
+    } else if (isMainOutcomeNo.checked) {
+      isMainOutcome = false;
     }
 
-
-    const pe = grupoStudy.querySelector(`#pe-${inc}`);
-    const atp = grupoStudy.querySelector(`#atp-${inc}`);
-    const ac = grupoStudy.querySelector(`#ac-${inc}`);
-    const ar = grupoStudy.querySelector(`#ar-${inc}`);
-    const e_pa = grupoStudy.querySelector(`#e_pa-${inc}`);
-    const other = grupoStudy.querySelector(`#other-${inc}`);
-    if (other.checked) {
-      $(`#other-domain-container-${inc}`).show();
-    } else {
-      $(`#other-domain-container-${inc}`).hide();
+    let isStudyIntervention = false;
+    if (isStudyInterventionYes.checked) {
+      isStudyIntervention = true;
+    } else if (isStudyInterventionNo.checked) {
+      isStudyIntervention = false;
     }
 
-    const otherDomain = grupoStudy.querySelector(`#other-domain-${inc}`).value;
+    let isPrimSchoolSet = false;
+    if (isPrimSchoolSetYes.checked) {
+      isPrimSchoolSet = true;
+    } else if (isPrimSchoolSetNo.checked) {
+      isPrimSchoolSet = false;
+    }
+
+    let isPublishedPeer = false;
+    if (isPublishedPeerYes.checked) {
+      isPublishedPeer = true;
+    } else if (isPublishedPeerNo.checked) {
+      isPublishedPeer = false;
+    }
+
+    let wasCollected = false;
+    if (wasCollectedYes.checked) {
+      wasCollected = true;
+    } else if (wasCollectedNo.checked) {
+      wasCollected = false;
+    }
 
     const values = {
-      pe: pe.checked,
-      atp: atp.checked,
-      ac: ac.checked,
-      ar: ar.checked,
-      e_pa: e_pa.checked,
-      other: other.checked,
-      otherText: otherDomain,
       title: title.value,
       year: year.value,
+      authors: authors.value,
       eletronicSource: eletronicSource.value,
-      apa7thReference: apa7thReference.value,
-      inclusionCriteria: inclusionCriteria.value,
-      exclusionCriteria: exclusionCriteria.value,
-      mainOutcomes: mainOutcomes.value,
-      minAgeSamples: minAgeSamples.value,
-      avgAgeSamples: avgAgeSamples.value,
-      maxAgeSamples: maxAgeSamples.value,
-      periodDataCollection: periodDataCollection,
-      lockdown: lockdown
+      isPopStudyComp: isPopStudyComp,
+      isMainOutcome: isMainOutcome,
+      isStudyIntervention: isStudyIntervention,
+      isPrimSchoolSet: isPrimSchoolSet,
+      isPublishedPeer: isPublishedPeer,
+      wasCollected: wasCollected
     };
 
     console.log(values);

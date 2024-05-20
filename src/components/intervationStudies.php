@@ -3,91 +3,15 @@
     <?php echo $inc ?>
   </h3>
   <div class=" indicator-input" style="margin: 0 !important">
-    <label for="<?php echo $inc ?>">
-      PE and school-based PA domains
-      <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected) </span><span><i
-          class="fas fa-info-circle"></i></span>
-    </label>
-    <div class="agreement-group" id="<?php echo $inc ?>" style="margin: 0 !important">
-      <label for="pe-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Physical Education</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="pe-<?php echo $inc ?>" value="pe"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["pe"] == 1 && $intervationStudy["pe"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-      <label for="atp-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Active transport</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="atp-<?php echo $inc ?>" value="atp"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["atp"] == 1 && $intervationStudy["atp"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-      <label for="ac-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Active classes/breaks</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="ac-<?php echo $inc ?>" value="ac"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["ac"] == 1 && $intervationStudy["ac"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-      <label for="ar-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Active recess</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="ar-<?php echo $inc ?>" value="ar"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["ar"] == 1 && $intervationStudy["ar"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-      <label for="e_pa-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Extracurricular physical activity</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="e_pa-<?php echo $inc ?>" value="e_pa"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["e_pa"] == 1 && $intervationStudy["e_pa"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-      <label for="other-<?php echo $inc ?>" class="radio-option-no-description">
-        <div class="option-text">
-          <h3>Other</h3>
-        </div>
-        <input type="checkbox" name="radio-group-intervation-studies" id="other-<?php echo $inc ?>" value="other"
-          onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" <?php if ($intervationStudy["other"] == 1 && $intervationStudy["other"] !== null) {
-        echo "checked";
-      } ?> />
-        <span class="checkmark"></span>
-      </label>
-    </div>
-  </div>
-  <div class=" indicator-input"
-    style="margin: 0 !important; <?php if ($intervationStudy["other"] == 0){echo "display: none";}?>"
-    id="other-domain-container-<?php echo $inc ?>">
-    <label for="other-domain-<?php echo $inc ?>">
-      Other domain
-    </label>
-    <textarea name="other-domain-<?php echo $inc ?>" id="other-domain-<?php echo $inc ?>" cols="30" rows="2"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["other_domain"]){ echo $intervationStudy["other_domain"];}else{echo "";} ?></textarea>
-
-
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
     <label for="title-<?php echo $inc ?>">
       Title
     </label>
     <textarea name="title-<?php echo $inc ?>" id="title-<?php echo $inc ?>" cols="30" rows="2"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["title"]){ echo $intervationStudy["title"];}else{echo "";} ?></textarea>
+      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if ($intervationStudy["title"]) {
+                                                                                                                                                            echo $intervationStudy["title"];
+                                                                                                                                                          } else {
+                                                                                                                                                            echo "";
+                                                                                                                                                          } ?></textarea>
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="year-<?php echo $inc ?>">
@@ -95,7 +19,22 @@
     </label>
     <input type="text" name="year-<?php echo $inc ?>" id="year-<?php echo $inc ?>"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["year"]){ echo $intervationStudy["year"];}else{echo "";} ?>">
+      value="<?php if ($intervationStudy["year"]) {
+                                                                                                                                                      echo $intervationStudy["year"];
+                                                                                                                                                    } else {
+                                                                                                                                                      echo "";
+                                                                                                                                                    } ?>">
+  </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="authors-<?php echo $inc ?>">
+      Authors
+    </label>
+    <textarea name="authors-<?php echo $inc ?>" id="authors-<?php echo $inc ?>" cols="30" rows="2"
+      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if ($intervationStudy["authors"]) {
+                                                                                                                                                                echo $intervationStudy["authors"];
+                                                                                                                                                              } else {
+                                                                                                                                                                echo "";
+                                                                                                                                                              } ?></textarea>
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="eletronic-source-<?php echo $inc ?>">
@@ -104,98 +43,152 @@
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
     <textarea name="eletronic-source-<?php echo $inc ?>" id="eletronic-source-<?php echo $inc ?>" cols="30" rows="2"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["eletronic_source"]){ echo $intervationStudy["eletronic_source"];}else{echo "";} ?></textarea>
+      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if ($intervationStudy["eletronic_source"]) {
+                                                                                                                                                                                  echo $intervationStudy["eletronic_source"];
+                                                                                                                                                                                } else {
+                                                                                                                                                                                  echo "";
+                                                                                                                                                                                } ?></textarea>
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
-    <label for="apa7th_reference-<?php echo $inc ?>">
-      APA 7th reference <span id="apa7thMethod" method="apa7th_reference"><i class="fas fa-info-circle"></i></span>
-    </label>
-    <textarea name="apa7th_reference-<?php echo $inc ?>" id="apa7th_reference-<?php echo $inc ?>" cols="30" rows="2"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["apa7th_reference"]){ echo $intervationStudy["apa7th_reference"];}else{echo "";} ?></textarea>
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="inclusion-criteria-<?php echo $inc ?>">
-      Inclusion criteria
-    </label>
-    <textarea name="inclusion-criteria-<?php echo $inc ?>" id="inclusion-criteria-<?php echo $inc ?>" cols="30" rows="4"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["inclusion_criteria"]){ echo $intervationStudy["inclusion_criteria"];}else{echo "";} ?></textarea>
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="exclusion-criteria-<?php echo $inc ?>">
-      Exclusion criteria
-    </label>
-    <textarea name="exclusion-criteria-<?php echo $inc ?>" id="exclusion-criteria-<?php echo $inc ?>" cols="30" rows="4"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["exclusion_criteria"]){ echo $intervationStudy["exclusion_criteria"];}else{echo "";} ?></textarea>
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="main-outcomes-<?php echo $inc ?>">
-      Main outcomes
-    </label>
-    <textarea name="main-outcomes-<?php echo $inc ?>" id="main-outcomes-<?php echo $inc ?>" cols="30" rows="4"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"><?php if($intervationStudy["main_outcomes"]){ echo $intervationStudy["main_outcomes"];}else{echo "";} ?></textarea>
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="min-age-samples-<?php echo $inc ?>">
-      Minimum age of the sample
-    </label>
-    <input type="text" name="min-age-samples-<?php echo $inc ?>" id="min-age-samples-<?php echo $inc ?>"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["min_age_sample"]){ echo $intervationStudy["min_age_sample"];}else{echo "";} ?>">
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="avg-age-samples-<?php echo $inc ?>">
-      Average age of the sample
-    </label>
-    <input type="text" name="avg-age-samples-<?php echo $inc ?>" id="avg-age-samples-<?php echo $inc ?>"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["avg_age_sample"]){ echo $intervationStudy["avg_age_sample"];}else{echo "";} ?>">
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="max-age-samples-<?php echo $inc ?>">
-      Maximum age of the sample
-    </label>
-    <input type="text" name="max-age-samples-<?php echo $inc ?>" id="max-age-samples-<?php echo $inc ?>"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["max_age_sample"]){ echo $intervationStudy["max_age_sample"];}else{echo "";} ?>">
-  </div>
-  <div class=" indicator-input" style="margin: 0 !important">
-    <label for="period_data_collect-<?php echo $inc ?>">
-      Was the study conducted in 2020?
+    <label for="is_pop_study_comp-<?php echo $inc ?>">
+      Is the population of the study composed of children aged 5 to 10 years old and/or adolescents aged 11 to 17 years
+      old attending school (for different age limits, the mean age needs to fall within these gaps)?
     </label>
     <!-- <input type="text" name="period-data-collection-<?php echo $inc ?>" id="period-data-collection-<?php echo $inc ?>"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if($intervationStudy["period_data_collect"]){ echo $intervationStudy["period_data_collect"];}else{echo "";} ?>"> -->
-    <div class="switch-field" id="period_data_collect-<?php echo $inc ?>">
-      <input type="radio" id="period_data_collect-<?php echo $inc ?>-yes" name="period_data_collect-<?php echo $inc ?>"
-        value="yes" <?php if ($intervationStudy["period_data_collect"] == 1 && $intervationStudy["period_data_collect"] !== null) {
-        echo "checked";
-      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
-      <label for="period_data_collect-<?php echo $inc ?>-yes">Yes</label>
-      <input type="radio" id="period_data_collect-<?php echo $inc ?>-no" name="period_data_collect-<?php echo $inc ?>"
-        value="no" <?php if ($intervationStudy["period_data_collect"] == 0 && $intervationStudy["period_data_collect"] !== null) {
-        echo "checked";
-      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
-      <label for="period_data_collect-<?php echo $inc ?>-no">No</label>
+      value="<?php if ($intervationStudy["is_pop_study_comp"]) {
+                echo $intervationStudy["is_pop_study_comp"];
+              } else {
+                echo "";
+              } ?>"> -->
+    <div class="switch-field" id="is_pop_study_comp-<?php echo $inc ?>">
+      <input type="radio" id="is_pop_study_comp-<?php echo $inc ?>-yes" name="is_pop_study_comp-<?php echo $inc ?>"
+        value="yes"
+        <?php if ($intervationStudy["is_pop_study_comp"] == 1 && $intervationStudy["is_pop_study_comp"] !== null) {
+                                                                                                                                  echo "checked";
+                                                                                                                                } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_pop_study_comp-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="is_pop_study_comp-<?php echo $inc ?>-no" name="is_pop_study_comp-<?php echo $inc ?>"
+        value="no"
+        <?php if ($intervationStudy["is_pop_study_comp"] == 0 && $intervationStudy["is_pop_study_comp"] !== null) {
+                                                                                                                                echo "checked";
+                                                                                                                              } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_pop_study_comp-<?php echo $inc ?>-no">No</label>
     </div>
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
-    <label for="not_was_lockdown-<?php echo $inc ?>">
-      Do you confirm that your country was not in a lockdown status due to the covid 19 pandemic when the data
-      collection took place?
+    <label for="is_main_outcome-<?php echo $inc ?>">
+      Is physical activity (i.e., MVPA, VPA, meeting the PA recommendations) the main outcome of the study?
     </label>
-    <div class="switch-field" id="not_was_lockdown-<?php echo $inc ?>">
-      <input type="radio" id="not_was_lockdown-<?php echo $inc ?>-yes" name="not_was_lockdown-<?php echo $inc ?>"
-        value="yes" <?php if ($intervationStudy["not_was_lockdown"] == 1 && $intervationStudy["not_was_lockdown"] !== null) {
-        echo "checked";
-      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
-      <label for="not_was_lockdown-<?php echo $inc ?>-yes">Yes</label>
-      <input type="radio" id="not_was_lockdown-<?php echo $inc ?>-no" name="not_was_lockdown-<?php echo $inc ?>"
-        value="no" <?php if ($intervationStudy["not_was_lockdown"] == 0 && $intervationStudy["not_was_lockdown"] !== null) {
-        echo "checked";
-      } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
-      <label for="not_was_lockdown-<?php echo $inc ?>-no">No</label>
+    <div class="switch-field" id="is_main_outcome-<?php echo $inc ?>">
+      <input type="radio" id="is_main_outcome-<?php echo $inc ?>-yes" name="is_main_outcome-<?php echo $inc ?>"
+        value="yes"
+        <?php if ($intervationStudy["is_main_outcome"] == 1 && $intervationStudy["is_main_outcome"] !== null) {
+                                                                                                                              echo "checked";
+                                                                                                                            } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_main_outcome-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="is_main_outcome-<?php echo $inc ?>-no" name="is_main_outcome-<?php echo $inc ?>"
+        value="no"
+        <?php if ($intervationStudy["is_main_outcome"] == 0 && $intervationStudy["is_main_outcome"] !== null) {
+                                                                                                                            echo "checked";
+                                                                                                                          } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_main_outcome-<?php echo $inc ?>-no">No</label>
+
 
     </div>
-    <button class="btn-delete" onclick="deleteStudy(<?php echo $inc ?>)"><strong>Delete</strong> Study</button>
   </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="is_study_intervention-<?php echo $inc ?>">
+      Is the study an intervention (a type of study in which an intervention is applied to a group of people in a
+      specific context to verify its impact on an outcome of interest)
+    </label>
+    <div class="switch-field" id="is_study_intervention-<?php echo $inc ?>">
+      <input type="radio" id="is_study_intervention-<?php echo $inc ?>-yes"
+        name="is_study_intervention-<?php echo $inc ?>" value="yes"
+        <?php if ($intervationStudy["is_study_intervention"] == 1 && $intervationStudy["is_study_intervention"] !== null) {
+                                                                                                                                            echo "checked";
+                                                                                                                                          } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_study_intervention-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="is_study_intervention-<?php echo $inc ?>-no"
+        name="is_study_intervention-<?php echo $inc ?>" value="no"
+        <?php if ($intervationStudy["is_study_intervention"] == 0 && $intervationStudy["is_study_intervention"] !== null) {
+                                                                                                                                          echo "checked";
+                                                                                                                                        } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_study_intervention-<?php echo $inc ?>-no">No</label>
+
+
+    </div>
+  </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="is_prim_school_set-<?php echo $inc ?>">
+      Is the study primarily conducted within the school setting?
+    </label>
+    <div class="switch-field" id="is_prim_school_set-<?php echo $inc ?>">
+      <input type="radio" id="is_prim_school_set-<?php echo $inc ?>-yes" name="is_prim_school_set-<?php echo $inc ?>"
+        value="yes"
+        <?php if ($intervationStudy["is_prim_school_set"] == 1 && $intervationStudy["is_prim_school_set"] !== null) {
+                                                                                                                                        echo "checked";
+                                                                                                                                      } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_prim_school_set-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="is_prim_school_set-<?php echo $inc ?>-no" name="is_prim_school_set-<?php echo $inc ?>"
+        value="no"
+        <?php if ($intervationStudy["is_prim_school_set"] == 0 && $intervationStudy["is_prim_school_set"] !== null) {
+                                                                                                                                      echo "checked";
+                                                                                                                                    } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_prim_school_set-<?php echo $inc ?>-no">No</label>
+
+
+    </div>
+  </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="is_published_peer-<?php echo $inc ?>">
+      Is the study published in a peer-reviewed journal?
+    </label>
+    <div class="switch-field" id="is_published_peer-<?php echo $inc ?>">
+      <input type="radio" id="is_published_peer-<?php echo $inc ?>-yes" name="is_published_peer-<?php echo $inc ?>"
+        value="yes"
+        <?php if ($intervationStudy["is_published_peer"] == 1 && $intervationStudy["is_published_peer"] !== null) {
+                                                                                                                                        echo "checked";
+                                                                                                                                      } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_published_peer-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="is_published_peer-<?php echo $inc ?>-no" name="is_published_peer-<?php echo $inc ?>"
+        value="no"
+        <?php if ($intervationStudy["is_published_peer"] == 0 && $intervationStudy["is_published_peer"] !== null) {
+                                                                                                                                      echo "checked";
+                                                                                                                                    } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="is_published_peer-<?php echo $inc ?>-no">No</label>
+
+
+    </div>
+  </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="was_collected-<?php echo $inc ?>">
+      Was the data of the study collected until December 2019 or after January 2021?
+    </label>
+    <div class="switch-field" id="was_collected-<?php echo $inc ?>">
+      <input type="radio" id="was_collected-<?php echo $inc ?>-yes" name="was_collected-<?php echo $inc ?>" value="yes"
+        <?php if ($intervationStudy["was_collected"] == 1 && $intervationStudy["was_collected"] !== null) {
+                                                                                                                                  echo "checked";
+                                                                                                                                } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="was_collected-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="was_collected-<?php echo $inc ?>-no" name="was_collected-<?php echo $inc ?>" value="no"
+        <?php if ($intervationStudy["was_collected"] == 0 && $intervationStudy["was_collected"] !== null) {
+                                                                                                                                echo "checked";
+                                                                                                                              } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="was_collected-<?php echo $inc ?>-no">No</label>
+
+    </div>
+  </div>
+
+  <button class="btn-delete" onclick="deleteStudy(<?php echo $inc ?>)"><strong>Delete</strong> Study</button>
 </div>

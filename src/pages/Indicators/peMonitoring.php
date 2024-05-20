@@ -269,7 +269,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             if (monitoringSystemValues.length > 0) {
               openModal("You must fill all the fields of the monitoring systems")
             } else {
-              window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+              verifyDocumentsInMonitoringSystem(pageUrl)
+
             }
           } else {
             window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
@@ -277,6 +278,40 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
       } else {
         window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+      }
+    }
+
+    function verifyDocumentsInMonitoringSystem(pageUrl) {
+      let monitoringSystemsDocuments = $("#monitoring-system-documents-1-contact")
+
+      let monitoringSystemsDocumentsArray = Array.from(monitoringSystemsDocuments.children())
+
+      if (monitoringSystemsDocumentsArray.length == 0) {
+        openModal("You must provide at least one document for each monitoring system")
+      } else {
+        let monitoringSystemsDocumentsValues = []
+        monitoringSystemsDocumentsArray.forEach((monitoringSystemDocument, index) => {
+          let documentTitle = $(monitoringSystemDocument).find("input[name='document-title-" + (index + 1) +
+            "-contact']").val()
+          let documentEletronicSource = $(monitoringSystemDocument).find("input[name='document-eletronic_source-" +
+            (index + 1) + "-contact']").val()
+
+          monitoringSystemsDocumentsValues.push({
+            documentTitle: documentTitle,
+            documentEletronicSource: documentEletronicSource
+          })
+        })
+
+        let monitoringSystemDocumentsValues = monitoringSystemsDocumentsValues.filter((monitoringSystemDocument) => {
+          return monitoringSystemDocument.documentTitle == "" || monitoringSystemDocument.documentEletronicSource ==
+            ""
+        })
+
+        if (monitoringSystemDocumentsValues.length > 0) {
+          openModal("You must fill all the fields of the documents in the monitoring systems")
+        } else {
+          window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
+        }
       }
     }
 

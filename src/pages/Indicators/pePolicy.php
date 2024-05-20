@@ -1317,25 +1317,11 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         const documents = $(`#documents-${indicatorName}-${'<?php echo $_SESSION['type'] ?>'}`)
         if (documents.children().length == 0) {
           allFilled = false
-          if (indicatorName == "exist_pe_curriculum_pe") {
+          if (indicatorName == "exist_pe_curriculum_pe" || indicatorName == "exist_pe_curriculum_se" ||
+            indicatorName == "exist_policy_mandatory_pe" || indicatorName == "exist_policy_mandatory_se" ||
+            indicatorName == "exist_policy_min_time_pe" || indicatorName == "exist_policy_min_time_se") {
             message =
-              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national official Physical Education curriculum for the compulsory school years of primary education'</strong>"
-          } else if (indicatorName == "exist_pe_curriculum_se") {
-            message =
-              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national official Physical Education curriculum for the compulsory school years of secondary education'</strong>"
-          } else if (indicatorName == "exist_policy_mandatory_pe") {
-            message =
-              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national policy requiring Physical Education to be mandatory for the compulsory school years of primary education'</strong>"
-          } else if (indicatorName == "exist_policy_mandatory_se") {
-            message =
-              "Please <strong>add at least one document</strong> to the indicator <strong>'Existence of a national policy requiring Physical Education to be mandatory for the compulsory school years of secondary education'</strong>"
-          } else if (indicatorName == "exist_policy_min_time_pe") {
-            message =
-              "Please <strong>add at least one document</strong> to the indicator<strong> 'Existence of a national policy requiring minimum Physical Education time for the compulsory school years of primary education'</strong>"
-          } else if (indicatorName == "exist_policy_min_time_se") {
-            message =
-              "Please <strong>add at least one document</strong> to the indicator<strong> 'Existence of a national policy requiring minimum Physical Education time for the compulsory school years of secondary education'</strong>"
-
+              "Please <strong>add at least one document</strong> to the indicator!"
           }
         }
       }
@@ -1506,11 +1492,11 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     let contactInputs = []
     let contactLabels = []
     let agreementGroups = []
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 6; i++) {
       // get all the divs with id that contains i and -contact
-      contactLabels.push($(`p[id="${i}-contact-label"]`))
+      contactLabels.push($(`div[id="${i}-contact-label"]`))
       contactInputs.push($(`div[id="${i}-contact"]`))
-      agreementGroups.push($(`div[id="agreement-group-${i}"]`))
+      agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
     }
 
     agreementGroups.forEach((agreementGroup, index) => {

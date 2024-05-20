@@ -18,11 +18,11 @@ foreach ($values as $key => $value) {
   }
 }
 
-$sql = "UPDATE research_pe_intervation_studies SET pe = ".$values['pe'].", atp = ".$values['atp'].", ac = ".$values['ac'].", ar = ".$values['ar'].", e_pa = ".$values['e_pa'].", other = ".$values['other'].", other_domain = ".$values['otherText'].", title = ".$values['title'].", year = ".$values['year'].", eletronic_source = ".$values['eletronicSource'].", apa7th_reference = ".$values['apa7thReference'].", inclusion_criteria = ".$values['inclusionCriteria'].", exclusion_criteria = ".$values['exclusionCriteria'].", main_outcomes = ".$values['mainOutcomes'].", min_age_sample = ".$values['minAgeSamples'].", avg_age_sample = ".$values['avgAgeSamples'].", max_age_sample = ".$values['maxAgeSamples'].", period_data_collect = ".$values['periodDataCollection'].", not_was_lockdown = ".$values['lockdown']." WHERE id_country = ".$id . " AND inc = " . $inc;
-// echo $sql;
+$sql = "UPDATE research_pe_intervation_studies SET title = $values[title], year = $values[year], authors = $values[authors], eletronic_source = $values[eletronicSource], is_pop_study_comp = $values[isPopStudyComp], is_main_outcome = $values[isMainOutcome], is_study_intervention = $values[isStudyIntervention], is_prim_school_set = $values[isPrimSchoolSet], is_published_peer = $values[isPublishedPeer], was_collected = $values[wasCollected] WHERE id_country = ".$id . " AND inc = " . $inc;
+
 $result = mysqli_query($conn, $sql);
 var_dump($result);
-// echo(mysqli_query($conn, $sql));
+
 echo(mysqli_error($conn));
 
 

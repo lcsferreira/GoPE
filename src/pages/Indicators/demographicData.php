@@ -962,7 +962,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       let agreementGroups = []
       let allFilled = true
 
-      for (let i = 9; i <= 10; i++) {
+      for (let i = 11; i <= 12; i++) {
         agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
       }
 
@@ -1154,9 +1154,9 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       let contactInputs = []
       let contactLabels = []
       let agreementGroups = []
-      for (let i = 1; i <= 12; i++) {
+      for (let i = 1; i <= 14; i++) {
         // get all the divs with id that contains i and -contact
-        if (i == 9 || i == 10) {
+        if (i == 11 || i == 12) {
           contactLabels.push($(`div[id="${i}-contact-label"]`))
           contactInputs.push($(`div[id="${i}-contact"]`))
           agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
