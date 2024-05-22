@@ -43,7 +43,7 @@ if (!isset($_SESSION['loggedIn'])) {
         <h2><?php echo $year = date('Y') + 1; ?></h2>
         <p>
           Dear Country Contact, the GoPE! team is designing the <strong>translated version</strong> of your
-          country’s <strong>Country Card. </strong> When it is available,
+          country’s <strong>Country Card. </strong> Please select "next" to see your country's Country Card,
         </p>
         <h3>
           You can

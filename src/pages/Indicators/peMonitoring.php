@@ -597,7 +597,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <div class="option-text">
                 <h3>Other</h3>
               </div>
-              <input type="checkbox" name="radio-group-monitoring-purpose" id="other-${inc}-${type}" value="other"/>
+              <input type="checkbox" name="radio-group-monitoring-purpose" id="other-${inc}-${type}" value="other" onclick="saveMonitoringSystemValues(${inc}, '${type}')"/>
               <span class="checkmark"></span>
             </label>
            <input type='text' name='other_purposes' id='other_purposes-${inc}-${type}' placeholder='which purpose(s)' onblur='saveMonitoringSystemValues(${inc}, '${type}')'/>
@@ -836,6 +836,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       const other = $(`#other-${inc}-${type}`).is(":checked")
 
       //if the value of 'other' is in monitoringPurpose show the input
+
+      console.log(other)
 
       if (other) {
         $(`#other_purposes-${inc}-${type}`).show()

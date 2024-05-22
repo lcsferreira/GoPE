@@ -15,7 +15,7 @@ $countryId = $_GET['id'];
 // $valueTypes = array("comments", "values_admin", "values_contact", "agreement");
 
 $progressIndicators = array(0, 0, 0, 0, 0);
-$totalIndicators = array(12, 3, 6, 1, 1);
+$totalIndicators = array(14, 3, 6, 1, 1);
 
 $index = 0;
 foreach ($indicators as $step) {
