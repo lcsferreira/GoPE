@@ -83,10 +83,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <?php include '../../components/header.php'; ?>
   <div class="container">
     <?php 
-    $typeModal = "warning";
-    $icon = "fas fa-exclamation-triangle";
-    $buttonCloseText = "Close";
-    include '../../components/modalInfo.php'; ?>
+    // $typeModal = "warning";
+    // $icon = "fas fa-exclamation-triangle";
+    // $buttonCloseText = "Close";
+    // include '../../components/modalInfo.php'; ?>
     <?php
     $cardLocationPath = "../../assets/card_demographic_data.png";
     include '../../components/cardLocation.php';
@@ -878,19 +878,9 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
 
       $(".btn-next").click(function() {
-        verifyAgreementInputWithNoDoc("paPrevalence")
+        window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";
       });
 
-      //get all the side-nav__links > li > a tags and add the verifyAgreementInputWithNoDoc function to the click event
-      $(".side-nav__links > li > a").click(function() {
-        event.preventDefault()
-        //get the href value
-        let pageUrl = $(this).attr("href")
-        //get the value between the last / and the .php
-        pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
-        //disable href
-        verifyAgreementInputWithNoDoc(pageUrl)
-      });
 
       $(".hide-show-video").click(function() {
         hideVideo()
@@ -900,19 +890,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       openCardLocationModal()
       verifyAgreementInput()
     });
-
-    function openModal(msg) {
-      $("#modal").css("display", "block")
-      $(".modal-body").html(msg)
-      $("#modal-close").click(function() {
-        closeModal()
-      })
-    }
-
-    function closeModal() {
-      $(".modal-body").html("")
-      $("#modal").css("display", "none")
-    }
 
     function openCardLocationModal() {
       $("#cardLocationModal").click(function() {
@@ -925,76 +902,6 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     function closeCardLocationModal() {
       $("#cardLocation").css("display", "none")
-    }
-
-    function verifyAllDocuments(role) {
-      const indicatorsNames = ["duration_compulsory_pe", "duration_compulsory_se"]
-      let allFilled = true
-      indicatorsNames.forEach(indicatorName => {
-        if (!verifyIfDocumentIsFFilled(indicatorName, role)) {
-          allFilled = false
-        }
-      })
-      return allFilled
-    }
-
-    function verifyIfDocumentIsFFilled(indicatorName, role) {
-      let allFilled = true
-      const documents = $(`#documents-${indicatorName}-${role}`)
-      documents.children().each(function() {
-        const doc = $(this)
-        const docInc = doc.attr('id').split("-")[2]
-        const title = doc.find(`#document-title-${indicatorName}-${docInc}-${role}`).val()
-        const yearPublication = doc.find(`#document-year_publication-${indicatorName}-${docInc}-${role}`).val()
-        const eletronicSource = doc.find(`#document-eletronic_source-${indicatorName}-${docInc}-${role}`).val()
-        const voluntaryComments = doc.find(`#document-voluntary_comments-${indicatorName}-${docInc}-${role}`).val()
-
-        if (title == "" || yearPublication == "" || eletronicSource == "") {
-          allFilled = false
-        }
-      })
-
-      return allFilled
-    }
-
-    //function to verify if the agreement input is 2 or 3, if it is, and no document is related, then show the modalInfo
-    function verifyAgreementInputWithNoDoc(pageUrl) {
-      let agreementGroups = []
-      let allFilled = true
-
-      for (let i = 11; i <= 12; i++) {
-        agreementGroups.push($(`div[id*="agreement-group-${i}"]`))
-      }
-
-      const indicatorsNames = ["duration_compulsory_pe", "duration_compulsory_se"]
-
-      let message = ""
-
-      agreementGroups.forEach(agreementGroup => {
-        let radioInputs = agreementGroup.find("input[type='radio']")
-        let agreementValue = radioInputs.filter(":checked").val()
-        let indicatorName = indicatorsNames[agreementGroups.indexOf(agreementGroup)]
-
-        if (agreementValue == 2 || agreementValue == 3) {
-          const documents = $(`#documents-${indicatorName}-${'<?php echo $_SESSION['type'] ?>'}`)
-          if (documents.children().length == 0) {
-            allFilled = false
-            if (indicatorName == "duration_compulsory_pe") {
-              message =
-                `Please <strong>add at least one document</strong> to the indicator <strong>'Duration of the compulsory school years of primary education'</strong>.`
-            } else {
-              message =
-                `Please <strong>add at least one document</strong> to the indicator <strong>'Duration of the compulsory school years of secondary education'</strong>.`
-            }
-          }
-        }
-      })
-
-      if (allFilled) {
-        window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
-      } else {
-        openModal(message)
-      }
     }
 
     function addDocumentToTable(indicatorName, tableName, role) {
