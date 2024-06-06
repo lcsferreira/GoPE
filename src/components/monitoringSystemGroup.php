@@ -11,7 +11,7 @@
     <div class="agreement-group" id="reach-group-<?php echo $inc ?>-<?php echo $type; ?>" style="margin: 0 !important">
       <label for="reach-pe-<?php echo $inc ?>-<?php echo $type; ?>" class="radio-option-no-description">
         <div class="option-text">
-          <h3>Specifcally for physical education</h3>
+          <h3>Specifically for physical education</h3>
         </div>
         <input type="radio" name="radio-group-reach-monitoring-system-<?php echo $inc ?>-<?php echo $type; ?>"
           id="reach-pe-<?php echo $inc ?>-<?php echo $type; ?>" value="1"

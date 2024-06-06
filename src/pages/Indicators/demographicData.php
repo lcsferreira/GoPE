@@ -94,7 +94,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Demographic data <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
+      <h1>Country and demographic data <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">

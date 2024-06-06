@@ -92,7 +92,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <h3 style="color: var(--red)">The information regarding the existence of this indicator must be provided by
               the Country Contact. However, the GoPE! research working group could have collected data. In that case,
               please validate the information or provide new data. To provide a monitoring system, please consult the
-              information box <i class="fas fa-info-circle"></i></h3>
+              information box</h3>
           </div>
           <div class="indicator-input-container-values">
             <div class="indicator-input-container-values-group">
@@ -413,7 +413,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <div class="agreement-group" id="reach-group-${inc}-${type}" style="margin: 0 !important">
             <label for="reach-pe-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>Specifcally for physical education</h3>
+                <h3>Specifically for physical education</h3>
               </div>
               <input type="radio" name="radio-group-reach-monitoring-system-${inc}-${type}"
                 id="reach-pe-${inc}-${type}" value="1" onclick="saveMonitoringSystemValues(${inc}, '${type}')"/>

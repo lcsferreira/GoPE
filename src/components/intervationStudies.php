@@ -80,7 +80,8 @@
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="is_main_outcome-<?php echo $inc ?>">
-      Is physical activity (i.e., MVPA, VPA, meeting the PA recommendations) the main outcome of the study?
+      Is physical activity the main/primary outcome of the study (e.g. moderate to vigorous physical activity, meeting
+      the physical activity recommendations, number of steps, active travel, etc)?
     </label>
     <div class="switch-field" id="is_main_outcome-<?php echo $inc ?>">
       <input type="radio" id="is_main_outcome-<?php echo $inc ?>-yes" name="is_main_outcome-<?php echo $inc ?>"
@@ -103,8 +104,8 @@
   </div>
   <div class=" indicator-input" style="margin: 0 !important">
     <label for="is_study_intervention-<?php echo $inc ?>">
-      Is the study an intervention (a type of study in which an intervention is applied to a group of people in a
-      specific context to verify its impact on an outcome of interest)
+      Is the study an intervention (e.g. randomized-controlled trial, quasi-experimental, …) or a study with a different
+      design (e.g. longitudinal, cohort, qualitative) but related to an intervention?
     </label>
     <div class="switch-field" id="is_study_intervention-<?php echo $inc ?>">
       <input type="radio" id="is_study_intervention-<?php echo $inc ?>-yes"
@@ -186,6 +187,28 @@
                                                                                                                                 echo "checked";
                                                                                                                               } ?> onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
       <label for="was_collected-<?php echo $inc ?>-no">No</label>
+
+    </div>
+  </div>
+  <div class=" indicator-input" style="margin: 0 !important">
+    <label for="has_abstract_en-<?php echo $inc ?>">
+      Does the study has an abstract written in English?
+    </label>
+    <div class="switch-field" id="has_abstract_en-<?php echo $inc ?>">
+      <input type="radio" id="has_abstract_en-<?php echo $inc ?>-yes" name="has_abstract_en-<?php echo $inc ?>"
+        value="yes"
+        <?php if ($intervationStudy["has_abstract_en"] == 1 && $intervationStudy["has_abstract_en"] !== null) {
+                                                                                                                                  echo "checked";
+                                                                                                                                } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="has_abstract_en-<?php echo $inc ?>-yes">Yes</label>
+      <input type="radio" id="has_abstract_en-<?php echo $inc ?>-no" name="has_abstract_en-<?php echo $inc ?>"
+        value="no"
+        <?php if ($intervationStudy["has_abstract_en"] == 0 && $intervationStudy["has_abstract_en"] !== null) {
+                                                                                                                                echo "checked";
+                                                                                                                              } ?>
+        onclick="saveIntervationStudiesValues(<?php echo $inc ?>)" />
+      <label for="has_abstract_en-<?php echo $inc ?>-no">No</label>
 
     </div>
   </div>

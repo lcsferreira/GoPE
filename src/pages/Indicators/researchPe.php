@@ -74,7 +74,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
           $videoTitle = "Methodological approach for collecting Physical Education and school-based physical activity interventions research";
-          $videoUrl = "https://www.youtube.com/embed/1w7OgIMMRc4";
+          $videoUrl = "https://drive.google.com/file/d/1IN3WSir94uzGzdt_2is7Wj1ajX70-rMP/preview";
           include '../../components/videoContainer.php'; ?>
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
@@ -168,17 +168,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       window.location.href = "../Indicators/peMonitoring.php<?php echo "?id=" . $_GET['id'] ?>";
     });
     $(".btn-next").click(function() {
-      verifyIntervetionCompleted("conclusion")
-    });
-
-    $(".side-nav__links > li > a").click(function() {
-      //remove href from the a tag
-      event.preventDefault()
-      //get the href value
-      let pageUrl = $(this).attr("href")
-      //get the value between the last / and the .php
-      pageUrl = pageUrl.substring(pageUrl.lastIndexOf("/") + 1, pageUrl.lastIndexOf(".php"))
-      verifyIntervetionCompleted(pageUrl)
+      window.location.href = "../Indicators/conclusion.php<?php echo "?id=" . $_GET['id'] ?>";
     });
 
     $(".hide-show-video").click(function() {
@@ -192,63 +182,6 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     openCardLocationModal()
 
   });
-
-  function verifyIntervetionCompleted(pageUrl) {
-    let agreementGroups = []
-    let allFilled = true
-    let studiesContainer = []
-    const studies = $("#studies")
-
-    agreementGroups.push($(`div[id="agreement-group-1"]`))
-
-    agreementGroups.forEach(agreementGroup => {
-      let radioInputs = agreementGroup.find("input[type='radio']")
-
-      let agreementValue = radioInputs.filter(":checked").val()
-
-      if (agreementValue == 2 || agreementValue == 3) {
-        //check if all the studies are filled
-        studies.children().each(function(index, study) {
-          let title = $(study).find("textarea[name^='title']")
-          let year = $(study).find("input[name^='year']")
-          let authors = $(study).find("textarea[name^='authors']")
-          let eletronicSource = $(study).find("textarea[name^='eletronic-source']")
-          let isPopStudyComp = $(study).find("input[name^='is_pop_study_comp']:checked")
-          let isMainOutcome = $(study).find("input[name^='is_main_outcome']:checked")
-          let isStudyIntervention = $(study).find("input[name^='is_study_intervention']:checked")
-          let isPrimSchoolSet = $(study).find("input[name^='is_prim_school_set']:checked")
-          let isPublishedPeer = $(study).find("input[name^='is_published_peer']:checked")
-          let wasCollected = $(study).find("input[name^='was_collected']:checked")
-
-          if (title.val() == "" || year.val() == "" || authors.val() == "" || eletronicSource.val() == "" ||
-            isPopStudyComp.length == 0 || isMainOutcome.length == 0 || isStudyIntervention.length == 0 ||
-            isPrimSchoolSet.length == 0 || isPublishedPeer.length == 0 || wasCollected.length == 0) {
-            allFilled = false
-          }
-        })
-      }
-    })
-
-    if (!allFilled) {
-      openModal("Please fill all the studies before proceeding")
-    } else {
-      window.location.href = `../Indicators/${pageUrl}.php<?php echo "?id=" . $_GET['id'] ?>`
-    }
-
-  }
-
-  function openModal(msg) {
-    $("#modal").css("display", "block")
-    $(".modal-body").html(msg)
-    $("#modal-close").click(function() {
-      closeModal()
-    })
-  }
-
-  function closeModal() {
-    $(".modal-body").html("")
-    $("#modal").css("display", "none")
-  }
 
   function openCardLocationModal() {
     $("#cardLocationModal").click(function() {
@@ -364,7 +297,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
         <label for="is_main_outcome-${inc}">
-          Is physical activity (i.e., MVPA, VPA, meeting the PA recommendations) the main outcome of the study?
+          Is physical activity the main/primary outcome of the study (e.g. moderate to vigorous physical activity, meeting the physical activity recommendations, number of steps, active travel, etc)?
         </label>
         <div class="switch-field" id="is_main_outcome-${inc}">
           <input type="radio" id="is_main_outcome-${inc}-yes" name="is_main_outcome-${inc}"
@@ -377,8 +310,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
         <label for="is_study_intervention-${inc}">
-          Is the study an intervention (a type of study in which an intervention is applied to a group of people in a
-          specific context to verify its impact on an outcome of interest)
+          Is the study an intervention (e.g. randomized-controlled trial, quasi-experimental, …) or a study with a different design (e.g. longitudinal, cohort, qualitative) but related to an intervention?
         </label>
         <div class="switch-field" id="is_study_intervention-${inc}">
           <input type="radio" id="is_study_intervention-${inc}-yes"
@@ -426,6 +358,19 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="was_collected-${inc}-yes">Yes</label>
           <input type="radio" id="was_collected-${inc}-no" name="was_collected-${inc}" value="no" onclick="saveIntervationStudiesValues(${inc})" />
           <label for="was_collected-${inc}-no">No</label>
+
+        </div>
+      </div>
+
+      <div class=" indicator-input" style="margin: 0 !important">
+        <label for="has_abstract_en-${inc}">
+          Does the study has an abstract written in English?
+        </label>
+        <div class="switch-field" id="has_abstract_en-${inc}">
+          <input type="radio" id="has_abstract_en-${inc}-yes" name="has_abstract_en-${inc}" value="yes" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="has_abstract_en-${inc}-yes">Yes</label>
+          <input type="radio" id="has_abstract_en-${inc}-no" name="has_abstract_en-${inc}" value="no" onclick="saveIntervationStudiesValues(${inc})" />
+          <label for="has_abstract_en-${inc}-no">No</label>
 
         </div>
       </div>
@@ -496,48 +441,58 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const isPublishedPeerNo = grupoStudy.querySelector(`#is_published_peer-${inc}-no`);
     const wasCollectedYes = grupoStudy.querySelector(`#was_collected-${inc}-yes`);
     const wasCollectedNo = grupoStudy.querySelector(`#was_collected-${inc}-no`);
+    const hasAbstractEnYes = grupoStudy.querySelector(`#has_abstract_en-${inc}-yes`);
+    const hasAbstractEnNo = grupoStudy.querySelector(`#has_abstract_en-${inc}-no`);
 
-    let isPopStudyComp = false;
+    let isPopStudyComp = null;
     if (isPopStudyCompYes.checked) {
       isPopStudyComp = true;
     } else if (isPopStudyCompNo.checked) {
       isPopStudyComp = false;
     }
 
-    let isMainOutcome = false;
+    let isMainOutcome = null;
     if (isMainOutcomeYes.checked) {
       isMainOutcome = true;
     } else if (isMainOutcomeNo.checked) {
       isMainOutcome = false;
     }
 
-    let isStudyIntervention = false;
+    let isStudyIntervention = null;
     if (isStudyInterventionYes.checked) {
       isStudyIntervention = true;
     } else if (isStudyInterventionNo.checked) {
       isStudyIntervention = false;
     }
 
-    let isPrimSchoolSet = false;
+    let isPrimSchoolSet = null;
     if (isPrimSchoolSetYes.checked) {
       isPrimSchoolSet = true;
     } else if (isPrimSchoolSetNo.checked) {
       isPrimSchoolSet = false;
     }
 
-    let isPublishedPeer = false;
+    let isPublishedPeer = null;
     if (isPublishedPeerYes.checked) {
       isPublishedPeer = true;
     } else if (isPublishedPeerNo.checked) {
       isPublishedPeer = false;
     }
 
-    let wasCollected = false;
+    let wasCollected = null;
     if (wasCollectedYes.checked) {
       wasCollected = true;
     } else if (wasCollectedNo.checked) {
       wasCollected = false;
     }
+
+    let hasAbstractEn = null;
+    if (hasAbstractEnYes.checked) {
+      hasAbstractEn = true;
+    } else if (hasAbstractEnNo.checked) {
+      hasAbstractEn = false;
+    }
+
 
     const values = {
       title: title.value,
@@ -549,7 +504,8 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       isStudyIntervention: isStudyIntervention,
       isPrimSchoolSet: isPrimSchoolSet,
       isPublishedPeer: isPublishedPeer,
-      wasCollected: wasCollected
+      wasCollected: wasCollected,
+      hasAbstractEn: hasAbstractEn
     };
 
     console.log(values);
