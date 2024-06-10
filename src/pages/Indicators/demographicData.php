@@ -67,6 +67,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/modalMethod.css">
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
@@ -87,6 +88,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     // $icon = "fas fa-exclamation-triangle";
     // $buttonCloseText = "Close";
     // include '../../components/modalInfo.php'; ?>
+    <?php include '../../components/modalMetodology.php'; ?>
     <?php
     $cardLocationPath = "../../assets/card_demographic_data.png";
     include '../../components/cardLocation.php';
@@ -870,6 +872,7 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./methods/demograhpicData.js"></script>
     <script>
     $(document).ready(function() {
       // verifyIfDocumentIsFFilled("duration_compulsory_pe", "admin")
@@ -886,10 +889,36 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         hideVideo()
       });
 
+      let methodSpans = document.querySelectorAll("[method]");
+      methodSpans.forEach(methodSpan => {
+        methodSpan.addEventListener("click", function() {
+          openModalMethod(methodSpan.getAttribute("method"))
+        })
+      })
+
 
       openCardLocationModal()
       verifyAgreementInput()
     });
+
+    function openModalMethod(method) {
+      const methodData = methods.find(
+        m => m.name == method)
+
+      $("#modalMethod").css("display", "block")
+
+      $("#indicatorTitle").html(methodData.title)
+      $("#modalIndicatorMethod").html(methodData.html)
+      $("#modal-close-method").click(function() {
+        closeModalMethod()
+      })
+    }
+
+    function closeModalMethod() {
+      $("#indicatorTitle").html("")
+      $("#modalIndicatorMethod").html("")
+      $("#modalMethod").css("display", "none")
+    }
 
     function openCardLocationModal() {
       $("#cardLocationModal").click(function() {

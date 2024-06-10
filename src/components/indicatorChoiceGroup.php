@@ -2,7 +2,7 @@
   <label for="<?php echo $indicatorOrder ?>-<?php echo $indicatorRole ?>">
     <?php echo $indicatorTitle ?>
     <?php if ($indicatorRole == 'admin') : ?>
-    <span><i class="fas fa-info-circle"></i></span>
+    <span method="<?php echo $indicatorName ?>"><i class="fas fa-info-circle"></i></span>
     <?php endif; ?>
   </label>
   <?php

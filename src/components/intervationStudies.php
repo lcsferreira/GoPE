@@ -17,7 +17,7 @@
     <label for="year-<?php echo $inc ?>">
       Year
     </label>
-    <input type="text" name="year-<?php echo $inc ?>" id="year-<?php echo $inc ?>"
+    <input type="number" name="year-<?php echo $inc ?>" id="year-<?php echo $inc ?>"
       onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
       value="<?php if ($intervationStudy["year"]) {
                                                                                                                                                       echo $intervationStudy["year"];

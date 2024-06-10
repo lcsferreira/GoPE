@@ -3,7 +3,7 @@
     Existence of a national, formal, and external monitoring system to evaluate physical education policy
     implementation.
     <?php if ($indicatorRole == 'admin') : ?>
-    <span><i class="fas fa-info-circle"></i></span>
+    <span method="<?php echo $indicatorName ?>"><i class="fas fa-info-circle"></i></span>
     <?php endif; ?>
   </label>
   <?php

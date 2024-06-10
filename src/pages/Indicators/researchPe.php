@@ -91,7 +91,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
               You can add different
               intervention studies that may exist and were not identified through the research
               process. To add an intervention study, please consult the inclusion criteria on the
-              information box <i class="fas fa-info-circle"></i>.
+              information box <span method="pe_research"><i class="fas fa-info-circle"></i></span>.
             </p>
           </div>
 
@@ -161,6 +161,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./methods/researchPe.js"></script>
 
   <script>
   $(document).ready(function(e) {
@@ -179,9 +180,35 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       addStudy();
     });
 
+    let methodSpans = document.querySelectorAll("[method='pe_research']");
+    methodSpans.forEach(methodSpan => {
+      methodSpan.addEventListener("click", function() {
+        openModalMethod(methodSpan.getAttribute("method"))
+      })
+    })
+
     openCardLocationModal()
 
   });
+
+  function openModalMethod(method) {
+    const methodData = methods.find(
+      m => m.name == method)
+
+    $("#modalMethod").css("display", "block")
+
+    $("#indicatorTitle").html(methodData.title)
+    $("#modalIndicatorMethod").html(methodData.html)
+    $("#modal-close-method").click(function() {
+      closeModalMethod()
+    })
+  }
+
+  function closeModalMethod() {
+    $("#indicatorTitle").html("")
+    $("#modalIndicatorMethod").html("")
+    $("#modalMethod").css("display", "none")
+  }
 
   function openCardLocationModal() {
     $("#cardLocationModal").click(function() {
@@ -262,7 +289,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <label for="year-${inc}">
           Year
         </label>
-        <input type="text" name="year-${inc}" id="year-${inc}"
+        <input type="number" name="year-${inc}" id="year-${inc}"
           onblur="saveIntervationStudiesValues(${inc})">
       </div>
       <div class=" indicator-input" style="margin: 0 !important">
@@ -377,7 +404,9 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <button class="btn-delete" onclick="deleteStudy(${inc})"><strong>Delete</strong> Study</button>
     </div>
     `;
-    studies.innerHTML += study;
+
+
+    $("#studies").append(study);
   }
 
   function addStudy() {
@@ -394,7 +423,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if (data == "Success") {
           showAddStudy();
         } else {
-          console.log(data);
+          // console.log(data);
         }
       }
     });

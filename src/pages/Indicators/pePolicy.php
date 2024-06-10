@@ -1147,38 +1147,8 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./methods/pe_policy.js"></script>
   <script>
-  const methods = [{
-      name: "name_region_subnational_curriculum_pe",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    },
-    {
-      name: "name_region_subnational_curriculum_se",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    },
-    {
-      name: "name_region_subnational_mandatory_pe",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    },
-    {
-      name: "name_region_subnational_mandatory_se",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    },
-    {
-      name: "name_region_subnational_min_time_pe",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    },
-    {
-      name: "name_region_subnational_min_time_se",
-      title: "Name of the region where the policy is implemented",
-      html: "<div><p>This answer option means that there are no policies implemented at a national level. The subnational level is the highest level of the country’s division immediately under the national level. The Country Contact must provide information on one region of the country that implements the requested policy. Ideally, the Country Contact must identify and report the region with the best PE policy status: the one that meets more GoPE! indicators</p></div>",
-    }
-  ];
   $(document).ready(function() {
     $(".btn-back").click(function() {
       window.location.href = "../Indicators/paPrevalence.php<?php echo "?id=" . $_GET['id'] ?>";

@@ -37,6 +37,7 @@ $agreementValues = mysqli_fetch_assoc($result);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/modalMethod.css">
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
   <link rel="stylesheet" href="../../css/pages/indicators.css">
@@ -55,6 +56,7 @@ $agreementValues = mysqli_fetch_assoc($result);
     $cardLocationPath = "../../assets/card_pa_participation.png";
     include '../../components/cardLocation.php';
     ?>
+    <?php include '../../components/modalMetodology.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Physical Activity participation <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
@@ -218,6 +220,7 @@ $agreementValues = mysqli_fetch_assoc($result);
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./methods/paParticipation.js"></script>
     <script>
     $(document).ready(function() {
       $(".btn-back").click(function() {
@@ -230,10 +233,36 @@ $agreementValues = mysqli_fetch_assoc($result);
       $(".hide-show-video").click(function() {
         hideVideo()
       });
+
+      let methodSpans = document.querySelectorAll("[method]");
+      methodSpans.forEach(methodSpan => {
+        methodSpan.addEventListener("click", function() {
+          openModalMethod(methodSpan.getAttribute("method"))
+        })
+      })
       openCardLocationModal()
 
       verifyAgreementInput()
     });
+
+    function openModalMethod(method) {
+      const methodData = methods.find(
+        m => m.name == method)
+
+      $("#modalMethod").css("display", "block")
+
+      $("#indicatorTitle").html(methodData.title)
+      $("#modalIndicatorMethod").html(methodData.html)
+      $("#modal-close-method").click(function() {
+        closeModalMethod()
+      })
+    }
+
+    function closeModalMethod() {
+      $("#indicatorTitle").html("")
+      $("#modalIndicatorMethod").html("")
+      $("#modalMethod").css("display", "none")
+    }
 
     function openCardLocationModal() {
       $("#cardLocationModal").click(function() {

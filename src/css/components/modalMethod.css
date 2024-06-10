@@ -54,3 +54,8 @@
   flex-direction: column;
   gap: 15px;
 }
+
+.modal-methodology .modal-body-method > p {
+  display: flex;
+  flex-direction: column;
+}

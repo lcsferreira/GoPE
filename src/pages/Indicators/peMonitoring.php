@@ -52,6 +52,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/sideNavBar.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/modalMethod.css">
   <link rel="stylesheet" href="../../css/components/inputYesNo.css">
   <link rel="stylesheet" href="../../css/components/agreementGroup.css">
   <link rel="stylesheet" href="../../css/components/commentGroup.css">
@@ -72,6 +73,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $cardLocationPath = "../../assets/card_pe_monitoring.png";
     include '../../components/cardLocation.php';
     ?>
+    <?php include '../../components/modalMetodology.php'; ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Physical education monitoring<i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
@@ -179,6 +181,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./methods/pe_monitoring.js"></script>
     <script>
     $(document).ready(function() {
       $(".btn-back").click(function() {
@@ -191,10 +194,36 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         hideVideo()
       });
 
+      let methodSpans = document.querySelectorAll("[method]");
+      methodSpans.forEach(methodSpan => {
+        methodSpan.addEventListener("click", function() {
+          openModalMethod(methodSpan.getAttribute("method"))
+        })
+      })
+
       openCardLocationModal()
 
       verifyAgreementInput()
     });
+
+    function openModalMethod(method) {
+      const methodData = methods.find(
+        m => m.name == method)
+
+      $("#modalMethod").css("display", "block")
+
+      $("#indicatorTitle").html(methodData.title)
+      $("#modalIndicatorMethod").html(methodData.html)
+      $("#modal-close-method").click(function() {
+        closeModalMethod()
+      })
+    }
+
+    function closeModalMethod() {
+      $("#indicatorTitle").html("")
+      $("#modalIndicatorMethod").html("")
+      $("#modalMethod").css("display", "none")
+    }
 
     function openCardLocationModal() {
       $("#cardLocationModal").click(function() {
@@ -434,7 +463,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="monitoring-purpose-${inc}-${type}">
             Monitoring purpose
             <br><span style="font-weight: 400; font-size:1rem; margin: 0">(More than 1 option can be selected)</span>
-            <span><i class="fas fa-info-circle"></i></span>
+            <span method="monitoring_purpose"><i class="fas fa-info-circle"></i></span>
           </label>
           <div class="agreement-group" id="monitoring-purpose-${inc}-${type}" style="margin: 0 !important">
             <label for="curriculum_implementation-${inc}-${type}" class="radio-option-no-description">
@@ -551,6 +580,13 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       $(".monitoring-systems-" + type).append(monitoringSystem)
 
       $(`#other_purposes-${inc}-${type}`).hide()
+
+      let methodSpans = document.querySelectorAll("[method]");
+      methodSpans.forEach(methodSpan => {
+        methodSpan.addEventListener("click", function() {
+          openModalMethod(methodSpan.getAttribute("method"))
+        })
+      })
 
     }
 
