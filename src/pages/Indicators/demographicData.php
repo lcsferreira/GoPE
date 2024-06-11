@@ -923,6 +923,9 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     function openCardLocationModal() {
       $("#cardLocationModal").click(function() {
         $("#cardLocation").css("display", "block")
+        $(".card-location-modal-body").append(
+          "<p>In GoPE!, we prioritize data comparability between countries and, therefore, rely on established international databases. However, if a GoPE! researcher or Country Contact strongly suggests including another data source, we require the collected data to be supported by an updated official document endorsed by a governmental or political authority.</p>"
+        )
         $("#card-location-modal-close").click(function() {
           closeCardLocationModal()
         })
@@ -931,6 +934,8 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     function closeCardLocationModal() {
       $("#cardLocation").css("display", "none")
+      //remove only the p tag
+      $(".card-location-modal-body").find("p").remove()
     }
 
     function addDocumentToTable(indicatorName, tableName, role) {

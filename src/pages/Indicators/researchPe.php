@@ -74,7 +74,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
           $videoTitle = "Methodological approach for collecting Physical Education and school-based physical activity interventions research";
-          $videoUrl = "https://drive.google.com/file/d/1IN3WSir94uzGzdt_2is7Wj1ajX70-rMP/preview";
+          $videoUrl = "https://drive.google.com/file/d/1jt1NhHPP0CY-s7I-yg6sAzZ-F5S76doK/preview";
           include '../../components/videoContainer.php'; ?>
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
