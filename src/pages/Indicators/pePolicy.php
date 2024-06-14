@@ -869,7 +869,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   $indicatorName = "exist_policy_min_time_pe";
                   foreach($policyMinTimePeDocumentsAdmin as $document) {
                     $docInc = $document['inc'];
-                    include '../../components/documentGroup.php';
+                    include '../../components/documentGroupMinTime.php';
                   }
                 }
                 ?>
@@ -943,7 +943,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   $indicatorName = "exist_policy_min_time_pe";
                   foreach($policyMinTimePeDocumentsContact as $document) {
                     $docInc = $document['inc'];
-                    include '../../components/documentGroup.php';
+                    include '../../components/documentGroupMinTime.php';
                   }
                 }
                 ?>
@@ -1039,7 +1039,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   $indicatorName = "exist_policy_min_time_se";
                   foreach($policyMinTimeSeDocumentsAdmin as $document) {
                     $docInc = $document['inc'];
-                    include '../../components/documentGroup.php';
+                    include '../../components/documentGroupMinTime.php';
                   }
                 }
                 ?>
@@ -1114,7 +1114,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                   $indicatorName = "exist_policy_min_time_se";
                   foreach($policyMinTimeSeDocumentsContact as $document) {
                     $docInc = $document['inc'];
-                    include '../../components/documentGroup.php';
+                    include '../../components/documentGroupMinTime.php';
                   }
                 }
                 ?>
@@ -1240,60 +1240,125 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     const lastDoc = documents.children().last().attr('id')
     const docInc = lastDoc ? parseInt(lastDoc.split("-")[2]) + 1 : 1
     const docRole = role
+    let document = ``
+    if (indicatorName == "exist_policy_min_time_pe" || indicatorName == "exist_policy_min_time_se") {
+      document = `
+        <div id="document-${indicatorName}-${docInc}-${docRole}">
+          <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
+            ${docInc}
+            <span><button class="btn-delete"
+                onclick="deleteDocumentFromIndicator(${docInc}, '${tableName}', '${docRole}', '${indicatorName}')"><i
+                  class="fas fa-trash-alt"></i></button></span>
+          </h3>
+          <div class="indicator-input">
+            <label for="document-title-${indicatorName}-${docInc}-${docRole}">Document
+              title</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-title-${indicatorName}-${docInc}-${docRole}"
+              id="document-title-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+              id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-eletronic_source-${indicatorName}-${docInc}-${docRole}">Eletronic
+              source</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+              id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
 
-    const document = `
-      <div id="document-${indicatorName}-${docInc}-${docRole}">
-        <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
-          ${docInc}
-          <span><button class="btn-delete"
-              onclick="deleteDocumentFromIndicator(${docInc}, '${tableName}', '${docRole}', '${indicatorName}')"><i
-                class="fas fa-trash-alt"></i></button></span>
-        </h3>
-        <div class="indicator-input">
-          <label for="document-title-${indicatorName}-${docInc}-${docRole}">Document
-            title</label>
-            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
-          <input type="text"
-            name="document-title-${indicatorName}-${docInc}-${docRole}"
-            id="document-title-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          <div class="indicator-input">
+            <label
+              for="document-min_time_required-${indicatorName}-${docInc}-${docRole}">Minimun time required</label>
+            <input type="text"
+              name="document-min_time_required-${indicatorName}-${docInc}-${docRole}"
+              id="document-min_time_required-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-min_time_required-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}">Voluntary
+              comments</label>
+            <textarea
+              name="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+              id="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-voluntary_comments-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
+          </div>
         </div>
-
-        <div class="indicator-input">
-          <label
-            for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
-            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
-          <input type="text"
-            name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
-            id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+      `
+    } else {
+      document = `
+        <div id="document-${indicatorName}-${docInc}-${docRole}">
+          <h3 style='margin-top: 2rem; display: flex; justify-content: space-between; align-items: center'>Document
+            ${docInc}
+            <span><button class="btn-delete"
+                onclick="deleteDocumentFromIndicator(${docInc}, '${tableName}', '${docRole}', '${indicatorName}')"><i
+                  class="fas fa-trash-alt"></i></button></span>
+          </h3>
+          <div class="indicator-input">
+            <label for="document-title-${indicatorName}-${docInc}-${docRole}">Document
+              title</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-title-${indicatorName}-${docInc}-${docRole}"
+              id="document-title-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+              id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-eletronic_source-${indicatorName}-${docInc}-${docRole}">Eletronic
+              source</label>
+              <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+        information.</p>
+            <input type="text"
+              name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+              id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+          </div>
+  
+          <div class="indicator-input">
+            <label
+              for="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}">Voluntary
+              comments</label>
+            <textarea
+              name="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+              id="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
+              onblur="saveDocumentValue('document-voluntary_comments-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
+          </div>
         </div>
-
-        <div class="indicator-input">
-          <label
-            for="document-eletronic_source-${indicatorName}-${docInc}-${docRole}">Eletronic
-            source</label>
-            <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
-          <input type="text"
-            name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
-            id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
-        </div>
-
-        <div class="indicator-input">
-          <label
-            for="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}">Voluntary
-            comments</label>
-          <textarea
-            name="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
-            id="document-voluntary_comments-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-voluntary_comments-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
-        </div>
-      </div>
-    `
+      `
+    }
 
     documents.append(document)
   }

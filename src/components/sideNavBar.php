@@ -13,8 +13,8 @@
         href="../../../src/pages/Indicators/peMonitoring.php?id=<?php echo $_GET["id"]; ?>">Physical education
         monitoring</a></li>
     <li <?php if (basename($_SERVER['PHP_SELF']) == "researchPe.php") echo 'class="selected"' ?>><a
-        href="../../../src/pages/Indicators/researchPe.php?id=<?php echo $_GET["id"]; ?>">Research in
-        PE and school-based PA</a></li>
+        href="../../../src/pages/Indicators/researchPe.php?id=<?php echo $_GET["id"]; ?>">PE and school-based PA
+        interventions research</a></li>
     <li <?php if (basename($_SERVER['PHP_SELF']) == "conclusion.php") echo 'class="selected"' ?>><a
         href="../../../src/pages/Indicators/conclusion.php?id=<?php echo $_GET["id"]; ?>">Conclusion</a></li>
   </ul>

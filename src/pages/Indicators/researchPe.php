@@ -66,7 +66,7 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
     ?>
     <div class="container__title-header">
       <button class="btn-back">Back</button>
-      <h1>Research in PE and school-based PA <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
+      <h1>PE and school-based PA interventions research <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
       <button class="btn-next">Next</button>
     </div>
     <div class="indicators-container">
@@ -119,11 +119,13 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
               <a href="../../uploads/tables/<?php echo $_GET["id"]; ?>.pdf" download class="btn-primary">
                 <strong>Download</strong> table
               </a>
+            </div>
+            <?php endif; ?>
+            <div class="control-panel">
               <button class="btn-add" id="addStudy">
                 <strong>Add</strong> Intervention study
               </button>
             </div>
-            <?php endif; ?>
           </div>
 
 
