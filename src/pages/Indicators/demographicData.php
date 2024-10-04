@@ -93,6 +93,14 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $cardLocationPath = "../../assets/card_demographic_data.png";
     include '../../components/cardLocation.php';
     ?>
+    <!-- <div id="notification" class="notification">
+      <div class="notification-content">
+        <p id="notification-message">Error saving data. Please try again.</p>
+        <button id="close-btn" class="close-btn">&times;</button>
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div> -->
+
 
     <div class="container__title-header">
       <button class="btn-back">Back</button>
@@ -901,6 +909,42 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       verifyAgreementInput()
     });
 
+    // function showErrorNotification(message, timeout = 5000) {
+    //   const notification = document.getElementById("notification");
+    //   const progressBar = document.getElementById("progress-bar");
+    //   const progressDiv = document.createElement("div");
+    //   const closeButton = document.getElementById("close-btn");
+
+    //   progressDiv.classList.add("progress-bar-fill");
+
+    //   // Atualizar a mensagem de erro
+    //   document.getElementById("notification-message").textContent = message;
+
+    //   // Adicionar a barra de progresso
+    //   progressBar.innerHTML = "";
+    //   progressBar.appendChild(progressDiv);
+
+    //   // Definir a duração da animação da barra de progresso
+    //   progressDiv.style.animationDuration = `${timeout / 1000}s`;
+
+    //   // Mostrar notificação com a animação de slide in
+    //   notification.style.animation = "slideIn 0.5s forwards";
+
+    //   // Função para fechar a notificação
+    //   function closeNotification() {
+    //     notification.style.animation = "slideOut 0.5s forwards";
+    //   }
+
+    //   // Adicionar evento ao botão de fechar
+    //   closeButton.addEventListener("click", closeNotification);
+
+    //   // Fechar notificação automaticamente após o timeout
+    //   setTimeout(() => {
+    //     closeNotification();
+    //   }, timeout);
+    // }
+
+
     function openModalMethod(method) {
       const methodData = methods.find(
         m => m.name == method)
@@ -960,6 +1004,9 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           if (response == "Success") {
             showDocument(indicatorName, tableName, role)
           } else {
+            // showErrorNotification(
+            //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+            //   5000)
             console.log(response)
           }
         }
@@ -985,10 +1032,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             title</label>
             <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-          <input type="text"
+          <textarea
             name="document-title-${indicatorName}-${docInc}-${docRole}"
             id="document-title-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+            onblur="saveDocumentValue('document-title-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
         </div>
 
         <div class="indicator-input">
@@ -996,10 +1043,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             for="document-year_publication-${indicatorName}-${docInc}-${docRole}">Year of publication</label>
             <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-          <input type="text"
+          <textarea
             name="document-year_publication-${indicatorName}-${docInc}-${docRole}"
             id="document-year_publication-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+            onblur="saveDocumentValue('document-year_publication-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
         </div>
 
         <div class="indicator-input">
@@ -1008,10 +1055,10 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             source</label>
             <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-          <input type="text"
+          <textarea
             name="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
             id="document-eletronic_source-${indicatorName}-${docInc}-${docRole}"
-            onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')">
+            onblur="saveDocumentValue('document-eletronic_source-${indicatorName}-${docInc}-${docRole}', '${tableName}', '${docInc}')"></textarea>
         </div>
 
         <div class="indicator-input">
@@ -1061,6 +1108,12 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the document value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -1082,6 +1135,12 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           removeDocumentFromIndicator(tableName, docInc, docRole, indicatorName)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while deleting the document due to internet instability. Please try again.", 5000
+          // )
+          console.log(error)
         }
       });
 
@@ -1161,6 +1220,13 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
+
         }
       });
     }
@@ -1184,6 +1250,12 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the admin value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -1207,6 +1279,12 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the value due to internet instability. Please try again.", 5000)
+          console.log(error)
+
         }
       });
     }
@@ -1231,6 +1309,12 @@ $compulsorySeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the comment due to internet instability. Please try again.", 5000)
+          console.log(error)
+
         }
       });
     }

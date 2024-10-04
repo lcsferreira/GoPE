@@ -95,6 +95,7 @@ mysqli_close($conn);
       </form>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
   const form = document.getElementById('userForm');
 
@@ -201,27 +202,29 @@ mysqli_close($conn);
   }
 
   function createUser(payload) {
-    fetch('../../query/Dashboard/createUser.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          // Code to execute if the response status is 200
-          window.location.href = '../../pages/Dashboard/usersList.php'
-          // console.log('User created');
-        } else {
-          console.log('Error:', response);
-        }
-      })
+    console.log(payload);
+    $.ajax({
+      type: "POST",
+      url: "../../query/Dashboard/createUser.php",
+      data: {
+        payload: payload
+      },
+      dataType: "text",
+      contentType: "application/x-www-form-urlencoded",
+    }).done(function(response) {
+      console.log(response);
+      if (response === "Success") {
+        // console.log('User updated successfully');
+        window.location.href = '../../pages/Dashboard/usersList.php'
+      } else {
+        window.location.href = '../../pages/Dashboard/createUser.php'
+      }
+    });
   }
 
   const submitButton = document.querySelector('.btn-submit');
   submitButton.addEventListener('click', () => {
-    // event.preventDefault();
+    event.preventDefault();
     const countryRelations = document.querySelectorAll('.country-relation');
     countryRelations.forEach((relation, index) => {
       const mainUser = relation.querySelector(`#main-user-${index + 1}`);

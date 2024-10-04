@@ -5,7 +5,7 @@
         data</a></li>
     <li <?php if (basename($_SERVER['PHP_SELF']) == "paPrevalence.php") echo 'class="selected"' ?>><a
         href="../../../src/pages/Indicators/paPrevalence.php?id=<?php echo $_GET["id"]; ?>">Physical activity
-        particpation</a></li>
+        participation</a></li>
     <li <?php if (basename($_SERVER['PHP_SELF']) == "pePolicy.php") echo 'class="selected"' ?>><a
         href="../../../src/pages/Indicators/pePolicy.php?id=<?php echo $_GET["id"]; ?>">Physical education
         policy</a></li>

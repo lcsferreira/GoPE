@@ -10,12 +10,10 @@
       title</label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text"
-      name="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+    <textarea name="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
-      value="<?php echo $document["title"] ?>"
       onblur="saveDocumentValue('document-title-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')"
-      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["title"] ?></textarea>
   </div>
 
   <div class="indicator-input">
@@ -38,24 +36,24 @@
       source</label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text"
+    <textarea
       name="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
-      value="<?php echo $document["eletronic_source"] ?>"
       onblur="saveDocumentValue('document-eletronic_source-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')"
-      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["eletronic_source"] ?></textarea>
   </div>
 
   <div class="indicator-input">
     <label
-      for="document-min_time_required-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Minimun
+      for="document-min_time_required-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Minimum
+      and mandatory
       time required</label>
-    <input type="text"
+    <p style="font-size:smaller">(Please insert page number or text excerpt)</p>
+    <textarea
       name="document-min_time_required-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-min_time_required-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
-      value="<?php echo $document["min_time_required"] ?>"
       onblur="saveDocumentValue('document-min_time_required-<?php echo $indicatorName; ?>-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $docInc ?>')"
-      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["min_time_required"] ?></textarea>
   </div>
 
   <div class="indicator-input">

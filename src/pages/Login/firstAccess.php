@@ -85,6 +85,8 @@ if (isset($_GET['Success'])) {
   </div>
 
   <script>
+  //se tiver ?Success? no URL, mostra a mensagem de sucesso
+
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirm-password');
   const submitButton = document.querySelector('.btn-login');
@@ -95,8 +97,17 @@ if (isset($_GET['Success'])) {
     const passwordError = document.getElementById('password-error');
     const numberRegex = /[0-9]/;
     const uppercaseRegex = /[A-Z]/;
-
-    if (password === '') {
+    //do not allow character ' (single quote)
+    if (password.includes("'") || password.includes('"')) {
+      passwordError.textContent = 'Password cannot contain single or double quotes';
+      submitButton.disabled = true;
+    } else if (password === confirmPassword) {
+      passwordError.textContent = '';
+      submitButton.disabled = false;
+    } else if (confirmPassword === '') {
+      passwordError.textContent = 'Confirm password is required';
+      submitButton.disabled = true;
+    } else if (password === '') {
       passwordError.textContent = 'Password is required';
       submitButton.disabled = true;
     } else if (password.length < 8) {
@@ -104,9 +115,6 @@ if (isset($_GET['Success'])) {
       submitButton.disabled = true;
     } else if (!numberRegex.test(password)) {
       passwordError.textContent = 'Password must have at least one number';
-      submitButton.disabled = true;
-    } else if (!uppercaseRegex.test(password)) {
-      passwordError.textContent = 'Password must have at least one uppercase letter';
       submitButton.disabled = true;
     } else if (password !== confirmPassword) {
       passwordError.textContent = 'Passwords do not match';

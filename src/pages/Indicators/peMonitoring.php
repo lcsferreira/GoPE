@@ -74,6 +74,13 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
     include '../../components/cardLocation.php';
     ?>
     <?php include '../../components/modalMetodology.php'; ?>
+    <!-- <div id="notification" class="notification">
+      <div class="notification-content">
+        <p id="notification-message">Error saving data. Please try again.</p>
+        <button id="close-btn" class="close-btn">&times;</button>
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div> -->
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Physical education monitoring<i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
@@ -84,7 +91,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div style="display: flex; flex-direction:column; gap:2rem; margin-left: 10rem;">
         <?php 
           $videoTitle = "Methodological approach for collecting Physical Education monitoring data";
-          $videoUrl = "https://drive.google.com/file/d/1NHY5mY9usAQExZg9MzgHikgb0LEhdnTf/preview";
+          $videoUrl = "https://drive.google.com/file/d/15bxRedWtXpXlBZj7K1hhuX3bGfFvYCJO/preview";
           include '../../components/videoContainer.php'; ?>
         <div class="indicator-input-container">
           <div class="indicator-input-container__header">
@@ -206,6 +213,41 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
       verifyAgreementInput()
     });
 
+    // function showErrorNotification(message, timeout = 5000) {
+    //   const notification = document.getElementById("notification");
+    //   const progressBar = document.getElementById("progress-bar");
+    //   const progressDiv = document.createElement("div");
+    //   const closeButton = document.getElementById("close-btn");
+
+    //   progressDiv.classList.add("progress-bar-fill");
+
+    //   // Atualizar a mensagem de erro
+    //   document.getElementById("notification-message").textContent = message;
+
+    //   // Adicionar a barra de progresso
+    //   progressBar.innerHTML = "";
+    //   progressBar.appendChild(progressDiv);
+
+    //   // Definir a duração da animação da barra de progresso
+    //   progressDiv.style.animationDuration = `${timeout / 1000}s`;
+
+    //   // Mostrar notificação com a animação de slide in
+    //   notification.style.animation = "slideIn 0.5s forwards";
+
+    //   // Função para fechar a notificação
+    //   function closeNotification() {
+    //     notification.style.animation = "slideOut 0.5s forwards";
+    //   }
+
+    //   // Adicionar evento ao botão de fechar
+    //   closeButton.addEventListener("click", closeNotification);
+
+    //   // Fechar notificação automaticamente após o timeout
+    //   setTimeout(() => {
+    //     closeNotification();
+    //   }, timeout);
+    // }
+
     function openModalMethod(method) {
       const methodData = methods.find(
         m => m.name == method)
@@ -303,6 +345,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -335,6 +383,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -366,6 +420,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -390,6 +450,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -419,9 +485,13 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         success: function(response) {
           if (response == "Success") {
             showAddMonitoringSystem(type)
-          } else {
-            console.log(response)
           }
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -538,7 +608,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="years_applied-${inc}-${type}">
-            School years to which is applied
+            School years to which is applied (e.g., 1st to 12th grades; 5th and 8th grades)
           </label>
           <input type="text" name="years_applied" id="years_applied-${inc}-${type}">
         </div>
@@ -565,8 +635,8 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="voluntary_comments-${inc}-${type}">
             Voluntary comments
           </label>
-          <input type="text" name="voluntary_comments" id="voluntary_comments-${inc}-${type}"
-            onblur="saveMonitoringSystemValues(${inc}, '${type}')">
+          <textarea name="voluntary_comments" id="voluntary_comments-${inc}-${type}"
+            onblur="saveMonitoringSystemValues(${inc}, '${type}')"></textarea>
         </div>
 
         <div id="monitoring-system-documents-${inc}-${type}">
@@ -612,18 +682,18 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <label for="document-title-${docInc}-${type}">Document title</label>
           <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-          <input type="text" name="document-title-${docInc}-${type}"
+          <textarea name="document-title-${docInc}-${type}"
             id="document-title-${docInc}-${type}"
-            onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}', '${inc}')">
+            onblur="saveDocumentValue('document-title-${docInc}-${type}', '${tableName}', '${inc}')"></textarea>
         </div>
 
         <div class="indicator-input">
           <label for="document-eletronic_source-${docInc}-${type}">Eletronic source</label>
           <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-          <input type="text" name="document-eletronic_source-${docInc}-${type}"
+          <textarea name="document-eletronic_source-${docInc}-${type}"
             id="document-eletronic_source-${docInc}-${type}"
-            onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}', '${inc}')">
+            onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}', '${inc}')"></textarea>
         </div>
       </div>
       `
@@ -653,9 +723,19 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           if (response == "Success") {
             showAddDocumentToMonitoringSystem(inc, type)
           } else {
+            // showErrorNotification(
+            //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+            //   5000)
             console.log(response)
           }
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
+
       });
     }
 
@@ -672,8 +752,17 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           if (data == "Success") {
             removeDocumentFromMonitoringSystem(docInc, type);
           } else {
-            console.log(data);
+            // showErrorNotification(
+            //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+            //   5000)
+            console.log(data)
           }
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
 
@@ -721,6 +810,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -789,6 +884,12 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -805,8 +906,17 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           if (data == "Success") {
             removeMonitoringSystem(inc, type);
           } else {
-            console.log(data);
+            // showErrorNotification(
+            //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+            //   5000)
+            console.log(data)
           }
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
 

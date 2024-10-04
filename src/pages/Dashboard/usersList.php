@@ -29,8 +29,10 @@ mysqli_close($conn);
   <link rel="stylesheet" href="../../css/components/header.css">
   <link rel="stylesheet" href="../../css/components/modal.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+    integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -50,8 +52,12 @@ mysqli_close($conn);
     <div class="dashboard-container">
       <div class="dashboard-container__header">
         <h2>User Details</h2>
-        <button class="btn-add" onclick="window.location.href = 'createUser.php';"><strong>Create</strong>
-          User</button>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn-add" onclick="window.location.href = 'createUser.php';"><strong>Create</strong>
+            User</button>
+          <button class="btn-download"><strong>Download</strong>
+            Users</button>
+        </div>
       </div>
       <table class="dashboard-table users">
         <thead>
@@ -66,62 +72,69 @@ mysqli_close($conn);
         </thead>
         <tbody>
           <?php foreach ($users as $user) : ?>
-            <!-- id name email secondary_email password type active -->
-            <tr>
-              <td><?php echo $user['name'] ?></td>
-              <td><?php echo $user['email'] ?></td>
-              <td><?php echo $user['institution'] ?></td>
-              <td class="status-<?php echo $user['active'] == 1 ? 'active' : 'inactive' ?>">
-                <?php echo $user['active'] == 1 ? 'Active' : 'Inactive' ?></td>
-              <td><?php echo $user['type'] ?></td>
-              <td>
-                <button class="btn-edit" onclick="window.location.href = 'editUser.php?id=<?php echo $user['id'] ?>'"><i class="fas fa-edit"></i></button>
-                <button class="btn-delete" id="btn-delete-<?php echo $user['id'] ?>"><i class="fas fa-trash-alt"></i></button>
-              </td>
-            </tr>
+          <!-- id name email secondary_email password type active -->
+          <tr>
+            <td><?php echo $user['name'] ?></td>
+            <td><?php echo $user['email'] ?></td>
+            <td><?php echo $user['institution'] ?></td>
+            <td class="status-<?php echo $user['active'] == 1 ? 'active' : 'inactive' ?>">
+              <?php echo $user['active'] == 1 ? 'Active' : 'Inactive' ?></td>
+            <td><?php echo $user['type'] ?></td>
+            <td>
+              <button class="btn-edit" onclick="window.location.href = 'editUser.php?id=<?php echo $user['id'] ?>'"><i
+                  class="fas fa-edit"></i></button>
+              <button class="btn-delete" id="btn-delete-<?php echo $user['id'] ?>"><i
+                  class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
     </div>
   </div>
   <script>
-    const modal = document.querySelector('.modal');
-    const modalConfirm = document.querySelector('#modal-confirm');
-    const modalClose = document.querySelector('#modal-close');
-    const btnDelete = document.querySelectorAll('.btn-delete');
+  const modal = document.querySelector('.modal');
+  const modalConfirm = document.querySelector('#modal-confirm');
+  const modalClose = document.querySelector('#modal-close');
+  const btnDelete = document.querySelectorAll('.btn-delete');
+  const btnDowload = document.querySelector('.btn-download');
 
-    btnDelete.forEach(btn => {
-      btn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        modalConfirm.setAttribute('id', btn.getAttribute('id').split('-')[2]);
-      });
+  btnDowload.addEventListener('click', () => {
+    window.location.href = '../../query/Dashboard/downloadUsers.php';
+  });
+
+  btnDelete.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalConfirm.setAttribute('id', btn.getAttribute('id').split('-')[2]);
     });
+  });
 
-    function deleteUser(id) {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '../../query/Dashboard/deleteUser.php', true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.send(`id=${id}`);
+  function deleteUser(id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '../../query/Dashboard/deleteUser.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(`id=${id}`);
 
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          window.location.href = 'usersList.php';
-        }
-      }
-
-      xhr.onerror = function() {
-        console.log('Error');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        window.location.href = 'usersList.php';
       }
     }
 
-    modalClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+    xhr.onerror = function() {
+      console.log('Error');
+    }
+  }
 
-    modalConfirm.addEventListener('click', () => {
-      const id = modalConfirm.getAttribute('id');
-      deleteUser(id);
-    });
+  modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  modalConfirm.addEventListener('click', () => {
+    const id = modalConfirm.getAttribute('id');
+    deleteUser(id);
+  });
   </script>
 </body>
 

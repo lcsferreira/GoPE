@@ -240,6 +240,7 @@ input:disabled {
   background: var(--white);
   color: var(--text-dark);
   font-size: 1rem;
+  font-family: unset;
 }
 
 .indicator-input textarea:disabled {
@@ -448,4 +449,82 @@ input[type="submit"] {
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+}
+
+/* Estilo da notificação */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: -350px; /* Fora da tela */
+  width: 300px;
+  background-color: #f44336;
+  color: white;
+  padding: 15px;
+  padding-right: 35px; /* Espaço extra para o botão de fechar */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: right 0.5s ease, opacity 0.5s ease;
+  z-index: 9999;
+}
+
+.notification-content {
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* Ajuste vertical */
+  right: 10px; /* Ajuste horizontal */
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  background-color: #ffcccb;
+  margin-top: 10px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #ffffff;
+  animation: progressBarAnimation linear forwards;
+}
+
+/* Animação da barra de progresso */
+@keyframes progressBarAnimation {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Animação de deslizar */
+@keyframes slideIn {
+  from {
+    right: -350px;
+    opacity: 0;
+  }
+  to {
+    right: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 20px;
+    opacity: 1;
+  }
+  to {
+    right: -350px;
+    opacity: 0;
+  }
 }

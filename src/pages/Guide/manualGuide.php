@@ -7,10 +7,12 @@ if (!isset($_SESSION['loggedIn'])) {
 }
 
 $videosUrl = [
-  "https://drive.google.com/file/d/1IN3WSir94uzGzdt_2is7Wj1ajX70-rMP/preview",
-  "https://drive.google.com/file/d/1YTK7IsJXtEKFuWUO-MKCc8U6tgMyYXss/preview",
-  "https://drive.google.com/file/d/16CIawm6043Q6BwhY_fIyMzPm6cs29ySc/preview",
-  "https://drive.google.com/file/d/1NHY5mY9usAQExZg9MzgHikgb0LEhdnTf/preview"
+  "https://www.youtube.com/embed/VbG3k4L3YME?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM",
+  "https://www.youtube.com/embed/T4BqxHAKSCo?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM",
+  "https://www.youtube.com/embed/4klD6OGoJcM?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM",
+  "https://www.youtube.com/embed/5teeCfMWzeE?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM",
+  "https://www.youtube.com/embed/Q9OSONdCHTw?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM",
+  "https://www.youtube.com/embed/lnCRX1hpjPU?list=PLQQXcXsQ7p8tX_z1V2pNWPV20IlFO1HeM"
 ];
 
 ?>
@@ -61,8 +63,8 @@ $videosUrl = [
           </a>
         </div>
         <div>
-          <object data="../../ assets/GoPE!_User_Manual_English.pdf" type="application/pdf" width="100%" height="100%">
-            <p>Link <a href="../../assets/GoPE!_User_Manual.pdf">to the PDF!</a></p>
+          <object data="../../assets/GoPE!_User_Manual_English.pdf" type="application/pdf" width="500" height="600">
+            <p>Link <a href="../../assets/GoPE!_User_Manual_English.pdf">to the PDF!</a></p>
           </object>
         </div>
       </div>
@@ -84,7 +86,7 @@ $videosUrl = [
           </a>
         </div>
         <div>
-          <object data="../../assets/GoPE!_User_Manual_Spanish.pdf" type="application/pdf" width="100%" height="100%">
+          <object data="../../assets/GoPE!_User_Manual_Spanish.pdf" type="application/pdf" width="500" height="600">
             <p>Link <a href="../../assets/GoPE!_User_Manual.pdf">to the PDF!</a></p>
           </object>
         </div>
@@ -97,8 +99,7 @@ $videosUrl = [
           <ul>
             <?php foreach ($videosUrl as $videoUrl) : ?>
             <li class="dashboard_container__videos-carousel__video">
-              <iframe width="560" height="315" src="<?php echo $videoUrl; ?>" title="YouTube video player"
-                frameborder="0"
+              <iframe width="560" height="315" src="<?php echo $videoUrl; ?>" title="Workflow video" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
             </li>
@@ -121,11 +122,6 @@ $videosUrl = [
       "max-width": slideWidth,
       "height": slideHeight
     });
-    // $(".slider-video ul").css({
-    //   "width": slideUlWidth,
-    //   "margin-left": -slideWidth
-    // });
-    $(".slider-video ul li:last-child").prependTo($(".slider-video ul"));
 
     function moveLeft() {
       $(".slider-video ul").stop().animate({

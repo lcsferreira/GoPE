@@ -87,11 +87,11 @@
         <span class="checkmark"></span>
       </label>
       <?php if ($monitoringSystem["other"] == 1 && $monitoringSystem["other"] !== null) {
-        echo "<input type='text' name='other_purposes' id='other_purposes-".$inc."-".$type."' value='" . $monitoringSystem["other_purposes"] . "' placeholder='which purpose(s)' onblur='saveMonitoringSystemValues(".$inc.", ".$type.")' />";
+        echo "<input type='text' name='other_purposes' id='other_purposes-".$inc."-".$type."' value='" . $monitoringSystem["other_purposes"] . "' placeholder='which purpose(s)' onblur='saveMonitoringSystemValues(".$inc.", `".$type."`)' />";
       } else{
       echo "<input type='text' name='other_purposes' id='other_purposes-".$inc."-".$type."'
         value='" . $monitoringSystem["other_purposes"] . "' placeholder='which purpose(s)' hidden
-        onblur='saveMonitoringSystemValues(".$inc.", ".$type.")' />";
+        onblur='saveMonitoringSystemValues(".$inc.", `".$type."`)' />";
       }?>
     </div>
   </div>
@@ -141,14 +141,14 @@
 
   <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
     <label for="years_applied-<?php echo $inc ?>-<?php echo $type; ?>">
-      School years to which is applied
+      School years to which is applied (e.g., 1st to 12th grades; 5th and 8th grades)
     </label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text" name="years_applied" id="years_applied-<?php echo $inc ?>-<?php echo $type; ?>"
-      value="<?php if($monitoringSystem["years_applied"]){ echo $monitoringSystem["years_applied"];}else{echo "";} ?>"
+    <textarea name="years_applied" id="years_applied-<?php echo $inc ?>-<?php echo $type; ?>"
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"
-      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>><?php if($monitoringSystem["years_applied"]){ echo $monitoringSystem["years_applied"];}else{echo "";} ?>
+    </textarea>
   </div>
 
   <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
@@ -169,20 +169,20 @@
     </label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text" name="years_application" id="years_application-<?php echo $inc ?>-<?php echo $type; ?>"
-      value="<?php if($monitoringSystem["years_application"]){ echo $monitoringSystem["years_application"];}else{echo "";} ?>"
+    <textarea name="years_application" id="years_application-<?php echo $inc ?>-<?php echo $type; ?>"
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"
-      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>><?php if($monitoringSystem["years_application"]){ echo $monitoringSystem["years_application"];}else{echo "";} ?>
+    </textarea>
   </div>
 
   <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
     <label for="voluntary_comments-<?php echo $inc ?>-<?php echo $type; ?>">
       Voluntary comments
     </label>
-    <input type="text" name="voluntary_comments" id="voluntary_comments-<?php echo $inc ?>-<?php echo $type; ?>"
-      value="<?php if($monitoringSystem["voluntary_comments"]){ echo $monitoringSystem["voluntary_comments"];}else{echo "";} ?>"
+    <textarea name="voluntary_comments" id="voluntary_comments-<?php echo $inc ?>-<?php echo $type; ?>"
       onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"
-      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>><?php if($monitoringSystem["voluntary_comments"]){ echo $monitoringSystem["voluntary_comments"];}else{echo "";} ?>
+    </textarea>
   </div>
 
   <div id="monitoring-system-documents-<?php echo $inc ?>-<?php echo $type; ?>">

@@ -9,21 +9,20 @@
     <label for="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Document title</label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text" name="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
-      id="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>" value="<?php echo $document["title"] ?>"
+    <textarea name="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       onblur="saveDocumentValue('document-title-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $inc; ?>')"
-      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["title"] ?></textarea>
   </div>
 
   <div class="indicator-input">
     <label for="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Eletronic source</label>
     <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
       information.</p>
-    <input type="text" name="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+    <textarea name="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
       id="document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
-      value="<?php echo $document["eletronic_source"] ?>"
       onblur="saveDocumentValue('document-eletronic_source-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $inc; ?>')"
-      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["eletronic_source"] ?></textarea>
   </div>
 
 </div>

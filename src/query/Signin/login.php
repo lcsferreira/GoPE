@@ -3,18 +3,10 @@ session_start();
 include '../../../config.php';
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
-  function validate($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $password = md5($password);
 }
-
-$email = validate($_POST['email']);
-$password = validate($_POST['password']);
-$password = md5($password);
 
 if (empty($email)) {
   header("Location: ../../pages/Login/login.php?error=Email is required");
@@ -36,6 +28,11 @@ if (empty($email)) {
       $_SESSION['loggedIn'] = true;
       $_SESSION['type'] = $row['type'];
       $_SESSION['consent'] = $row['consent'];
+
+      //store last_logged_in timestamp
+      $last_logged_in = date('Y-m-d H:i:s');
+      $sql = "UPDATE users SET last_logged_in='$last_logged_in' WHERE email='$email'";
+      mysqli_query($conn, $sql);
 
       if ($row['type'] === 'admin') {
         header("Location: ../../pages/Dashboard/countriesList.php");

@@ -18,33 +18,6 @@ if ($result->num_rows > 0) {
   $countryName = $row['name'];
 }
 
-if($userType === 'contact') {
-  // verify if is main contact
-  $sql = "SELECT is_main FROM user_country_relations WHERE id_user = $userId AND id_country = $countryId";
-  $result = $conn->query($sql);
-  if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if($row['is_main'] == '1'){
-      $enableSubmit = true;
-    }
-    else{
-      $enableSubmit = false;
-    }
-  }
-}
-// check if indicators_step is waiting admin
-$sql = "SELECT indicators_step FROM countries WHERE id = $countryId";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  $indicatorsStep = $row['indicators_step'];
-  if($row['indicators_step'] === 'waiting_admin') {
-    $enableSubmit = false;
-  }else{
-    $enableSubmit = true;
-  }
-}
-
 // check if all agreements are checked
 
 function verifyAllAgreementsChecked($conn,$countryId)
@@ -73,6 +46,34 @@ if($userType === "contact"){
   }else{
     $enableSubmit = false;
     $hasAllAgreementsChecked = false;
+  }
+}
+
+// check if indicators_step is waiting admin
+$sql = "SELECT indicators_step FROM countries WHERE id = $countryId";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $indicatorsStep = $row['indicators_step'];
+  if($row['indicators_step'] === 'waiting_admin') {
+    $enableSubmit = false;
+  }else{
+    $enableSubmit = true;
+  }
+}
+
+if($userType === 'contact') {
+  // verify if is main contact
+  $sql = "SELECT is_main FROM user_country_relations WHERE id_user = $userId AND id_country = $countryId";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if($row['is_main'] == 1){
+      $enableSubmit = true;
+    }
+    else{
+      $enableSubmit = false;
+    }
   }
 }
 

@@ -1,3 +1,11 @@
 /.vscode
 /config.php
 /uploads
+/email_config.php
+.pdf
+.jpg
+.jpeg
+.png
+uploads
+assets
+PHPMailer

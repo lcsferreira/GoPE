@@ -1,5 +1,12 @@
 <?php
 include "../../../config.php";
+include '../../../email_config.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../../PHPMailer/src/Exception.php';
+require '../../../PHPMailer/src/PHPMailer.php';
+require '../../../PHPMailer/src/SMTP.php';
 
 $countryId = $_POST['idCountry'];
 
@@ -22,32 +29,47 @@ if ($result) {
   if ($result->num_rows > 0) {
 
     foreach ($emails as $email) {
-      $to = $email;
-      //get the actual year
-      $year = date("Y") + 1;
-      
-      $subject = "Indicators step - REVIEW REQUIRED - GoPE!";
-      $headers  = 'MIME-Version: 1.0' . "\r\n";
-      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-      $headers .= 'From: prferreiraj@loudoun.dreamhost.com' . "\r\n";
-      $headers .= 'Reply-To: info@globalphysicaleducationobservatory.com' . "\r\n";
-      $headers .= "X-Priority: 1\r\n";
-      $headers .= 'X-Mailer: PHP/' . phpversion();
-    
-      $message = "
-      <br>
-        Dear ".$country_name." Contact,
-      <br><br>
-        For the first set of Country Cards ".$year.", we have updated the data for the GoPE! physical education indicators. Please log into the Workflow in order to review the indicators, make any adjustments and approve the new Country Card.
-      <br><br>
-        Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
-      <br><br>
-        <a href='http://work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?id=$countryId'>Workflow</a>
-      <br><br>
-      If you have any questions, please contact us at <a href='mailto: gopecoordination@gmail.com'>gopecoordination@gmail.com</a> or <a href='mailto:prjccristao@gmail.com'>prjccristao@gmail.com</a>
-      ";
-    
-      mail($to, $subject, $message, $headers);
+      try{
+        $to = $email;
+        //get the actual year
+        $year = date("Y") + 1;
+        $mail = new PHPMailer(true); 
+
+        //Server settings
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = $dreamhost;                  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = $host_username ;           // SMTP username
+        $mail->Password = $host_password;                          // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable SSL encryption, TLS also accepted with port 465
+        $mail->Port = $host_port;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom($host_username, 'GoPE!');
+        $mail->addAddress($to);     // Add a recipient
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = "Indicators step - REVIEW REQUIRED - GoPE!";
+        $mail->Body = "
+          <br>
+          Dear ".$country_name." Contact,
+        <br><br>
+          For the first set of Country Cards ".$year.", we have updated the data for the GoPE! physical education indicators. Please log into the Workflow in order to review the indicators, make any adjustments and approve the new Country Card.
+        <br><br>
+          Please click in the <b>link below</b> to enter the ".$year." GoPE! Country Cards Workflow.
+        <br><br>
+          <a href='http:work.globalphysicaleducationobservatory.com/src/pages/Indicators/indicatorsProgress.php?id=$countryId'>Workflow</a>
+        <br><br>
+        If you have any questions, please contact us at <a href='mailto: gopecoordination@gmail.com'>gopecoordination@gmail.com</a> or <a href='mailto:prjccristao@gmail.com'>prjccristao@gmail.com</a>
+        ";
+
+        $mail->send();
+        
+      } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      }
     }
     echo "success";
   }

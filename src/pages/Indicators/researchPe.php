@@ -64,6 +64,13 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       $buttonCloseText = "Close";
       include '../../components/modalInfo.php'; 
     ?>
+    <!-- <div id="notification" class="notification">
+      <div class="notification-content">
+        <p id="notification-message">Error saving data. Please try again.</p>
+        <button id="close-btn" class="close-btn">&times;</button>
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div> -->
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>PE and school-based PA interventions research <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
@@ -193,6 +200,46 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   });
 
+  // function showErrorNotification(message, timeout = 5000) {
+  //   const notification = document.getElementById("notification");
+  //   const progressBar = document.getElementById("progress-bar");
+  //   const progressDiv = document.createElement("div");
+  //   const closeButton = document.getElementById("close-btn");
+
+  //   // se a notificação já estiver aberta, reset timeout
+  //   if (notification.style.animation == "slideIn 0.5s forwards") {
+  //     clearTimeout(timeout);
+  //   }
+
+  //   progressDiv.classList.add("progress-bar-fill");
+
+  //   // Atualizar a mensagem de erro
+  //   document.getElementById("notification-message").textContent = message;
+
+  //   // Adicionar a barra de progresso
+  //   progressBar.innerHTML = "";
+  //   progressBar.appendChild(progressDiv);
+
+  //   // Definir a duração da animação da barra de progresso
+  //   progressDiv.style.animationDuration = `${timeout / 1000}s`;
+
+  //   // Mostrar notificação com a animação de slide in
+  //   notification.style.animation = "slideIn 0.5s forwards";
+
+  //   // Função para fechar a notificação
+  //   function closeNotification() {
+  //     notification.style.animation = "slideOut 0.5s forwards";
+  //   }
+
+  //   // Adicionar evento ao botão de fechar
+  //   closeButton.addEventListener("click", closeNotification);
+
+  //   // Fechar notificação automaticamente após o timeout
+  //   setTimeout(() => {
+  //     closeNotification();
+  //   }, timeout);
+  // }
+
   function openModalMethod(method) {
     const methodData = methods.find(
       m => m.name == method)
@@ -242,6 +289,12 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       },
       success: function(response) {
         console.log(response)
+      },
+      error: function(error) {
+        // showErrorNotification(
+        //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+        //   5000)
+        console.log(error)
       }
     });
   }
@@ -425,8 +478,17 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if (data == "Success") {
           showAddStudy();
         } else {
-          // console.log(data);
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(data)
         }
+      },
+      error: function(error) {
+        // showErrorNotification(
+        //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+        //   5000)
+        console.log(error)
       }
     });
 
@@ -448,8 +510,17 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if (data == "Success") {
           removeStudy(inc);
         } else {
-          console.log(data);
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(data)
         }
+      },
+      error: function(error) {
+        // showErrorNotification(
+        //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+        //   5000)
+        console.log(error)
       }
     });
   }
@@ -552,8 +623,17 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if (data == "Success") {
           console.log("Success");
         } else {
-          console.log(data);
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(data)
         }
+      },
+      error: function(error) {
+        // showErrorNotification(
+        //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+        //   5000)
+        console.log(error)
       }
     });
 
@@ -579,6 +659,12 @@ $intervationStudies = mysqli_fetch_all($result, MYSQLI_ASSOC);
       },
       success: function(response) {
         console.log(response)
+      },
+      error: function(error) {
+        // showErrorNotification(
+        //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+        //   5000)
+        console.log(error)
       }
     });
   }

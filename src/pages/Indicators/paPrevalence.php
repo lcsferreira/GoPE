@@ -57,6 +57,13 @@ $agreementValues = mysqli_fetch_assoc($result);
     include '../../components/cardLocation.php';
     ?>
     <?php include '../../components/modalMetodology.php'; ?>
+    <!-- <div id="notification" class="notification">
+      <div class="notification-content">
+        <p id="notification-message">Error saving data. Please try again.</p>
+        <button id="close-btn" class="close-btn">&times;</button>
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div> -->
     <div class="container__title-header">
       <button class="btn-back">Back</button>
       <h1>Physical Activity participation <i class="fas fa-info-circle" id="cardLocationModal"></i></h1>
@@ -245,6 +252,41 @@ $agreementValues = mysqli_fetch_assoc($result);
       verifyAgreementInput()
     });
 
+    // function showErrorNotification(message, timeout = 5000) {
+    //   const notification = document.getElementById("notification");
+    //   const progressBar = document.getElementById("progress-bar");
+    //   const progressDiv = document.createElement("div");
+    //   const closeButton = document.getElementById("close-btn");
+
+    //   progressDiv.classList.add("progress-bar-fill");
+
+    //   // Atualizar a mensagem de erro
+    //   document.getElementById("notification-message").textContent = message;
+
+    //   // Adicionar a barra de progresso
+    //   progressBar.innerHTML = "";
+    //   progressBar.appendChild(progressDiv);
+
+    //   // Definir a duração da animação da barra de progresso
+    //   progressDiv.style.animationDuration = `${timeout / 1000}s`;
+
+    //   // Mostrar notificação com a animação de slide in
+    //   notification.style.animation = "slideIn 0.5s forwards";
+
+    //   // Função para fechar a notificação
+    //   function closeNotification() {
+    //     notification.style.animation = "slideOut 0.5s forwards";
+    //   }
+
+    //   // Adicionar evento ao botão de fechar
+    //   closeButton.addEventListener("click", closeNotification);
+
+    //   // Fechar notificação automaticamente após o timeout
+    //   setTimeout(() => {
+    //     closeNotification();
+    //   }, timeout);
+    // }
+
     function openModalMethod(method) {
       const methodData = methods.find(
         m => m.name == method)
@@ -342,6 +384,12 @@ $agreementValues = mysqli_fetch_assoc($result);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -366,6 +414,12 @@ $agreementValues = mysqli_fetch_assoc($result);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -390,6 +444,12 @@ $agreementValues = mysqli_fetch_assoc($result);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }
@@ -415,6 +475,12 @@ $agreementValues = mysqli_fetch_assoc($result);
         },
         success: function(response) {
           console.log(response)
+        },
+        error: function(error) {
+          // showErrorNotification(
+          //   "An error occurred while saving the agreement value due to internet instability. Please try again.",
+          //   5000)
+          console.log(error)
         }
       });
     }

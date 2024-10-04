@@ -17,7 +17,7 @@ const methods = [
   {
     name: "literacy_youth_total",
     title: "Literacy youth total (15 to 24 years) (%)",
-    html: "<p>Most recent data from the World Bank, for “Literacy rate, youth total (% of people ages 15-24)”.<br><a href='https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS'>World Bank: Literacy rate, youth total (% of people ages 15-24)</a><br>[accessed in April 23rd, 2024]</p>",
+    html: "<p>Most recent data from the World Bank, for “Literacy rate, youth total (% of people ages 15-24)”.<br><a href='https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS'>World Bank: Literacy rate, youth total (% of people ages 15-24)</a><br>For Argentina, Bahrain, Greece, Malaysia, San Marino, most recent data from the UNICEF Global database on literacy rate, for “Youth literacy rate, aged 15-24”.<br><a href='https://data.unicef.org/wp-content/uploads/2021/04/Literacy-rate_2021-1.xlsx'>https://data.unicef.org/wp-content/uploads/2021/04/Literacy-rate_2021-1.xlsx</a><br>[accessed in April 23rd, 2024]</p>",
   },
   {
     name: "gov_expenditure_education",

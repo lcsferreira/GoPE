@@ -67,6 +67,20 @@
   transform: scale(1.1);
 }
 
+.dashboard-container__header .btn-download {
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-container__header .btn-download:hover {
+  transform: scale(1.1);
+}
+
 .dashboard-container table {
   width: 100%;
   border-collapse: separate;

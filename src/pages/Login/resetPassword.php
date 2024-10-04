@@ -82,7 +82,16 @@ if (isset($_GET['Success'])) {
     const numberRegex = /[0-9]/;
     const uppercaseRegex = /[A-Z]/;
 
-    if (password === '') {
+    if (password.includes("'") || password.includes('"')) {
+      passwordError.textContent = 'Password cannot contain single or double quotes';
+      submitButton.disabled = true;
+    } else if (password === confirmPassword) {
+      passwordError.textContent = '';
+      submitButton.disabled = false;
+    } else if (confirmPassword === '') {
+      passwordError.textContent = 'Confirm password is required';
+      submitButton.disabled = true;
+    } else if (password === '') {
       passwordError.textContent = 'Password is required';
       submitButton.disabled = true;
     } else if (password.length < 8) {

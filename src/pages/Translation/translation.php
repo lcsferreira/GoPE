@@ -589,7 +589,6 @@ if ($result->num_rows > 0) {
     for (const [key, value] of formData.entries()) {
       data[key] = value;
     }
-    console.log(data);
 
     //send the data to the server
     $.ajax({
@@ -597,6 +596,7 @@ if ($result->num_rows > 0) {
       url: "../../query/Translation/sendTranslations.php?id=<?php echo $country_id; ?>",
       data: data,
       success: function(response) {
+        console.log(response);
         if (response == "success") {
           window.location.href =
             '../Dashboard/countriesList.php<?php if($_SESSION['type']=='contact') {echo "?id=".$_SESSION['id'];} ?>';

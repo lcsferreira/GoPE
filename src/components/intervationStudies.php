@@ -54,13 +54,6 @@
       Is the population of the study composed of children aged 5 to 10 years old and/or adolescents aged 11 to 17 years
       old attending school (for different age limits, the mean age needs to fall within these gaps)?
     </label>
-    <!-- <input type="text" name="period-data-collection-<?php echo $inc ?>" id="period-data-collection-<?php echo $inc ?>"
-      onblur="saveIntervationStudiesValues(<?php echo $inc ?>)"
-      value="<?php if ($intervationStudy["is_pop_study_comp"]) {
-                echo $intervationStudy["is_pop_study_comp"];
-              } else {
-                echo "";
-              } ?>"> -->
     <div class="switch-field" id="is_pop_study_comp-<?php echo $inc ?>">
       <input type="radio" id="is_pop_study_comp-<?php echo $inc ?>-yes" name="is_pop_study_comp-<?php echo $inc ?>"
         value="yes"
