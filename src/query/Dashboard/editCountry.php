@@ -1,7 +1,7 @@
 <?php
 include '../../../config.php';
 
-if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region']) && isset($_POST['need_translation_value']) && isset($_POST['id'])) {
+if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region']) && isset($_POST['need_translation_value']) && isset($_POST['id']) && isset($_POST['card_english_step']) && isset($_POST['card_translated_step']) && isset($_POST['translation_step']) && isset($_POST['indicators_step'])) {
   function validate($data)
   {
     $data = trim($data);
@@ -15,12 +15,18 @@ if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region'])
   $region = validate($_POST['region']);
   $need_translation = validate($_POST['need_translation_value']);
   $need_translation = $need_translation == "true" ? 1 : 0;
+  $card_english_step = validate($_POST['card_english_step']);
+  $card_translated_step = validate($_POST['card_translated_step']);
+  $translation_step = validate($_POST['translation_step']);
+  $indicators_step = validate($_POST['indicators_step']);
   $id = $_POST['id'];
 
   if ($need_translation == 1) {
-    $sql = "UPDATE countries SET name = ?, capital = ?, region = ?, need_translation = ? WHERE id = '$id'";
+    // $sql = "UPDATE countries SET name = ?, capital = ?, region = ?, need_translation = ? WHERE id = '$id'";
+    $sql = "UPDATE countries SET name = ?, capital = ?, region = ?, need_translation = ?, card_english_step = ?, card_translated_step = ?, translation_step = ?, indicators_step = ? WHERE id = '$id'";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $name, $capital, $region, $need_translation);
+    // $stmt->bind_param("sssi", $name, $capital, $region, $need_translation);
+    $stmt->bind_param("sssissss", $name, $capital, $region, $need_translation, $card_english_step, $card_translated_step, $translation_step, $indicators_step);
     $stmt->execute();
     $result = $stmt->get_result();
     $error = mysqli_error($conn);
@@ -34,7 +40,8 @@ if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region'])
       exit();
     }
   } else {
-    $sql = "UPDATE countries SET name = '$name', capital = '$capital', region = '$region', need_translation = '$need_translation', translation_step = NULL, card_translated_step = NULL WHERE id = '$id'";
+    // $sql = "UPDATE countries SET name = '$name', capital = '$capital', region = '$region', need_translation = '$need_translation', translation_step = NULL, card_translated_step = NULL WHERE id = '$id'";
+    $sql = "UPDATE countries SET name = '$name', capital = '$capital', region = '$region', need_translation = '$need_translation', translation_step = NULL, card_translated_step = NULL, card_english_step = '$card_english_step', indicators_step = '$indicators_step' WHERE id = '$id'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
