@@ -152,20 +152,25 @@ mysqli_close($conn);
     event.preventDefault(); // Prevent form submission
 
     // Get input values
-    var name = document.getElementById("name").value;
-    var capital = document.getElementById("capital").value;
-    var region = document.getElementById("region").value;
-    var needTranslation = document.getElementById("need_translation").checked;
+    let name = document.getElementById("name").value;
+    let capital = document.getElementById("capital").value;
+    let region = document.getElementById("region").value;
+    let needTranslation = document.getElementById("need_translation").checked;
 
     // Set the value of the hidden input field based on checkbox state
     document.getElementById("need_translation_value").value = needTranslation;
 
-    let indicators_step = document.getElementById("indicators_step").value;
-    let translation_step = document.getElementById("translation_step").value;
-    let card_translated_step = document.getElementById("card_translated_step").value;
-    let card_english_step = document.getElementById("card_english_step").value;
-
-
+    if (needTranslation) {
+      let indicators_step = document.getElementById("indicators_step").value;
+      let translation_step = document.getElementById("translation_step").value;
+      let card_translated_step = document.getElementById("card_translated_step").value;
+      let card_english_step = document.getElementById("card_english_step").value;
+    } else {
+      let indicators_step = document.getElementById("indicators_step").value;
+      let translation_step = null;
+      let card_translated_step = null;
+      let card_english_step = document.getElementById("card_english_step").value;
+    }
 
     // Log the values (you can modify this part as per your requirement)
     // console.log("Name: " + name);

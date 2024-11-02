@@ -25,4 +25,14 @@
       <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>><?php echo $document["eletronic_source"] ?></textarea>
   </div>
 
+  <div class="indicator-input">
+    <label for="document-year_publication-<?php echo $docInc; ?>-<?php echo $docRole; ?>">Year of Publication</label>
+    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
+    <input type="number" name="document-year_publication-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      id="document-year_publication-<?php echo $docInc; ?>-<?php echo $docRole; ?>"
+      onblur="saveDocumentValue('document-year_publication-<?php echo $docInc; ?>-<?php echo $docRole; ?>', '<?php echo $tableName; ?>', '<?php echo $inc; ?>')"
+      value="<?php if($document["year_publication"]){ echo $document["year_publication"];}else{echo "";} ?>"
+      <?php if($_SESSION['type'] != $docRole){echo " disabled";} ?>>
+  </div>
 </div>

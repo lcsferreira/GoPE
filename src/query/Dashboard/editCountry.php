@@ -1,7 +1,7 @@
 <?php
 include '../../../config.php';
 
-if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region']) && isset($_POST['need_translation_value']) && isset($_POST['id']) && isset($_POST['card_english_step']) && isset($_POST['card_translated_step']) && isset($_POST['translation_step']) && isset($_POST['indicators_step'])) {
+if (isset($_POST['name']) && isset($_POST['capital']) && isset($_POST['region']) && isset($_POST['need_translation_value']) && isset($_POST['id'])) {
   function validate($data)
   {
     $data = trim($data);

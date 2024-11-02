@@ -520,7 +520,7 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </label>
             <label for="reach-school-${inc}-${type}" class="radio-option-no-description">
               <div class="option-text">
-                <h3>General for school</h3>
+                <h3>General for school (inclusive of PE)</h3>
               </div>
               <input type="radio" name="radio-group-reach-monitoring-system-${inc}-${type}"
                 id="reach-school-${inc}-${type}" value="2" onclick="saveMonitoringSystemValues(${inc}, '${type}')" />
@@ -694,6 +694,15 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <textarea name="document-eletronic_source-${docInc}-${type}"
             id="document-eletronic_source-${docInc}-${type}"
             onblur="saveDocumentValue('document-eletronic_source-${docInc}-${type}', '${tableName}', '${inc}')"></textarea>
+        </div>
+
+        <div class="indicator-input">
+          <label for="document-year_publication-${docInc}-${type}">Year of Publication</label>
+          <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
+      information.</p>
+          <input type="number" name="document-year_publication-${docInc}-${type}"
+            id="document-year_publication-${docInc}-${type}"
+            onblur="saveDocumentValue('document-year_publication-${docInc}-${type}', '${tableName}', '${inc}')"></input>
         </div>
       </div>
       `

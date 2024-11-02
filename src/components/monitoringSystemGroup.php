@@ -22,7 +22,7 @@
       </label>
       <label for="reach-school-<?php echo $inc ?>-<?php echo $type; ?>" class="radio-option-no-description">
         <div class="option-text">
-          <h3>General for school</h3>
+          <h3>General for school (inclusive of PE)</h3>
         </div>
         <input type="radio" name="radio-group-reach-monitoring-system-<?php echo $inc ?>-<?php echo $type; ?>"
           id="reach-school-<?php echo $inc ?>-<?php echo $type; ?>" value="2"
