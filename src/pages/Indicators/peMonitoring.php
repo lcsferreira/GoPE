@@ -614,16 +614,6 @@ $monitoringSystemsDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
         </div>
 
         <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
-          <label for="year_publication-${inc}-${type}">
-            Year of publication
-          </label>
-          <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
-          <input type="number" name="year_publication" id="year_publication-${inc}-${type}"
-            onblur="saveMonitoringSystemValues(${inc}, '${type}')">
-        </div>
-
-        <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
           <label for="years_application-${inc}-${type}">
             Years of application
           </label>

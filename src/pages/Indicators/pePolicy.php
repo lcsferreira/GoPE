@@ -381,7 +381,7 @@ $policyMinTimeSeDocumentsContact = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <?php
               $indicatorRole = "contact";
               $indicatorOrder = 2;
-              $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of primary education";
+              $indicatorTitle = "Existence of a national official Physical Education curriculum for the compulsory school years of secondary education";
               $inputs = [
                 (object) [
                   "name" => "yes-all",

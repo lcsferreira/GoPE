@@ -152,18 +152,6 @@
   </div>
 
   <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
-    <label for="year_publication-<?php echo $inc ?>-<?php echo $type; ?>">
-      Year of publication
-    </label>
-    <p style="font-size:smaller">Write ‘NA’ (non-applicable) if you either lack knowledge or do not have access to that
-      information.</p>
-    <input type="number" name="year_publication" id="year_publication-<?php echo $inc ?>-<?php echo $type; ?>"
-      value="<?php if($monitoringSystem["year_publication"]){ echo $monitoringSystem["year_publication"];}else{echo "";} ?>"
-      onblur="saveMonitoringSystemValues(<?php echo $inc ?>, '<?php echo $type; ?>')"
-      <?php if($_SESSION['type'] != $type){echo " disabled";} ?>>
-  </div>
-
-  <div class=" indicator-input" style="margin: 1rem 0 0 0 !important">
     <label for="years_application-<?php echo $inc ?>-<?php echo $type; ?>">
       Years of application
     </label>
